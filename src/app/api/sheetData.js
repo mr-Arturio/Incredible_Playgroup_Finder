@@ -1,5 +1,5 @@
 
-import  GoogleSheets from '../actions/GoogleSheets';
+import  GoogleSheets from '../actions/getSheetData';
 
 export default async function handler(req, res) {
   try {
