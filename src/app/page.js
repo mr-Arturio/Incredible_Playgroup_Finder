@@ -1,14 +1,17 @@
 "use client";
 
 // import React, { useEffect, useState } from "react";
-import GoogleSheets  from "@/app/actions/GoogleSheets";
+
 import Navbar from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import MapComponent from "@/app/components/MapComponent";
+import { getSheetData } from "@/app/actions/getSheetData";  
 
 function Home() {
+
+
   const handleOnGetSheetDataClick = async () => {
-    const response = await GoogleSheets();
+    const response = await getSheetData();
     console.log(response)
   };
 
@@ -30,3 +33,6 @@ function Home() {
 }
 
 export default Home;
+
+
+
