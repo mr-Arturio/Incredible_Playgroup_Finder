@@ -16,16 +16,16 @@ export async function getSheetData() {
 
     const data = await glSheets.spreadsheets.values.get({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'A1:A4',
+        range: 'A1:A',
     });
 
-    const date = data.data.values[0];
+    const date = data.data.values;
 console.log(date);
 
 
 return { 
   props: {
-    date
+    sheetData: date
     
   } 
 }
