@@ -19,7 +19,16 @@ export async function getSheetData() {
         range: 'A1:A4',
     });
 
+    const date = data.data.values[0];
+console.log(date);
 
 
-    return { data: data.data.values };
+return { 
+  props: {
+    date
+    
+  } 
 }
+    
+}
+

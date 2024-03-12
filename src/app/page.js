@@ -7,6 +7,7 @@ import { Footer } from "@/app/components/Footer";
 import MapComponent from "@/app/components/MapComponent";
 import { getSheetData } from "@/app/actions/getSheetData";  
 
+
 function Home() {
 
 
@@ -33,6 +34,3 @@ function Home() {
 }
 
 export default Home;
-
-
-
