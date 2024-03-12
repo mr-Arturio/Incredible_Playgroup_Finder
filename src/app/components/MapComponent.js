@@ -4,8 +4,8 @@ import React from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const center = {
-  lat: -3.745,
-  lng: -38.523
+  lat: 45.424721,
+  lng: -75.695
 };
 
 function MapComponent() {
