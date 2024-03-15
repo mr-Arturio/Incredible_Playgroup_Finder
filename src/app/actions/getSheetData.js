@@ -1,6 +1,16 @@
 "use server";
 import { google } from "googleapis";
 
+function transformDataToObjects(data) {
+  const headers = data[0];
+  return data.slice(1).map(row => {
+    return headers.reduce((accumulator, header, index) => {
+      accumulator[header] = row[index];
+      return accumulator;
+    }, {});
+  });
+}
+
 export async function getSheetData() {
   const glAuth = await google.auth.getClient({
     projectId: process.env.GOOGLE_SHEETS_PROJECT_ID,
@@ -20,11 +30,13 @@ export async function getSheetData() {
   });
 
   
-  console.log(data.data.values);
+  const transformedData = transformDataToObjects(data.data.values);
+
+console.log(transformedData);
 
   return {
     props: {
-      sheetData: data.data.values,
+      sheetData: transformedData, // Now returns data as objects
     },
   };
 }
