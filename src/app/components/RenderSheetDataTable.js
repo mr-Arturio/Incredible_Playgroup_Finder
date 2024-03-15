@@ -14,7 +14,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
-          {sheetData.slice(1).map((row, rowIndex) => (
+          {sheetData.map((row, rowIndex) => (
             <tr key={rowIndex}>
               {row.map((cell, cellIndex) => (
                 <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
