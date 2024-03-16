@@ -1,15 +1,6 @@
 "use server";
 import { google } from "googleapis";
-
-function transformDataToObjects(data) {
-  const headers = data[0];
-  return data.slice(1).map(row => {
-    return headers.reduce((accumulator, header, index) => {
-      accumulator[header] = row[index];
-      return accumulator;
-    }, {});
-  });
-}
+import { transformDataToObjects } from "../utils/transformDataToObjects";
 
 export async function getSheetData() {
   const glAuth = await google.auth.getClient({
