@@ -23,7 +23,7 @@ export async function getSheetData() {
   
   const transformedData = transformDataToObjects(data.data.values);
 
-console.log(transformedData);
+// console.log(transformedData);
 
   return {
     props: {
