@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Navbar from "@/app/components/Navbar";
-import { Footer } from "@/app/components/Footer";
-import MapComponent from "@/app/components/MapComponent";
-import { getSheetData } from "@/app/actions/getSheetData";
-import RenderSheetDataTable from "@/app/components/RenderSheetDataTable";
-
+import Navbar from "../components/Navbar";
+import { Footer } from "../components/Footer";
+import MapComponent from "../components/MapComponent";
+import { getSheetData } from "../actions/getSheetData";
+import RenderSheetDataTable from "../components/RenderSheetDataTable";
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
@@ -28,7 +27,9 @@ function Home() {
           <MapComponent />
           <article>
             <h1>The data</h1>
-            <div><RenderSheetDataTable sheetData={sheetData} /></div>
+            <div>
+              <RenderSheetDataTable sheetData={sheetData} />
+            </div>
           </article>
         </div>
       </main>
