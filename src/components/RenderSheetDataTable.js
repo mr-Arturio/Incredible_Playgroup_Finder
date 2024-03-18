@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const RenderSheetDataTable = ({ sheetData }) => {
-  if (!sheetData || sheetData.length === 0) return <p>Loading...</p>;
+  if (!sheetData || sheetData.length === 0) return <div className="text-center p-4">Loading...</div>;
 
   const [filteredData, setFilteredData] = useState(sheetData);
   const [filterCriteria, setFilterCriteria] = useState("");
@@ -24,21 +24,23 @@ const RenderSheetDataTable = ({ sheetData }) => {
   }, [sheetData, filterCriteria]); // Rerun when sheetData or filterCriteria changes
 
   return (
-    <div>
-      <label htmlFor="filterCriteria">Filter by Location: </label>
-      <select
-        id="filterCriteria"
-        value={filterCriteria}
-        onChange={(e) => setFilterCriteria(e.target.value)}
-        className="mb-4"
-      >
-        <option value="">Select Location</option>
-        {filterOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+    <div className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style={{ height: "70vh" }}>
+      <div className="flex justify-between items-center p-4">
+        <label htmlFor="filterCriteria" className="block text-gray-700 text-sm font-bold mb-2">Filter by Location: </label>
+        <select
+          id="filterCriteria"
+          value={filterCriteria}
+          onChange={(e) => setFilterCriteria(e.target.value)}
+          className="form-select block w-1/4 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+        >
+          <option value="">Select Location</option>
+          {filterOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <table className="min-w-full leading-normal">
         <thead>
@@ -59,7 +61,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
               {headers.map((header, cellIndex) => (
                 <td
                   key={cellIndex}
-                  className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
                 >
                   {row[header]}
                 </td>

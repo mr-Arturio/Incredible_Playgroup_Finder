@@ -23,15 +23,10 @@ function MapComponent() {
     const geocodeAddresses = async (addresses) => {
       const promises = addresses.map(address =>
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`)
-          .then(response => {
-            console.log(`Response from geocoding API for ${address}:`, response);
-            return response.json();
-          })
+          .then(response => response.json())
           .then(data => {
-            console.log(data);
             if (data.results && data.results.length > 0) {
               const location = data.results[0].geometry.location;
-             
               return {
                 lat: location.lat,
                 lng: location.lng,
@@ -41,7 +36,7 @@ function MapComponent() {
             }
           })
       );
-    
+
       try {
         const geocodedMarkers = await Promise.all(promises);
         setMarkers(geocodedMarkers);
@@ -54,8 +49,9 @@ function MapComponent() {
   }, []);
 
   if (!isLoaded) return <div>Loading...</div>;
-  return isLoaded ? (
-    <div className="w-full md:w-96 h-96">
+  return (
+    // Ensure the map fills the div completely, which is controlled by the parent's width
+    <div className="h-full w-full">
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '100%' }}
         center={center}
@@ -66,7 +62,7 @@ function MapComponent() {
         ))}
       </GoogleMap>
     </div>
-  ) : <></>;
+  );
 }
 
 export default React.memo(MapComponent);
