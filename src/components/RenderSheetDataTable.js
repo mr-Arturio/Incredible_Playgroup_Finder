@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const RenderSheetDataTable = ({ sheetData }) => {
-  if (!sheetData || sheetData.length === 0) return <p>No data available</p>;
+  if (!sheetData || sheetData.length === 0) return <p>Loading...</p>;
 
   const [filteredData, setFilteredData] = useState(sheetData);
   const [filterCriteria, setFilterCriteria] = useState("");
