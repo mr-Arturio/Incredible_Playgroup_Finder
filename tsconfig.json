@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "src/app/layout.js",
     "src/app/page.js",
-    "src/app/components/MapComponent.js"
+    "src/components/MapComponent.js"
   ],
   "exclude": ["node_modules"]
 }
