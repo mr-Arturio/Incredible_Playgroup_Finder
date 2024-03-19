@@ -5,7 +5,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   const [filteredData, setFilteredData] = useState(sheetData);
   const [filterCriteria, setFilterCriteria] = useState("");
-
+  console.log("++++++++++DATA-----", sheetData);
   // Defining filter options
   const filterOptions = ['Central', 'South', 'East', 'West'];
 

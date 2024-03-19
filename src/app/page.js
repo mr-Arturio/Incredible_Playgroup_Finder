@@ -31,7 +31,7 @@ function Home() {
 
           {/* MapComponent on the right (40%) */}
           <div className="w-2/5">
-            <MapComponent />
+            <MapComponent sheetData={sheetData}/>
           </div>
         </div>
       </main>
