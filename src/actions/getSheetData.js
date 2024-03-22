@@ -1,8 +1,27 @@
 "use server";
 import { google } from "googleapis";
 import { transformDataToObjects } from "../utils/transformDataToObjects";
+import { TTLCache } from "../utils/TTLCache"; // Import the TTLCache class
+
+const sheetCache = new TTLCache(1000 * 60 * 60); // Cache TTL of 1 hour
 
 export async function getSheetData() {
+  const cacheKey = "sheetData";
+
+  // Try to get cached data
+  let cachedData = sheetCache.get(cacheKey);
+
+  if (cachedData) {
+    console.log("Returning cached data");
+    return {
+      props: {
+        sheetData: cachedData,
+      },
+    };
+  } else {
+    console.log("Cache miss: Fetching new data");
+  }
+
   const glAuth = await google.auth.getClient({
     projectId: process.env.GOOGLE_SHEETS_PROJECT_ID,
     credentials: {
@@ -20,10 +39,11 @@ export async function getSheetData() {
     range: "A:M",
   });
 
-  
   const transformedData = transformDataToObjects(data.data.values);
 
-// console.log(transformedData);
+  sheetCache.set(cacheKey, transformedData);
+  console.log("New data cached");
+  // console.log(transformedData);
 
   return {
     props: {
