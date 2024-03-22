@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import { Footer } from "../components/Footer";
 import MapComponent from "../components/MapComponent";
 import { getSheetData } from "../actions/getSheetData";
 import RenderSheetDataTable from "../components/RenderSheetDataTable";
@@ -20,7 +18,6 @@ function Home() {
 
   return (
     <div className="flex flex-col bg-gray-100 min-h-screen">
-      <Navbar />
       <main className="flex flex-1">
         <div className="flex w-full">
           {/* RenderSheetDataTable on the left (60%) */}
@@ -31,11 +28,10 @@ function Home() {
 
           {/* MapComponent on the right (40%) */}
           <div className="w-2/5">
-            <MapComponent sheetData={sheetData}/>
+            <MapComponent sheetData={sheetData} />
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
