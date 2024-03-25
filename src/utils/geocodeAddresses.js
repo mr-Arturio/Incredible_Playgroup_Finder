@@ -12,6 +12,7 @@ const geocodeAddress = async (address, apiKey) => {
     if (data.results && data.results.length > 0) {
       const location = data.results[0].geometry.location;
       const marker = { lat: location.lat, lng: location.lng };
+      console.log("Geocoded address:", address, marker);
       localStorage.setItem(address, JSON.stringify(marker));
       return marker;
     } else {
@@ -24,19 +25,24 @@ const geocodeAddresses = async (addresses, apiKey) => {
   // Create a Set from addresses to filter out duplicates, then convert back to an array
   const uniqueAddresses = Array.from(new Set(addresses));
   try {
-    const geocodePromises = uniqueAddresses.map(address => geocodeAddress(address, apiKey));
+    const addressesWithoutLatLng = uniqueAddresses.filter(data => typeof data.lat === 'undefined' || typeof data.lng === 'undefined');
+    const addressesWithLatLng = uniqueAddresses.filter(data => typeof data.lat !== 'undefined' && typeof data.lng !== 'undefined');
+
+    const geocodePromises = addressesWithoutLatLng.map(address => geocodeAddress(address.Address, apiKey));
     const results = await Promise.allSettled(geocodePromises);
     const geocodedMarkers = results
       .filter(result => result.status === 'fulfilled')
       .map(result => result.value);
 
-      console.log("Number of markers to be placed on the map:", geocodedMarkers);
+    const allMarkers = [...addressesWithLatLng, ...geocodedMarkers];
 
-    return geocodedMarkers;
+    console.log("Number of markers to be placed on the map:", allMarkers);
+
+    return allMarkers;
   } catch (error) {
     console.error("Geocoding error:", error);
     throw error;
   }
 };
 
-export default geocodeAddresses;
+export { geocodeAddress, geocodeAddresses };
