@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import MapComponent from "../components/MapComponent";
 import { getSheetData } from "../actions/getSheetData";
 import RenderSheetDataTable from "../components/RenderSheetDataTable";
@@ -22,6 +23,9 @@ function Home() {
         <div className="flex w-full">
           {/* RenderSheetDataTable on the left (60%) */}
           <div className="w-3/5 p-4">
+            <div className="flex items-center justify-between">
+            <Link href="/charts">Charts</Link>
+            </div>
             <h1 className="text-lg font-semibold mb-4">The Data</h1>
             <RenderSheetDataTable sheetData={sheetData} />
           </div>
