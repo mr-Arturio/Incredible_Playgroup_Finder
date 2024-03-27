@@ -2,8 +2,8 @@ import React from 'react';
 
 // Placeholder for language icons. You should replace these with your actual icons or SVG paths.
 const languageIcons = {
-  English: '/icons/english.svg', // replace with your actual path to the English icon
-  French: '/icons/french.svg',  // replace with your actual path to the French icon
+  English: '/english.svg', // replace with your actual path to the English icon
+  French: '/french.svg',  // replace with your actual path to the French icon
   // Add more languages and their icon paths as needed
 };
 
@@ -49,7 +49,7 @@ function PlaygroupCard({ playgroup }) {
         </div>
       )}
       <div className="absolute bottom-4 right-4 flex items-center">
-        <img src={getLanguageIcon(Language)} alt={`${Language} icon`} className="h-6 w-6" />
+        <img src={getLanguageIcon(Language)} alt={`${Language} icon`} className="h-7 w-7" />
       </div>
     </div>
   );
