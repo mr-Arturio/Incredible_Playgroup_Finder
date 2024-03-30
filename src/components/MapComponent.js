@@ -45,7 +45,7 @@ function MapComponent({ sheetData }) {
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100%" }}
         center={center}
-        zoom={10}
+        zoom={11}
       >
         {markers.map((marker, index) => (
           <Marker //need to parseFloat again to avoid error... thats where TypeScript would be useful
