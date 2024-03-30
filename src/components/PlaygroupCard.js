@@ -1,21 +1,45 @@
-import React from "react";
-
-
+import React, { useState } from "react";
 
 function PlaygroupCard({ playgroup }) {
-  const { Date, Time, Name, Address, Age, Day, Language, URL, Service } =
-    playgroup;
+  const {
+    Date,
+    Time,
+    Name,
+    Address,
+    Age,
+    Day,
+    Language,
+    URL,
+    Service,
+    Parking,
+    Coffee,
+    WiFi,
+  } = playgroup;
 
-    const icons = {
-      time: "/time.svg",
-      location: "/location.svg",
-      age: "/age.svg",
-      language: `/${Language.toLowerCase()}.svg`, // Dynamic path to your language icon
-    };
+  const icons = {
+    time: "/time.svg",
+    location: "/location.svg",
+    age: "/age.svg",
+    parking: {
+      show: Parking === "Yes",
+      src: "/parking.svg",
+      tooltip: "Parking Available",
+    },
+    coffee: { show: Coffee === "Yes", src: "/coffee.svg", tooltip: "Coffee" },
+    wifi: { show: WiFi === "Yes", src: "/wifi.svg", tooltip: "WiFi Available" },
+    // Assuming Language should always be shown; adjust if needed
+    language: {
+      show: true,
+      src: `/${Language.toLowerCase()}.svg`,
+      tooltip: Language,
+    },
+  };
+
+  const [tooltip, setTooltip] = useState("");
 
   return (
     <div className="bg-blue-100 shadow-lg rounded-lg overflow-hidden m-6 relative">
-      <div className="flex justify-between items-start p-6">
+      <div className="flex justify-between items-start p-7">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
             {Name}
@@ -24,7 +48,7 @@ function PlaygroupCard({ playgroup }) {
             {Day}, {Date}
           </p>
         </div>
-        <div className="text-sm font-semibold text-gray-500 bg-gray-200 px-3 py-1 rounded-full">
+        <div className="text-lg font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
           {Service}
         </div>
       </div>
@@ -43,11 +67,11 @@ function PlaygroupCard({ playgroup }) {
         </div>
         <div className="flex items-center mt-2 text-gray-700">
           <img src={icons.age} alt="Age" className="h-5 w-5 text-gray-500" />
-          <span className="ml-2">{Age} Years</span>
+          <span className="ml-2">{Age}</span>
         </div>
       </div>
       {URL && (
-        <div className="bg-blue-200 p-4">
+        <div className="bg-blue-200 py-4 px-6">
           <a
             href={URL}
             target="_blank"
@@ -58,12 +82,25 @@ function PlaygroupCard({ playgroup }) {
           </a>
         </div>
       )}
-      <div className="absolute bottom-4 right-4 flex items-center">
-        <img
-          src={icons.language}
-          alt={`${Language} icon`}
-          className="h-7 w-7"
-        />
+      <div className="absolute bottom-4 right-4 flex items-center space-x-3">
+        {Object.entries(icons).map(
+          ([key, { show, src, tooltip: iconTooltip }]) =>
+            show && (
+              <div
+                key={key}
+                onMouseEnter={() => setTooltip(iconTooltip)}
+                onMouseLeave={() => setTooltip("")}
+                className="relative"
+              >
+                <img src={src} alt={iconTooltip} className="h-7 w-7" />
+                {tooltip === iconTooltip && (
+                  <div className="absolute bottom-full mb-2 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
+                    {iconTooltip}
+                  </div>
+                )}
+              </div>
+            )
+        )}
       </div>
     </div>
   );
