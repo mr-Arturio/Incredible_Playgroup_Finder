@@ -113,7 +113,7 @@ function PlaygroupCard({ playgroup }) {
               >
                 <img src={src} alt={iconTooltip} className="h-7 w-7" />
                 {tooltip === iconTooltip && (
-                  <div className="absolute bottom-full mb-2 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
+                  <div className="absolute bottom-full mb-2 -ml-4 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
                     {iconTooltip}
                   </div>
                 )}
