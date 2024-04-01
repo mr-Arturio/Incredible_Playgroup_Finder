@@ -10,9 +10,11 @@ const RenderSheetDataTable = ({ sheetData }) => {
   const [filterCriteria, setFilterCriteria] = useState({
     location: "",
     language: "",
+    day: "",
   });
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
+  const [dayOptions, setDayOptions] = useState([]);
 
   useEffect(() => {
     // Extract unique locations from sheetData
@@ -22,6 +24,15 @@ const RenderSheetDataTable = ({ sheetData }) => {
     const uniqueLanguages = new Set(
       sheetData.map((item) => item.Language).filter(Boolean)
     );
+
+    setDayOptions([
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ]);
     setLocationOptions([...uniqueLocations]);
     setLanguageOptions([...uniqueLanguages]);
 
@@ -36,12 +47,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       style={{ height: "70vh" }}
     >
       <div className="flex justify-between items-center p-4">
-        <label
-          htmlFor="filterCriteria"
-          className="block text-gray-700 text-sm font-bold mb-2"
-        >
-          Filter by Location:{" "}
-        </label>
+        {/* Location filter select */}
         <select
           id="locationCriteria"
           value={filterCriteria.location}
@@ -69,6 +75,23 @@ const RenderSheetDataTable = ({ sheetData }) => {
         >
           <option value="">Select Language</option>
           {languageOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+
+        {/* Day of the week filter select */}
+        <select
+          id="dayCriteria"
+          value={filterCriteria.day}
+          onChange={(e) =>
+            setFilterCriteria({ ...filterCriteria, day: e.target.value })
+          }
+          className="form-select block w-full md:w-1/4 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+        >
+          <option value="">Select Day of the Week</option>
+          {dayOptions.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
