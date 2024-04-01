@@ -20,7 +20,7 @@ function MapComponent({ sheetData }) {
     // Filter out the data with valid lat and lng information
     const markersWithLatLng = sheetData.filter((data) => {
       // Log the lat and lng values to check if they are numbers
-      console.log("Latitude:", data.lat, "Longitude:", data.lng);
+      //console.log("Latitude:", data.lat, "Longitude:", data.lng);
 
       // Convert lat and lng strings to numbers
       const lat = parseFloat(data.lat);
