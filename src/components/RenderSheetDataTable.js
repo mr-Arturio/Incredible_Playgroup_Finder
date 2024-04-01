@@ -11,10 +11,12 @@ const RenderSheetDataTable = ({ sheetData }) => {
     location: "",
     language: "",
     day: "",
+    name: "",
   });
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
   const [dayOptions, setDayOptions] = useState([]);
+  const [nameOptions, setNameOptions] = useState([]);
 
   useEffect(() => {
     // Extract unique locations from sheetData
@@ -23,6 +25,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
     );
     const uniqueLanguages = new Set(
       sheetData.map((item) => item.Language).filter(Boolean)
+    );
+    const uniqueNames = new Set(
+      sheetData.map((item) => item.Name).filter(Boolean)
     );
 
     setDayOptions([
@@ -35,6 +40,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
     ]);
     setLocationOptions([...uniqueLocations]);
     setLanguageOptions([...uniqueLanguages]);
+    setNameOptions([...uniqueNames]);
 
     // Apply filtering based on location
     let filtered = applyFilters(sheetData, filterCriteria);
@@ -47,6 +53,23 @@ const RenderSheetDataTable = ({ sheetData }) => {
       style={{ height: "70vh" }}
     >
       <div className="flex justify-between items-center p-4">
+        {/* Facility Name filter select */}
+        <select
+          id="nameCriteria"
+          value={filterCriteria.name}
+          onChange={(e) =>
+            setFilterCriteria({ ...filterCriteria, name: e.target.value })
+          }
+          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
+        >
+          <option value="">Select Facility</option>
+          {nameOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+
         {/* Location filter select */}
         <select
           id="locationCriteria"
@@ -54,7 +77,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           onChange={(e) =>
             setFilterCriteria({ ...filterCriteria, location: e.target.value })
           }
-          className="form-select block w-full md:w-1/4 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 mb-4 md:mb-0 md:mr-4"
+          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
         >
           <option value="">Select Location</option>
           {locationOptions.map((option) => (
@@ -71,7 +94,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           onChange={(e) =>
             setFilterCriteria({ ...filterCriteria, language: e.target.value })
           }
-          className="form-select block w-full md:w-1/4 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
         >
           <option value="">Select Language</option>
           {languageOptions.map((option) => (
@@ -88,7 +111,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           onChange={(e) =>
             setFilterCriteria({ ...filterCriteria, day: e.target.value })
           }
-          className="form-select block w-full md:w-1/4 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
         >
           <option value="">Select Day of the Week</option>
           {dayOptions.map((option) => (

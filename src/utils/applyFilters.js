@@ -9,6 +9,9 @@ const applyFilters = (data, criteria) => {
     if (criteria.day && item.Day !== criteria.day) {
       return false;
     }
+    if (criteria.name && item.Name !== criteria.name) {
+      return false;
+    }
     return true;
   });
 };
