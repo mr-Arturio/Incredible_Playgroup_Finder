@@ -6,6 +6,9 @@ const applyFilters = (data, criteria) => {
     if (criteria.language && item.Language !== criteria.language) {
       return false;
     }
+    if (criteria.day && item.Day !== criteria.day) {
+      return false;
+    }
     return true;
   });
 };
