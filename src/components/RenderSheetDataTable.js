@@ -55,10 +55,10 @@ const RenderSheetDataTable = ({ sheetData }) => {
   return (
     <div
       className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
-      style={{ height: "70vh" }}
+      style={{ height: "80vh" }}
     >
-      <div className="sticky top-0 bg-white z-10">
-        <div className="flex justify-between items-center p-4">
+      <div className="sticky top-0 bg-white z-10 p-4">
+      <div className="flex flex-wrap lg:flex-nowrap justify-between items-center">
           <FilterComponent
             id="nameCriteria"
             value={filterCriteria.name}
