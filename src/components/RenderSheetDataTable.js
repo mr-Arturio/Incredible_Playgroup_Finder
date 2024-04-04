@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PlaygroupCard from "./PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
+import FilterComponent from "./FilterComponent";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   if (!sheetData || sheetData.length === 0)
@@ -47,84 +48,55 @@ const RenderSheetDataTable = ({ sheetData }) => {
     setFilteredData(filtered);
   }, [sheetData, filterCriteria]);
 
+  const handleFilterChange = (key, value) => {
+    setFilterCriteria({ ...filterCriteria, [key]: value });
+  };
+
   return (
     <div
       className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
       style={{ height: "70vh" }}
     >
-      <div className="flex justify-between items-center p-4">
-        {/* Facility Name filter select */}
-        <select
-          id="nameCriteria"
-          value={filterCriteria.name}
-          onChange={(e) =>
-            setFilterCriteria({ ...filterCriteria, name: e.target.value })
-          }
-          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
-        >
-          <option value="">Select Facility</option>
-          {nameOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+      <div className="sticky top-0 bg-white z-10">
+        <div className="flex justify-between items-center p-4">
+          <FilterComponent
+            id="nameCriteria"
+            value={filterCriteria.name}
+            options={nameOptions}
+            onChange={(e) => handleFilterChange("name", e.target.value)}
+            placeholder="Select Facility"
+          />
 
-        {/* Location filter select */}
-        <select
-          id="locationCriteria"
-          value={filterCriteria.location}
-          onChange={(e) =>
-            setFilterCriteria({ ...filterCriteria, location: e.target.value })
-          }
-          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
-        >
-          <option value="">Select Location</option>
-          {locationOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+          <FilterComponent
+            id="locationCriteria"
+            value={filterCriteria.location}
+            options={locationOptions}
+            onChange={(e) => handleFilterChange("location", e.target.value)}
+            placeholder="Select Location"
+          />
 
-        {/* Language filter select */}
-        <select
-          id="languageCriteria"
-          value={filterCriteria.language}
-          onChange={(e) =>
-            setFilterCriteria({ ...filterCriteria, language: e.target.value })
-          }
-          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
-        >
-          <option value="">Select Language</option>
-          {languageOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+          <FilterComponent
+            id="languageCriteria"
+            value={filterCriteria.language}
+            options={languageOptions}
+            onChange={(e) => handleFilterChange("language", e.target.value)}
+            placeholder="Select Language"
+          />
 
-        {/* Day of the week filter select */}
-        <select
-          id="dayCriteria"
-          value={filterCriteria.day}
-          onChange={(e) =>
-            setFilterCriteria({ ...filterCriteria, day: e.target.value })
-          }
-          className="form-select block w-full md:w-1/4 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
-        >
-          <option value="">Select Day of the Week</option>
-          {dayOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+          <FilterComponent
+            id="dayCriteria"
+            value={filterCriteria.day}
+            options={dayOptions}
+            onChange={(e) => handleFilterChange("day", e.target.value)}
+            placeholder="Select Day of the Week"
+          />
+        </div>
       </div>
-
-      {filteredData.map((playgroup) => (
-        <PlaygroupCard key={playgroup.id} playgroup={playgroup} />
-      ))}
+      <div className="mt-12">
+        {filteredData.map((playgroup) => (
+          <PlaygroupCard key={playgroup.id} playgroup={playgroup} />
+        ))}
+      </div>
     </div>
   );
 };
