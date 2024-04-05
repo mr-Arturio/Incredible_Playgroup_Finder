@@ -45,7 +45,7 @@ export async function getSheetData() {
     // Only cache if data is not null
     sheetCache.set(cacheKey, transformedData);
     console.log("New data cached");
-    console.log(transformedData);
+    // console.log(transformedData);
   }
 
   return {
