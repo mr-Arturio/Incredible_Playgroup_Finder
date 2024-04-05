@@ -41,9 +41,9 @@ function MapComponent({ sheetData }) {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full content-center">
       <GoogleMap
-        mapContainerStyle={{ width: "100%", height: "100%" }}
+        mapContainerStyle={{ width: "100%", height: "80%" }}
         center={center}
         zoom={11}
       >

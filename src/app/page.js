@@ -25,19 +25,9 @@ function Home() {
       </div>
 
       <main className="max-w-screen-2xl flex-1  w-11/12">
-        {/* RenderSheetDataTable on the left (60%) */}
-        <div className="flex flex-col md:flex-row justify-center">
-          <div className="w-full md:w-3/5 p-4">
-            {" "}
-            <h1 className="text-lg font-semibold mb-4">The Data</h1>
-            <RenderSheetDataTable sheetData={sheetData} />
-          </div>
-
-          {/* MapComponent on the right (40%) */}
-          <div className="w-full md:w-2/5">
-            <MapComponent sheetData={sheetData} />
-          </div>
-        </div>
+        {" "}
+        <h1 className="text-lg font-semibold mb-4">The Data</h1>
+        <RenderSheetDataTable sheetData={sheetData} />
       </main>
     </div>
   );
