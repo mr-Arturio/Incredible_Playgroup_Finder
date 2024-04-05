@@ -58,7 +58,7 @@ function PlaygroupCard({ playgroup }) {
 
   return (
     <div className="bg-blue-100 shadow-lg rounded-lg overflow-hidden m-6 relative">
-      <div className="flex justify-between items-start p-7">
+      <div className="flex justify-between items-start px-7 pt-5 pb-3">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
             {Name}
@@ -71,7 +71,7 @@ function PlaygroupCard({ playgroup }) {
           {Service}
         </div>
       </div>
-      <div className="px-6 pb-6">
+      <div className="px-6 pb-4">
         <div className="flex items-center text-gray-700">
           <img src={icons.time} alt="Time" className="h-5 w-5 text-gray-500" />
           <span className="ml-2">{Time}</span>

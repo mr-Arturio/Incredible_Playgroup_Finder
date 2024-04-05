@@ -20,7 +20,7 @@ function MapComponent({ sheetData }) {
     // Filter out the data with valid lat and lng information
     const markersWithLatLng = sheetData.filter((data) => {
       // Log the lat and lng values to check if they are numbers
-      console.log("Latitude:", data.lat, "Longitude:", data.lng);
+      //console.log("Latitude:", data.lat, "Longitude:", data.lng);
 
       // Convert lat and lng strings to numbers
       const lat = parseFloat(data.lat);
@@ -41,9 +41,9 @@ function MapComponent({ sheetData }) {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full content-center">
       <GoogleMap
-        mapContainerStyle={{ width: "100%", height: "100%" }}
+        mapContainerStyle={{ width: "100%", height: "80%" }}
         center={center}
         zoom={11}
       >
