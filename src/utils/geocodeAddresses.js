@@ -12,7 +12,7 @@ const geocodeAddress = async (address, apiKey) => {
     if (data.results && data.results.length > 0) {
       const location = data.results[0].geometry.location;
       const marker = { lat: location.lat, lng: location.lng };
-      console.log("Geocoded address:", address, marker);
+      //console.log("Geocoded address:", address, marker);
       localStorage.setItem(address, JSON.stringify(marker));
       return marker;
     } else {
@@ -36,7 +36,7 @@ const geocodeAddresses = async (addresses, apiKey) => {
 
     const allMarkers = [...addressesWithLatLng, ...geocodedMarkers];
 
-    console.log("Number of markers to be placed on the map:", allMarkers);
+    //console.log("Number of markers to be placed on the map:", allMarkers);
 
     return allMarkers;
   } catch (error) {
