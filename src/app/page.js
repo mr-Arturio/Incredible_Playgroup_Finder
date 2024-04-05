@@ -1,19 +1,34 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import MapComponent from "../components/MapComponent";
-import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { getSheetData } from "../actions/getSheetData";
+import RenderSheetDataTable from "../components/RenderSheetDataTable";
+import { Header } from "../components/Header";
 
 function Home() {
+  const [sheetData, setSheetData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getSheetData();
+      setSheetData(response.props.sheetData); // Assuming the data is structured correctly
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
-      <Navbar />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <h1>Welcome to Our Application</h1>
-          <MapComponent />
-        </div>
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen">
+      {/* Top Content Area - Always present */}
+      <div className=" max-w-screen-2xl w-11/12 p-4">
+        <Header />
+      </div>
+
+      <main className="max-w-screen-2xl flex-1  w-11/12">
+        {" "}
+        <h1 className="text-lg font-semibold mb-4">The Data</h1>
+        <RenderSheetDataTable sheetData={sheetData} />
       </main>
-      <Footer />
     </div>
   );
 }
