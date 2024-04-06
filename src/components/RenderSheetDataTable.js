@@ -5,9 +5,12 @@ import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
 
 const RenderSheetDataTable = ({ sheetData }) => {
-  if (!sheetData || sheetData.length === 0)
-    return <div className="text-center p-4">Loading...</div>;
 
+      // Check for sheetData availability after all hook calls
+      if (!sheetData || sheetData.length === 0) 
+        return <div className="text-center p-4">Loading...</div>;
+      
+    
   const [filteredData, setFilteredData] = useState(sheetData);
   const [filterCriteria, setFilterCriteria] = useState({
     location: "",
@@ -17,8 +20,16 @@ const RenderSheetDataTable = ({ sheetData }) => {
   });
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
-  const [dayOptions, setDayOptions] = useState([]);
   const [nameOptions, setNameOptions] = useState([]);
+  const [dayOptions, setDayOptions] = useState([
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ]);
+  
 
   useEffect(() => {
     // Extract unique locations from sheetData
@@ -32,14 +43,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
       sheetData.map((item) => item.Name).filter(Boolean)
     );
 
-    setDayOptions([
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ]);
     setLocationOptions([...uniqueLocations]);
     setLanguageOptions([...uniqueLanguages]);
     setNameOptions([...uniqueNames]);
@@ -52,6 +55,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
   const handleFilterChange = (key, value) => {
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
+
+
 
   return (
     <div className="flex flex-col md:flex-col">
