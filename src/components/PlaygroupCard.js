@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
 function PlaygroupCard({ playgroup }) {
   const {
@@ -73,19 +74,33 @@ function PlaygroupCard({ playgroup }) {
       </div>
       <div className="px-6 pb-4">
         <div className="flex items-center text-gray-700">
-          <img src={icons.time} alt="Time" className="h-5 w-5 text-gray-500" />
+          <Image
+            src={icons.time}
+            alt="Time"
+            className="h-5 w-5 text-gray-500"
+            width={500}
+            height={300}
+          />
           <span className="ml-2">{Time}</span>
         </div>
         <div className="flex items-center mt-2 text-gray-700">
-          <img
+          <Image
             src={icons.location}
             alt="Location"
             className="h-5 w-5 text-gray-500"
+            width={500}
+            height={300}
           />
           <span className="ml-2">{Address}</span>
         </div>
         <div className="flex items-center mt-2 text-gray-700">
-          <img src={icons.age} alt="Age" className="h-5 w-5 text-gray-500" />
+          <Image
+            src={icons.age}
+            alt="Age"
+            className="h-5 w-5 text-gray-500"
+            width={500}
+            height={300}
+          />
           <span className="ml-2">{Age}</span>
         </div>
       </div>
@@ -111,7 +126,13 @@ function PlaygroupCard({ playgroup }) {
                 onMouseLeave={() => setTooltip("")}
                 className="relative"
               >
-                <img src={src} alt={iconTooltip} className="h-7 w-7" />
+                <Image
+                  src={src}
+                  alt={iconTooltip}
+                  className="h-7 w-7"
+                  width={500}
+                  height={300}
+                />
                 {tooltip === iconTooltip && (
                   <div className="absolute bottom-full mb-2 -ml-4 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
                     {iconTooltip}
