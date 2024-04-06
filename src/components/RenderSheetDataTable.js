@@ -7,7 +7,7 @@ import MapComponent from "./MapComponent";
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
-  const [filteredData, setFilteredData] = useState(sheetData);
+  const [filteredData, setFilteredData] = useState(sheetData || []);
   const [filterCriteria, setFilterCriteria] = useState({
     location: "",
     language: "",
@@ -44,7 +44,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       setNameOptions([...uniqueNames]);
 
       // Apply filtering based on location
-      let filtered = applyFilters(sheetData, filterCriteria);
+      let filtered = applyFilters(sheetData, filterCriteria) || [];
       setFilteredData(filtered);
     }
   }, [sheetData, filterCriteria, isLoading]);
