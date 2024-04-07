@@ -7,6 +7,7 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 function MapComponent({ sheetData }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
+  const [userLocation, setUserLocation] = useState(null); // State to store user's location
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
@@ -45,16 +46,19 @@ function MapComponent({ sheetData }) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setCenter({
+          const userCoords = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-          });
+          };
+          setCenter(userCoords);
+          setUserLocation(userCoords); // Update user's location state
         },
         (error) => {
           console.error("Error fetching the user's location: ", error);
           // Use fallback center if there's an error or permission is denied
           setCenter(fallbackCenter);
-        }
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 } // High accuracy option
       );
     } else {
       // Geolocation API not supported
@@ -81,6 +85,16 @@ function MapComponent({ sheetData }) {
             }}
           />
         ))}
+        {userLocation && (
+          <Marker
+            position={userLocation}
+            // Specify your custom icon URL
+            icon={{
+              url: '/home.svg',
+              scaledSize: new window.google.maps.Size(40, 40), // Adjust size as needed
+            }}
+          />
+        )}
       </GoogleMap>
     </div>
   );
