@@ -5,7 +5,8 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
 function MapComponent({ sheetData }) {
-  const center = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []); //to avoid re-rendering,
+  const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
+  const [center, setCenter] = useState(fallbackCenter);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
@@ -38,6 +39,30 @@ function MapComponent({ sheetData }) {
 
     setMarkers(markersWithLatLng);
   }, [sheetData]);
+
+  // Fetch the user's location and update the center of the map
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCenter({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Error fetching the user's location: ", error);
+          // Use fallback center if there's an error or permission is denied
+          setCenter(fallbackCenter);
+        }
+      );
+    } else {
+      // Geolocation API not supported
+      console.error("Geolocation is not supported by this browser.");
+      // Use fallback center
+      setCenter(fallbackCenter);
+    }
+  }, []);
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
