@@ -58,7 +58,7 @@ function MapComponent({ sheetData }) {
           // Use fallback center if there's an error or permission is denied
           setCenter(fallbackCenter);
         },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 } // High accuracy option
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } // High accuracy option
       );
     } else {
       // Geolocation API not supported
