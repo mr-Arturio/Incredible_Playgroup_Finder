@@ -1,13 +1,19 @@
 // "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 // import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
 function MapComponent({ sheetData }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
+  const [hoveredMarker, setHoveredMarker] = useState(null); // Track hovered marker
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
@@ -83,17 +89,40 @@ function MapComponent({ sheetData }) {
               lat: parseFloat(marker.lat),
               lng: parseFloat(marker.lng),
             }}
-          />
+            onMouseOver={() => setHoveredMarker(index)} // Assume each marker has a unique id
+            onMouseOut={() => setHoveredMarker(null)}
+          >
+            {hoveredMarker === index && (
+              <InfoWindow
+                position={{
+                  lat: parseFloat(marker.lat),
+                  lng: parseFloat(marker.lng),
+                }}
+              >
+                <div>
+                  <h3>{marker.Name}</h3>
+                  <p>{marker.Address}</p>
+                </div>
+              </InfoWindow>
+            )}
+          </Marker>
         ))}
         {userLocation && (
           <Marker
             position={userLocation}
-            // Specify your custom icon URL
             icon={{
-              url: '/home.svg',
-              scaledSize: new window.google.maps.Size(40, 40), // Adjust size as needed
+              url: "/home.svg",
+              scaledSize: new window.google.maps.Size(40, 40),
             }}
-          />
+            onMouseOver={() => setHoveredMarker("userLocation")}
+            onMouseOut={() => setHoveredMarker(null)}
+          >
+            {hoveredMarker === "userLocation" && (
+              <InfoWindow position={userLocation}>
+                <div>You are here</div>
+              </InfoWindow>
+            )}
+          </Marker>
         )}
       </GoogleMap>
     </div>
