@@ -104,7 +104,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           >
             <div className="mt-12">
               {filteredData.map((playgroup) => (
-                <PlaygroupCard key={playgroup.id} playgroup={playgroup} />
+                <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
               ))}
             </div>
           </div>
@@ -112,7 +112,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
         {/* Map Section */}
         <div className="w-full md:w-2/5">
-          <MapComponent sheetData={sheetData} />
+          <MapComponent sheetData={filteredData} />
         </div>
       </div>
     </div>
