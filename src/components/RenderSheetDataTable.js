@@ -7,6 +7,7 @@ import MapComponent from "./MapComponent";
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [filteredData, setFilteredData] = useState(sheetData || []);
   const [filterCriteria, setFilterCriteria] = useState({
     location: "",
@@ -25,6 +26,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
     "Friday",
     "Saturday",
   ]);
+  const handleMarkerSelect = (Address) => {
+    setSelectedAddress(Address);
+  };
 
   useEffect(() => {
     if (!isLoading) {
@@ -103,16 +107,25 @@ const RenderSheetDataTable = ({ sheetData }) => {
             style={{ height: "80vh" }}
           >
             <div className="mt-12">
-              {filteredData.map((playgroup) => (
-                <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
-              ))}
+              {filteredData
+                .filter(
+                  (playgroup) =>
+                    selectedAddress === null ||
+                    playgroup.Address === selectedAddress
+                )
+                .map((playgroup) => (
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                ))}
             </div>
           </div>
         </div>
 
         {/* Map Section */}
         <div className="w-full md:w-2/5">
-          <MapComponent sheetData={filteredData} />
+          <MapComponent
+            sheetData={filteredData}
+            onMarkerSelect={handleMarkerSelect}
+          />
         </div>
       </div>
     </div>

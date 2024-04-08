@@ -9,7 +9,7 @@ import {
 } from "@react-google-maps/api";
 // import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
-function MapComponent({ sheetData }) {
+function MapComponent({ sheetData, onMarkerSelect }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
@@ -84,11 +84,12 @@ function MapComponent({ sheetData }) {
       >
         {markers.map((marker, index) => (
           <Marker //need to parseFloat again to avoid error... thats where TypeScript would be useful
-            key={index}
+            key={marker.ID}
             position={{
               lat: parseFloat(marker.lat),
               lng: parseFloat(marker.lng),
             }}
+            onClick={() => onMarkerSelect(marker.Address)}
             onMouseOver={() => setHoveredMarker(index)} // Assume each marker has a unique id
             onMouseOut={() => setHoveredMarker(null)}
           >
