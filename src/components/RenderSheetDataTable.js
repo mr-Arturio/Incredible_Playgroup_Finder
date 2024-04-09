@@ -30,6 +30,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
     setSelectedAddress(Address);
   };
 
+  //Reset Function
+  const resetFilters = () => {
+    setSelectedAddress(null);
+    setFilterCriteria({
+      location: "",
+      language: "",
+      day: "",
+      name: "",
+    });
+  };
+
   useEffect(() => {
     if (!isLoading) {
       // Extract unique locations from sheetData
@@ -96,6 +107,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
             placeholder="Select Day of the Week"
           />
         </div>
+        {/* Reset Button */}
+        <button
+          onClick={resetFilters}
+          className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+        >
+          Reset Filters
+        </button>
       </div>
 
       {/* Content Sections */}
