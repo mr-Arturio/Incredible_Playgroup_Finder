@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import MapComponent from "../components/MapComponent";
 import { getSheetData } from "../actions/getSheetData";
 import RenderSheetDataTable from "../components/RenderSheetDataTable";
 import { Header } from "../components/Header";
