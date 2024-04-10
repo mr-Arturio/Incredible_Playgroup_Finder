@@ -25,6 +25,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
     "Thursday",
     "Friday",
     "Saturday",
+    "Sunday",
   ]);
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address);
@@ -76,14 +77,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
       <div className="sticky top-0 bg-white z-10 p-4 w-full">
         <div className="flex flex-wrap justify-between items-center">
           <FilterComponent
-            id="nameCriteria"
-            value={filterCriteria.name}
-            options={nameOptions}
-            onChange={(e) => handleFilterChange("name", e.target.value)}
-            placeholder="Select Facility"
-          />
-
-          <FilterComponent
             id="locationCriteria"
             value={filterCriteria.location}
             options={locationOptions}
@@ -105,6 +98,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder="Select Day of the Week"
+          />
+
+          <FilterComponent
+            id="nameCriteria"
+            value={filterCriteria.name}
+            options={nameOptions}
+            onChange={(e) => handleFilterChange("name", e.target.value)}
+            placeholder="Select Facility"
           />
         </div>
         {/* Reset Button */}
