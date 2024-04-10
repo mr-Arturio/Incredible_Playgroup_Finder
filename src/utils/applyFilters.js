@@ -12,6 +12,9 @@ const applyFilters = (data, criteria) => {
     if (criteria.name && item.Name !== criteria.name) {
       return false;
     }
+    if (criteria.age && item.Age !== criteria.age) {
+      return false;
+    }
     return true;
   });
 };

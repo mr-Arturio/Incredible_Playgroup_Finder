@@ -14,10 +14,16 @@ const RenderSheetDataTable = ({ sheetData }) => {
     language: "",
     day: "",
     name: "",
+    age: "",
   });
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
   const [nameOptions, setNameOptions] = useState([]);
+  const [ageOptions, setAgeOptions] = useState([
+     "Babies",
+     "Toddlers",
+     "Kids",
+  ]);
   const [dayOptions, setDayOptions] = useState([
     "Monday",
     "Tuesday",
@@ -39,6 +45,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       language: "",
       day: "",
       name: "",
+      age: "",
     });
   };
 
@@ -82,6 +89,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
             placeholder="Select Location"
+          />
+          <FilterComponent
+            id="ageCriteria"
+            value={filterCriteria.age}
+            options={ageOptions}
+            onChange={(e) => handleFilterChange("age", e.target.value)}
+            placeholder="Select Age Group"
           />
 
           <FilterComponent
