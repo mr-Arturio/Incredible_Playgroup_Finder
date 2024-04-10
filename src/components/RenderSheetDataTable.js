@@ -15,10 +15,16 @@ const RenderSheetDataTable = ({ sheetData }) => {
     day: "",
     name: "",
     age: "",
+    time: "",
   });
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
   const [nameOptions, setNameOptions] = useState([]);
+  const [timeOptions, setTimeOptions] = useState([
+    "Morning",
+    "Afternoon",
+    "Evening"
+  ]);
   const [ageOptions, setAgeOptions] = useState([
      "Babies",
      "Toddlers",
@@ -46,6 +52,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       day: "",
       name: "",
       age: "",
+      time: "",
     });
   };
 
@@ -61,6 +68,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       const uniqueNames = new Set(
         sheetData.map((item) => item.Name).filter(Boolean)
       );
+
 
       setLocationOptions([...uniqueLocations]);
       setLanguageOptions([...uniqueLanguages]);
@@ -112,6 +120,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder="Select Day of the Week"
+          />
+
+          <FilterComponent
+            id="timeCriteria"
+            value={filterCriteria.time}
+            options={timeOptions}
+            onChange={(e) => handleFilterChange("time", e.target.value)}
+            placeholder="Select Time of the Day"
           />
 
           <FilterComponent
