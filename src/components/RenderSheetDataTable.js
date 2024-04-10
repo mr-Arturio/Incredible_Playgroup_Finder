@@ -7,16 +7,29 @@ import MapComponent from "./MapComponent";
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [filteredData, setFilteredData] = useState(sheetData || []);
   const [filterCriteria, setFilterCriteria] = useState({
     location: "",
     language: "",
     day: "",
     name: "",
+    age: "",
+    time: "",
   });
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
   const [nameOptions, setNameOptions] = useState([]);
+  const [timeOptions, setTimeOptions] = useState([
+    "Morning",
+    "Afternoon",
+    "Evening"
+  ]);
+  const [ageOptions, setAgeOptions] = useState([
+     "Babies",
+     "Toddlers",
+     "Kids",
+  ]);
   const [dayOptions, setDayOptions] = useState([
     "Monday",
     "Tuesday",
@@ -24,7 +37,24 @@ const RenderSheetDataTable = ({ sheetData }) => {
     "Thursday",
     "Friday",
     "Saturday",
+    "Sunday",
   ]);
+  const handleMarkerSelect = (Address) => {
+    setSelectedAddress(Address);
+  };
+
+  //Reset Function
+  const resetFilters = () => {
+    setSelectedAddress(null);
+    setFilterCriteria({
+      location: "",
+      language: "",
+      day: "",
+      name: "",
+      age: "",
+      time: "",
+    });
+  };
 
   useEffect(() => {
     if (!isLoading) {
@@ -38,6 +68,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       const uniqueNames = new Set(
         sheetData.map((item) => item.Name).filter(Boolean)
       );
+
 
       setLocationOptions([...uniqueLocations]);
       setLanguageOptions([...uniqueLanguages]);
@@ -61,19 +92,18 @@ const RenderSheetDataTable = ({ sheetData }) => {
       <div className="sticky top-0 bg-white z-10 p-4 w-full">
         <div className="flex flex-wrap justify-between items-center">
           <FilterComponent
-            id="nameCriteria"
-            value={filterCriteria.name}
-            options={nameOptions}
-            onChange={(e) => handleFilterChange("name", e.target.value)}
-            placeholder="Select Facility"
-          />
-
-          <FilterComponent
             id="locationCriteria"
             value={filterCriteria.location}
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
             placeholder="Select Location"
+          />
+          <FilterComponent
+            id="ageCriteria"
+            value={filterCriteria.age}
+            options={ageOptions}
+            onChange={(e) => handleFilterChange("age", e.target.value)}
+            placeholder="Select Age Group"
           />
 
           <FilterComponent
@@ -91,7 +121,30 @@ const RenderSheetDataTable = ({ sheetData }) => {
             onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder="Select Day of the Week"
           />
+
+          <FilterComponent
+            id="timeCriteria"
+            value={filterCriteria.time}
+            options={timeOptions}
+            onChange={(e) => handleFilterChange("time", e.target.value)}
+            placeholder="Select Time of the Day"
+          />
+
+          <FilterComponent
+            id="nameCriteria"
+            value={filterCriteria.name}
+            options={nameOptions}
+            onChange={(e) => handleFilterChange("name", e.target.value)}
+            placeholder="Select Facility"
+          />
         </div>
+        {/* Reset Button */}
+        <button
+          onClick={resetFilters}
+          className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+        >
+          Reset Filters
+        </button>
       </div>
 
       {/* Content Sections */}
@@ -103,16 +156,25 @@ const RenderSheetDataTable = ({ sheetData }) => {
             style={{ height: "80vh" }}
           >
             <div className="mt-12">
-              {filteredData.map((playgroup) => (
-                <PlaygroupCard key={playgroup.id} playgroup={playgroup} />
-              ))}
+              {filteredData
+                .filter(
+                  (playgroup) =>
+                    selectedAddress === null ||
+                    playgroup.Address === selectedAddress
+                )
+                .map((playgroup) => (
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                ))}
             </div>
           </div>
         </div>
 
         {/* Map Section */}
         <div className="w-full md:w-2/5">
-          <MapComponent sheetData={sheetData} />
+          <MapComponent
+            sheetData={filteredData}
+            onMarkerSelect={handleMarkerSelect}
+          />
         </div>
       </div>
     </div>

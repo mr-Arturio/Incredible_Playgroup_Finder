@@ -36,17 +36,17 @@ export async function getSheetData() {
 
   const data = await glSheets.spreadsheets.values.get({
     spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    range: "A:Q",
+    range: "A:R",
   });
 
   const transformedData = transformDataToObjects(data.data.values);
 
-  if (transformedData) {
-    // Only cache if data is not null
-    sheetCache.set(cacheKey, transformedData);
-    console.log("New data cached");
-    // console.log(transformedData);
-  }
+  // if (transformedData) {
+  //   // Only cache if data is not null
+  //   sheetCache.set(cacheKey, transformedData);
+  //   console.log("New data cached");
+  //   // console.log(transformedData);
+  // }
 
   return {
     props: {
