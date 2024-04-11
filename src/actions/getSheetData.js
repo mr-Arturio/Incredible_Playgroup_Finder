@@ -36,7 +36,7 @@ export async function getSheetData() {
 
   const data = await glSheets.spreadsheets.values.get({
     spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    range: "A:R",
+    range: "A:S",
   });
 
   const transformedData = transformDataToObjects(data.data.values);
