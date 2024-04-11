@@ -16,6 +16,7 @@ function PlaygroupCard({ playgroup }) {
     Coffee,
     WiFi,
     Outdoor,
+    Cancelled,
   } = playgroup;
 
   const icons = {
@@ -78,8 +79,8 @@ function PlaygroupCard({ playgroup }) {
             src={icons.time}
             alt="Time"
             className="h-5 w-5 text-gray-500"
-            width={500}
-            height={300}
+            width={20}
+            height={20}
           />
           <span className="ml-2">{Time}</span>
         </div>
@@ -88,18 +89,28 @@ function PlaygroupCard({ playgroup }) {
             src={icons.location}
             alt="Location"
             className="h-5 w-5 text-gray-500"
-            width={500}
-            height={300}
+            width={20}
+            height={20}
           />
-          <span className="ml-2">{Address}</span>
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+              Address
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 text-blue-600 hover:text-blue-700"
+            style={{ textDecoration: "underline" }}
+          >
+            {Address}
+          </a>
         </div>
         <div className="flex items-center mt-2 text-gray-700">
           <Image
             src={icons.age}
             alt="Age"
             className="h-5 w-5 text-gray-500"
-            width={500}
-            height={300}
+            width={20}
+            height={20}
           />
           <span className="ml-2">{Age}</span>
         </div>
@@ -130,8 +141,8 @@ function PlaygroupCard({ playgroup }) {
                   src={src}
                   alt={iconTooltip}
                   className="h-7 w-7"
-                  width={500}
-                  height={300}
+                  width={20}
+                  height={20}
                 />
                 {tooltip === iconTooltip && (
                   <div className="absolute bottom-full mb-2 -ml-4 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
