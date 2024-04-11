@@ -3,6 +3,8 @@ import PlaygroupCard from "./PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
+import Loading from "../app/loading";
+
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -80,7 +82,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
     }
   }, [sheetData, filterCriteria, isLoading]);
 
-  if (isLoading) return <div className="text-center p-4">Loading...</div>;
+  if (isLoading) return <Loading />;
 
   const handleFilterChange = (key, value) => {
     setFilterCriteria({ ...filterCriteria, [key]: value });
