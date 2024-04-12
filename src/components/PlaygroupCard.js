@@ -58,8 +58,23 @@ function PlaygroupCard({ playgroup }) {
 
   const [tooltip, setTooltip] = useState("");
 
+  // Conditional style classes
+  const cardStyle =
+    Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
+  const cancelledTextStyle = "text-red-500 text-xl font-bold";
+  const cardClasses = `shadow-lg rounded-lg overflow-hidden m-6 relative ${cardStyle}`;
+  const moreInfoStyle =
+    Cancelled === "Yes"
+      ? "bg-red-200 text-red-700 hover:bg-red-300 hover:text-red-800"
+      : "bg-blue-200 text-indigo-600 hover:text-indigo-800 visited:text-purple-600";
+
   return (
-    <div className="bg-blue-100 shadow-lg rounded-lg overflow-hidden m-6 relative">
+    <div className={cardClasses}>
+      {Cancelled === "Yes" && (
+        <div className="absolute z-10 w-full h-full flex justify-center items-center">
+          <span className={cancelledTextStyle}>Cancelled</span>
+        </div>
+      )}
       <div className="flex justify-between items-start px-7 pt-5 pb-3">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
@@ -116,12 +131,17 @@ function PlaygroupCard({ playgroup }) {
         </div>
       </div>
       {URL && (
-        <div className="bg-blue-200 py-4 px-6">
+        <div
+          className={`py-4 px-6 ${Cancelled === "Yes" ? "relative z-20" : ""}`}
+          style={{
+            backgroundColor: Cancelled === "Yes" ? "#fee2e2" : "#bfdbfe",
+          }}
+        >
           <a
             href={URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-indigo-600 hover:text-indigo-800 visited:text-purple-600"
+            className={`rounded-md px-3 py-1 transition duration-300 ease-in-out ${moreInfoStyle}`}
           >
             More Info
           </a>
