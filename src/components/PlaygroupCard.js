@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import Tooltip from "./Tooltip";
 
 function PlaygroupCard({ playgroup }) {
   const {
@@ -151,25 +152,23 @@ function PlaygroupCard({ playgroup }) {
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
-              <div
+              <Tooltip
                 key={key}
-                onMouseEnter={() => setTooltip(iconTooltip)}
-                onMouseLeave={() => setTooltip("")}
-                className="relative"
+                text={tooltip === iconTooltip ? iconTooltip : ""}
               >
-                <Image
-                  src={src}
-                  alt={iconTooltip}
-                  className="h-7 w-7"
-                  width={20}
-                  height={20}
-                />
-                {tooltip === iconTooltip && (
-                  <div className="absolute bottom-full mb-2 -ml-4 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
-                    {iconTooltip}
-                  </div>
-                )}
-              </div>
+                <div
+                  onMouseEnter={() => setTooltip(iconTooltip)}
+                  onMouseLeave={() => setTooltip("")}
+                >
+                  <Image
+                    src={src}
+                    alt={iconTooltip}
+                    className="h-7 w-7"
+                    width={28}
+                    height={28}
+                  />
+                </div>
+              </Tooltip>
             )
         )}
       </div>
