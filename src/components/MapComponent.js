@@ -1,6 +1,7 @@
 // "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
+import Loading from "../app/loading";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -74,7 +75,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     }
   }, []);
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <Loading />;;
   return (
     <div className="h-full w-full content-center">
       <GoogleMap

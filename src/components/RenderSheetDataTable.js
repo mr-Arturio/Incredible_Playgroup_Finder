@@ -3,6 +3,7 @@ import PlaygroupCard from "./PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
+import Loading from "../app/loading";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -23,13 +24,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
   const [timeOptions, setTimeOptions] = useState([
     "Morning",
     "Afternoon",
-    "Evening"
+    "Evening",
   ]);
-  const [ageOptions, setAgeOptions] = useState([
-     "Babies",
-     "Toddlers",
-     "Kids",
-  ]);
+  const [ageOptions, setAgeOptions] = useState(["Babies", "Toddlers", "Kids"]);
   const [dayOptions, setDayOptions] = useState([
     "Monday",
     "Tuesday",
@@ -69,7 +66,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
         sheetData.map((item) => item.Name).filter(Boolean)
       );
 
-
       setLocationOptions([...uniqueLocations]);
       setLanguageOptions([...uniqueLanguages]);
       setNameOptions([...uniqueNames]);
@@ -80,7 +76,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
     }
   }, [sheetData, filterCriteria, isLoading]);
 
-  if (isLoading) return <div className="text-center p-4">Loading...</div>;
+  if (isLoading) return <Loading />;
+  //check for no data available
+  const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
     setFilterCriteria({ ...filterCriteria, [key]: value });
@@ -155,17 +153,26 @@ const RenderSheetDataTable = ({ sheetData }) => {
             className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
             style={{ height: "80vh" }}
           >
-            <div className="mt-12">
-              {filteredData
-                .filter(
-                  (playgroup) =>
-                    selectedAddress === null ||
-                    playgroup.Address === selectedAddress
-                )
-                .map((playgroup) => (
-                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
-                ))}
-            </div>
+            {noDataAvailable ? (
+              <div className="flex justify-center items-center h-full">
+                <span className="text-gray-500 text-center">
+                  No data found for the selected filters. Please adjust your
+                  search criteria.
+                </span>
+              </div>
+            ) : (
+              <div className="mt-12">
+                {filteredData
+                  .filter(
+                    (playgroup) =>
+                      selectedAddress === null ||
+                      playgroup.Address === selectedAddress
+                  )
+                  .map((playgroup) => (
+                    <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                  ))}
+              </div>
+            )}
           </div>
         </div>
 
