@@ -11,6 +11,15 @@ npm run dev
 ```
 
 - npm install @react-google-maps/api
+- npm install react-datepicker <br> 
+
+The Date object in JavaScript uses the local time zone, while the toISOString() method converts the date to UTC time, potentially resulting in a date shift due to the time zone difference.
+
+To fix this, you can adjust the date to account for the time zone offset before converting it to an ISO string.
+```Sets the time to midnight for the selected date to avoid any shifts due to the time difference within the day.
+Calculates the timezone offset in milliseconds and subtracts it from the date to get the local time as if it were in UTC.
+Converts the adjusted date to an ISO string and splits it to get the YYYY-MM-DD format, which should now represent the correct local date.
+```
 
 do not forget about```"use client"```!!!
 

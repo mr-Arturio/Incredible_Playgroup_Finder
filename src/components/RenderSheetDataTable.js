@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
+import { handleDateChange } from "../utils/handleDateChange";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
+  const [startDate, setStartDate] = useState(new Date());
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [filteredData, setFilteredData] = useState(sheetData || []);
   const [filterCriteria, setFilterCriteria] = useState({
+    date: "",
     location: "",
     language: "",
     day: "",
@@ -43,7 +48,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
   //Reset Function
   const resetFilters = () => {
     setSelectedAddress(null);
+    setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
+      date: "",
       location: "",
       language: "",
       day: "",
@@ -135,6 +142,21 @@ const RenderSheetDataTable = ({ sheetData }) => {
             onChange={(e) => handleFilterChange("name", e.target.value)}
             placeholder="Select Facility"
           />
+          <DatePicker
+            selected={startDate}
+            onChange={(date) =>
+              handleDateChange(
+                date,
+                setStartDate,
+                setFilterCriteria,
+                filterCriteria
+              )
+            }
+            minDate={new Date()} // Only show today and future dates
+            filterDate={(date) => {
+              return true;
+            }}
+          />
         </div>
         {/* Reset Button */}
         <button
@@ -163,11 +185,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
             ) : (
               <div className="mt-12">
                 {filteredData
-                  .filter(
-                    (playgroup) =>
+                  .filter((playgroup) => {
+                    //additional logic to check that playgroup is not in the past
+                    const playgroupDate = new Date(playgroup.Date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    return (
                       selectedAddress === null ||
-                      playgroup.Address === selectedAddress
-                  )
+                      (playgroup.Address === selectedAddress &&
+                        playgroupDate >= today)
+                    );
+                  })
                   .map((playgroup) => (
                     <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                   ))}
