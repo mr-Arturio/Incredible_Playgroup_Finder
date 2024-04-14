@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
+import { handleDateChange } from "../utils/handleDateChange";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
+  const [startDate, setStartDate] = useState(new Date());
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [filteredData, setFilteredData] = useState(sheetData || []);
   const [filterCriteria, setFilterCriteria] = useState({
+    date: "",
     location: "",
     language: "",
     day: "",
@@ -39,11 +44,22 @@ const RenderSheetDataTable = ({ sheetData }) => {
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address);
   };
+  // //handle data change
+  // const handleDateChange = (date) => {
+  //   setStartDate(date);
+  //   // Update your filter criteria for date here
+  //   setFilterCriteria({
+  //     ...filterCriteria,
+  //     date: date.toISOString().split("T")[0],
+  //   });
+  // };
 
   //Reset Function
   const resetFilters = () => {
     setSelectedAddress(null);
+    setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
+      date: "",
       location: "",
       language: "",
       day: "",
@@ -134,6 +150,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
             options={nameOptions}
             onChange={(e) => handleFilterChange("name", e.target.value)}
             placeholder="Select Facility"
+          />
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => handleDateChange(date, setStartDate, setFilterCriteria, filterCriteria)}
+            minDate={new Date()} // Only show today and future dates
+            filterDate={(date) => {
+              return true;
+            }}
           />
         </div>
         {/* Reset Button */}

@@ -25,6 +25,11 @@ const applyFilters = (data, criteria) => {
     if (criteria.time && categorizeTime(item.Time) !== criteria.time) {
       return false;
     }
+    // make sure data is in ISO format 'YYYY-MM-DD'
+    if (criteria.date && item.Date !== criteria.date) {
+        return false;
+      }
+    
     return true;
   });
 };
