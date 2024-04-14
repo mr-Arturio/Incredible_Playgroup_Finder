@@ -14,6 +14,6 @@ export const handleDateChange = (
   setStartDate(adjustedDate);
   setFilterCriteria({
     ...filterCriteria,
-    date: localAdjustedDate.toISOString().split("T")[0],
+    date: localAdjustedDate.toISOString().split("T")[0], //
   });
 };

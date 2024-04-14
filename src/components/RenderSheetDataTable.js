@@ -44,15 +44,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address);
   };
-  // //handle data change
-  // const handleDateChange = (date) => {
-  //   setStartDate(date);
-  //   // Update your filter criteria for date here
-  //   setFilterCriteria({
-  //     ...filterCriteria,
-  //     date: date.toISOString().split("T")[0],
-  //   });
-  // };
 
   //Reset Function
   const resetFilters = () => {
@@ -153,7 +144,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
           />
           <DatePicker
             selected={startDate}
-            onChange={(date) => handleDateChange(date, setStartDate, setFilterCriteria, filterCriteria)}
+            onChange={(date) =>
+              handleDateChange(
+                date,
+                setStartDate,
+                setFilterCriteria,
+                filterCriteria
+              )
+            }
             minDate={new Date()} // Only show today and future dates
             filterDate={(date) => {
               return true;
@@ -187,11 +185,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
             ) : (
               <div className="mt-12">
                 {filteredData
-                  .filter(
-                    (playgroup) =>
+                  .filter((playgroup) => {
+                    //additional logic to check that playgroup is not in the past
+                    const playgroupDate = new Date(playgroup.Date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    return (
                       selectedAddress === null ||
-                      playgroup.Address === selectedAddress
-                  )
+                      (playgroup.Address === selectedAddress &&
+                        playgroupDate >= today)
+                    );
+                  })
                   .map((playgroup) => (
                     <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                   ))}
