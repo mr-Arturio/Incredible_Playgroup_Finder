@@ -11,6 +11,7 @@ npm run dev
 ```
 
 - npm install @react-google-maps/api
+- npm install react-datepicker
 
 do not forget about```"use client"```!!!
 
