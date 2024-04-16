@@ -105,23 +105,22 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      {/* Sticky top bar for filters */}
-      <div className="sticky top-0 bg-white z-10 p-4 w-full">
-        <div className="flex flex-wrap justify-between items-center">
+    <div className="sticky top-0 bg-white z-10 p-4 w-full">
+      <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 md:space-x-2">
           {/* Filter dropdown components */}
           <FilterComponent
             id="locationCriteria"
             value={filterCriteria.location}
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
-            placeholder="Select Location"
+            placeholder="Location"
           />
           <FilterComponent
             id="ageCriteria"
             value={filterCriteria.age}
             options={ageOptions}
             onChange={(e) => handleFilterChange("age", e.target.value)}
-            placeholder="Select Age Group"
+            placeholder="Age Group"
           />
 
           <FilterComponent
@@ -129,7 +128,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             value={filterCriteria.language}
             options={languageOptions}
             onChange={(e) => handleFilterChange("language", e.target.value)}
-            placeholder="Select Language"
+            placeholder="Language"
           />
 
           <FilterComponent
@@ -137,7 +136,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             value={filterCriteria.day}
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
-            placeholder="Select Day of the Week"
+            placeholder="Day of the Week"
           />
 
           <FilterComponent
@@ -145,7 +144,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             value={filterCriteria.time}
             options={timeOptions}
             onChange={(e) => handleFilterChange("time", e.target.value)}
-            placeholder="Select Time of the Day"
+            placeholder="Time of the Day"
           />
 
           <FilterComponent
@@ -153,10 +152,11 @@ const RenderSheetDataTable = ({ sheetData }) => {
             value={filterCriteria.name}
             options={nameOptions}
             onChange={(e) => handleFilterChange("name", e.target.value)}
-            placeholder="Select Facility"
+            placeholder="Facility"
           />
           {/* Date Picker */}
           <DatePicker
+          className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             selected={startDate}
             onChange={(date) =>
               handleDateChange(
@@ -175,8 +175,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
         {/* Reset button to clear all selected filters */}
         <button
           onClick={resetFilters}
-          className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
-        >
+          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
           Reset Filters
         </button>
       </div>
