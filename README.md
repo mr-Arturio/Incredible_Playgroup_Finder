@@ -1,14 +1,36 @@
-## PerentResource
-project
-initial
+## Parent Resource Playgroup Finder application. 
+1. This innovative platform is designed to make life easier for parents in Ottawa by providing an intuitive way to find playgroup information tailored to their needs.
+### OR
+2. Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map and filterable playgroup cards for a tailored experience.
 
-## Getting Started
 
-First, run the development server:
+Our application stands out with its easy-to-use interactive map and a dynamic filtering system that allows users to search for playgroups by location, age group, language preference, date, day, and facility. Data is pulled in real-time from a Google Sheets database, ensuring the most current information is always at hand.
+
+Key features include:
+- **Interactive Map**: View playgroup locations across Ottawa, with the option to filter based on various criteria.
+- **Real-time Data**: Playgroup information is continuously updated, providing the latest event details.
+- **Filter Options**: Search for playgroups by location, age group, language, date, day, or name.
+- **Responsive Design**: Whether on desktop or mobile, the experience is seamless.
+- **User Location Detection**: With permission, the app will show your location on the map for convenience.
+- **Detailed Event Information**: Reactive playgroup cards with detailed event information.
+- **Direct Navigation**: Clicking an address takes you to Google Maps to easily find directions.
+- **Date Picker**: React DatePicker is integrated for easy date selection.
+
+
+## Setup
+
+Clone the repository to your local environment:
 
 ```bash
+git clone [repository-url]
+cd [repository-directory]
+npm install
 npm run dev
 ```
+Navigate to http://localhost:3000 in your browser to view the app.
+
+
+introduce advanced TTLCache for improved performance and reduced API call costs.
 
 - npm install @react-google-maps/api
 - npm install react-datepicker <br> 
@@ -29,11 +51,3 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
