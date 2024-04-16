@@ -63,31 +63,31 @@ const RenderSheetDataTable = ({ sheetData }) => {
   useEffect(() => {
     if (!isLoading) {
       // Extract unique locations from sheetData
-      const uniqueLocations = new Set(
-        sheetData.map((item) => item.Location).filter(Boolean)
-      );
-      const uniqueLanguages = new Set(
-        sheetData.map((item) => item.Language).filter(Boolean)
-      );
-      const uniqueNames = new Set(
-        sheetData.map((item) => item.Name).filter(Boolean)
-      );
+      setLocationOptions([...new Set(sheetData.map((item) => item.Location).filter(Boolean))]);
+      setLanguageOptions([...new Set(sheetData.map((item) => item.Language).filter(Boolean))]);
+      setNameOptions([...new Set(sheetData.map((item) => item.Name).filter(Boolean))]);
 
-      setLocationOptions([...uniqueLocations]);
-      setLanguageOptions([...uniqueLanguages]);
-      setNameOptions([...uniqueNames]);
-
-      // Apply filtering based on location
-      let filtered = applyFilters(sheetData, filterCriteria) || [];
-      setFilteredData(filtered);
+       // Apply filters to the data
+    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+    
+    // If a specific location is selected via marker, filter by that as well
+    if (selectedAddress) {
+      filtered = filtered.filter((playgroup) => playgroup.Address === selectedAddress);
     }
-  }, [sheetData, filterCriteria, isLoading]);
+    
+    setFilteredData(filtered);
+  }
+}, [sheetData, filterCriteria, isLoading, selectedAddress]);
 
   if (isLoading) return <Loading />;
   //check for no data available
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
+    // Deselect marker when the name filter changes or when the location filter changes
+    if (key === "name" || key === "location") {
+      setSelectedAddress(null);
+    }
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
