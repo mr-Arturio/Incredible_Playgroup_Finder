@@ -9,12 +9,14 @@ import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
 
 const RenderSheetDataTable = ({ sheetData }) => {
-  const isLoading = !sheetData || sheetData.length === 0;
+  const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [filteredData, setFilteredData] = useState(sheetData || []);
+  // State declarations
+  const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
+  const [selectedAddress, setSelectedAddress] = useState(null); // Tracks the selected address from map markers
+  const [filteredData, setFilteredData] = useState(sheetData || []); // Stores the filtered data based on criteria
   const [filterCriteria, setFilterCriteria] = useState({
+    // Stores the current filter settings
     date: "",
     location: "",
     language: "",
@@ -23,6 +25,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
     age: "",
     time: "",
   });
+
+  // State for filter options, extracted from sheet data
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
   const [nameOptions, setNameOptions] = useState([]);
@@ -42,10 +46,10 @@ const RenderSheetDataTable = ({ sheetData }) => {
     "Sunday",
   ]);
   const handleMarkerSelect = (Address) => {
-    setSelectedAddress(Address);
+    setSelectedAddress(Address); // Set the address when a map marker is selected
   };
 
-  //Reset Function
+  // Reset all filters to default states, including clearing selected markers
   const resetFilters = () => {
     setSelectedAddress(null);
     setStartDate(new Date()); // Reset the date picker to today's date
@@ -62,22 +66,30 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   useEffect(() => {
     if (!isLoading) {
-      // Extract unique locations from sheetData
-      setLocationOptions([...new Set(sheetData.map((item) => item.Location).filter(Boolean))]);
-      setLanguageOptions([...new Set(sheetData.map((item) => item.Language).filter(Boolean))]);
-      setNameOptions([...new Set(sheetData.map((item) => item.Name).filter(Boolean))]);
+      // Extract all unique location, languge, facility from sheetData. If it's not in spreadsheet it will to be displayed in the filter
+      setLocationOptions([
+        ...new Set(sheetData.map((item) => item.Location).filter(Boolean)),
+      ]);
+      setLanguageOptions([
+        ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
+      ]);
+      setNameOptions([
+        ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
+      ]);
 
-       // Apply filters to the data
-    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-    
-    // If a specific location is selected via marker, filter by that as well
-    if (selectedAddress) {
-      filtered = filtered.filter((playgroup) => playgroup.Address === selectedAddress);
+      // Apply filters to the data
+      let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+
+      // If a specific location is selected via marker, filter by that as well
+      if (selectedAddress) {
+        filtered = filtered.filter(
+          (playgroup) => playgroup.Address === selectedAddress
+        );
+      }
+
+      setFilteredData(filtered);
     }
-    
-    setFilteredData(filtered);
-  }
-}, [sheetData, filterCriteria, isLoading, selectedAddress]);
+  }, [sheetData, filterCriteria, isLoading, selectedAddress]);
 
   if (isLoading) return <Loading />;
   //check for no data available
@@ -93,9 +105,10 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      {/* Filter Components */}
+      {/* Sticky top bar for filters */}
       <div className="sticky top-0 bg-white z-10 p-4 w-full">
         <div className="flex flex-wrap justify-between items-center">
+          {/* Filter dropdown components */}
           <FilterComponent
             id="locationCriteria"
             value={filterCriteria.location}
@@ -142,6 +155,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             onChange={(e) => handleFilterChange("name", e.target.value)}
             placeholder="Select Facility"
           />
+          {/* Date Picker */}
           <DatePicker
             selected={startDate}
             onChange={(date) =>
@@ -158,7 +172,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             }}
           />
         </div>
-        {/* Reset Button */}
+        {/* Reset button to clear all selected filters */}
         <button
           onClick={resetFilters}
           className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
