@@ -17,9 +17,20 @@ Key features include:
 - **Date Picker**: React DatePicker is integrated for easy date selection.
 
 
-## Getting Started
+## Setup
 
- introduce advanced TTLCache for improved performance and reduced API call costs.
+Clone the repository to your local environment:
+
+```bash
+git clone [repository-url]
+cd [repository-directory]
+npm install
+npm run dev
+```
+Navigate to http://localhost:3000 in your browser to view the app.
+
+
+introduce advanced TTLCache for improved performance and reduced API call costs.
 
 - npm install @react-google-maps/api
 - npm install react-datepicker <br> 
