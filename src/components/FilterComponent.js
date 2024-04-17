@@ -1,17 +1,17 @@
 import React from "react";
 
 const FilterComponent = ({ id, value, options, onChange, placeholder }) => {
-  const showAllOption = "Show all"; // This can be changed to any string you want to display
-
+  
   return (
+    <div className="w-full md:w-3/12 px-1 mb-2 md:mb-0"> {/* Adjust the width and padding as per requirement */}
     <select
       id={id}
       value={value}
       onChange={onChange}
-      className="form-select block w-full lg:w-1/6 py-2 pl-3 pr-8 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-gray-700 hover:border-gray-400"
+      className="block w-full py-2 pl-3 pr-10 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700 hover:border-gray-400 transition ease-in-out duration-150"
     >
       {/* Show "Show all" option when something is selected */}
-      {value && <option value="">{showAllOption}</option>}
+      {value && <option value="" className="font-bold">Show all</option>}
       {/* Placeholder as the first option */}
       {!value && <option value="" disabled>{placeholder}</option>}
       {/* Map through the options passed to the component */}
@@ -21,6 +21,7 @@ const FilterComponent = ({ id, value, options, onChange, placeholder }) => {
         </option>
       ))}
     </select>
+    </div>
   );
 };
 
