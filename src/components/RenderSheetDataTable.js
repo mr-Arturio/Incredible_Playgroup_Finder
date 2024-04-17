@@ -105,12 +105,11 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      <div className="sticky top-0 bg-white z-10 p-4 w-full">
-      <div className="flex flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
-  {/* Filters container */}
-  <div className="flex flex-col space-y-4 md:space-y-0 md:flex-1">
-    {/* First row of filters */}
-    <div className="flex justify-around gap-2 mb-4">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white z-10 p-4 w-full">
+        {/* Filters container */}
+        <div className="flex flex-col space-y-4 md:space-y-0 md:flex-1">
+          {/* First row of filters */}
+          <div className="flex justify-around gap-2 mb-4">
             <FilterComponent
               id="locationCriteria"
               value={filterCriteria.location}
@@ -162,8 +161,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
           </div>
         </div>
 
-  {/* Date picker and reset button */}
-  <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
+        {/* Date picker and reset button */}
+        <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
           <DatePicker
             className="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none md:h-[calc(100%+3rem)]"
             selected={startDate}
@@ -184,11 +183,10 @@ const RenderSheetDataTable = ({ sheetData }) => {
           {/* Reset button to clear all selected filters */}
           <button
             onClick={resetFilters}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline md:h-[calc(100%+3rem)] md:mt-8"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline md:h-[calc(100%+1rem)] md:mt-8"
           >
             Reset Filters
           </button>
-          </div>
         </div>
       </div>
 
