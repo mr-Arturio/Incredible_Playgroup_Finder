@@ -3,7 +3,7 @@ import React from "react";
 const FilterComponent = ({ id, value, options, onChange, placeholder }) => {
   
   return (
-    <div className="w-full md:w-4/12 px-1 mb-2 md:mb-0"> {/* Adjust the width and padding as per requirement */}
+    <div className="w-full md:w-3/12 px-1 mb-2 md:mb-0"> {/* Adjust the width and padding as per requirement */}
     <select
       id={id}
       value={value}
