@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import Tooltip from "./Tooltip";
+import getIcons from "../utils/icons";
 
 function PlaygroupCard({ playgroup }) {
   const {
@@ -16,49 +18,30 @@ function PlaygroupCard({ playgroup }) {
     Coffee,
     WiFi,
     Outdoor,
+    Cancelled,
   } = playgroup;
 
-  const icons = {
-    time: "/time.svg",
-    location: "/location.svg",
-    age: "/age.svg",
-    parking: {
-      show: Parking === "Yes",
-      src: "/parking.svg",
-      tooltip: "Parking Available",
-    },
-    coffee: {
-      show: Coffee === "Yes",
-      src: "/coffee.svg",
-      tooltip: "Coffee",
-    },
-    wifi: {
-      show: WiFi === "Yes",
-      src: "/wifi.svg",
-      tooltip: "WiFi Available",
-    },
-    indoor: {
-      show: Outdoor === "No",
-      src: "/indoor.svg",
-      tooltip: "Indoor",
-    },
-    outdoor: {
-      show: Outdoor === "Yes",
-      src: "outdoor.svg",
-      tooltip: "Outdoor",
-    },
-    // Assuming Language should always be shown; adjust if needed
-    language: {
-      show: true,
-      src: `/${Language.toLowerCase()}.svg`, //// Dynamic path to your language icon
-      tooltip: Language,
-    },
-  };
+  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
 
   const [tooltip, setTooltip] = useState("");
 
+  // Conditional style classes
+  const cardStyle =
+    Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
+  const cancelledTextStyle = "text-red-500 text-xl font-bold";
+  const cardClasses = `shadow-lg rounded-lg overflow-hidden m-6 relative ${cardStyle}`;
+  const moreInfoStyle =
+    Cancelled === "Yes"
+      ? "bg-red-200 text-red-700 hover:bg-red-300 hover:text-red-800"
+      : "bg-blue-200 text-indigo-600 hover:text-indigo-800 visited:text-purple-600";
+
   return (
-    <div className="bg-blue-100 shadow-lg rounded-lg overflow-hidden m-6 relative">
+    <div className={cardClasses}>
+      {Cancelled === "Yes" && (
+        <div className="absolute z-10 w-full h-full flex justify-center items-center">
+          <span className={cancelledTextStyle}>Cancelled</span>
+        </div>
+      )}
       <div className="flex justify-between items-start px-7 pt-5 pb-3">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
@@ -78,8 +61,8 @@ function PlaygroupCard({ playgroup }) {
             src={icons.time}
             alt="Time"
             className="h-5 w-5 text-gray-500"
-            width={500}
-            height={300}
+            width={20}
+            height={20}
           />
           <span className="ml-2">{Time}</span>
         </div>
@@ -88,29 +71,44 @@ function PlaygroupCard({ playgroup }) {
             src={icons.location}
             alt="Location"
             className="h-5 w-5 text-gray-500"
-            width={500}
-            height={300}
+            width={20}
+            height={20}
           />
-          <span className="ml-2">{Address}</span>
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+              Address
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 text-blue-600 hover:text-blue-700"
+            style={{ textDecoration: "underline" }}
+          >
+            {Address}
+          </a>
         </div>
         <div className="flex items-center mt-2 text-gray-700">
           <Image
             src={icons.age}
             alt="Age"
             className="h-5 w-5 text-gray-500"
-            width={500}
-            height={300}
+            width={20}
+            height={20}
           />
           <span className="ml-2">{Age}</span>
         </div>
       </div>
       {URL && (
-        <div className="bg-blue-200 py-4 px-6">
+        <div
+          className={`py-4 px-6 ${Cancelled === "Yes" ? "relative z-20" : ""}`}
+          style={{
+            backgroundColor: Cancelled === "Yes" ? "#fee2e2" : "#bfdbfe",
+          }}
+        >
           <a
             href={URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-indigo-600 hover:text-indigo-800 visited:text-purple-600"
+            className={`rounded-md px-3 py-1 transition duration-300 ease-in-out ${moreInfoStyle}`}
           >
             More Info
           </a>
@@ -120,25 +118,23 @@ function PlaygroupCard({ playgroup }) {
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
-              <div
+              <Tooltip
                 key={key}
-                onMouseEnter={() => setTooltip(iconTooltip)}
-                onMouseLeave={() => setTooltip("")}
-                className="relative"
+                text={tooltip === iconTooltip ? iconTooltip : ""}
               >
-                <Image
-                  src={src}
-                  alt={iconTooltip}
-                  className="h-7 w-7"
-                  width={500}
-                  height={300}
-                />
-                {tooltip === iconTooltip && (
-                  <div className="absolute bottom-full mb-2 -ml-4 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
-                    {iconTooltip}
-                  </div>
-                )}
-              </div>
+                <div
+                  onMouseEnter={() => setTooltip(iconTooltip)}
+                  onMouseLeave={() => setTooltip("")}
+                >
+                  <Image
+                    src={src}
+                    alt={iconTooltip}
+                    className="h-7 w-7"
+                    width={28}
+                    height={28}
+                  />
+                </div>
+              </Tooltip>
             )
         )}
       </div>
