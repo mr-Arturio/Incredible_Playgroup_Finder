@@ -7,6 +7,7 @@ import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
+import DatePickerComponent from "./DatePickerComponent";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -164,10 +165,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
         {/* Date picker and reset button */}
         <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
           <div className="w-full h-full md:flex md:items-center">
-            <DatePicker
-              className="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none h-10"
-              selected={startDate}
-              onChange={(date) =>
+            <DatePickerComponent
+              onDateChange={(date) =>
                 handleDateChange(
                   date,
                   setStartDate,
@@ -175,9 +174,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
                   filterCriteria
                 )
               }
-              minDate={new Date()} // Only show today and future dates
-              filterDate={(date) => true}
-              wrapperClassName="w-full md:w-auto" // Added a wrapper class to control width
             />
           </div>
 
