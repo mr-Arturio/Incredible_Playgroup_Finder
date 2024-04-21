@@ -32,53 +32,53 @@ Navigate to http://localhost:3000 in your browser to view the app.
 
 ### Updates:
 - add Google Map API
-- populate spreadsheet with mock data
-- connect spread sheet API
-- transform spreadsheet data to a key-object
-- create playgroup Cards
-- More Info as a link to the web site
-- add icons for time, address and age on the Playgroup card
-- add icons for parking, WiFi etc.
-- add more colums for the playgroups (parking, WiFi - Yes/No logic)
-- add additional information in a small pop-up box when a user hovers over icon
-- add lattitude and longtitude colums with data (create logic to populate this for the new addresses)
-- display markers using geolocation
-- display only one marker for the same addresses
-- introduce advanced TTLCache for improved performance and reduced API call costs.
-- add marker for user location (ask permission)
-- center the map on the user location(change it for Ottawa center in cvase user is not from here?)
-- add info pop-up box when hover over marker
-- create location, language, day and facility filters
-- connect all filters to the Markers on the map
-- add reset filters button
-- add filters by:
- - age (0-18, 18-3, 0-6 ?)
- - daytime (morning, afternoon, evening)
-- add "Show All" option to the filters when user chose some(not visible in default state)
-- implement cancel logic - if playgroup canceled (add column with Yes/No logic)
-- no data found massage
-- logic to show playgroups for today and future (no past)
-- addres as a link to google map rout
-- refactore filters styly (2 rows + responsive)
-- add react-datepicker - to filter playgroups by date
-- fix date and time logic for EST
-- add header text with an image
-- make calendar filter as an icon
+- Populate the spreadsheet with mock data.
+- Connect to the spreadsheet API.
+- Transform spreadsheet data into a key-object format.
+- Create Playgroup cards.
+- Add a "More Info" link to the website on each card.
+- Add icons for time, address, and age on the Playgroup card.
+- Include icons for amenities such as parking and WiFi.
+- Add more columns for playgroup amenities (parking, WiFi - using Yes/No logic).
+- Display additional information in a small pop-up box when a user hovers over an icon.
+- Add latitude and longitude columns with data (develop logic to populate these for new addresses).
+- Display markers using geolocation data.
+- Display only one marker for duplicate addresses.
+- Introduce advanced TTLCache for improved performance and reduced API call costs.
+- Add a marker for the user's location (request permission).
+- Center the map on the user's location (default to Ottawa's center if the user's location is unavailable).
+- Add an info pop-up box when hovering over a marker.
+- Create filters for location, language, day, and facility.
+- Connect all filters to the markers on the map.
+- Add a "reset filters" button.
+- Add filters for:
+  - Age (0-18, 18-30, 0-6?)
+  - Time of day (morning, afternoon, evening)
+- Add a "Show All" option for the filters, visible only when a user makes a selection (hidden by default).
+- Implement logic for cancelled playgroups - add a column with Yes/No logic.
+- Display a message when no data is found.
+- Logic to display playgroups for today and future dates only (exclude past dates).
+- Add a link to Google Maps routes on the address.
+- Refactor filter styles to two rows and ensure responsiveness.
+- Integrate React-datepicker to filter playgroups by date.
+- Adjust date and time logic for Eastern Standard Time (EST).
+- Add header text with an image.
+- Make the calendar filter accessible via an icon.
 
 ### Future Development
-- fix callendar icon - make it inline in mobile loyaout
-- refactore playgroup cards - make them smaller and extend upon press
-- hide filters in mobile layaout with 'Show filter options' button
-- mobile layaout - map on top, playgroup cards 
-- contact form at buttom
-- style header text with logo
-- geolocation logic - check lng and ltd fot each adress - if its not exist - create one and populate spreadsheet for future use
-- use days of the week (monday, tuesdae etc...) to display playgroups that are every week. It will make data shorter. but how to manage cancelations? add culomn 'repetetive' - means playgrop is every week (Yes/No). and use code to count days and display propper day of the week
-- French version
-- Charts
-- Deploy Server?
-- Google cloud account for PRC and spreadsheet with propper data
-- write an instructions on how to populate data in spreadsheet
+- Fix calendar icon to make it inline in mobile layout.
+- Refactor Playgroup cards to be smaller and expand upon pressing.
+- Hide filters in the mobile layout with a "Show Filter Options" button.
+- Arrange the mobile layout with the map on top and Playgroup cards below.
+- Add a contact form at the bottom.
+- Style the header text with a logo.
+- Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
+- Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
+- Offer a French version.
+- Incorporate charts.
+- Consider deploying a server?
+- Set up a Google Cloud account for PRC and ensure the spreadsheet contains proper data.
+- Provide instructions on how to populate data in the spreadsheet.
 
 - npm install @react-google-maps/api
 - npm install react-datepicker <br> 
