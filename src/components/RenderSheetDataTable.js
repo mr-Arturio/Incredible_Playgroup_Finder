@@ -193,7 +193,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       {/* Content Sections */}
       <div className="flex flex-1 md:flex-row ">
         {/* Playgroup Cards Section */}
-        <div className="w-full md:w-3/5 pt-4">
+        <div className="w-full md:w-3/5 pt-4 pr-4">
           <div
             className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
             style={{ height: "80vh" }}
