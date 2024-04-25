@@ -106,13 +106,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white z-10 p-4 w-full">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow overflow-y-auto z-10 p-4 w-full">
         {/* Filters container */}
         <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
           {/* First row of filters */}
           <div className="flex justify-around gap-2 mb-4">
             <FilterComponent
               id="locationCriteria"
+              className="flex-grow"
               value={filterCriteria.location}
               options={locationOptions}
               onChange={(e) => handleFilterChange("location", e.target.value)}
@@ -120,6 +121,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             />
             <FilterComponent
               id="ageCriteria"
+              className="flex-grow"
               value={filterCriteria.age}
               options={ageOptions}
               onChange={(e) => handleFilterChange("age", e.target.value)}
@@ -128,6 +130,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
             <FilterComponent
               id="languageCriteria"
+              className="flex-grow"
               value={filterCriteria.language}
               options={languageOptions}
               onChange={(e) => handleFilterChange("language", e.target.value)}
@@ -188,9 +191,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
       </div>
 
       {/* Content Sections */}
-      <div className="flex flex-1 md:flex-row">
+      <div className="flex flex-1 md:flex-row ">
         {/* Playgroup Cards Section */}
-        <div className="w-full md:w-3/5 p-4">
+        <div className="w-full md:w-3/5 pt-4 pr-4">
           <div
             className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
             style={{ height: "80vh" }}

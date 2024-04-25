@@ -25,7 +25,6 @@ function Home() {
 
       <main className="max-w-screen-2xl flex-1  w-11/12">
         {" "}
-        <h1 className="text-lg font-semibold mb-4">The Data</h1>
         <RenderSheetDataTable sheetData={sheetData} />
       </main>
     </div>
