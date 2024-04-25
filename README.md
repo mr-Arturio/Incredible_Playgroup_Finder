@@ -64,6 +64,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Adjust date and time logic for Eastern Standard Time (EST).
 - Add header text with an image.
 - Make the calendar filter accessible via an icon.
+- Move logo, Name and charts button to Navigation field.
 
 ### Future Development
 - Fix calendar icon to make it inline in mobile layout.
