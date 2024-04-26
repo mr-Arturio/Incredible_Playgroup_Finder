@@ -65,6 +65,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Add header text with an image.
 - Make the calendar filter accessible via an icon.
 - Move logo, Name and charts button to Navigation field.
+- Make Name as a link, remove 'More Info'
+- Add special Notes field box
 
 ### Future Development
 - Fix calendar icon to make it inline in mobile layout.
@@ -81,8 +83,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Set up a Google Cloud account for PRC and ensure the spreadsheet contains proper data.
 - Provide instructions on how to populate data in the spreadsheet.
 
-- npm install @react-google-maps/api
-- npm install react-datepicker <br> 
+```npm install @react-google-maps/api```
+```npm install react-datepicker``` <br> 
 
 The Date object in JavaScript uses the local time zone, while the toISOString() method converts the date to UTC time, potentially resulting in a date shift due to the time zone difference.
 

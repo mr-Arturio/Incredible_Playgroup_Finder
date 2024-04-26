@@ -19,6 +19,7 @@ function PlaygroupCard({ playgroup }) {
     WiFi,
     Outdoor,
     Cancelled,
+    Notes,
   } = playgroup;
 
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
@@ -30,10 +31,6 @@ function PlaygroupCard({ playgroup }) {
     Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
   const cancelledTextStyle = "text-red-500 text-xl font-bold";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-6 relative ${cardStyle}`;
-  const moreInfoStyle =
-    Cancelled === "Yes"
-      ? "bg-red-200 text-red-700 hover:bg-red-300 hover:text-red-800"
-      : "bg-blue-200 text-indigo-600 hover:text-indigo-800 visited:text-purple-600";
 
   return (
     <div className={cardClasses}>
@@ -45,7 +42,14 @@ function PlaygroupCard({ playgroup }) {
       <div className="flex justify-between items-start px-7 pt-5 pb-3">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
-            {Name}
+            <a
+              href={URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            >
+              {Name}
+            </a>
           </h2>
           <p className="mt-3 text-gray-600 text-sm">
             {Day}, {Date}
@@ -55,89 +59,86 @@ function PlaygroupCard({ playgroup }) {
           {Service}
         </div>
       </div>
-      <div className="px-6 pb-4">
-        <div className="flex items-center text-gray-700">
-          <Image
-            src={icons.time}
-            alt="Time"
-            className="h-5 w-5 text-gray-500"
-            width={20}
-            height={20}
-          />
-          <span className="ml-2">{Time}</span>
+      <div className="px-6 pb-4 flex justify-between">
+        {/* First column for Time, Address, and Age */}
+        <div className="flex flex-col justify-between mr-4 pr-10">
+          <div className="flex items-center text-gray-700">
+            <Image
+              src={icons.time}
+              alt="Time"
+              className="h-5 w-5 text-gray-500"
+              width={20}
+              height={20}
+            />
+            <span className="ml-2">{Time}</span>
+          </div>
+          <div className="flex items-center mt-2 text-gray-700">
+            <Image
+              src={icons.location}
+              alt="Location"
+              className="h-5 w-5 text-gray-500"
+              width={20}
+              height={20}
+            />
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                Address
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 text-blue-600 hover:text-blue-700"
+              style={{ textDecoration: "underline" }}
+            >
+              {Address}
+            </a>
+          </div>
+          <div className="flex items-center mt-2 text-gray-700">
+            <Image
+              src={icons.age}
+              alt="Age"
+              className="h-5 w-5 text-gray-500"
+              width={20}
+              height={20}
+            />
+            <span className="ml-2">{Age}</span>
+          </div>
         </div>
-        <div className="flex items-center mt-2 text-gray-700">
-          <Image
-            src={icons.location}
-            alt="Location"
-            className="h-5 w-5 text-gray-500"
-            width={20}
-            height={20}
-          />
-          <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-              Address
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 text-blue-600 hover:text-blue-700"
-            style={{ textDecoration: "underline" }}
-          >
-            {Address}
-          </a>
-        </div>
-        <div className="flex items-center mt-2 text-gray-700">
-          <Image
-            src={icons.age}
-            alt="Age"
-            className="h-5 w-5 text-gray-500"
-            width={20}
-            height={20}
-          />
-          <span className="ml-2">{Age}</span>
-        </div>
-      </div>
-      {URL && (
-        <div
-          className={`py-4 px-6 ${Cancelled === "Yes" ? "relative z-20" : ""}`}
-          style={{
-            backgroundColor: Cancelled === "Yes" ? "#fee2e2" : "#bfdbfe",
-          }}
-        >
-          <a
-            href={URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`rounded-md px-3 py-1 transition duration-300 ease-in-out ${moreInfoStyle}`}
-          >
-            More Info
-          </a>
-        </div>
-      )}
-      <div className="absolute bottom-4 right-4 flex items-center space-x-3">
-        {Object.entries(icons).map(
-          ([key, { show, src, tooltip: iconTooltip }]) =>
-            show && (
-              <Tooltip
-                key={key}
-                text={tooltip === iconTooltip ? iconTooltip : ""}
-              >
-                <div
-                  onMouseEnter={() => setTooltip(iconTooltip)}
-                  onMouseLeave={() => setTooltip("")}
-                >
-                  <Image
-                    src={src}
-                    alt={iconTooltip}
-                    className="h-7 w-7"
-                    width={28}
-                    height={28}
-                  />
-                </div>
-              </Tooltip>
-            )
+        {/* Second column for Notes */}
+        {Notes && (
+          <div className="bg-gray-100 flex-1 p-2 rounded-lg shadow-md p-2 max-w-sm">
+            <p className="text-gray-800 text-sm">
+              <span className="font-bold">Special Notes:</span> {Notes}
+            </p>
+          </div>
         )}
       </div>
+
+      {Cancelled !== "Yes" && (
+        <div className="bg-blue-200 p-3 flex justify-end items-center space-x-3">
+          {Object.entries(icons).map(
+            ([key, { show, src, tooltip: iconTooltip }]) =>
+              show && (
+                <Tooltip
+                  key={key}
+                  text={tooltip === iconTooltip ? iconTooltip : ""}
+                >
+                  <div
+                    onMouseEnter={() => setTooltip(iconTooltip)}
+                    onMouseLeave={() => setTooltip("")}
+                  >
+                    <Image
+                      src={src}
+                      alt={iconTooltip}
+                      className="h-7 w-7"
+                      width={28}
+                      height={28}
+                    />
+                  </div>
+                </Tooltip>
+              )
+          )}
+        </div>
+      )}
     </div>
   );
 }
