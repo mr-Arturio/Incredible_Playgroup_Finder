@@ -30,10 +30,6 @@ function PlaygroupCard({ playgroup }) {
     Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
   const cancelledTextStyle = "text-red-500 text-xl font-bold";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-6 relative ${cardStyle}`;
-  const moreInfoStyle =
-    Cancelled === "Yes"
-      ? "bg-red-200 text-red-700 hover:bg-red-300 hover:text-red-800"
-      : "bg-blue-200 text-indigo-600 hover:text-indigo-800 visited:text-purple-600";
 
   return (
     <div className={cardClasses}>
@@ -45,7 +41,14 @@ function PlaygroupCard({ playgroup }) {
       <div className="flex justify-between items-start px-7 pt-5 pb-3">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
-            {Name}
+            <a
+              href={URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            >
+              {Name}
+            </a>
           </h2>
           <p className="mt-3 text-gray-600 text-sm">
             {Day}, {Date}
@@ -97,24 +100,8 @@ function PlaygroupCard({ playgroup }) {
           <span className="ml-2">{Age}</span>
         </div>
       </div>
-      {URL && (
-        <div
-          className={`py-4 px-6 ${Cancelled === "Yes" ? "relative z-20" : ""}`}
-          style={{
-            backgroundColor: Cancelled === "Yes" ? "#fee2e2" : "#bfdbfe",
-          }}
-        >
-          <a
-            href={URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`rounded-md px-3 py-1 transition duration-300 ease-in-out ${moreInfoStyle}`}
-          >
-            More Info
-          </a>
-        </div>
-      )}
-      <div className="absolute bottom-4 right-4 flex items-center space-x-3">
+      
+      <div className="bg-blue-200 p-4 flex justify-end items-center space-x-3">
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
