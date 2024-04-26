@@ -7,6 +7,7 @@ import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
+import DatePickerComponent from "./DatePickerComponent";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -105,13 +106,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white z-10 p-4 w-full">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow overflow-y-auto z-10 p-4 w-full">
         {/* Filters container */}
         <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
           {/* First row of filters */}
           <div className="flex justify-around gap-2 mb-4">
             <FilterComponent
               id="locationCriteria"
+              className="flex-grow"
               value={filterCriteria.location}
               options={locationOptions}
               onChange={(e) => handleFilterChange("location", e.target.value)}
@@ -119,6 +121,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             />
             <FilterComponent
               id="ageCriteria"
+              className="flex-grow"
               value={filterCriteria.age}
               options={ageOptions}
               onChange={(e) => handleFilterChange("age", e.target.value)}
@@ -127,6 +130,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
             <FilterComponent
               id="languageCriteria"
+              className="flex-grow"
               value={filterCriteria.language}
               options={languageOptions}
               onChange={(e) => handleFilterChange("language", e.target.value)}
@@ -164,10 +168,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
         {/* Date picker and reset button */}
         <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
           <div className="w-full h-full md:flex md:items-center">
-            <DatePicker
-              className="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none h-10"
-              selected={startDate}
-              onChange={(date) =>
+            <DatePickerComponent
+              onDateChange={(date) =>
                 handleDateChange(
                   date,
                   setStartDate,
@@ -175,9 +177,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
                   filterCriteria
                 )
               }
-              minDate={new Date()} // Only show today and future dates
-              filterDate={(date) => true}
-              wrapperClassName="w-full md:w-auto" // Added a wrapper class to control width
             />
           </div>
 
@@ -192,9 +191,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
       </div>
 
       {/* Content Sections */}
-      <div className="flex flex-1 md:flex-row">
+      <div className="flex flex-1 md:flex-row ">
         {/* Playgroup Cards Section */}
-        <div className="w-full md:w-3/5 p-4">
+        <div className="w-full md:w-3/5 pt-4 pr-4">
           <div
             className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
             style={{ height: "80vh" }}
