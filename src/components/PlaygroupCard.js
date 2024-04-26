@@ -100,31 +100,33 @@ function PlaygroupCard({ playgroup }) {
           <span className="ml-2">{Age}</span>
         </div>
       </div>
-      
-      <div className="bg-blue-200 p-4 flex justify-end items-center space-x-3">
-        {Object.entries(icons).map(
-          ([key, { show, src, tooltip: iconTooltip }]) =>
-            show && (
-              <Tooltip
-                key={key}
-                text={tooltip === iconTooltip ? iconTooltip : ""}
-              >
-                <div
-                  onMouseEnter={() => setTooltip(iconTooltip)}
-                  onMouseLeave={() => setTooltip("")}
+
+      {Cancelled !== "Yes" && (
+        <div className="bg-blue-200 p-4 flex justify-end items-center space-x-3">
+          {Object.entries(icons).map(
+            ([key, { show, src, tooltip: iconTooltip }]) =>
+              show && (
+                <Tooltip
+                  key={key}
+                  text={tooltip === iconTooltip ? iconTooltip : ""}
                 >
-                  <Image
-                    src={src}
-                    alt={iconTooltip}
-                    className="h-7 w-7"
-                    width={28}
-                    height={28}
-                  />
-                </div>
-              </Tooltip>
-            )
-        )}
-      </div>
+                  <div
+                    onMouseEnter={() => setTooltip(iconTooltip)}
+                    onMouseLeave={() => setTooltip("")}
+                  >
+                    <Image
+                      src={src}
+                      alt={iconTooltip}
+                      className="h-7 w-7"
+                      width={28}
+                      height={28}
+                    />
+                  </div>
+                </Tooltip>
+              )
+          )}
+        </div>
+      )}
     </div>
   );
 }
