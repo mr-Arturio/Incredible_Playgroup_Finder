@@ -19,6 +19,7 @@ function PlaygroupCard({ playgroup }) {
     WiFi,
     Outdoor,
     Cancelled,
+    Notes,
   } = playgroup;
 
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
@@ -58,51 +59,62 @@ function PlaygroupCard({ playgroup }) {
           {Service}
         </div>
       </div>
-      <div className="px-6 pb-4">
-        <div className="flex items-center text-gray-700">
-          <Image
-            src={icons.time}
-            alt="Time"
-            className="h-5 w-5 text-gray-500"
-            width={20}
-            height={20}
-          />
-          <span className="ml-2">{Time}</span>
+      <div className="px-6 pb-4 flex justify-between">
+        {/* First column for Time, Address, and Age */}
+        <div className="flex flex-col justify-between mr-4 pr-10">
+          <div className="flex items-center text-gray-700">
+            <Image
+              src={icons.time}
+              alt="Time"
+              className="h-5 w-5 text-gray-500"
+              width={20}
+              height={20}
+            />
+            <span className="ml-2">{Time}</span>
+          </div>
+          <div className="flex items-center mt-2 text-gray-700">
+            <Image
+              src={icons.location}
+              alt="Location"
+              className="h-5 w-5 text-gray-500"
+              width={20}
+              height={20}
+            />
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                Address
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 text-blue-600 hover:text-blue-700"
+              style={{ textDecoration: "underline" }}
+            >
+              {Address}
+            </a>
+          </div>
+          <div className="flex items-center mt-2 text-gray-700">
+            <Image
+              src={icons.age}
+              alt="Age"
+              className="h-5 w-5 text-gray-500"
+              width={20}
+              height={20}
+            />
+            <span className="ml-2">{Age}</span>
+          </div>
         </div>
-        <div className="flex items-center mt-2 text-gray-700">
-          <Image
-            src={icons.location}
-            alt="Location"
-            className="h-5 w-5 text-gray-500"
-            width={20}
-            height={20}
-          />
-          <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-              Address
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 text-blue-600 hover:text-blue-700"
-            style={{ textDecoration: "underline" }}
-          >
-            {Address}
-          </a>
-        </div>
-        <div className="flex items-center mt-2 text-gray-700">
-          <Image
-            src={icons.age}
-            alt="Age"
-            className="h-5 w-5 text-gray-500"
-            width={20}
-            height={20}
-          />
-          <span className="ml-2">{Age}</span>
-        </div>
+        {/* Second column for Notes */}
+        {Notes && (
+          <div className="bg-gray-100 flex-1 p-2 rounded-lg shadow-md p-2 max-w-sm">
+            <p className="text-gray-800 text-sm">
+              <span className="font-bold">Special Notes:</span> {Notes}
+            </p>
+          </div>
+        )}
       </div>
 
       {Cancelled !== "Yes" && (
-        <div className="bg-blue-200 p-4 flex justify-end items-center space-x-3">
+        <div className="bg-blue-200 p-3 flex justify-end items-center space-x-3">
           {Object.entries(icons).map(
             ([key, { show, src, tooltip: iconTooltip }]) =>
               show && (
