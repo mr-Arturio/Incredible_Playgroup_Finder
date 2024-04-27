@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Tooltip from "./Tooltip";
-import getIcons from "../utils/icons";
+import getIcons from "../../utils/icons";
 
 function PlaygroupCard({ playgroup }) {
   const {
