@@ -104,7 +104,7 @@ function PlaygroupCard({ playgroup }) {
           </div>
         </div>
         {/* Second column for Notes */}
-        {Notes && (
+        {Cancelled !== "Yes" && Notes && (
           <div className="bg-gray-100 flex-1 p-2 rounded-lg shadow-md p-2 max-w-sm">
             <p className="text-gray-800 text-sm">
               <span className="font-bold">Special Notes:</span> {Notes}
