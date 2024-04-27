@@ -106,7 +106,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow overflow-y-auto z-10 p-4 w-full">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
         {/* Filters container */}
         <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
           {/* First row of filters */}
