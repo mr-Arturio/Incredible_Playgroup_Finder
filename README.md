@@ -67,14 +67,17 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Move logo, Name and charts button to Navigation field.
 - Make Name as a link, remove 'More Info'
 - Add special Notes field box
+- Create separate ellement for the small playgroup card
+- Logic to extend small card to full card
+
 
 ### Future Development
+- ❗ADD arrows to roll big card to small again!!!
+- Style small card
 - Fix calendar icon to make it inline in mobile layout.
-- Refactor Playgroup cards to be smaller and expand upon pressing.
 - Hide filters in the mobile layout with a "Show Filter Options" button.
 - Arrange the mobile layout with the map on top and Playgroup cards below.
 - Add a contact form at the bottom.
-- Style the header text with a logo.
 - Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
 - Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
 - Offer a French version.
