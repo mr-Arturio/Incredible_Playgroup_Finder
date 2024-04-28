@@ -35,7 +35,7 @@ function PlaygroupCard({ playgroup }) {
   const cardStyle =
     Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
   const cancelledTextStyle = "text-red-500 text-xl font-bold";
-  const cardClasses = `shadow-lg rounded-lg overflow-hidden m-6 relative ${cardStyle}`;
+  const cardClasses = `shadow-lg rounded-lg overflow-hidden m-5 relative ${cardStyle}`;
 
   return (
     <div className={cardClasses}>
