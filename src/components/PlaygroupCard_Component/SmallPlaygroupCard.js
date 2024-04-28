@@ -8,16 +8,16 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
     <>
       <div className="flex justify-between items-start px-5 pt-3 pb-3">
         <div>
-        <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
-                <a
-                  href={URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
-                >
-                  {Name}
-                </a>
-              </h2>
+          <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
+            <a
+              href={URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            >
+              {Name}
+            </a>
+          </h2>
           <p className="mt-2 text-gray-600 text-sm">
             {Day}, {Date}
           </p>
@@ -28,12 +28,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       </div>
       <div className="px-6 pb-3">
         <div className="flex items-center text-gray-700">
-          <Image 
-          src="/time.svg" 
-          alt="Time" 
-          width={20} 
-          height={20} 
-          />
+          <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2">{Time}</span>
         </div>
       </div>
@@ -41,15 +36,17 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       <div className="bg-blue-200 p-3 justify-start items-center flex">
         <button
           onClick={onExpand}
-          className="text-gray-800 hover:text-blue-600 focus:outline-none ml-2"
+          className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
           aria-label="More information"
         >
           <Image
             src="double_arrow.svg"
             alt="More Information"
-            width={18}
-            height={18}
+            width={17}
+            height={17}
+            className="inline-block"
           />
+          <span className="ml-2 inline-block">More Information</span>
         </button>
       </div>
     </>
