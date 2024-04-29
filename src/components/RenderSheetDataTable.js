@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import PlaygroupCard from "./PlaygroupCard";
+import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
-import FilterComponent from "./FilterComponent";
+import FilterComponent from "./Filter_Component/FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
-import DatePickerComponent from "./DatePickerComponent";
+import DatePickerComponent from "./Filter_Component/DatePickerComponent";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -106,7 +106,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow overflow-y-auto z-10 p-4 w-full">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
         {/* Filters container */}
         <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
           {/* First row of filters */}
