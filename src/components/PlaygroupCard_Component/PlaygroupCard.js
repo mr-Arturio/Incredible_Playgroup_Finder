@@ -121,34 +121,52 @@ function PlaygroupCard({ playgroup }) {
           </div>
 
           {Cancelled !== "Yes" && (
-            <div className="bg-blue-200 p-3 flex justify-end items-center space-x-3">
-              {Object.entries(icons).map(
-                ([key, { show, src, tooltip: iconTooltip }]) =>
-                  show && (
-                    <Tooltip
-                      key={key}
-                      text={tooltip === iconTooltip ? iconTooltip : ""}
-                    >
-                      <div
-                        onMouseEnter={() => setTooltip(iconTooltip)}
-                        onMouseLeave={() => setTooltip("")}
+            <div className="bg-blue-200 p-3 flex justify-between items-center ">
+              {/* Show Less button */}
+              <button
+                onClick={toggleExpand}
+                className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
+                aria-label="Show Less"
+              >
+                <Image
+                  src="doubleArrowUp.svg"
+                  alt="Show Less"
+                  width={17}
+                  height={17}
+                  className="inline-block"
+                />
+                <span className="ml-2 inline-block">Show Less</span>
+              </button>
+              {/* Icons */}
+              <div className="flex items-center space-x-3">
+                {Object.entries(icons).map(
+                  ([key, { show, src, tooltip: iconTooltip }]) =>
+                    show && (
+                      <Tooltip
+                        key={key}
+                        text={tooltip === iconTooltip ? iconTooltip : ""}
                       >
-                        <Image
-                          src={src}
-                          alt={iconTooltip}
-                          className="h-7 w-7"
-                          width={28}
-                          height={28}
-                        />
-                      </div>
-                    </Tooltip>
-                  )
-              )}
+                        <div
+                          onMouseEnter={() => setTooltip(iconTooltip)}
+                          onMouseLeave={() => setTooltip("")}
+                        >
+                          <Image
+                            src={src}
+                            alt={iconTooltip}
+                            className="h-7 w-7"
+                            width={28}
+                            height={28}
+                          />
+                        </div>
+                      </Tooltip>
+                    )
+                )}
+              </div>
             </div>
           )}
         </>
       ) : (
-        <SmallPlaygroupCard playgroup={playgroup} onExpand={toggleExpand}/>
+        <SmallPlaygroupCard playgroup={playgroup} onExpand={toggleExpand} />
       )}
     </div>
   );

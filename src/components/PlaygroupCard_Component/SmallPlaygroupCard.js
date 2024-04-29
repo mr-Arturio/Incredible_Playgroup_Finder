@@ -28,7 +28,12 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       </div>
       <div className="px-6 pb-3">
         <div className="flex items-center text-gray-700">
-          <Image src="/time.svg" alt="Time" width={20} height={20} />
+          <Image 
+          src="/time.svg" 
+          alt="Time" 
+          width={20} 
+          height={20} 
+          />
           <span className="ml-2">{Time}</span>
         </div>
       </div>
@@ -51,34 +56,6 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       </div>
     </>
   );
-}
-
-{
-  /* <span className="ml-2">{Time}</span>
-        </div>
-        </div>
-        </div> */
-}
-{
-  /* More Information Arrow Button */
-}
-{
-  /* <button
-          onClick={onExpand}
-          className="text-gray-800 hover:text-blue-600 focus:outline-none"
-          aria-label="More information"
-        >
-          <Image
-            src="double_arrow.svg"
-            alt="More Information"
-            width={20}
-            height={20}
-          />
-        </button>
-      </div>
-    </div>
-  );
-} */
 }
 
 export default SmallPlaygroupCard;
