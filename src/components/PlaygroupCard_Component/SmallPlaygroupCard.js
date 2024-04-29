@@ -38,7 +38,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
         </div>
       </div>
 
-      <div className="bg-blue-200 p-3 justify-start items-center flex">
+      <div className="bg-blue-200 p-2 justify-start items-center flex">
         <button
           onClick={onExpand}
           className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
@@ -47,8 +47,8 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
           <Image
             src="double_arrow.svg"
             alt="More Information"
-            width={17}
-            height={17}
+            width={16}
+            height={16}
             className="inline-block"
           />
           <span className="ml-2 inline-block">More Information</span>

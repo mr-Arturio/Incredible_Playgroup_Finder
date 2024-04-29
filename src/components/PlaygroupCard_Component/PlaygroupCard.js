@@ -79,7 +79,7 @@ function PlaygroupCard({ playgroup }) {
                 />
                 <span className="ml-2">{Time}</span>
               </div>
-              <div className="flex items-center mt-2 text-gray-700">
+              <div className="flex items-center py-1 mt-2 text-gray-700">
                 <Image
                   src={icons.location}
                   alt="Location"
@@ -99,7 +99,7 @@ function PlaygroupCard({ playgroup }) {
                   {Address}
                 </a>
               </div>
-              <div className="flex items-center mt-2 text-gray-700">
+              <div className="flex items-center my-2 text-gray-700">
                 <Image
                   src={icons.age}
                   alt="Age"
