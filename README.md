@@ -69,11 +69,10 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Add special Notes field box
 - Create separate ellement for the small playgroup card
 - Logic to extend small card to full card
-
+- Style small card
+- ADD arrows to roll big card to small again (^ Show Less)!!!
 
 ### Future Development
-- ❗ADD arrows to roll big card to small again!!!
-- Style small card
 - Fix calendar icon to make it inline in mobile layout.
 - Hide filters in the mobile layout with a "Show Filter Options" button.
 - Arrange the mobile layout with the map on top and Playgroup cards below.
