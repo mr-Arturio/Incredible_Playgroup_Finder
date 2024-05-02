@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import Tooltip from "./Tooltip";
+import getIcons from "../../utils/icons";
 
 function SmallPlaygroupCard({ playgroup, onExpand }) {
-  const { Date, Time, Name, Day, Service, URL } = playgroup;
+  const {
+    Date,
+    Time,
+    Name,
+    Day,
+    Language,
+    URL,
+    Service,
+    Parking,
+    Coffee,
+    WiFi,
+    Outdoor,
+  } = playgroup;
+
+  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
+  const [tooltip, setTooltip] = useState("");
 
   return (
     <>
@@ -28,17 +45,12 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       </div>
       <div className="px-6 pb-3">
         <div className="flex items-center text-gray-700">
-          <Image 
-          src="/time.svg" 
-          alt="Time" 
-          width={20} 
-          height={20} 
-          />
+          <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2">{Time}</span>
         </div>
       </div>
 
-      <div className="bg-blue-200 p-2 justify-start items-center flex">
+      <div className="bg-blue-200 p-3 flex justify-between items-center ">
         <button
           onClick={onExpand}
           className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
@@ -53,6 +65,30 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
           />
           <span className="ml-2 inline-block">More Information</span>
         </button>
+        <div className="flex items-center space-x-3">
+          {Object.entries(icons).map(
+            ([key, { show, src, tooltip: iconTooltip }]) =>
+              show && (
+                <Tooltip
+                  key={key}
+                  text={tooltip === iconTooltip ? iconTooltip : ""}
+                >
+                  <div
+                    onMouseEnter={() => setTooltip(iconTooltip)}
+                    onMouseLeave={() => setTooltip("")}
+                  >
+                    <Image
+                      src={src}
+                      alt={iconTooltip}
+                      className="h-7 w-7"
+                      width={28}
+                      height={28}
+                    />
+                  </div>
+                </Tooltip>
+              )
+          )}
+        </div>
       </div>
     </>
   );

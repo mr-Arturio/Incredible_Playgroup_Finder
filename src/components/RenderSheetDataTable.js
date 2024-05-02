@@ -191,9 +191,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
       </div>
 
       {/* Content Sections */}
-      <div className="flex flex-1 md:flex-row ">
+      <div className="flex flex-1 flex-col xl:flex-row-reverse">
+
+         {/* Map Section */}
+         <div className="w-full xl:w-2/5 " style={{ height: "85vh" }}>
+          <MapComponent
+            sheetData={filteredData}
+            onMarkerSelect={handleMarkerSelect}
+          />
+        </div>
         {/* Playgroup Cards Section */}
-        <div className="w-full md:w-3/5 pt-4 pr-4">
+        <div className="w-full xl:w-3/5 pt-4 pr-4">
           <div
             className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
             style={{ height: "80vh" }}
@@ -227,13 +235,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           </div>
         </div>
 
-        {/* Map Section */}
-        <div className="w-full md:w-2/5">
-          <MapComponent
-            sheetData={filteredData}
-            onMarkerSelect={handleMarkerSelect}
-          />
-        </div>
+       
       </div>
     </div>
   );
