@@ -16,13 +16,20 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
     Coffee,
     WiFi,
     Outdoor,
+    Cancelled
   } = playgroup;
 
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
   const [tooltip, setTooltip] = useState("");
+  const cancelledTextStyle = "text-red-500 text-xl font-bold";
 
   return (
     <>
+      {Cancelled === "Yes" && (
+        <div className="absolute z-10 w-full h-full flex justify-center items-center">
+          <span className={cancelledTextStyle}>Cancelled</span>
+        </div>
+      )}
       <div className="flex justify-between items-start px-5 pt-3 pb-3">
         <div>
           <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
