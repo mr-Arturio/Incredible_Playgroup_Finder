@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import Image from 'next/image'; // Ensure Next.js Image component is correctly imported.
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Image from "next/image"; // Ensure Next.js Image component is correctly imported.
 
 const DatePickerComponent = ({ onDateChange }) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -13,29 +13,45 @@ const DatePickerComponent = ({ onDateChange }) => {
 
   const handleChange = (date) => {
     setStartDate(date);
-    onDateChange(date);  // This will call the passed handleDateChange function.
-    setIsOpen(false);  // Close the calendar after the date is selected.
+    onDateChange(date); // This will call the passed handleDateChange function.
+    setIsOpen(false); // Close the calendar after the date is selected.
   };
+
+    // Date format function
+    const formatDate = (date) => {
+      return date.toLocaleDateString();
+    };
 
   return (
     <div className="relative w-full">
       {/* Calendar Icon */}
       <button
         onClick={toggleCalendar}
-        className="flex justify-center items-center"
+        className="hidden lg:flex justify-center items-center"
         style={{ zIndex: 2 }} // Make sure the button is over the DatePicker
       >
         <Image
-          src='/calendar.svg'
+          src="/calendar.svg"
           alt="Calendar Icon"
-          width={40}  // Size of the icon
+          width={40} // Size of the icon
           height={40}
         />
       </button>
 
+      {/* Date Box for lg screens and smaller */}
+      <button
+        onClick={toggleCalendar}
+        className="flex lg:hidden justify-center items-center px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-100 focus:outline-none"
+        style={{ zIndex: 2 }} // Make sure the button is over the DatePicker
+      >
+        {formatDate(startDate)}
+      </button>
+
       {/* DatePicker */}
       {isOpen && (
-        <div style={{ position: 'absolute', top: '3rem', left: 0, width: '100%' }}>
+        <div
+          style={{ position: "absolute", top: "3rem", left: 0, width: "100%" }}
+        >
           <DatePicker
             selected={startDate}
             onChange={handleChange}
