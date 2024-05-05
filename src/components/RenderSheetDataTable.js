@@ -105,10 +105,10 @@ const RenderSheetDataTable = ({ sheetData }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
+    <div className="flex flex-col lg:flex-col">
+      <div className="flex flex-col lg:flex-row space-y-4 md:space-y-0 lg:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
         {/* Filters container */}
-        <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
+        <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1">
           {/* First row of filters */}
           <div className="flex justify-around gap-2 mb-4">
             <FilterComponent
@@ -166,8 +166,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
         </div>
 
         {/* Date picker and reset button */}
-        <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
-          <div className="w-full h-full md:flex md:items-center">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:space-x-4">
+          <div className="w-full h-full lg:flex lg:items-center">
             <DatePickerComponent
               onDateChange={(date) =>
                 handleDateChange(
@@ -183,7 +183,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           {/* Reset button to clear all selected filters */}
           <button
             onClick={resetFilters}
-            className="mt-4 md:mt-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-full md:w-auto"
+            className="mt-4 lg:mt-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-full lg:w-auto"
           >
             Reset Filters
           </button>

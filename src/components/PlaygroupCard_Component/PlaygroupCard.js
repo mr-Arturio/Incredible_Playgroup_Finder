@@ -34,18 +34,13 @@ function PlaygroupCard({ playgroup }) {
   // Conditional style classes
   const cardStyle =
     Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
-  const cancelledTextStyle = "text-red-500 text-xl font-bold";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-5 relative ${cardStyle}`;
 
   return (
     <div className={cardClasses}>
       {isExpanded ? (
         <>
-          {Cancelled === "Yes" && (
-            <div className="absolute z-10 w-full h-full flex justify-center items-center">
-              <span className={cancelledTextStyle}>Cancelled</span>
-            </div>
-          )}
+
           <div className="flex justify-between items-start px-7 pt-5 pb-3">
             <div>
               <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
@@ -111,16 +106,16 @@ function PlaygroupCard({ playgroup }) {
               </div>
             </div>
             {/* Second column for Notes */}
-            {Cancelled !== "Yes" && Notes && (
+           
               <div className="bg-gray-100 flex-1 p-2 rounded-lg shadow-md p-2 max-w-sm">
                 <p className="text-gray-800 text-sm">
                   <span className="font-bold">Special Notes:</span> {Notes}
                 </p>
               </div>
-            )}
+           
           </div>
 
-          {Cancelled !== "Yes" && (
+          
             <div className="bg-blue-200 p-3 flex justify-between items-center ">
               {/* Show Less button */}
               <button
@@ -163,7 +158,7 @@ function PlaygroupCard({ playgroup }) {
                 )}
               </div>
             </div>
-          )}
+          
         </>
       ) : (
         <SmallPlaygroupCard playgroup={playgroup} onExpand={toggleExpand} />
