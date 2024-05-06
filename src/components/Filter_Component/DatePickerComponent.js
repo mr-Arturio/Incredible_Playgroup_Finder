@@ -23,8 +23,9 @@ const DatePickerComponent = ({ onDateChange }) => {
     };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full flex flex-col items-center">
       {/* Calendar Icon */}
+      <h2 className="text-md font-semibold text-gray-700 mb-2">Select a Date</h2>
       <button
         onClick={toggleCalendar}
         className="hidden lg:flex justify-center items-center"
@@ -50,7 +51,7 @@ const DatePickerComponent = ({ onDateChange }) => {
       {/* DatePicker */}
       {isOpen && (
         <div
-          style={{ position: "absolute", top: "3rem", left: 0, width: "100%" }}
+          style={{ position: "absolute", top: "4.5rem", left: 0, width: "100%" }}
         >
           <DatePicker
             selected={startDate}
