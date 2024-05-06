@@ -8,6 +8,7 @@ import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import DatePickerComponent from "./Filter_Component/DatePickerComponent";
+import ResetFiltersButton from "./Filter_Component/ResetFiltersButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -106,7 +107,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col lg:flex-col">
-      <div className="flex flex-col lg:flex-row space-y-4 md:space-y-0 lg:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
+      <div className="flex flex-col lg:flex-row space-y-4 md:space-y-0 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
         {/* Filters container */}
         <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1">
           {/* First row of filters */}
@@ -181,20 +182,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
           </div>
 
           {/* Reset button to clear all selected filters */}
-          <button
-            onClick={resetFilters}
-            className="mt-4 lg:mt-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-full lg:w-auto"
-          >
-            Reset Filters
-          </button>
+          <ResetFiltersButton resetFilters={resetFilters} />
         </div>
       </div>
 
       {/* Content Sections */}
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
-
-         {/* Map Section */}
-         <div className="w-full xl:w-2/5 " style={{ height: "85vh" }}>
+        {/* Map Section */}
+        <div className="w-full xl:w-2/5 " style={{ height: "85vh" }}>
           <MapComponent
             sheetData={filteredData}
             onMarkerSelect={handleMarkerSelect}
@@ -234,8 +229,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
             )}
           </div>
         </div>
-
-       
       </div>
     </div>
   );
