@@ -72,9 +72,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Style small card
 - ADD arrows to roll big card to small again (^ Show Less)!!!
 - Arrange the mobile layout with the map on top and Playgroup cards below.
+- Hide filters in the mobile layout with a "Show Filter Options" button.
 
 ### Future Development
-- Hide filters in the mobile layout with a "Show Filter Options" button.
 - Add a contact form at the bottom.
 - Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
 - Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).

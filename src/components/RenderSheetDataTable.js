@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
@@ -108,10 +109,22 @@ const RenderSheetDataTable = ({ sheetData }) => {
     <div className="flex flex-col lg:flex-col">
       {/* Toggle button */}
       <button
-        className="md:hidden p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg"
+        className="md:hidden p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center"
         onClick={() => setIsFilterVisible(!isFilterVisible)}
       >
-        {isFilterVisible ? "Hide Filters" : "Show Filters"}
+        {isFilterVisible ? (
+    <>
+      <img src="doubleArrowUp.svg" alt="Show Less" width={17} height={17} className="mr-5" />
+      Hide Filters
+      <img src="doubleArrowUp.svg" alt="Show Less" width={17} height={17} className="ml-5" />
+    </>
+  ) : (
+    <>
+      <img src="double_arrow.svg" alt="Show Less" width={17} height={17} className="mr-5" />
+      Show Filters
+      <img src="double_arrow.svg" alt="Show Less" width={17} height={17} className="ml-5" />
+    </>
+  )}
       </button>
 
       {/* Filters container */}

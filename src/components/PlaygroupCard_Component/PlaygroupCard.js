@@ -130,7 +130,7 @@ function PlaygroupCard({ playgroup }) {
                   height={17}
                   className="inline-block"
                 />
-                <span className="ml-2 inline-block">Show Less</span>
+                <span className="ml-2 inline-block sm:text-base text-sm">Show Less</span>
               </button>
               {/* Icons */}
               <div className="flex items-center space-x-3">
