@@ -3,12 +3,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
-import FilterComponent from "./Filter_Component/FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
-import DatePickerComponent from "./Filter_Component/DatePickerComponent";
-import ResetFiltersButton from "./Filter_Component/ResetFiltersButton";
+import FilterContainer from "./Filter_Component/FilterContainer";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -107,83 +105,22 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col lg:flex-col">
+      {/* Filters container */}
       <div className="flex flex-col lg:flex-row space-y-4 md:space-y-0 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
-        {/* Filters container */}
-        <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1">
-          {/* First row of filters */}
-          <div className="flex justify-around gap-2 mb-4">
-            <FilterComponent
-              id="locationCriteria"
-              className="flex-grow"
-              value={filterCriteria.location}
-              options={locationOptions}
-              onChange={(e) => handleFilterChange("location", e.target.value)}
-              placeholder="Location"
-            />
-            <FilterComponent
-              id="ageCriteria"
-              className="flex-grow"
-              value={filterCriteria.age}
-              options={ageOptions}
-              onChange={(e) => handleFilterChange("age", e.target.value)}
-              placeholder="Age Group"
-            />
-
-            <FilterComponent
-              id="languageCriteria"
-              className="flex-grow"
-              value={filterCriteria.language}
-              options={languageOptions}
-              onChange={(e) => handleFilterChange("language", e.target.value)}
-              placeholder="Language"
-            />
-          </div>
-          {/* Second row of filters */}
-          <div className="flex justify-around gap-2 mb-4">
-            <FilterComponent
-              id="dayCriteria"
-              value={filterCriteria.day}
-              options={dayOptions}
-              onChange={(e) => handleFilterChange("day", e.target.value)}
-              placeholder="Day of the Week"
-            />
-
-            <FilterComponent
-              id="timeCriteria"
-              value={filterCriteria.time}
-              options={timeOptions}
-              onChange={(e) => handleFilterChange("time", e.target.value)}
-              placeholder="Time of the Day"
-            />
-
-            <FilterComponent
-              id="nameCriteria"
-              value={filterCriteria.name}
-              options={nameOptions}
-              onChange={(e) => handleFilterChange("name", e.target.value)}
-              placeholder="Facility"
-            />
-          </div>
-        </div>
-
-        {/* Date picker and reset button */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:space-x-4">
-          <div className="w-full h-full lg:flex lg:items-center">
-            <DatePickerComponent
-              onDateChange={(date) =>
-                handleDateChange(
-                  date,
-                  setStartDate,
-                  setFilterCriteria,
-                  filterCriteria
-                )
-              }
-            />
-          </div>
-
-          {/* Reset button to clear all selected filters */}
-          <ResetFiltersButton resetFilters={resetFilters} />
-        </div>
+        <FilterContainer
+          filterCriteria={filterCriteria}
+          setFilterCriteria={setFilterCriteria}
+          handleFilterChange={handleFilterChange}
+          locationOptions={locationOptions}
+          ageOptions={ageOptions}
+          languageOptions={languageOptions}
+          dayOptions={dayOptions}
+          timeOptions={timeOptions}
+          nameOptions={nameOptions}
+          handleDateChange={handleDateChange}
+          setStartDate={setStartDate}
+          resetFilters={resetFilters}
+        />
       </div>
 
       {/* Content Sections */}
