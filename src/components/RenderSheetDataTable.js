@@ -25,7 +25,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
     age: "",
     time: "",
   });
-
+  // State to control filter container visibility
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
   // State for filter options, extracted from sheet data
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
@@ -105,24 +106,36 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col lg:flex-col">
-      {/* Filters container */}
-      <div className="flex flex-col lg:flex-row space-y-4 md:space-y-0 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
-        <FilterContainer
-          filterCriteria={filterCriteria}
-          setFilterCriteria={setFilterCriteria}
-          handleFilterChange={handleFilterChange}
-          locationOptions={locationOptions}
-          ageOptions={ageOptions}
-          languageOptions={languageOptions}
-          dayOptions={dayOptions}
-          timeOptions={timeOptions}
-          nameOptions={nameOptions}
-          handleDateChange={handleDateChange}
-          setStartDate={setStartDate}
-          resetFilters={resetFilters}
-        />
-      </div>
+      {/* Toggle button */}
+      <button
+        className="md:hidden p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg"
+        onClick={() => setIsFilterVisible(!isFilterVisible)}
+      >
+        {isFilterVisible ? "Hide Filters" : "Show Filters"}
+      </button>
 
+      {/* Filters container */}
+      <div
+        className={`flex flex-col lg:flex-row space-y-4 md:space-y-0 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full ${
+          isFilterVisible ? "" : "hidden md:flex"
+        }`}
+      >
+          <FilterContainer
+            filterCriteria={filterCriteria}
+            setFilterCriteria={setFilterCriteria}
+            handleFilterChange={handleFilterChange}
+            locationOptions={locationOptions}
+            ageOptions={ageOptions}
+            languageOptions={languageOptions}
+            dayOptions={dayOptions}
+            timeOptions={timeOptions}
+            nameOptions={nameOptions}
+            handleDateChange={handleDateChange}
+            setStartDate={setStartDate}
+            resetFilters={resetFilters}
+          />
+        </div>
+   
       {/* Content Sections */}
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
@@ -133,38 +146,36 @@ const RenderSheetDataTable = ({ sheetData }) => {
           />
         </div>
         {/* Playgroup Cards Section */}
-        <div className="w-full xl:w-3/5 pt-4 pr-4">
-          <div
-            className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
-            style={{ height: "80vh" }}
-          >
-            {noDataAvailable ? (
-              <div className="flex justify-center items-center h-full">
-                <span className="text-gray-500 text-center">
-                  No data found for the selected filters. Please adjust your
-                  search criteria.
-                </span>
-              </div>
-            ) : (
-              <div className="mt-12">
-                {filteredData
-                  .filter((playgroup) => {
-                    //additional logic to check that playgroup is not in the past
-                    const playgroupDate = new Date(playgroup.Date);
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0);
-                    return (
-                      selectedAddress === null ||
-                      (playgroup.Address === selectedAddress &&
-                        playgroupDate >= today)
-                    );
-                  })
-                  .map((playgroup) => (
-                    <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
-                  ))}
-              </div>
-            )}
-          </div>
+        <div
+          className="w-full xl:w-3/5 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          style={{ height: "80vh" }}
+        >
+          {noDataAvailable ? (
+            <div className="flex justify-center items-center h-full">
+              <span className="text-gray-500 text-center">
+                No data found for the selected filters. Please adjust your
+                search criteria.
+              </span>
+            </div>
+          ) : (
+            <div className="mt-12">
+              {filteredData
+                .filter((playgroup) => {
+                  //additional logic to check that playgroup is not in the past
+                  const playgroupDate = new Date(playgroup.Date);
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  return (
+                    selectedAddress === null ||
+                    (playgroup.Address === selectedAddress &&
+                      playgroupDate >= today)
+                  );
+                })
+                .map((playgroup) => (
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
