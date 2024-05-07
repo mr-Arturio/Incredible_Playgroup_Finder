@@ -1,5 +1,3 @@
-// "use client";
-
 import React, { useState, useEffect, useMemo } from "react";
 import Loading from "../app/loading";
 import {
@@ -57,7 +55,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          setCenter(userCoords);
+          // setCenter(userCoords); // Center the map on the user's location(removed in case user is not in Ottawa)
           setUserLocation(userCoords); // Update user's location state
         },
         (error) => {
@@ -75,7 +73,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     }
   }, []);
 
-  if (!isLoaded) return <Loading />;;
+  if (!isLoaded) return <Loading />;
   return (
     <div className="h-full w-full content-center">
       <GoogleMap
