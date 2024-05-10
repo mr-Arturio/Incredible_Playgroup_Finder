@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
@@ -28,6 +27,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
   });
   // State to control filter container visibility
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  // Controls visibility of the map
+  const [isMapVisible, setIsMapVisible] = useState(true);
   // State for filter options, extracted from sheet data
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
@@ -113,18 +114,42 @@ const RenderSheetDataTable = ({ sheetData }) => {
         onClick={() => setIsFilterVisible(!isFilterVisible)}
       >
         {isFilterVisible ? (
-    <>
-      <img src="doubleArrowUp.svg" alt="Show Less" width={17} height={17} className="mr-5" />
-      Hide Filters
-      <img src="doubleArrowUp.svg" alt="Show Less" width={17} height={17} className="ml-5" />
-    </>
-  ) : (
-    <>
-      <img src="double_arrow.svg" alt="Show Less" width={17} height={17} className="mr-5" />
-      Show Filters
-      <img src="double_arrow.svg" alt="Show Less" width={17} height={17} className="ml-5" />
-    </>
-  )}
+          <>
+            <Image
+              src="doubleArrowUp.svg"
+              alt="Show Less"
+              width={17}
+              height={17}
+              className="mr-5"
+            />
+            Hide Filters
+            <Image
+              src="doubleArrowUp.svg"
+              alt="Show Less"
+              width={17}
+              height={17}
+              className="ml-5"
+            />
+          </>
+        ) : (
+          <>
+            <Image
+              src="double_arrow.svg"
+              alt="Show Less"
+              width={17}
+              height={17}
+              className="mr-5"
+            />
+            Show Filters
+            <Image
+              src="double_arrow.svg"
+              alt="Show Less"
+              width={17}
+              height={17}
+              className="ml-5"
+            />
+          </>
+        )}
       </button>
 
       {/* Filters container */}
@@ -133,31 +158,78 @@ const RenderSheetDataTable = ({ sheetData }) => {
           isFilterVisible ? "" : "hidden md:flex"
         }`}
       >
-          <FilterContainer
-            filterCriteria={filterCriteria}
-            setFilterCriteria={setFilterCriteria}
-            handleFilterChange={handleFilterChange}
-            locationOptions={locationOptions}
-            ageOptions={ageOptions}
-            languageOptions={languageOptions}
-            dayOptions={dayOptions}
-            timeOptions={timeOptions}
-            nameOptions={nameOptions}
-            handleDateChange={handleDateChange}
-            setStartDate={setStartDate}
-            resetFilters={resetFilters}
-          />
-        </div>
-   
+        <FilterContainer
+          filterCriteria={filterCriteria}
+          setFilterCriteria={setFilterCriteria}
+          handleFilterChange={handleFilterChange}
+          locationOptions={locationOptions}
+          ageOptions={ageOptions}
+          languageOptions={languageOptions}
+          dayOptions={dayOptions}
+          timeOptions={timeOptions}
+          nameOptions={nameOptions}
+          handleDateChange={handleDateChange}
+          setStartDate={setStartDate}
+          resetFilters={resetFilters}
+        />
+      </div>
+
       {/* Content Sections */}
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
-        <div className="w-full xl:w-2/5 " style={{ height: "85vh" }}>
-          <MapComponent
-            sheetData={filteredData}
-            onMarkerSelect={handleMarkerSelect}
-          />
-        </div>
+        {/* Toggle button for map */}
+        <button
+          className="md:hidden p-2 text-white bg-blue-600 hover:bg-blue-800 rounded-lg flex items-center justify-center mt-5 mb-2"
+          onClick={() => setIsMapVisible(!isMapVisible)}
+        >
+          {isMapVisible ? (
+             <>
+             <Image
+               src="doubleArrowUp.svg"
+               alt="Show Less"
+               width={17}
+               height={17}
+               className="mr-5"
+             />
+             Hide Map
+             <Image
+               src="doubleArrowUp.svg"
+               alt="Show Less"
+               width={17}
+               height={17}
+               className="ml-6"
+             />
+           </>
+         ) : (
+           <>
+             <Image
+               src="double_arrow.svg"
+               alt="Show Less"
+               width={17}
+               height={17}
+               className="mr-7"
+             />
+             Show Map
+             <Image
+               src="double_arrow.svg"
+               alt="Show Less"
+               width={17}
+               height={17}
+               className="ml-7"
+             />
+           </>
+         )}
+        </button>
+        
+          <div className={`w-full xl:w-2/5 ${
+            isMapVisible ? "" : "hidden md:flex"
+          }`} style={{ height: "85vh" }}>
+            <MapComponent
+              sheetData={filteredData}
+              onMarkerSelect={handleMarkerSelect}
+            />
+          </div>
+        
         {/* Playgroup Cards Section */}
         <div
           className="w-full xl:w-3/5 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
