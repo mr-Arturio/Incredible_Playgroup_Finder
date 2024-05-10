@@ -7,6 +7,7 @@ import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
+import ToggleButton from "./ToggleButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -108,49 +109,15 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col lg:flex-col">
-      {/* Toggle button */}
-      <button
-        className="md:hidden p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center"
-        onClick={() => setIsFilterVisible(!isFilterVisible)}
-      >
-        {isFilterVisible ? (
-          <>
-            <Image
-              src="doubleArrowUp.svg"
-              alt="Show Less"
-              width={17}
-              height={17}
-              className="mr-5"
-            />
-            Hide Filters
-            <Image
-              src="doubleArrowUp.svg"
-              alt="Show Less"
-              width={17}
-              height={17}
-              className="ml-5"
-            />
-          </>
-        ) : (
-          <>
-            <Image
-              src="double_arrow.svg"
-              alt="Show Less"
-              width={17}
-              height={17}
-              className="mr-5"
-            />
-            Show Filters
-            <Image
-              src="double_arrow.svg"
-              alt="Show Less"
-              width={17}
-              height={17}
-              className="ml-5"
-            />
-          </>
-        )}
-      </button>
+      {/* Button to toggle filters */}
+      <ToggleButton
+        isToggled={isFilterVisible}
+        onToggle={() => setIsFilterVisible(!isFilterVisible)}
+        labels={{
+          toggledOn: "Hide Filters",
+          toggledOff: "Show Filters",
+        }}
+      />
 
       {/* Filters container */}
       <div
@@ -177,59 +144,26 @@ const RenderSheetDataTable = ({ sheetData }) => {
       {/* Content Sections */}
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
-        {/* Toggle button for map */}
-        <button
-          className="md:hidden p-2 text-white bg-blue-600 hover:bg-blue-800 rounded-lg flex items-center justify-center mt-5 mb-2"
-          onClick={() => setIsMapVisible(!isMapVisible)}
+        {/* Button to toggle map */}
+        <ToggleButton
+          isToggled={isMapVisible}
+          onToggle={() => setIsMapVisible(!isMapVisible)}
+          labels={{
+            toggledOn: "Hide Map",
+            toggledOff: "Show Map",
+          }}
+        />
+
+        <div
+          className={`w-full xl:w-2/5 ${isMapVisible ? "" : "hidden md:flex"}`}
+          style={{ height: "85vh" }}
         >
-          {isMapVisible ? (
-             <>
-             <Image
-               src="doubleArrowUp.svg"
-               alt="Show Less"
-               width={17}
-               height={17}
-               className="mr-5"
-             />
-             Hide Map
-             <Image
-               src="doubleArrowUp.svg"
-               alt="Show Less"
-               width={17}
-               height={17}
-               className="ml-6"
-             />
-           </>
-         ) : (
-           <>
-             <Image
-               src="double_arrow.svg"
-               alt="Show Less"
-               width={17}
-               height={17}
-               className="mr-7"
-             />
-             Show Map
-             <Image
-               src="double_arrow.svg"
-               alt="Show Less"
-               width={17}
-               height={17}
-               className="ml-7"
-             />
-           </>
-         )}
-        </button>
-        
-          <div className={`w-full xl:w-2/5 ${
-            isMapVisible ? "" : "hidden md:flex"
-          }`} style={{ height: "85vh" }}>
-            <MapComponent
-              sheetData={filteredData}
-              onMarkerSelect={handleMarkerSelect}
-            />
-          </div>
-        
+          <MapComponent
+            sheetData={filteredData}
+            onMarkerSelect={handleMarkerSelect}
+          />
+        </div>
+
         {/* Playgroup Cards Section */}
         <div
           className="w-full xl:w-3/5 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
