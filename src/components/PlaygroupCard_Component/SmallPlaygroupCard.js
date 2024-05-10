@@ -106,7 +106,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
                 height={16}
                 className="inline-block"
               />
-              <span className="ml-2 inline-block">More Information</span>
+              <span className="ml-2 inline-block sm:text-base text-sm">More Information</span>
             </button>
             <div className="flex items-center space-x-3">
               {Object.entries(icons).map(
