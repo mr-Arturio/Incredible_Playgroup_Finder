@@ -72,7 +72,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       <div className="bg-blue-200 p-3 flex justify-between items-center ">
         {Cancelled === "Yes" ? (
           <button
-          onClick={URL ? () => window.open(URL, "_blank") : () => {}}
+            onClick={URL ? () => window.open(URL, "_blank") : () => {}}
             className="flex items-center px-3 py-2 bg-blue-500 text-white font-medium text-sm rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700 transform hover:scale-105 transition-transform duration-200 ease-in-out shadow hover:shadow-md ml-3"
             aria-label="More Information"
           >
@@ -96,7 +96,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
           <>
             <button
               onClick={onExpand}
-              className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
+              className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 md:ml-3 ml-1"
               aria-label="More Information"
             >
               <Image
@@ -106,9 +106,19 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
                 height={16}
                 className="inline-block"
               />
-              <span className="ml-2 inline-block sm:text-base text-sm">More Information</span>
+              <div>
+                {/* Visible only on small screens */}
+                <span className="md:hidden inline-block sm:text-base text-sm ml-2 ">
+                  More Info
+                </span>
+
+                {/* Visible from medium screens and up */}
+                <span className="hidden md:inline-block sm:text-base text-sm ml-2">
+                  More Information
+                </span>
+              </div>
             </button>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center md:space-x-3 space-x-2">
               {Object.entries(icons).map(
                 ([key, { show, src, tooltip: iconTooltip }]) =>
                   show && (
