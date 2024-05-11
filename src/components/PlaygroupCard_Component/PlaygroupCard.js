@@ -40,10 +40,9 @@ function PlaygroupCard({ playgroup }) {
     <div className={cardClasses}>
       {isExpanded ? (
         <>
-
           <div className="flex justify-between items-start px-7 pt-5 pb-3">
             <div>
-              <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
+              <h2 className="block mt-2 md:text-xl text-lg leading-tight font-semibold text-gray-800">
                 <a
                   href={URL}
                   target="_blank"
@@ -57,13 +56,13 @@ function PlaygroupCard({ playgroup }) {
                 {Day}, {Date}
               </p>
             </div>
-            <div className="text-lg font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
+            <div className="md:text-lg text-md font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
               {Service}
             </div>
           </div>
-          <div className="px-6 pb-4 flex justify-between">
+          <div className="px-6 pb-4 flex flex-col md:flex-row justify-between">
             {/* First column for Time, Address, and Age */}
-            <div className="flex flex-col justify-between mr-4 pr-10">
+            <div className="flex flex-col justify-between mr-4 md:pr-10 pr-0">
               <div className="flex items-center text-gray-700">
                 <Image
                   src={icons.time}
@@ -104,61 +103,65 @@ function PlaygroupCard({ playgroup }) {
                 />
                 <span className="ml-2">{Age}</span>
               </div>
-            </div>
-            {/* Second column for Notes */}
-           
-              <div className="bg-gray-100 flex-1 p-2 rounded-lg shadow-md p-2 max-w-sm">
+              {/* Notes section moves here on small screens */}
+              <div className="mt-2 md:hidden bg-gray-100 p-2 rounded-lg shadow-md">
                 <p className="text-gray-800 text-sm">
                   <span className="font-bold">Special Notes:</span> {Notes}
                 </p>
               </div>
-           
+            </div>
+            {/* Second column for Notes on medium and larger screens */}
+            <div className="hidden md:block bg-gray-100 flex-1 p-2 rounded-lg shadow-md max-w-sm">
+              <p className="text-gray-800 text-sm">
+                <span className="font-bold">Special Notes:</span> {Notes}
+              </p>
+            </div>
           </div>
 
-          
-            <div className="bg-blue-200 p-3 flex justify-between items-center ">
-              {/* Show Less button */}
-              <button
-                onClick={toggleExpand}
-                className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
-                aria-label="Show Less"
-              >
-                <Image
-                  src="doubleArrowUp.svg"
-                  alt="Show Less"
-                  width={17}
-                  height={17}
-                  className="inline-block"
-                />
-                <span className="ml-2 inline-block sm:text-base text-sm">Show Less</span>
-              </button>
-              {/* Icons */}
-              <div className="flex items-center space-x-3">
-                {Object.entries(icons).map(
-                  ([key, { show, src, tooltip: iconTooltip }]) =>
-                    show && (
-                      <Tooltip
-                        key={key}
-                        text={tooltip === iconTooltip ? iconTooltip : ""}
+          <div className="bg-blue-200 p-3 flex justify-between items-center ">
+            {/* Show Less button */}
+            <button
+              onClick={toggleExpand}
+              className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 ml-3"
+              aria-label="Show Less"
+            >
+              <Image
+                src="doubleArrowUp.svg"
+                alt="Show Less"
+                width={17}
+                height={17}
+                className="inline-block"
+              />
+              <span className="ml-2 inline-block sm:text-base text-sm">
+                Show Less
+              </span>
+            </button>
+            {/* Icons */}
+            <div className="flex items-center space-x-3">
+              {Object.entries(icons).map(
+                ([key, { show, src, tooltip: iconTooltip }]) =>
+                  show && (
+                    <Tooltip
+                      key={key}
+                      text={tooltip === iconTooltip ? iconTooltip : ""}
+                    >
+                      <div
+                        onMouseEnter={() => setTooltip(iconTooltip)}
+                        onMouseLeave={() => setTooltip("")}
                       >
-                        <div
-                          onMouseEnter={() => setTooltip(iconTooltip)}
-                          onMouseLeave={() => setTooltip("")}
-                        >
-                          <Image
-                            src={src}
-                            alt={iconTooltip}
-                            className="h-7 w-7"
-                            width={28}
-                            height={28}
-                          />
-                        </div>
-                      </Tooltip>
-                    )
-                )}
-              </div>
+                        <Image
+                          src={src}
+                          alt={iconTooltip}
+                          className="h-7 w-7"
+                          width={28}
+                          height={28}
+                        />
+                      </div>
+                    </Tooltip>
+                  )
+              )}
             </div>
-          
+          </div>
         </>
       ) : (
         <SmallPlaygroupCard playgroup={playgroup} onExpand={toggleExpand} />

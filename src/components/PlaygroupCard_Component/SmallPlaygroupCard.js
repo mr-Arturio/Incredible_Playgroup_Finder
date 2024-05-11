@@ -40,7 +40,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       )}
       <div className="flex justify-between items-start px-5 pt-3 pb-3">
         <div>
-          <h2 className="block mt-2 text-xl leading-tight font-semibold text-gray-800">
+          <h2 className="block mt-2 md:text-xl text-lg leading-tight font-semibold text-gray-800">
             {Cancelled !== "Yes" ? (
               <a
                 href={URL}
@@ -58,7 +58,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
             {Day}, {Date}
           </p>
         </div>
-        <div className="text-lg font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
+        <div className="md:text-lg text-md font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
           {Service}
         </div>
       </div>
