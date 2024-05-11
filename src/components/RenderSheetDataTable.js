@@ -8,6 +8,7 @@ import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
+import NoDataText from "./NoDataText";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -80,17 +81,14 @@ const RenderSheetDataTable = ({ sheetData }) => {
       setNameOptions([
         ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
       ]);
-
       // Apply filters to the data
       let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-
       // If a specific location is selected via marker, filter by that as well
       if (selectedAddress) {
         filtered = filtered.filter(
           (playgroup) => playgroup.Address === selectedAddress
         );
       }
-
       setFilteredData(filtered);
     }
   }, [sheetData, filterCriteria, isLoading, selectedAddress]);
@@ -118,10 +116,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
           toggledOff: "Show Filters",
         }}
       />
-
       {/* Filters container */}
       <div
-        className={`flex flex-col lg:flex-row space-y-4 md:space-y-0 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full ${
+        className={`flex flex-col lg:flex-row space-y-4 md:space-y-0 sticky top-0 bg-white rounded-lg shadow z-10 p-4 mb-5 w-full ${
           isFilterVisible ? "" : "hidden md:flex"
         }`}
       >
@@ -140,7 +137,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
           resetFilters={resetFilters}
         />
       </div>
-
       {/* Content Sections */}
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
@@ -163,21 +159,15 @@ const RenderSheetDataTable = ({ sheetData }) => {
             onMarkerSelect={handleMarkerSelect}
           />
         </div>
-
         {/* Playgroup Cards Section */}
         <div
           className="w-full xl:w-3/5 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
           style={{ height: "80vh" }}
         >
           {noDataAvailable ? (
-            <div className="flex justify-center items-center h-full">
-              <span className="text-gray-500 text-center">
-                No data found for the selected filters. Please adjust your
-                search criteria.
-              </span>
-            </div>
+            <NoDataText />
           ) : (
-            <div className="mt-12">
+            <div className="mt-6">
               {filteredData
                 .filter((playgroup) => {
                   //additional logic to check that playgroup is not in the past

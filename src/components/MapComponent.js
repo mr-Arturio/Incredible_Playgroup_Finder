@@ -75,7 +75,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
 
   if (!isLoaded) return <Loading />;
   return (
-    <div className="h-full w-full content-center">
+    <div className="h-full w-full content-start mt-6 md:ml-3">
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "80%" }}
         center={center}

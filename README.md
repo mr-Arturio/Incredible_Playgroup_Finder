@@ -73,6 +73,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - ADD arrows to roll big card to small again (^ Show Less)!!!
 - Arrange the mobile layout with the map on top and Playgroup cards below.
 - Hide filters in the mobile layout with a "Show Filter Options" button.
+- Hide Map in the mobile layout with a "Show Map" button.
+- More responsive changes: move notes field, arrange sizes and margins etc.
 
 ### Future Development
 - Add a contact form at the bottom.
