@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getSheetData } from "../actions/getSheetData";
 import RenderSheetDataTable from "../components/RenderSheetDataTable";
 import { Header } from "../components/Header";
+import ContactForm from "../components/ContactForm";
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
@@ -26,7 +27,12 @@ function Home() {
       <main className="max-w-screen-2xl flex-1  w-11/12">
         {" "}
         <RenderSheetDataTable sheetData={sheetData} />
-      </main>
+          </main>
+      {/* Bottom Content Area - Always present */}
+      <div className="max-w-screen-2xl w-11/12 p-4">
+        <h2 className="text-2xl font-bold">Need Help?</h2>
+      <ContactForm />
+      </div>
     </div>
   );
 }
