@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await getSheetData();
-      setSheetData(response.props.sheetData); // Assuming the data is structured correctly
+      setSheetData(response.props.sheetData);
     };
     fetchData();
   }, []);

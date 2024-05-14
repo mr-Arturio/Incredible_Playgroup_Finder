@@ -23,30 +23,27 @@ function MapComponent({ sheetData, onMarkerSelect }) {
 
   useEffect(() => {
     if (!sheetData) return;
-
     // Filter out the data with valid lat and lng information
     const markersWithLatLng = sheetData.filter((data) => {
       // Log the lat and lng values to check if they are numbers
       //console.log("Latitude:", data.lat, "Longitude:", data.lng);
-
       // Convert lat and lng strings to numbers
       const lat = parseFloat(data.lat);
       const lng = parseFloat(data.lng);
-
       // Check if lat and lng are valid numbers
       const isValidLatLng = !isNaN(lat) && !isNaN(lng);
-
+      // Log an error if lat or lng is invalid
       if (!isValidLatLng) {
         console.error("Invalid latitude or longitude:", data);
       }
-
       return isValidLatLng;
     });
-
     setMarkers(markersWithLatLng);
+    // console.log(`Number of markers shown: ${markersWithLatLng.length}`);
+    // console.log("Visible addresses:", markersWithLatLng.map(marker => marker.Address));
   }, [sheetData]);
 
-  // Fetch the user's location and update the center of the map
+  // Fetch the user's location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
