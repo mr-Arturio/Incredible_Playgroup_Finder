@@ -43,15 +43,21 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     const addresses = new Set();
 
     markersWithLatLng.forEach((marker) => {
-      if (!addresses.has(marker.Address)) {
-        uniqueMarkers.push(marker);
-        addresses.add(marker.Address);
+      // Clean the address by removing trailing spaces and periods
+      const cleanedAddress = marker.Address.trim().replace(/\.*$/, "");
+
+      if (!addresses.has(cleanedAddress)) {
+        uniqueMarkers.push({ ...marker, Address: cleanedAddress });
+        addresses.add(cleanedAddress);
       }
     });
 
     setMarkers(uniqueMarkers);
     console.log(`Number of markers shown: ${uniqueMarkers.length}`);
-    console.log("Visible addresses:", uniqueMarkers.map(marker => marker.Address));
+    console.log(
+      "Visible addresses:",
+      uniqueMarkers.map((marker) => marker.Address)
+    );
   }, [sheetData]);
 
   // Fetch the user's location
@@ -99,10 +105,15 @@ function MapComponent({ sheetData, onMarkerSelect }) {
               lng: parseFloat(marker.lng),
             }}
             onClick={() => onMarkerSelect(marker.Address)}
-            onMouseOver={() => setHoveredMarker(createKey(marker.lat, marker.lng, marker.Address))}
+            onMouseOver={() =>
+              setHoveredMarker(
+                createKey(marker.lat, marker.lng, marker.Address)
+              )
+            }
             onMouseOut={() => setHoveredMarker(null)}
           >
-            {hoveredMarker === createKey(marker.lat, marker.lng, marker.Address) && (
+            {hoveredMarker ===
+              createKey(marker.lat, marker.lng, marker.Address) && (
               <InfoWindow
                 position={{
                   lat: parseFloat(marker.lat),
