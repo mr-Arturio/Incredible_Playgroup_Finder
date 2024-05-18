@@ -29,7 +29,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
   // State to control filter container visibility
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   // Controls visibility of the map
-  const [isMapVisible, setIsMapVisible] = useState(true);
+  const [isMapVisible, setIsMapVisible] = useState(false);
   // State for filter options, extracted from sheet data
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
