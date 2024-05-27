@@ -58,7 +58,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
             {Day}, {Date}
           </p>
         </div>
-        <div className="md:text-lg text-md font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
+        <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
           {Service}
         </div>
       </div>

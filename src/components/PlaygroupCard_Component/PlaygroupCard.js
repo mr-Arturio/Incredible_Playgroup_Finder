@@ -56,7 +56,7 @@ function PlaygroupCard({ playgroup }) {
                 {Day}, {Date}
               </p>
             </div>
-            <div className="md:text-lg text-md font-semibold text-gray-500 bg-gray-200 mt-2 px-4 py-1 rounded-full">
+            <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
               {Service}
             </div>
           </div>
@@ -103,15 +103,9 @@ function PlaygroupCard({ playgroup }) {
                 />
                 <span className="ml-2">{Age}</span>
               </div>
-              {/* Notes section moves here on small screens */}
-              <div className="mt-2 md:hidden bg-gray-100 p-2 rounded-lg shadow-md">
-                <p className="text-gray-800 text-sm">
-                  <span className="font-bold">Special Notes:</span> {Notes}
-                </p>
-              </div>
             </div>
-            {/* Second column for Notes on medium and larger screens */}
-            <div className="hidden md:block bg-gray-100 flex-1 p-2 rounded-lg shadow-md max-w-sm">
+            {/* Special Notes section for all screen sizes */}
+            <div className="bg-gray-100 p-2 rounded-lg shadow-md mt-2 md:mt-0 md:max-w-sm flex-1">
               <p className="text-gray-800 text-sm">
                 <span className="font-bold">Special Notes:</span> {Notes}
               </p>
