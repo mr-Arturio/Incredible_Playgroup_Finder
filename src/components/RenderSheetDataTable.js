@@ -49,6 +49,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
     "Saturday",
     "Sunday",
   ]);
+
+  // State to control the number of visible cards
+  const [visibleCards, setVisibleCards] = useState(6);
+  const handleShowMore = () => {
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
+  };
+
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address); // Set the address when a map marker is selected
   };
@@ -179,9 +186,21 @@ const RenderSheetDataTable = ({ sheetData }) => {
                       playgroupDate >= today)
                   );
                 })
+                .slice(0, visibleCards)
                 .map((playgroup) => (
                   <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                 ))}
+              {visibleCards < filteredData.length && (
+                
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={handleShowMore}
+                    className="px-4 py-2 bg-blue-500 text-white font-medium text-sm rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700 transform hover:scale-105 transition-transform duration-200 ease-in-out shadow hover:shadow-md"
+                  >
+                    Show More
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
