@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-const ToggleButton = ({ isToggled, onToggle, labels }) => {
+const ToggleButton = ({ isToggled, onToggle, labels, className = "" }) => {
   return (
     <button
-      className="md:hidden p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center mt-5 "
+      className={`p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center mt-4 ${className}`}
       onClick={onToggle}
     >
       {isToggled ? (

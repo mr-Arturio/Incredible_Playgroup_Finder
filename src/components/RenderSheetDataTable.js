@@ -121,6 +121,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           toggledOn: "Hide Filters",
           toggledOff: "Show Filters",
         }}
+        className="md:hidden"
       />
       {/* Filters container */}
       <div
@@ -154,6 +155,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             toggledOn: "Hide Map",
             toggledOff: "Show Map",
           }}
+          className="md:hidden"
         />
 
         <div
@@ -191,14 +193,15 @@ const RenderSheetDataTable = ({ sheetData }) => {
                   <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                 ))}
               {visibleCards < filteredData.length && (
-                
-                <div className="flex justify-center mt-4">
-                  <button
-                    onClick={handleShowMore}
-                    className="px-4 py-2 bg-blue-500 text-white font-medium text-sm rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700 transform hover:scale-105 transition-transform duration-200 ease-in-out shadow hover:shadow-md"
-                  >
-                    Show More
-                  </button>
+                <div className="flex justify-center mb-4">
+                  <ToggleButton
+                    isToggled={false}
+                    onToggle={handleShowMore}
+                    labels={{
+                      toggledOn: "Show Less",
+                      toggledOff: "Show More",
+                    }}
+                  />
                 </div>
               )}
             </div>
