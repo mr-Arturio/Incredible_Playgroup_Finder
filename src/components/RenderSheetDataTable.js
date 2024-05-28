@@ -8,6 +8,7 @@ import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
+import ShowTodayButton from "./ShowTodayButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -75,6 +76,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
     });
   };
 
+  // Show today's playgroups
+  const showTodayPlaygroups = () => {
+    const today = new Date().toLocaleDateString("en-CA");
+    setFilterCriteria({ ...filterCriteria, date: today });
+    setSelectedAddress(null); // Optionally reset selected address
+  };
+
   useEffect(() => {
     if (!isLoading) {
       // Extract all unique location, languge, facility from sheetData. If it's not in spreadsheet it will to be displayed in the filter
@@ -113,6 +121,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col lg:flex-col">
+      <div className="flex justify-start my-4">
+        <ShowTodayButton onShowToday={showTodayPlaygroups} />
+      </div>
       {/* Button to toggle filters */}
       <ToggleButton
         isToggled={isFilterVisible}
