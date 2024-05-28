@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Image from "next/image";
-import Tooltip from "./Tooltip";
 import getIcons from "../../utils/icons";
 import SmallPlaygroupCard from "./SmallPlaygroupCard";
+import CardHeader from "./CardHeader";
+import CardDetails from "./CardDetails";
+import CardFooter from "./CardFooter";
 
 function PlaygroupCard({ playgroup }) {
   const {
@@ -40,123 +41,30 @@ function PlaygroupCard({ playgroup }) {
     <div className={cardClasses}>
       {isExpanded ? (
         <>
-          <div className="flex justify-between items-start px-7 pt-5 pb-3">
-            <div>
-              <h2 className="block mt-2 md:text-xl text-lg leading-tight font-semibold text-gray-800">
-                <a
-                  href={URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
-                >
-                  {Name}
-                </a>
-              </h2>
-              <p className="mt-3 text-gray-600 text-sm">
-                {Day}, {Date}
-              </p>
-            </div>
-            <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
-              {Service}
-            </div>
-          </div>
-          <div className="px-6 pb-4 flex flex-col md:flex-row justify-between">
-            {/* First column for Time, Address, and Age */}
-            <div className="flex flex-col justify-between mr-4 md:pr-10 pr-0">
-              <div className="flex items-center text-gray-700">
-                <Image
-                  src={icons.time}
-                  alt="Time"
-                  className="h-5 w-5 text-gray-500"
-                  width={20}
-                  height={20}
-                />
-                <span className="ml-2">{Time}</span>
-              </div>
-              <div className="flex items-center py-1 mt-2 text-gray-700">
-                <Image
-                  src={icons.location}
-                  alt="Location"
-                  className="h-5 w-5 text-gray-500"
-                  width={20}
-                  height={20}
-                />
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                    Address
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-2 text-blue-600 hover:text-blue-700"
-                  style={{ textDecoration: "underline" }}
-                >
-                  {Address}
-                </a>
-              </div>
-              <div className="flex items-center my-2 text-gray-700">
-                <Image
-                  src={icons.age}
-                  alt="Age"
-                  className="h-5 w-5 text-gray-500"
-                  width={20}
-                  height={20}
-                />
-                <span className="ml-2">{Age}</span>
-              </div>
-            </div>
-            {/* Special Notes section for all screen sizes */}
-            <div className="bg-gray-100 p-2 rounded-lg shadow-md mt-2 md:mt-0 md:max-w-sm flex-1">
-              <p className="text-gray-800 text-sm">
-                <span className="font-bold">Special Notes:</span> {Notes}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-blue-200 p-3 flex justify-between items-center ">
-            {/* Show Less button */}
-            <button
-              onClick={toggleExpand}
-              className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 md:ml-3 ml-1"
-              aria-label="Show Less"
-            >
-              <Image
-                src="doubleArrowUp.svg"
-                alt="Show Less"
-                width={17}
-                height={17}
-                className="inline-block"
-              />
-              <span className="md:ml-2 ml-1 inline-block sm:text-base text-sm">
-                Show Less
-              </span>
-            </button>
-            {/* Icons */}
-            <div className="flex items-center md:space-x-3 space-x-2">
-              {Object.entries(icons).map(
-                ([key, { show, src, tooltip: iconTooltip }]) =>
-                  show && (
-                    <Tooltip
-                      key={key}
-                      text={tooltip === iconTooltip ? iconTooltip : ""}
-                    >
-                      <div
-                        onMouseEnter={() => setTooltip(iconTooltip)}
-                        onMouseLeave={() => setTooltip("")}
-                      >
-                        <Image
-                          src={src}
-                          alt={iconTooltip}
-                          className="h-7 w-7"
-                          width={28}
-                          height={28}
-                        />
-                      </div>
-                    </Tooltip>
-                  )
-              )}
-            </div>
-          </div>
-        </>
+        <CardHeader
+        URL={URL}
+        Name={Name}
+        Day={Day}
+        Date={Date}
+        Service={Service}
+        Cancelled={Cancelled}
+      />
+      <CardDetails
+        Time={Time}
+        Address={Address}
+        Age={Age}
+        Notes={Notes}
+        icons={icons}
+      />
+      <CardFooter
+        icons={icons}
+        tooltip={tooltip}
+        setTooltip={setTooltip}
+        onExpand={toggleExpand}
+        isExpanded={isExpanded}
+        URL={URL}
+      />
+    </>
       ) : (
         <SmallPlaygroupCard playgroup={playgroup} onExpand={toggleExpand} />
       )}
