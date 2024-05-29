@@ -75,9 +75,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Hide filters in the mobile layout with a "Show Filter Options" button.
 - Hide Map in the mobile layout with a "Show Map" button.
 - More responsive changes: move notes field, arrange sizes and margins etc.
+- Add a contact form at the bottom.(docs.google.com/forms)
 
 ### Future Development
-- Add a contact form at the bottom.
 - Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
 - Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
 - Offer a French version.

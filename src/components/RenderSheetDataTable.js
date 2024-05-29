@@ -8,6 +8,7 @@ import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
+import ShowTodayButton from "./ShowTodayButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
@@ -29,7 +30,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
   // State to control filter container visibility
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   // Controls visibility of the map
-  const [isMapVisible, setIsMapVisible] = useState(true);
+  const [isMapVisible, setIsMapVisible] = useState(false);
   // State for filter options, extracted from sheet data
   const [locationOptions, setLocationOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
@@ -49,6 +50,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
     "Saturday",
     "Sunday",
   ]);
+
+  // State to control the number of visible cards
+  const [visibleCards, setVisibleCards] = useState(6);
+  const handleShowMore = () => {
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
+  };
+
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address); // Set the address when a map marker is selected
   };
@@ -66,6 +74,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
       age: "",
       time: "",
     });
+  };
+
+  // Show today's playgroups
+  const showTodayPlaygroups = () => {
+    const today = new Date().toLocaleDateString("en-CA");
+    setFilterCriteria({ ...filterCriteria, date: today });
+    setSelectedAddress(null); // Optionally reset selected address
   };
 
   useEffect(() => {
@@ -106,6 +121,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <div className="flex flex-col lg:flex-col">
+      <div className="flex justify-start my-4">
+        <ShowTodayButton onShowToday={showTodayPlaygroups} />
+      </div>
       {/* Button to toggle filters */}
       <ToggleButton
         isToggled={isFilterVisible}
@@ -114,6 +132,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           toggledOn: "Hide Filters",
           toggledOff: "Show Filters",
         }}
+        className="md:hidden"
       />
       {/* Filters container */}
       <div
@@ -147,6 +166,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             toggledOn: "Hide Map",
             toggledOff: "Show Map",
           }}
+          className="md:hidden"
         />
 
         <div
@@ -179,9 +199,22 @@ const RenderSheetDataTable = ({ sheetData }) => {
                       playgroupDate >= today)
                   );
                 })
+                .slice(0, visibleCards)
                 .map((playgroup) => (
                   <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                 ))}
+              {visibleCards < filteredData.length && (
+                <div className="flex justify-center mb-4">
+                  <ToggleButton
+                    isToggled={false}
+                    onToggle={handleShowMore}
+                    labels={{
+                      toggledOn: "Show Less",
+                      toggledOff: "Show More",
+                    }}
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>

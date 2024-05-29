@@ -15,13 +15,13 @@ const Navbar = () => {
             className="rounded-full"
           />
         </div>
-        <h1 className="text-4xl font-bold text-center mt-4">
+        <h1 className="text-xl md:text-4xl font-bold text-center mt-4 mr-1">
           Welcome to the Incredible Playgroup Finder!
         </h1>
         <div className="flex space-x-4">
           {/* Place your navigation links here */}
           <Link href="/charts">
-            <button className="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none py-2 px-4 rounded">
+            <button className="text-white hidden md:inline bg-blue-500 hover:bg-blue-600 focus:outline-none py-2 px-4 rounded">
               Charts
             </button>
           </Link>

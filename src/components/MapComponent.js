@@ -38,9 +38,26 @@ function MapComponent({ sheetData, onMarkerSelect }) {
       }
       return isValidLatLng;
     });
-    setMarkers(markersWithLatLng);
-    // console.log(`Number of markers shown: ${markersWithLatLng.length}`);
-    // console.log("Visible addresses:", markersWithLatLng.map(marker => marker.Address));
+    // Filter unique addresses
+    const uniqueMarkers = [];
+    const addresses = new Set();
+
+    markersWithLatLng.forEach((marker) => {
+      // Clean the address by removing trailing spaces and periods
+      const cleanedAddress = marker.Address.trim().replace(/\.*$/, "");
+
+      if (!addresses.has(cleanedAddress)) {
+        uniqueMarkers.push({ ...marker, Address: cleanedAddress });
+        addresses.add(cleanedAddress);
+      }
+    });
+
+    setMarkers(uniqueMarkers);
+    console.log(`Number of markers shown: ${uniqueMarkers.length}`);
+    console.log(
+      "Visible addresses:",
+      uniqueMarkers.map((marker) => marker.Address)
+    );
   }, [sheetData]);
 
   // Fetch the user's location
@@ -70,6 +87,8 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     }
   }, []);
 
+  const createKey = (lat, lng, address) => `${lat}-${lng}-${address}`;
+
   if (!isLoaded) return <Loading />;
   return (
     <div className="h-full w-full content-start mt-6 md:ml-3">
@@ -78,18 +97,23 @@ function MapComponent({ sheetData, onMarkerSelect }) {
         center={center}
         zoom={11}
       >
-        {markers.map((marker, index) => (
+        {markers.map((marker) => (
           <Marker //need to parseFloat again to avoid error... thats where TypeScript would be useful
-            key={marker.ID}
+            key={createKey(marker.lat, marker.lng, marker.Address)}
             position={{
               lat: parseFloat(marker.lat),
               lng: parseFloat(marker.lng),
             }}
             onClick={() => onMarkerSelect(marker.Address)}
-            onMouseOver={() => setHoveredMarker(index)} // Assume each marker has a unique id
+            onMouseOver={() =>
+              setHoveredMarker(
+                createKey(marker.lat, marker.lng, marker.Address)
+              )
+            }
             onMouseOut={() => setHoveredMarker(null)}
           >
-            {hoveredMarker === index && (
+            {hoveredMarker ===
+              createKey(marker.lat, marker.lng, marker.Address) && (
               <InfoWindow
                 position={{
                   lat: parseFloat(marker.lat),
