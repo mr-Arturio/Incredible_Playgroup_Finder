@@ -42,12 +42,13 @@ export async function getSheetData() {
 
     const transformedData = transformDataToObjects(data.data.values);
 
-    // if (transformedData) {
-    //   // Only cache if data is not null
-    //   sheetCache.set(cacheKey, transformedData);
-    //   console.log("New data cached");
-    //   // console.log(transformedData);
-    // }
+    //Cache the data
+    if (transformedData) {
+      // Only cache if data is not null
+      sheetCache.set(cacheKey, transformedData);
+      console.log("New data cached");
+      // console.log(transformedData);
+    }
 
     return {
       props: {
