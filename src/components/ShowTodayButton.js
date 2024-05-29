@@ -6,7 +6,7 @@ const ShowTodayButton = ({ onShowToday }) => {
       className="p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center mt-5"
       onClick={onShowToday}
     >
-      Show Today's PlayGroups
+      Show Today&apos;s Playgroups
     </button>
   );
 };
