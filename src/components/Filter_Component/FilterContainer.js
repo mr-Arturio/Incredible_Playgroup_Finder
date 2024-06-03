@@ -20,7 +20,7 @@ const FilterContainer = ({
   <>
     <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1">
       {/* First row of filters */}
-      <div className="flex justify-around gap-2 mb-4">
+      <div className="md:flex justify-around gap-2 mb-4">
         <FilterComponent
           id="locationCriteria"
           className="flex-grow"
@@ -37,7 +37,6 @@ const FilterContainer = ({
           onChange={(e) => handleFilterChange("age", e.target.value)}
           placeholder="Age Group"
         />
-
         <FilterComponent
           id="languageCriteria"
           className="flex-grow"
@@ -48,7 +47,7 @@ const FilterContainer = ({
         />
       </div>
       {/* Second row of filters */}
-      <div className="flex justify-around gap-2 mb-4">
+      <div className="md:flex justify-around gap-2 mb-4">
         <FilterComponent
           id="dayCriteria"
           value={filterCriteria.day}
