@@ -136,7 +136,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
       />
       {/* Filters container */}
       <div
-        className={`flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 mb-5 w-full ${
+        className={`flex flex-col p-5 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 mb-5 w-full ${
           isFilterVisible ? "" : "hidden md:flex"
         }`}
       >
