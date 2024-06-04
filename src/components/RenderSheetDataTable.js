@@ -120,11 +120,12 @@ const RenderSheetDataTable = ({ sheetData }) => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-col">
-      <div className="flex justify-start my-4">
+    <>
+      <div className="flex justify-start mb-4">
         <ShowTodayButton onShowToday={showTodayPlaygroups} />
       </div>
       {/* Button to toggle filters */}
+      <div className="flex flex-1 flex-col">
       <ToggleButton
         isToggled={isFilterVisible}
         onToggle={() => setIsFilterVisible(!isFilterVisible)}
@@ -134,9 +135,10 @@ const RenderSheetDataTable = ({ sheetData }) => {
         }}
         className="md:hidden"
       />
+      </div>
       {/* Filters container */}
       <div
-        className={`flex flex-col p-5 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 mb-5 w-full ${
+        className={`flex flex-col p-5 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg shadow mb-5 w-full ${
           isFilterVisible ? "" : "hidden md:flex"
         }`}
       >
@@ -170,7 +172,9 @@ const RenderSheetDataTable = ({ sheetData }) => {
         />
 
         <div
-          className={`w-full xl:w-2/5 ${isMapVisible ? "" : "hidden md:flex"}`}
+          className={`w-full xl:w-1/2 ${
+            isMapVisible ? "" : "hidden md:flex"
+          } `}
           style={{ height: "85vh" }}
         >
           <MapComponent
@@ -180,7 +184,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
         </div>
         {/* Playgroup Cards Section */}
         <div
-          className="w-full xl:w-3/5 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          className="w-full xl:w-1/2 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
           style={{ height: "80vh" }}
         >
           {noDataAvailable ? (
@@ -204,7 +208,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
                   <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                 ))}
               {visibleCards < filteredData.length && (
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-2">
                   <ToggleButton
                     isToggled={false}
                     onToggle={handleShowMore}
@@ -219,7 +223,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           )}
         </div>
       </div>
-    </div>
+      </>
   );
 };
 

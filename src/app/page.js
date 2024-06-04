@@ -24,15 +24,13 @@ function Home() {
         <Header />
       </div>
 
-      <main className="max-w-screen-2xl flex-1  w-11/12">
+      <main className="max-w-screen-2xl flex-1 w-11/12 sticky top-12">
         {" "}
         <RenderSheetDataTable sheetData={sheetData} />
-          </main>
-      {/* Bottom Content Area - Always present */}
-      <div className="max-w-screen-2xl w-11/12 p-4">
+        {/* Bottom Content Area - Always present */}
         <h2 className="text-2xl font-bold">Need Help?</h2>
-      <ContactForm />
-      </div>
+        <ContactForm />
+      </main>
     </div>
   );
 }
