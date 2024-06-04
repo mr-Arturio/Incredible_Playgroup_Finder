@@ -18,18 +18,20 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
       {/* Top Content Area - Always present */}
-      <div className=" max-w-screen-2xl w-11/12 p-4">
+      <div className="container pb-4">
         <Header />
       </div>
 
-      <main className="max-w-screen-2xl flex-1 w-11/12 sticky top-12">
+      <main className="container  flex-1 sticky top-12 ">
         {" "}
         <RenderSheetDataTable sheetData={sheetData} />
         {/* Bottom Content Area - Always present */}
-        <h2 className="text-2xl font-bold">Need Help?</h2>
-        <ContactForm />
+        <section>
+          <h2 className="text-2xl font-bold mt-4">Need Help?</h2>
+          <ContactForm />
+        </section>
       </main>
     </div>
   );
