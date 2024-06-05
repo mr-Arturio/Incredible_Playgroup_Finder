@@ -3,7 +3,7 @@ import React from "react";
 const FilterComponent = ({ id, value, options, onChange, placeholder }) => {
   
   return (
-    <div className="w-full lg:w-3/12 px-1 mb-2 lg:mb-0">
+    <div className="w-full px-1 mb-2 lg:mb-0">
     <select
       id={id}
       value={value}
