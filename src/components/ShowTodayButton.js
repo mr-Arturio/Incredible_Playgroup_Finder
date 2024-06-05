@@ -3,7 +3,7 @@ import React from "react";
 const ShowTodayButton = ({ onShowToday }) => {
   return (
     <button
-      className="p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center mt-5"
+      className="p-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg flex items-center justify-center"
       onClick={onShowToday}
     >
       Show Today&apos;s Playgroups

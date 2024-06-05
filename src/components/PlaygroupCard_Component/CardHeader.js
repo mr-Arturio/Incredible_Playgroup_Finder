@@ -2,9 +2,9 @@ import React from "react";
 
 function CardHeader({ URL, Name, Day, Date, Service, Cancelled }) {
   return (
-    <div className="flex justify-between items-start px-7 pt-5 pb-3">
+    <div className="flex justify-between items-start px-7 pt-3 pb-3">
       <div>
-        <h2 className="block mt-2 md:text-xl text-lg leading-tight font-semibold text-gray-800">
+        <h2 className="block mt-1 md:text-xl text-lg leading-tight font-semibold text-gray-800">
           {Cancelled !== "Yes" ? (
             <a
               href={URL}
@@ -18,7 +18,7 @@ function CardHeader({ URL, Name, Day, Date, Service, Cancelled }) {
             Name
           )}
         </h2>
-        <p className="mt-3 text-gray-600 text-sm">
+        <p className="mt-1 text-gray-600 text-sm">
           {Day}, {Date}
         </p>
       </div>
