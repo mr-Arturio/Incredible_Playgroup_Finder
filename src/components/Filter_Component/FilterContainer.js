@@ -16,6 +16,7 @@ const FilterContainer = ({
   handleDateChange,
   setStartDate,
   resetFilters,
+  dayMapping,
 }) => (
   <>
     <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-4">
@@ -47,15 +48,15 @@ const FilterContainer = ({
         />
       </div>
       {/* Second row of filters */}
-      <div className="md:flex justify-between  gap-2 mb-4">
+      <div className="md:flex justify-between gap-2 mb-4">
         <FilterComponent
           id="dayCriteria"
           value={filterCriteria.day}
           options={dayOptions}
           onChange={(e) => handleFilterChange("day", e.target.value)}
           placeholder="Day of the Week"
+          mapping={dayMapping}
         />
-
         <FilterComponent
           id="timeCriteria"
           value={filterCriteria.time}
@@ -63,7 +64,6 @@ const FilterContainer = ({
           onChange={(e) => handleFilterChange("time", e.target.value)}
           placeholder="Time of the Day"
         />
-
         <FilterComponent
           id="nameCriteria"
           value={filterCriteria.name}
@@ -73,7 +73,6 @@ const FilterContainer = ({
         />
       </div>
     </div>
-
     {/* Date picker and reset button */}
     <div className="flex flex-col lg:flex-row lg:items-end lg:space-x-4">
       <div className="w-full h-full lg:flex lg:items-center">
@@ -88,7 +87,6 @@ const FilterContainer = ({
           }
         />
       </div>
-
       {/* Reset button to clear all selected filters */}
       <ResetFiltersButton resetFilters={resetFilters} />
     </div>

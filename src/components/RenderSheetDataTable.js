@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
@@ -11,12 +11,11 @@ import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
-  const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
+  const isLoading = !sheetData || sheetData.length === 0;
 
   // State declarations
   const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
   const [selectedAddress, setSelectedAddress] = useState(null); // Tracks the selected address from map markers
-  const [filteredData, setFilteredData] = useState(sheetData || []); // Stores the filtered data based on criteria
   const [filterCriteria, setFilterCriteria] = useState({
     // Stores the current filter settings
     date: "",
@@ -31,25 +30,6 @@ const RenderSheetDataTable = ({ sheetData }) => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   // Controls visibility of the map
   const [isMapVisible, setIsMapVisible] = useState(false);
-  // State for filter options, extracted from sheet data
-  const [locationOptions, setLocationOptions] = useState([]);
-  const [languageOptions, setLanguageOptions] = useState([]);
-  const [nameOptions, setNameOptions] = useState([]);
-  const [timeOptions, setTimeOptions] = useState([
-    "Morning",
-    "Afternoon",
-    "Evening",
-  ]);
-  const [ageOptions, setAgeOptions] = useState(["Babies", "Toddlers", "Kids"]);
-  const [dayOptions, setDayOptions] = useState([
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ]);
 
   // State to control the number of visible cards
   const [visibleCards, setVisibleCards] = useState(6);
@@ -83,32 +63,30 @@ const RenderSheetDataTable = ({ sheetData }) => {
     setSelectedAddress(null); // Optionally reset selected address
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      // Extract all unique location, languge, facility from sheetData. If it's not in spreadsheet it will to be displayed in the filter
-      setLocationOptions([
-        ...new Set(sheetData.map((item) => item.Location).filter(Boolean)),
-      ]);
-      setLanguageOptions([
-        ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
-      ]);
-      setNameOptions([
-        ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
-      ]);
-      // Apply filters to the data
-      let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-      // If a specific location is selected via marker, filter by that as well
-      if (selectedAddress) {
-        filtered = filtered.filter(
-          (playgroup) => playgroup.Address === selectedAddress
-        );
-      }
-      setFilteredData(filtered);
-    }
-  }, [sheetData, filterCriteria, isLoading, selectedAddress]);
+  const dayMapping = {
+    Mon: "Monday",
+    Tue: "Tuesday",
+    Wed: "Wednesday",
+    Thur: "Thursday",
+    Fri: "Friday",
+    Sat: "Saturday",
+    Sun: "Sunday",
+  };
 
-  if (isLoading) return <Loading />;
-  //check for no data available
+  const dayOptions = Object.keys(dayMapping); // Short day names for filtering
+
+  const filteredData = useMemo(() => {
+    if (isLoading) return [];
+
+    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+    if (selectedAddress) {
+      filtered = filtered.filter(
+        (playgroup) => playgroup.Address === selectedAddress
+      );
+    }
+    return filtered;
+  }, [sheetData, filterCriteria, selectedAddress, isLoading]);
+
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
@@ -119,6 +97,32 @@ const RenderSheetDataTable = ({ sheetData }) => {
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
+  const locationOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [
+      ...new Set(sheetData.map((item) => item.Location).filter(Boolean)),
+    ];
+  }, [sheetData]);
+
+  const languageOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [
+      ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
+    ];
+  }, [sheetData]);
+
+  const nameOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [
+      ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
+    ];
+  }, [sheetData]);
+
+  const timeOptions = ["Morning", "Afternoon", "Evening"];
+  const ageOptions = ["Babies", "Toddlers", "Kids"];
+
+  if (isLoading) return <Loading />;
+
   return (
     <>
       <div className="flex justify-start mb-4">
@@ -126,15 +130,15 @@ const RenderSheetDataTable = ({ sheetData }) => {
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col">
-      <ToggleButton
-        isToggled={isFilterVisible}
-        onToggle={() => setIsFilterVisible(!isFilterVisible)}
-        labels={{
-          toggledOn: "Hide Filters",
-          toggledOff: "Show Filters",
-        }}
-        className="md:hidden"
-      />
+        <ToggleButton
+          isToggled={isFilterVisible}
+          onToggle={() => setIsFilterVisible(!isFilterVisible)}
+          labels={{
+            toggledOn: "Hide Filters",
+            toggledOff: "Show Filters",
+          }}
+          className="md:hidden"
+        />
       </div>
       {/* Filters container */}
       <div
@@ -155,6 +159,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           handleDateChange={handleDateChange}
           setStartDate={setStartDate}
           resetFilters={resetFilters}
+          dayMapping={dayMapping} // Pass the mapping to the FilterContainer
         />
       </div>
       {/* Content Sections */}
@@ -184,7 +189,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
         </div>
         {/* Playgroup Cards Section */}
         <div
-          className="w-full xl:w-1/2 pt-4 pr-4overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          className="w-full xl:w-1/2 pt-4 pr-4 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
           style={{ height: "80vh" }}
         >
           {noDataAvailable ? (
@@ -193,7 +198,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
             <div className="mt-6">
               {filteredData
                 .filter((playgroup) => {
-                  //additional logic to check that playgroup is not in the past
+                  // Additional logic to check that playgroup is not in the past
                   const playgroupDate = new Date(playgroup.Date);
                   const today = new Date();
                   today.setHours(0, 0, 0, 0);
@@ -223,7 +228,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           )}
         </div>
       </div>
-      </>
+    </>
   );
 };
 
