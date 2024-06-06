@@ -67,7 +67,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
     Mon: "Monday",
     Tue: "Tuesday",
     Wed: "Wednesday",
-    Thu: "Thursday",
+    Thur: "Thursday",
     Fri: "Friday",
     Sat: "Saturday",
     Sun: "Sunday",
