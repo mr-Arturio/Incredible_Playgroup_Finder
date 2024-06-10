@@ -35,7 +35,7 @@ function PlaygroupCard({ playgroup }) {
   // Conditional style classes
   const cardStyle =
     Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
-  const cardClasses = `shadow-lg rounded-lg overflow-hidden m-5 relative ${cardStyle}`;
+  const cardClasses = `shadow-lg rounded-lg overflow-hidden m-4 relative ${cardStyle}`;
 
   return (
     <div className={cardClasses}>
