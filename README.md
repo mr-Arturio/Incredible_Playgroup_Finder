@@ -76,8 +76,19 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Hide Map in the mobile layout with a "Show Map" button.
 - More responsive changes: move notes field, arrange sizes and margins etc.
 - Add a contact form at the bottom.(docs.google.com/forms)
+- Make Map and Playgroup section 50/50 size
+- A lot off small style and size adjustments.
+- Add 'Show Today's Playgroups' button
+- Make 'Show Today's Playgroups' filter and show groups for today
+- Redirect user to playgroup cards section with data after pressing 'Show Today's Playgroups'
+-  useMemo to reduce useState calls
+- logic to show full date names in filter (in data they are short: Mon, Tue... etc.)
 
 ### Future Development
+- more layout improvements
+- list of active filters....
+- sticky main field
+- logic for add to the callendar option
 - Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
 - Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
 - Offer a French version.

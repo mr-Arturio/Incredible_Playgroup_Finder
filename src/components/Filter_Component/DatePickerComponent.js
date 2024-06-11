@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Image from "next/image"; // Ensure Next.js Image component is correctly imported.
+import Image from "next/image";
 
 const DatePickerComponent = ({ onDateChange }) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -51,7 +51,7 @@ const DatePickerComponent = ({ onDateChange }) => {
       {/* DatePicker */}
       {isOpen && (
         <div
-          style={{ position: "absolute", top: "4.5rem", left: 0, width: "100%" }}
+          style={{ position: "absolute", top: "4.5rem", left: 0, width: "100%", zIndex: 3}}
         >
           <DatePicker
             selected={startDate}

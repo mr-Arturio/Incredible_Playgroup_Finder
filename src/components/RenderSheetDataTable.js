@@ -56,11 +56,15 @@ const RenderSheetDataTable = ({ sheetData }) => {
     });
   };
 
-  // Show today's playgroups
+  // Show today's playgroups and scroll to the target area
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
     setFilterCriteria({ ...filterCriteria, date: today });
     setSelectedAddress(null); // Optionally reset selected address
+    const targetElement = document.getElementById("today-playgroups-section");
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const dayMapping = {
@@ -99,23 +103,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   const locationOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [
-      ...new Set(sheetData.map((item) => item.Location).filter(Boolean)),
-    ];
+    return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
   }, [sheetData]);
 
   const languageOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [
-      ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
-    ];
+    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
   }, [sheetData]);
 
   const nameOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [
-      ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
-    ];
+    return [...new Set(sheetData.map((item) => item.Name).filter(Boolean))];
   }, [sheetData]);
 
   const timeOptions = ["Morning", "Afternoon", "Evening"];
@@ -125,11 +123,11 @@ const RenderSheetDataTable = ({ sheetData }) => {
 
   return (
     <>
-      <div className="flex justify-start mb-4">
+      <div className="flex justify-start md:mb-4 mb-2">
         <ShowTodayButton onShowToday={showTodayPlaygroups} />
       </div>
       {/* Button to toggle filters */}
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col" id="today-playgroups-section">
         <ToggleButton
           isToggled={isFilterVisible}
           onToggle={() => setIsFilterVisible(!isFilterVisible)}
@@ -177,9 +175,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
         />
 
         <div
-          className={`w-full xl:w-1/2 ${
-            isMapVisible ? "" : "hidden md:flex"
-          } `}
+          className={`w-full xl:w-1/2 ${isMapVisible ? "" : "hidden md:flex"} `}
           style={{ height: "85vh" }}
         >
           <MapComponent
@@ -189,13 +185,13 @@ const RenderSheetDataTable = ({ sheetData }) => {
         </div>
         {/* Playgroup Cards Section */}
         <div
-          className="w-full xl:w-1/2 pt-4 pr-4 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          className="w-full xl:w-1/2 pt-2 pr-2 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
           style={{ height: "80vh" }}
         >
           {noDataAvailable ? (
             <NoDataText />
           ) : (
-            <div className="mt-6">
+            <>
               {filteredData
                 .filter((playgroup) => {
                   // Additional logic to check that playgroup is not in the past
@@ -224,7 +220,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
                   />
                 </div>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
