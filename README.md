@@ -83,6 +83,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Redirect user to playgroup cards section with data after pressing 'Show Today's Playgroups'
 -  useMemo to reduce useState calls
 - logic to show full date names in filter (in data they are short: Mon, Tue... etc.)
+- Baby scale available icon adde with logic and tooltip
 
 ### Future Development
 - more layout improvements
@@ -109,6 +110,8 @@ Converts the adjusted date to an ISO string and splits it to get the YYYY-MM-DD 
 ```
 
 do not forget about```"use client"```!!!
+
+Icons : https://uxwing.com/, https://iconduck.com/
 
 ## Learn More
 
