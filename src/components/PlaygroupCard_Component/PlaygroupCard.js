@@ -22,9 +22,10 @@ function PlaygroupCard({ playgroup }) {
     Outdoor,
     Cancelled,
     Notes,
+    Scale
   } = playgroup;
 
-  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
+  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
 
   const [isExpanded, setIsExpanded] = useState(false); // State for expanding/collapsing the card
   const [tooltip, setTooltip] = useState("");

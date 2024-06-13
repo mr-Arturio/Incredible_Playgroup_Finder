@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Tooltip from "./Tooltip";
 
-function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded, URL }) {
+function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded }) {
   return (
     <div className="bg-blue-200 p-3 flex justify-between items-center">
       {isExpanded ? (

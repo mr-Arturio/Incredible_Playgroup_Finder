@@ -18,9 +18,10 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
     WiFi,
     Outdoor,
     Cancelled,
+    Scale,
   } = playgroup;
 
-  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language);
+  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
   const [tooltip, setTooltip] = useState("");
   const cancelledTextStyle = "text-red-500 text-2xl font-bold";
 
