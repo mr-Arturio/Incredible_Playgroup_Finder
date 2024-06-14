@@ -2,7 +2,7 @@ import React from "react";
 
 function CardHeader({ URL, Name, Day, Date, Service, Cancelled }) {
   return (
-    <div className="flex justify-between items-start px-7 pt-3 pb-3">
+    <div className="flex justify-between items-start px-5 md:px-6 pt-3 pb-3">
       <div>
         <h2 className="block mt-1 md:text-xl text-lg leading-tight font-semibold text-gray-800">
           {Cancelled !== "Yes" ? (
