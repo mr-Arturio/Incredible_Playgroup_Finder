@@ -1,8 +1,11 @@
+"use client";
+
 import React, { useState } from "react";
 import getIcons from "../../utils/icons";
 import Image from "next/image";
 import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 function SmallPlaygroupCard({ playgroup, onExpand }) {
   const {
@@ -40,7 +43,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
           </span>
         </div>
       )}
-       <CardHeader
+      <CardHeader
         URL={URL}
         Name={Name}
         Day={Day}
@@ -48,10 +51,24 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
         Service={Service}
         Cancelled={Cancelled}
       />
-      <div className="px-6 pb-3">
+      <div className="px-5 md:px-6 pb-3">
         <div className="flex items-center text-gray-700">
           <Image src="/time.svg" alt="Time" width={20} height={20} />
-          <span className="ml-2">{Time}</span>
+          <span className="ml-2 mb-2">{Time}</span>
+        </div>
+        <div>
+          <AddToCalendarButton
+            name="Title"
+            options={["Google", "Outlook.com", "Apple"]}
+            location="World Wide Web"
+            startDate="2024-06-16"
+            endDate="2024-06-16"
+            startTime="10:15"
+            endTime="23:30"
+            timeZone="Canada/Eastern"
+            size="2"
+            listStyle="overlay"
+          ></AddToCalendarButton>
         </div>
       </div>
       <CardFooter
