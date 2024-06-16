@@ -5,9 +5,8 @@ import getIcons from "../../utils/icons";
 import Image from "next/image";
 import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
-import { AddToCalendarButton } from "add-to-calendar-button-react";
 
-function SmallPlaygroupCard({ playgroup, onExpand }) {
+function SmallPlaygroupCard({ playgroup, onExpand, startTime, endTime }) {
   const {
     Date,
     Time,
@@ -28,9 +27,6 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
   const [tooltip, setTooltip] = useState("");
   const cancelledTextStyle = "text-red-500 text-2xl font-bold";
-
-    // Split Time into start and end times
-    const [startTime, endTime] = Time.split(" - ");
 
   return (
     <>
@@ -58,10 +54,10 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
       <div className="px-5 md:px-6 pb-3">
         <div className="flex items-center text-gray-700">
           <Image src="/time.svg" alt="Time" width={20} height={20} />
-          <span className="ml-2 mb-2">{Time}</span>
+          <span className="ml-2">{Time}</span>
         </div>
         <div>
-        <AddToCalendarButton
+        {/* <AddToCalendarButton
             name={Name}
             options={["Google", "Outlook.com", "Apple"]}
             location={Address}
@@ -73,7 +69,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
             size="1"
             listStyle="overlay"
             buttonStyle="round"
-          ></AddToCalendarButton>
+          ></AddToCalendarButton> */}
         </div>
       </div>
       <CardFooter

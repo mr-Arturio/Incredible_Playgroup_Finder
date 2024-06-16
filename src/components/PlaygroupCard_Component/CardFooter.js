@@ -6,6 +6,7 @@ import { AddToCalendarButton } from "add-to-calendar-button-react";
 function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded, name, address, date, startTime, endTime }) {
   return (
     <div className="bg-blue-200 p-3 flex justify-between items-center">
+      <div className="flex">
       {isExpanded ? (
         <button
           onClick={onExpand}
@@ -46,8 +47,7 @@ function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded, name, ad
           </div>
         </button>
       )}
-      <div className="flex items-center md:space-x-3 space-x-2">
-        <div>
+      <div className="ml-3 hidden sm:flex">
           <AddToCalendarButton
             name={name}
             options={["Google", "Outlook.com", "Apple"]}
@@ -62,6 +62,9 @@ function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded, name, ad
             buttonStyle="text"
           ></AddToCalendarButton>
         </div>
+      </div>
+      <div className="flex items-center md:space-x-3 space-x-2">
+        
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (

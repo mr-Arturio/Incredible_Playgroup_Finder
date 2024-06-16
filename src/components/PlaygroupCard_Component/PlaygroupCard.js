@@ -22,13 +22,16 @@ function PlaygroupCard({ playgroup }) {
     Outdoor,
     Cancelled,
     Notes,
-    Scale
+    Scale,
   } = playgroup;
 
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
 
   const [isExpanded, setIsExpanded] = useState(false); // State for expanding/collapsing the card
   const [tooltip, setTooltip] = useState("");
+
+  // Split Time into start and end times
+  const [startTime, endTime] = Time.split(" - ");
 
   // Function to toggle the expanded state
   const toggleExpand = () => setIsExpanded(!isExpanded);
@@ -42,30 +45,35 @@ function PlaygroupCard({ playgroup }) {
     <div className={cardClasses}>
       {isExpanded ? (
         <>
-        <CardHeader
-        URL={URL}
-        Name={Name}
-        Day={Day}
-        Date={Date}
-        Service={Service}
-        Cancelled={Cancelled}
-      />
-      <CardDetails
-        Time={Time}
-        Address={Address}
-        Age={Age}
-        Notes={Notes}
-        icons={icons}
-      />
-      <CardFooter
-        icons={icons}
-        tooltip={tooltip}
-        setTooltip={setTooltip}
-        onExpand={toggleExpand}
-        isExpanded={isExpanded}
-        URL={URL}
-      />
-    </>
+          <CardHeader
+            URL={URL}
+            Name={Name}
+            Day={Day}
+            Date={Date}
+            Service={Service}
+            Cancelled={Cancelled}
+          />
+          <CardDetails
+            Time={Time}
+            Address={Address}
+            Age={Age}
+            Notes={Notes}
+            icons={icons}
+          />
+          <CardFooter
+            icons={icons}
+            tooltip={tooltip}
+            setTooltip={setTooltip}
+            onExpand={toggleExpand}
+            isExpanded={isExpanded}
+            URL={URL}
+            name={Name}
+            address={Address}
+            date={Date}
+            startTime={startTime}
+            endTime={endTime}
+          />
+        </>
       ) : (
         <SmallPlaygroupCard playgroup={playgroup} onExpand={toggleExpand} />
       )}
