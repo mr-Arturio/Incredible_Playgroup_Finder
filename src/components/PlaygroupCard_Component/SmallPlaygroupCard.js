@@ -13,6 +13,7 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
     Time,
     Name,
     Day,
+    Address,
     Language,
     URL,
     Service,
@@ -27,6 +28,9 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
   const [tooltip, setTooltip] = useState("");
   const cancelledTextStyle = "text-red-500 text-2xl font-bold";
+
+    // Split Time into start and end times
+    const [startTime, endTime] = Time.split(" - ");
 
   return (
     <>
@@ -57,17 +61,18 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
           <span className="ml-2 mb-2">{Time}</span>
         </div>
         <div>
-          <AddToCalendarButton
-            name="Title"
+        <AddToCalendarButton
+            name={Name}
             options={["Google", "Outlook.com", "Apple"]}
-            location="World Wide Web"
-            startDate="2024-06-16"
-            endDate="2024-06-16"
-            startTime="10:15"
-            endTime="23:30"
+            location={Address}
+            startDate={Date}
+            endDate={Date}
+            startTime={startTime}
+            endTime={endTime}
             timeZone="Canada/Eastern"
-            size="2"
+            size="1"
             listStyle="overlay"
+            buttonStyle="round"
           ></AddToCalendarButton>
         </div>
       </div>
@@ -78,6 +83,11 @@ function SmallPlaygroupCard({ playgroup, onExpand }) {
         onExpand={onExpand}
         isExpanded={false}
         URL={URL}
+        name={Name}
+        address={Address}
+        date={Date}
+        startTime={startTime}
+        endTime={endTime}
       />
     </>
   );

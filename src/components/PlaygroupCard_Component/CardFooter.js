@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import Tooltip from "./Tooltip";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
-function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded }) {
+function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded, name, address, date, startTime, endTime }) {
   return (
     <div className="bg-blue-200 p-3 flex justify-between items-center">
       {isExpanded ? (
@@ -46,6 +47,21 @@ function CardFooter({ icons, tooltip, setTooltip, onExpand, isExpanded }) {
         </button>
       )}
       <div className="flex items-center md:space-x-3 space-x-2">
+        <div>
+          <AddToCalendarButton
+            name={name}
+            options={["Google", "Outlook.com", "Apple"]}
+            location={address}
+            startDate={date}
+            endDate={date}
+            startTime={startTime}
+            endTime={endTime}
+            timeZone="Canada/Eastern"
+            size="1"
+            listStyle="overlay"
+            buttonStyle="text"
+          ></AddToCalendarButton>
+        </div>
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
