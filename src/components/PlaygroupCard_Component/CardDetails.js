@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function CardDetails({ Time, Address, Age, Notes, icons }) {
   return (
-    <div className="px-6 pb-4 flex flex-col md:flex-row justify-between">
+    <div className="px-5 md:px-6 pb-4 flex flex-col md:flex-row justify-between">
       <div className="flex flex-col justify-between mr-4 md:pr-10 pr-0">
         <div className="flex items-center text-gray-700">
           <Image
