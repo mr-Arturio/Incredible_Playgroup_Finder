@@ -1,7 +1,6 @@
 ## Parent Resource Playgroup Finder application. 
-1. This innovative platform is designed to make life easier for parents in Ottawa by providing an intuitive way to find playgroup information tailored to their needs.
-### OR
-2. Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map and filterable playgroup cards for a tailored experience.
+www.incredibleplaygroupfinder.ca <br>
+ Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map, filterable playgroup cards and option to add aevents to your calendar for a tailored experience.
 
 
 Our application stands out with its easy-to-use interactive map and a dynamic filtering system that allows users to search for playgroups by location, age group, language preference, date, day, and facility. Data is pulled in real-time from a Google Sheets database, ensuring the most current information is always at hand.
@@ -106,15 +105,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 ```npm install @react-google-maps/api```
 ```npm install react-datepicker``` <br> 
 
-The Date object in JavaScript uses the local time zone, while the toISOString() method converts the date to UTC time, potentially resulting in a date shift due to the time zone difference.
-
-To fix this, you can adjust the date to account for the time zone offset before converting it to an ISO string.
-```Sets the time to midnight for the selected date to avoid any shifts due to the time difference within the day.
-Calculates the timezone offset in milliseconds and subtracts it from the date to get the local time as if it were in UTC.
-Converts the adjusted date to an ISO string and splits it to get the YYYY-MM-DD format, which should now represent the correct local date.
-```
-
-do not forget about```"use client"```!!!
+#### Color Palate
+![Color Schema](./public/ColorPalate.png)
 
 Icons : https://uxwing.com/, https://iconduck.com/
 
