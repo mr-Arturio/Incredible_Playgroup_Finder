@@ -33,13 +33,14 @@ const DatePickerComponent = ({ onDateChange }) => {
         className="hidden lg:flex justify-center items-center"
         style={{ zIndex: 2 }} // Make sure the button is over the DatePicker
       >
-        <Image
-          src="/calendar.svg"
-          alt="Calendar Icon"
-          width={40} // Size of the icon
-          height={40}
-          objectFit="contain" // Ensures the image is contained within the specified dimensions
-        />
+        <div className="w-10 h-10 relative">
+          <Image
+            src="/calendar.svg"
+            alt="Calendar Icon"
+            fill
+            className="w-full h-auto"
+          />
+        </div>
       </button>
 
       {/* Date Box for lg screens and smaller */}
