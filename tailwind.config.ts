@@ -17,6 +17,7 @@ const config: Config = {
       colors: {
         mainBlue: '#4E8DCA',
         hoverBlue: '#316191',
+        plum: '#A34298',
       },
     },
   },

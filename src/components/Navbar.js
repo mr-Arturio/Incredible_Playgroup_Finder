@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="bg-purple-400 text-white py-2">
+    <nav className="bg-plum text-white py-2">
       <div className="container mx-auto flex justify-between items-center">
         <div className="logo">
           {/* Assuming you have a logo.png in your public folder */}
@@ -21,7 +21,7 @@ const Navbar = () => {
         <div className="flex space-x-4">
           {/* Place your navigation links here */}
           <Link href="/charts">
-            <button className="text-white hidden md:inline bg-blue-500 hover:bg-blue-600 focus:outline-none py-2 px-4 rounded">
+            <button className="text-white hidden md:inline bg-mainBlue hover:bg-hoverBlue focus:outline-none py-2 px-4 rounded-lg">
               Charts
             </button>
           </Link>

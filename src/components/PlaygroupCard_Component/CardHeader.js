@@ -10,7 +10,7 @@ function CardHeader({ URL, Name, Day, Date, Service, Cancelled }) {
               href={URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+              className="text-plum hover:text-hoverBlue transition duration-300 ease-in-out"
             >
               {Name}
             </a>
