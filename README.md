@@ -83,13 +83,18 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Redirect user to playgroup cards section with data after pressing 'Show Today's Playgroups'
 -  useMemo to reduce useState calls
 - logic to show full date names in filter (in data they are short: Mon, Tue... etc.)
-- Baby scale available icon adde with logic and tooltip
+- Baby scale available icon adde with logic and tooltip + new column in DB
+- reduce redundancy and simplify the code for LargePlaygroupCard and SmallPlaygroupCard by creating a common base component - BasePlaygroupCard
+- visible list af active filters with delete filter option
+- install npm addToCallendar packege
+- implement addToCalendar button into the playcard footer (only for medium and bigger screens)
+- adjust all AddToCallendar settings, style, position and options
+- add logic to hide this button when group is cancelled
 
 ### Future Development
 - more layout improvements
-- list of active filters....
 - sticky main field
-- logic for add to the callendar option
+- logic for add to the callendar option - in mobile screens
 - Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
 - Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
 - Offer a French version.

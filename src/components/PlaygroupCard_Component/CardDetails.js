@@ -35,7 +35,7 @@ function CardDetails({ Time, Address, Age, Notes, icons }) {
             {Address}
           </a>
         </div>
-        <div className="flex items-center my-2 text-gray-700">
+        {/* <div className="flex items-center my-2 text-gray-700">
           <Image
             src={icons.age}
             alt="Age"
@@ -44,7 +44,7 @@ function CardDetails({ Time, Address, Age, Notes, icons }) {
             height={20}
           />
           <span className="ml-2">{Age}</span>
-        </div>
+        </div> */}
       </div>
       {Notes && (
         <div className="bg-gray-100 p-2 rounded-lg shadow-md mt-2 md:mt-0 md:max-w-sm flex-1">
