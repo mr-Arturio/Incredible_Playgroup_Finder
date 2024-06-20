@@ -17,15 +17,17 @@ const DatePickerComponent = ({ onDateChange }) => {
     setIsOpen(false); // Close the calendar after the date is selected.
   };
 
-    // Date format function
-    const formatDate = (date) => {
-      return date.toLocaleDateString();
-    };
+  // Date format function
+  const formatDate = (date) => {
+    return date.toLocaleDateString();
+  };
 
   return (
     <div className="relative w-full flex flex-col items-center">
       {/* Calendar Icon */}
-      <h2 className="text-md font-semibold text-gray-700 mb-2">Select a Date</h2>
+      <h2 className="text-md font-semibold text-gray-700 mb-2">
+        Select a Date
+      </h2>
       <button
         onClick={toggleCalendar}
         className="hidden lg:flex justify-center items-center"
@@ -36,6 +38,7 @@ const DatePickerComponent = ({ onDateChange }) => {
           alt="Calendar Icon"
           width={40} // Size of the icon
           height={40}
+          objectFit="contain" // Ensures the image is contained within the specified dimensions
         />
       </button>
 
@@ -51,7 +54,13 @@ const DatePickerComponent = ({ onDateChange }) => {
       {/* DatePicker */}
       {isOpen && (
         <div
-          style={{ position: "absolute", top: "4.5rem", left: 0, width: "100%", zIndex: 3}}
+          style={{
+            position: "absolute",
+            top: "4.5rem",
+            left: 0,
+            width: "100%",
+            zIndex: 3,
+          }}
         >
           <DatePicker
             selected={startDate}
