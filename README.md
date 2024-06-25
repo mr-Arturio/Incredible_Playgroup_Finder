@@ -14,6 +14,7 @@ Key features include:
 - **Detailed Event Information**: Reactive playgroup cards with detailed event information.
 - **Direct Navigation**: Clicking an address takes you to Google Maps to easily find directions.
 - **Date Picker**: React DatePicker is integrated for easy date selection.
+- **Add To Calendar**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
 
 
 ## Setup
@@ -89,6 +90,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - implement addToCalendar button into the playcard footer (only for medium and bigger screens)
 - adjust all AddToCallendar settings, style, position and options
 - add logic to hide this button when group is cancelled
+- apply color schema
+- wrote a script for Google Spreadsheet for faster update the columns
+- add and edit information to database
 
 ### Future Development
 - more layout improvements
