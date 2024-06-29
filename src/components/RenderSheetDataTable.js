@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/LargePlaygroupCard";
 import applyFilters from "../utils/applyFilters";
@@ -12,6 +12,9 @@ import ShowTodayButton from "./ShowTodayButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
   const isLoading = !sheetData || sheetData.length === 0;
+
+  // Reference for scrolling to today's playgroups section
+  const todayPlaygroupsSectionRef = useRef(null);
 
   // State declarations
   const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
@@ -61,9 +64,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
     const today = new Date().toLocaleDateString("en-CA");
     setFilterCriteria({ ...filterCriteria, date: today });
     setSelectedAddress(null); // Optionally reset selected address
-    const targetElement = document.getElementById("today-playgroups-section");
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+    if (todayPlaygroupsSectionRef.current) {
+      todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
