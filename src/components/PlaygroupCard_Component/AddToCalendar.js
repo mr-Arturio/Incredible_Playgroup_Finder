@@ -5,7 +5,7 @@ const AddToCalendar = ({ name, address, date, startTime, endTime, Cancelled }) =
   if (Cancelled === "Yes") return null;
 
   return (
-    
+   
       <AddToCalendarButton
         name={name}
         options={["Google", "Outlook.com", "Apple"]}

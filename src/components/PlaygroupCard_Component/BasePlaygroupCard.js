@@ -3,7 +3,6 @@ import getIcons from "../../utils/icons";
 import CardHeader from "./CardHeader";
 import CardFooter from "./CardFooter";
 import CardDetails from "./CardDetails";
-import Image from "next/image";
 
 function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const {
@@ -32,7 +31,8 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const [startTime, endTime] = Time.split(" - ");
 
   // Conditional style classes
-  const cardStyle = Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
+  const cardStyle =
+    Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-4 relative ${cardStyle}`;
 
   return (
@@ -42,7 +42,10 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           className="absolute z-10 w-full h-full flex justify-center items-center"
           style={{ pointerEvents: "none" }}
         >
-          <span className="text-red-500 text-2xl font-bold" style={{ pointerEvents: "auto" }}>
+          <span
+            className="text-red-500 text-2xl font-bold"
+            style={{ pointerEvents: "auto" }}
+          >
             Cancelled
           </span>
         </div>
@@ -54,6 +57,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         Date={Date}
         Service={Service}
         Cancelled={Cancelled}
+        Time={Time}
       />
       {isExpanded && (
         <CardDetails
@@ -62,15 +66,12 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Age={Age}
           Notes={Notes}
           icons={icons}
+          name={Name}
+          date={Date}
+          startTime={startTime}
+          endTime={endTime}
+          Cancelled={Cancelled}
         />
-      )}
-      {!isExpanded && (
-        <div className="px-5 md:px-6 pb-3">
-          <div className="flex items-center text-gray-700">
-            <Image src="/time.svg" alt="Time" width={20} height={20} />
-            <span className="ml-2">{Time}</span>
-          </div>
-        </div>
       )}
       <CardFooter
         icons={icons}
