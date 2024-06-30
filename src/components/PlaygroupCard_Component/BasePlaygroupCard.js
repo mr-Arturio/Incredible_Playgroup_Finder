@@ -58,6 +58,11 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         Service={Service}
         Cancelled={Cancelled}
         Time={Time}
+        name={Name}
+        address={Address}
+        date={Date}
+        startTime={startTime}
+        endTime={endTime}
       />
       {isExpanded && (
         <CardDetails
@@ -66,10 +71,6 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Age={Age}
           Notes={Notes}
           icons={icons}
-          name={Name}
-          date={Date}
-          startTime={startTime}
-          endTime={endTime}
           Cancelled={Cancelled}
         />
       )}

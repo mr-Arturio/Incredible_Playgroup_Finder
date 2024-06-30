@@ -10,7 +10,7 @@ function CardHeader({
   Service,
   Cancelled,
   Time,
-  Address,
+  address,
   startTime,
   endTime,
 }) {
@@ -45,10 +45,10 @@ function CardHeader({
           <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2">{Time}</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center sm:hidden">
           <AddToCalendar
             name={Name}
-            address={Address}
+            address={address}
             date={Date}
             startTime={startTime}
             endTime={endTime}
