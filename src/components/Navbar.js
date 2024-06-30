@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+
 
 const Navbar = () => {
   return (
@@ -19,13 +19,8 @@ const Navbar = () => {
           Welcome to the Incredible Playgroup Finder!
         </h1>
         <div className="flex space-x-4">
-          {/* Place your navigation links here */}
-          <Link href="/charts">
-            <button className="text-white hidden md:inline bg-mainBlue hover:bg-hoverBlue focus:outline-none py-2 px-4 rounded-lg">
-              Charts
-            </button>
-          </Link>
-          {/* Add more navigation links as needed */}
+        
+     
         </div>
       </div>
     </nav>
