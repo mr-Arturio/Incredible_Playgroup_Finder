@@ -93,6 +93,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - apply color schema
 - wrote a script for Google Spreadsheet for faster update the columns
 - add and edit information to database
+- fixing the spreadsheet: remove/relocate text, add lng & lat. Fix the view. Wrote scripts to speed up the process
+- move hart button to the footer
+- use useRef to avoid direct DOM manipulations in showTodayPlaygroups
 
 ### Future Development
 - more layout improvements
@@ -113,6 +116,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 ![Color Schema](./public/ColorPalate.png)
 
 Icons : https://uxwing.com/, https://iconduck.com/
+Address to GPS Coordinates: https://www.gps-coordinates.net/ 
 
 ## Learn More
 
