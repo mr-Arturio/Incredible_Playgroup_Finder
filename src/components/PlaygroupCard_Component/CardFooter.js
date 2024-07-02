@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Tooltip from "./Tooltip";
-import { AddToCalendarButton } from "add-to-calendar-button-react";
+import AddToCalendar from "./AddToCalendar";
 
 function CardFooter({
   icons,
@@ -17,7 +17,7 @@ function CardFooter({
   Cancelled,
 }) {
   return (
-    <div className="bg-blue-200 p-3 flex justify-between items-center">
+    <div className="bg-blue-200 p-3 flex justify-between items-center mt-3">
       <div className="flex">
         {isExpanded ? (
           <button
@@ -59,26 +59,16 @@ function CardFooter({
             </div>
           </button>
         )}
-        {Cancelled !== "Yes" ? ( // Conditionally render AddToCalendarButton
-          <div className="ml-3 hidden sm:flex">
-            <AddToCalendarButton
-              name={name}
-              options={["Google", "Outlook.com", "Apple"]}
-              location={address}
-              startDate={date}
-              endDate={date}
-              startTime={startTime}
-              endTime={endTime}
-              timeZone="Canada/Eastern"
-              size="1"
-              listStyle="modal"
-              buttonStyle="text"
-              trigger="click"
-            ></AddToCalendarButton>
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="ml-3 hidden sm:flex">
+          <AddToCalendar
+            name={name}
+            address={address}
+            date={date}
+            startTime={startTime}
+            endTime={endTime}
+            Cancelled={Cancelled}
+          />
+        </div>
       </div>
       <div className="flex items-center md:space-x-3 space-x-2">
         {Object.entries(icons).map(
