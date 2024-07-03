@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState, useMemo, useRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
+import PlaygroupCard from "./PlaygroupCard_Component/LargePlaygroupCard";
 import applyFilters from "../utils/applyFilters";
-import FilterComponent from "./Filter_Component/FilterComponent";
 import MapComponent from "./MapComponent";
 import Loading from "../app/loading";
 import { handleDateChange } from "../utils/handleDateChange";
-import DatePickerComponent from "./Filter_Component/DatePickerComponent";
+import FilterContainer from "./Filter_Component/FilterContainer";
+import ToggleButton from "./ToggleButton";
+import NoDataText from "./NoDataText";
+import ShowTodayButton from "./ShowTodayButton";
 
 const RenderSheetDataTable = ({ sheetData }) => {
-  const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
+  const isLoading = !sheetData || sheetData.length === 0;
+
+  // Reference for scrolling to today's playgroups section
+  const todayPlaygroupsSectionRef = useRef(null);
 
   // State declarations
   const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
   const [selectedAddress, setSelectedAddress] = useState(null); // Tracks the selected address from map markers
-  const [filteredData, setFilteredData] = useState(sheetData || []); // Stores the filtered data based on criteria
   const [filterCriteria, setFilterCriteria] = useState({
     // Stores the current filter settings
     date: "",
@@ -26,26 +29,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
     age: "",
     time: "",
   });
+  // State to control filter container visibility
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  // Controls visibility of the map
+  const [isMapVisible, setIsMapVisible] = useState(false);
 
-  // State for filter options, extracted from sheet data
-  const [locationOptions, setLocationOptions] = useState([]);
-  const [languageOptions, setLanguageOptions] = useState([]);
-  const [nameOptions, setNameOptions] = useState([]);
-  const [timeOptions, setTimeOptions] = useState([
-    "Morning",
-    "Afternoon",
-    "Evening",
-  ]);
-  const [ageOptions, setAgeOptions] = useState(["Babies", "Toddlers", "Kids"]);
-  const [dayOptions, setDayOptions] = useState([
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ]);
+  // State to control the number of visible cards
+  const [visibleCards, setVisibleCards] = useState(6);
+  const handleShowMore = () => {
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
+  };
+
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address); // Set the address when a map marker is selected
   };
@@ -65,35 +59,40 @@ const RenderSheetDataTable = ({ sheetData }) => {
     });
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      // Extract all unique location, languge, facility from sheetData. If it's not in spreadsheet it will to be displayed in the filter
-      setLocationOptions([
-        ...new Set(sheetData.map((item) => item.Location).filter(Boolean)),
-      ]);
-      setLanguageOptions([
-        ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
-      ]);
-      setNameOptions([
-        ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
-      ]);
-
-      // Apply filters to the data
-      let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-
-      // If a specific location is selected via marker, filter by that as well
-      if (selectedAddress) {
-        filtered = filtered.filter(
-          (playgroup) => playgroup.Address === selectedAddress
-        );
-      }
-
-      setFilteredData(filtered);
+  // Show today's playgroups and scroll to the target area
+  const showTodayPlaygroups = () => {
+    const today = new Date().toLocaleDateString("en-CA");
+    setFilterCriteria({ ...filterCriteria, date: today });
+    setSelectedAddress(null); // Optionally reset selected address
+    if (todayPlaygroupsSectionRef.current) {
+      todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [sheetData, filterCriteria, isLoading, selectedAddress]);
+  };
 
-  if (isLoading) return <Loading />;
-  //check for no data available
+  const dayMapping = {
+    Mon: "Monday",
+    Tue: "Tuesday",
+    Wed: "Wednesday",
+    Thur: "Thursday",
+    Fri: "Friday",
+    Sat: "Saturday",
+    Sun: "Sunday",
+  };
+
+  const dayOptions = Object.keys(dayMapping); // Short day names for filtering
+
+  const filteredData = useMemo(() => {
+    if (isLoading) return [];
+
+    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+    if (selectedAddress) {
+      filtered = filtered.filter(
+        (playgroup) => playgroup.Address === selectedAddress
+      );
+    }
+    return filtered;
+  }, [sheetData, filterCriteria, selectedAddress, isLoading]);
+
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
@@ -104,138 +103,126 @@ const RenderSheetDataTable = ({ sheetData }) => {
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
+  const locationOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
+  }, [sheetData]);
+
+  const languageOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
+  }, [sheetData]);
+
+  const nameOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [...new Set(sheetData.map((item) => item.Name).filter(Boolean))];
+  }, [sheetData]);
+
+  const timeOptions = ["Morning", "Afternoon", "Evening"];
+  const ageOptions = ["Babies", "Toddlers", "Kids"];
+
+  if (isLoading) return <Loading />;
+
   return (
-    <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow z-10 p-4 w-full">
-        {/* Filters container */}
-        <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
-          {/* First row of filters */}
-          <div className="flex justify-around gap-2 mb-4">
-            <FilterComponent
-              id="locationCriteria"
-              className="flex-grow"
-              value={filterCriteria.location}
-              options={locationOptions}
-              onChange={(e) => handleFilterChange("location", e.target.value)}
-              placeholder="Location"
-            />
-            <FilterComponent
-              id="ageCriteria"
-              className="flex-grow"
-              value={filterCriteria.age}
-              options={ageOptions}
-              onChange={(e) => handleFilterChange("age", e.target.value)}
-              placeholder="Age Group"
-            />
-
-            <FilterComponent
-              id="languageCriteria"
-              className="flex-grow"
-              value={filterCriteria.language}
-              options={languageOptions}
-              onChange={(e) => handleFilterChange("language", e.target.value)}
-              placeholder="Language"
-            />
-          </div>
-          {/* Second row of filters */}
-          <div className="flex justify-around gap-2 mb-4">
-            <FilterComponent
-              id="dayCriteria"
-              value={filterCriteria.day}
-              options={dayOptions}
-              onChange={(e) => handleFilterChange("day", e.target.value)}
-              placeholder="Day of the Week"
-            />
-
-            <FilterComponent
-              id="timeCriteria"
-              value={filterCriteria.time}
-              options={timeOptions}
-              onChange={(e) => handleFilterChange("time", e.target.value)}
-              placeholder="Time of the Day"
-            />
-
-            <FilterComponent
-              id="nameCriteria"
-              value={filterCriteria.name}
-              options={nameOptions}
-              onChange={(e) => handleFilterChange("name", e.target.value)}
-              placeholder="Facility"
-            />
-          </div>
-        </div>
-
-        {/* Date picker and reset button */}
-        <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
-          <div className="w-full h-full md:flex md:items-center">
-            <DatePickerComponent
-              onDateChange={(date) =>
-                handleDateChange(
-                  date,
-                  setStartDate,
-                  setFilterCriteria,
-                  filterCriteria
-                )
-              }
-            />
-          </div>
-
-          {/* Reset button to clear all selected filters */}
-          <button
-            onClick={resetFilters}
-            className="mt-4 md:mt-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-full md:w-auto"
-          >
-            Reset Filters
-          </button>
-        </div>
+    <>
+      <div className="flex justify-start md:mb-4 mb-2">
+        <ShowTodayButton onShowToday={showTodayPlaygroups} />
       </div>
-
+      {/* Button to toggle filters */}
+      <div className="flex flex-1 flex-col" id="today-playgroups-section">
+        <ToggleButton
+          isToggled={isFilterVisible}
+          onToggle={() => setIsFilterVisible(!isFilterVisible)}
+          labels={{
+            toggledOn: "Hide Filters",
+            toggledOff: "Show Filters",
+          }}
+          className="md:hidden"
+        />
+      </div>
+      {/* Filters container */}
+      <div className={` ${isFilterVisible ? "" : "hidden md:flex"}`}>
+        <FilterContainer
+          filterCriteria={filterCriteria}
+          setFilterCriteria={setFilterCriteria}
+          handleFilterChange={handleFilterChange}
+          locationOptions={locationOptions}
+          ageOptions={ageOptions}
+          languageOptions={languageOptions}
+          dayOptions={dayOptions}
+          timeOptions={timeOptions}
+          nameOptions={nameOptions}
+          handleDateChange={handleDateChange}
+          setStartDate={setStartDate}
+          resetFilters={resetFilters}
+          dayMapping={dayMapping} // Pass the mapping to the FilterContainer
+        />
+      </div>
       {/* Content Sections */}
-      <div className="flex flex-1 md:flex-row ">
-        {/* Playgroup Cards Section */}
-        <div className="w-full md:w-3/5 pt-4 pr-4">
-          <div
-            className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
-            style={{ height: "80vh" }}
-          >
-            {noDataAvailable ? (
-              <div className="flex justify-center items-center h-full">
-                <span className="text-gray-500 text-center">
-                  No data found for the selected filters. Please adjust your
-                  search criteria.
-                </span>
-              </div>
-            ) : (
-              <div className="mt-12">
-                {filteredData
-                  .filter((playgroup) => {
-                    //additional logic to check that playgroup is not in the past
-                    const playgroupDate = new Date(playgroup.Date);
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0);
-                    return (
-                      selectedAddress === null ||
-                      (playgroup.Address === selectedAddress &&
-                        playgroupDate >= today)
-                    );
-                  })
-                  .map((playgroup) => (
-                    <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
-                  ))}
-              </div>
-            )}
-          </div>
-        </div>
-
+      <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
-        <div className="w-full md:w-2/5">
+        {/* Button to toggle map */}
+        <ToggleButton
+          isToggled={isMapVisible}
+          onToggle={() => setIsMapVisible(!isMapVisible)}
+          labels={{
+            toggledOn: "Hide Map",
+            toggledOff: "Show Map",
+          }}
+          className="md:hidden"
+        />
+
+        <div
+          className={`w-full xl:w-1/2 ${isMapVisible ? "" : "hidden md:flex"} `}
+          style={{ height: "85vh" }}
+        >
           <MapComponent
             sheetData={filteredData}
             onMarkerSelect={handleMarkerSelect}
           />
         </div>
+        {/* Playgroup Cards Section */}
+        <div
+          className="w-full xl:w-1/2 pt-2 pr-2 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          style={{ height: "80vh" }}
+        >
+          {noDataAvailable ? (
+            <NoDataText />
+          ) : (
+            <>
+              {filteredData
+                .filter((playgroup) => {
+                  // Additional logic to check that playgroup is not in the past
+                  const playgroupDate = new Date(playgroup.Date);
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  return (
+                    selectedAddress === null ||
+                    (playgroup.Address === selectedAddress &&
+                      playgroupDate >= today)
+                  );
+                })
+                .slice(0, visibleCards)
+                .map((playgroup) => (
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                ))}
+              {visibleCards < filteredData.length && (
+                <div className="flex justify-center mb-2">
+                  <ToggleButton
+                    isToggled={false}
+                    onToggle={handleShowMore}
+                    labels={{
+                      toggledOn: "Show Less",
+                      toggledOff: "Show More",
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

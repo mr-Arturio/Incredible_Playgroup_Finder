@@ -1,7 +1,6 @@
 ## Parent Resource Playgroup Finder application. 
-1. This innovative platform is designed to make life easier for parents in Ottawa by providing an intuitive way to find playgroup information tailored to their needs.
-### OR
-2. Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map and filterable playgroup cards for a tailored experience.
+www.incredibleplaygroupfinder.ca <br>
+ Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map, filterable playgroup cards and option to add aevents to your calendar for a tailored experience.
 
 
 Our application stands out with its easy-to-use interactive map and a dynamic filtering system that allows users to search for playgroups by location, age group, language preference, date, day, and facility. Data is pulled in real-time from a Google Sheets database, ensuring the most current information is always at hand.
@@ -15,6 +14,7 @@ Key features include:
 - **Detailed Event Information**: Reactive playgroup cards with detailed event information.
 - **Direct Navigation**: Clicking an address takes you to Google Maps to easily find directions.
 - **Date Picker**: React DatePicker is integrated for easy date selection.
+- **Add To Calendar**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
 
 
 ## Setup
@@ -71,12 +71,36 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Logic to extend small card to full card
 - Style small card
 - ADD arrows to roll big card to small again (^ Show Less)!!!
+- Arrange the mobile layout with the map on top and Playgroup cards below.
+- Hide filters in the mobile layout with a "Show Filter Options" button.
+- Hide Map in the mobile layout with a "Show Map" button.
+- More responsive changes: move notes field, arrange sizes and margins etc.
+- Add a contact form at the bottom.(docs.google.com/forms)
+- Make Map and Playgroup section 50/50 size
+- A lot off small style and size adjustments.
+- Add 'Show Today's Playgroups' button
+- Make 'Show Today's Playgroups' filter and show groups for today
+- Redirect user to playgroup cards section with data after pressing 'Show Today's Playgroups'
+-  useMemo to reduce useState calls
+- logic to show full date names in filter (in data they are short: Mon, Tue... etc.)
+- Baby scale available icon adde with logic and tooltip + new column in DB
+- reduce redundancy and simplify the code for LargePlaygroupCard and SmallPlaygroupCard by creating a common base component - BasePlaygroupCard
+- visible list af active filters with delete filter option
+- install npm addToCallendar packege
+- implement addToCalendar button into the playcard footer (only for medium and bigger screens)
+- adjust all AddToCallendar settings, style, position and options
+- add logic to hide this button when group is cancelled
+- apply color schema
+- wrote a script for Google Spreadsheet for faster update the columns
+- add and edit information to database
+- fixing the spreadsheet: remove/relocate text, add lng & lat. Fix the view. Wrote scripts to speed up the process
+- move hart button to the footer
+- use useRef to avoid direct DOM manipulations in showTodayPlaygroups
 
 ### Future Development
-- Fix calendar icon to make it inline in mobile layout.
-- Hide filters in the mobile layout with a "Show Filter Options" button.
-- Arrange the mobile layout with the map on top and Playgroup cards below.
-- Add a contact form at the bottom.
+- more layout improvements
+- sticky main field
+- logic for add to the callendar option - in mobile screens
 - Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
 - Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
 - Offer a French version.
@@ -88,15 +112,11 @@ Navigate to http://localhost:3000 in your browser to view the app.
 ```npm install @react-google-maps/api```
 ```npm install react-datepicker``` <br> 
 
-The Date object in JavaScript uses the local time zone, while the toISOString() method converts the date to UTC time, potentially resulting in a date shift due to the time zone difference.
+#### Color Palate
+![Color Schema](./public/ColorPalate.png)
 
-To fix this, you can adjust the date to account for the time zone offset before converting it to an ISO string.
-```Sets the time to midnight for the selected date to avoid any shifts due to the time difference within the day.
-Calculates the timezone offset in milliseconds and subtracts it from the date to get the local time as if it were in UTC.
-Converts the adjusted date to an ISO string and splits it to get the YYYY-MM-DD format, which should now represent the correct local date.
-```
-
-do not forget about```"use client"```!!!
+Icons : https://uxwing.com/, https://iconduck.com/
+Address to GPS Coordinates: https://www.gps-coordinates.net/ 
 
 ## Learn More
 
