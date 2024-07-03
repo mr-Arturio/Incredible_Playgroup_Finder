@@ -13,11 +13,11 @@ const getIcons = (Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
     src: "coffee.svg",
     tooltip: "Coffee",
   },
-  wifi: {
-    show: WiFi === "Yes",
-    src: "wifi.svg",
-    tooltip: "WiFi Available",
-  },
+  // wifi: {
+  //   show: WiFi === "Yes",
+  //   src: "wifi.svg",
+  //   tooltip: "WiFi Available",
+  // },
   indoor: {
     show: Outdoor === "No",
     src: "indoor.svg",

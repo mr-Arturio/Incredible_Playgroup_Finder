@@ -94,8 +94,13 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - wrote a script for Google Spreadsheet for faster update the columns
 - add and edit information to database
 - fixing the spreadsheet: remove/relocate text, add lng & lat. Fix the view. Wrote scripts to speed up the process
-- move hart button to the footer
+- move chart button to the footer
 - use useRef to avoid direct DOM manipulations in showTodayPlaygroups
+- separate file for addToCalendar component
+- addtoCalendar button position on mobile screens
+- adjust positioning for select a Date and reset button
+- fix positioning for Active filter list
+- add LanguageSwitcher component and button to the NavBar
 
 ### Future Development
 - more layout improvements
