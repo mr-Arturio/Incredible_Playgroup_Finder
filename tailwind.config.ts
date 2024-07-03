@@ -18,6 +18,8 @@ const config: Config = {
         mainBlue: '#4E8DCA',
         hoverBlue: '#316191',
         plum: '#A34298',
+        amber: '#FCBE22',
+        orange: '#EF682A',
       },
     },
   },

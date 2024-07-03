@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 
 const Navbar = () => {
@@ -18,9 +19,8 @@ const Navbar = () => {
         <h1 className="text-xl md:text-4xl font-bold text-center mt-4 mr-1">
           Welcome to the Incredible Playgroup Finder!
         </h1>
-        <div className="flex space-x-4">
-        
-     
+        <div className="flex space-x-4 mr-2">
+        <LanguageSwitcher />
         </div>
       </div>
     </nav>

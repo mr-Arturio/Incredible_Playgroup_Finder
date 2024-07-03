@@ -23,7 +23,7 @@ const FilterContainer = ({
   );
 
   return (
-    <>
+    <div className="flex flex-col py-3 px-5 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg shadow mb-4 w-full">
       <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-4">
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">
@@ -78,18 +78,16 @@ const FilterContainer = ({
           />
         </div>
         {/* Third row for active filters */}
-        <div className="md:flex justify-between gap-2 mb-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <ActiveFilters
-              filterCriteria={filterCriteria}
-              handleFilterChange={handleFilterChange}
-            />
-          </div>
+        <div className="lg:flex hidden justify-between gap-2 mb-4">
+          <ActiveFilters
+            filterCriteria={filterCriteria}
+            handleFilterChange={handleFilterChange}
+          />
         </div>
       </div>
       {/* Date picker and reset button */}
       <div
-        className={`flex flex-col lg:flex-row lg:space-x-4 ${
+        className={`flex flex-row lg:space-x-4 ${
           hasActiveFilters ? "lg:items-start" : "lg:items-middle"
         }`}
       >
@@ -114,7 +112,14 @@ const FilterContainer = ({
           <ResetFiltersButton resetFilters={resetFilters} />
         </div>
       </div>
-    </>
+      {/* Third row for active filters */}
+      <div className="lg:hidden flex justify-between gap-2 mb-4">
+        <ActiveFilters
+          filterCriteria={filterCriteria}
+          handleFilterChange={handleFilterChange}
+        />
+      </div>
+    </div>
   );
 };
 
