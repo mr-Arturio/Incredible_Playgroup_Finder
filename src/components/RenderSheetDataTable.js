@@ -10,8 +10,23 @@ import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 
-const RenderSheetDataTable = ({ sheetData }) => {
+const RenderSheetDataTable = ({ sheetData, language }) => {
   const isLoading = !sheetData || sheetData.length === 0;
+
+ // Define text mappings based on the selected language
+ const translations = {
+  toggledOn: language === 'fr' ? 'Masquer les filtres' : 'Hide Filters',
+  toggledOff: language === 'fr' ? 'Afficher les filtres' : 'Show Filters',
+  daysOfWeek: {
+    Mon: language === 'fr' ? 'Lundi' : 'Monday',
+    Tue: language === 'fr' ? 'Mardi' : 'Tuesday',
+    Wed: language === 'fr' ? 'Mercredi' : 'Wednesday',
+    Thur: language === 'fr' ? 'Jeudi' : 'Thursday',
+    Fri: language === 'fr' ? 'Vendredi' : 'Friday',
+    Sat: language === 'fr' ? 'Samedi' : 'Saturday',
+    Sun: language === 'fr' ? 'Dimanche' : 'Sunday',
+  }
+};
 
   // Reference for scrolling to today's playgroups section
   const todayPlaygroupsSectionRef = useRef(null);
@@ -69,17 +84,17 @@ const RenderSheetDataTable = ({ sheetData }) => {
     }
   };
 
-  const dayMapping = {
-    Mon: "Monday",
-    Tue: "Tuesday",
-    Wed: "Wednesday",
-    Thur: "Thursday",
-    Fri: "Friday",
-    Sat: "Saturday",
-    Sun: "Sunday",
-  };
+  // const dayMapping = {
+  //   Mon: "Monday",
+  //   Tue: "Tuesday",
+  //   Wed: "Wednesday",
+  //   Thur: "Thursday",
+  //   Fri: "Friday",
+  //   Sat: "Saturday",
+  //   Sun: "Sunday",
+  // };
 
-  const dayOptions = Object.keys(dayMapping); // Short day names for filtering
+  const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
   const filteredData = useMemo(() => {
     if (isLoading) return [];
@@ -134,8 +149,8 @@ const RenderSheetDataTable = ({ sheetData }) => {
           isToggled={isFilterVisible}
           onToggle={() => setIsFilterVisible(!isFilterVisible)}
           labels={{
-            toggledOn: "Hide Filters",
-            toggledOff: "Show Filters",
+            toggledOn: translations.toggledOn,
+            toggledOff: translations.toggledOff,
           }}
           className="md:hidden"
         />
@@ -155,7 +170,7 @@ const RenderSheetDataTable = ({ sheetData }) => {
           handleDateChange={handleDateChange}
           setStartDate={setStartDate}
           resetFilters={resetFilters}
-          dayMapping={dayMapping} // Pass the mapping to the FilterContainer
+          dayMapping={translations.daysOfWeek} // Pass the mapping to the FilterContainer
         />
       </div>
       {/* Content Sections */}
