@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/LargePlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import MapComponent from "./MapComponent";
-import Loading from "../app/loading";
+import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
@@ -13,20 +13,20 @@ import ShowTodayButton from "./ShowTodayButton";
 const RenderSheetDataTable = ({ sheetData, language }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
- // Define text mappings based on the selected language
- const translations = {
-  toggledOn: language === 'fr' ? 'Masquer les filtres' : 'Hide Filters',
-  toggledOff: language === 'fr' ? 'Afficher les filtres' : 'Show Filters',
-  daysOfWeek: {
-    Mon: language === 'fr' ? 'Lundi' : 'Monday',
-    Tue: language === 'fr' ? 'Mardi' : 'Tuesday',
-    Wed: language === 'fr' ? 'Mercredi' : 'Wednesday',
-    Thur: language === 'fr' ? 'Jeudi' : 'Thursday',
-    Fri: language === 'fr' ? 'Vendredi' : 'Friday',
-    Sat: language === 'fr' ? 'Samedi' : 'Saturday',
-    Sun: language === 'fr' ? 'Dimanche' : 'Sunday',
-  }
-};
+  // Define text mappings based on the selected language
+  const translations = {
+    toggledOn: language === "fr" ? "Masquer les filtres" : "Hide Filters",
+    toggledOff: language === "fr" ? "Afficher les filtres" : "Show Filters",
+    daysOfWeek: {
+      Mon: language === "fr" ? "Lundi" : "Monday",
+      Tue: language === "fr" ? "Mardi" : "Tuesday",
+      Wed: language === "fr" ? "Mercredi" : "Wednesday",
+      Thur: language === "fr" ? "Jeudi" : "Thursday",
+      Fri: language === "fr" ? "Vendredi" : "Friday",
+      Sat: language === "fr" ? "Samedi" : "Saturday",
+      Sun: language === "fr" ? "Dimanche" : "Sunday",
+    },
+  };
 
   // Reference for scrolling to today's playgroups section
   const todayPlaygroupsSectionRef = useRef(null);
