@@ -1,8 +1,10 @@
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "../app/i18n";
 
 
-const Navbar = () => {
+async function Navbar({ lng }){
+  const { t } = await useTranslation(lng);
   return (
     <nav className="bg-plum text-white py-2">
       <div className="container mx-auto flex justify-between items-center">
@@ -17,7 +19,7 @@ const Navbar = () => {
           />
         </div>
         <h1 className="text-xl md:text-4xl font-bold text-center mt-4 mr-1">
-          Welcome to the Incredible Playgroup Finder!
+          {t("welcome")}
         </h1>
         <div>
         <LanguageSwitcher />
