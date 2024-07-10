@@ -6,6 +6,7 @@ async function ContactForm({ lng }) {
 
   return (
     <div className="flex flex-col items-start justify-center bg-gray-100 py-4">
+      <h2 className="text-2xl font-bold mt-4"> {t("needHelp")} </h2>
       <p className="text-lg text-center mb-4">
         {t("contactForm")}
       </p>
