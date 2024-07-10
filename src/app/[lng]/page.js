@@ -5,12 +5,9 @@ import { getSheetData } from "../../actions/getSheetData";
 import RenderSheetDataTable from "../../components/RenderSheetDataTable";
 import { Header } from "../../components/Header";
 import ContactForm from "../../components/ContactForm";
-// import LanguageSwitcher from "../../components/LanguageSwitcher";
 
-
-function Home() {
+function Home({ lng }) {
   const [sheetData, setSheetData] = useState(null);
-  // const [language, setLanguage] = useState("en");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,21 +17,15 @@ function Home() {
     fetchData();
   }, []);
 
-  // const handleLanguageChange = (lang) => {
-  //   setLanguage(lang);
-  // };
-
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
       <div className="container pb-4">
         <Header />
-        {/* <LanguageSwitcher onLanguageChange={handleLanguageChange} /> */}
       </div>
       <main className="container flex-1">
         <RenderSheetDataTable sheetData={sheetData} />
         <section>
-          
-          <ContactForm />
+          <ContactForm lng={lng} />
         </section>
       </main>
     </div>
