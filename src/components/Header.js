@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import Image from "next/image";
+"use client";
 
-export const Header = () => {
+import React, { useState } from "react";
+import { useTranslation } from "../app/i18n/client";
+
+function Header({ lng })  {
+  const { t, i18n } = useTranslation(lng);
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
 
   const toggleTextVisibility = () => {
@@ -11,40 +14,25 @@ export const Header = () => {
   const fullText = (
     <>
       <p>
-        Conceived and created by an Ottawa Mom, Ottawa parents now have a new,
-        incredibly useful tool to plan EarlyON playgroup outings with their
-        children.
+{t("headerText.fullText1")}
       </p>
       <br />
       <p>
-        EarlyON playgroups are an important part of growing up in Ottawa, and
-        are often the first opportunity our littles have to head out into the
-        world to learn and socialize. Parents can make new friends who are also
-        starting a young family, have a safe and welcoming space to ask
-        parenting questions and laugh about this crazy new adventure with other
-        parents. Each EarlyON has its own unique flavor, and can include access
-        to resources such as toy libraries, cool outdoor spaces, parenting
-        resources such as books or micro-learning opportunities, playgroups in
-        different languages and even free parking or yummy snacks!
+      {t("headerText.fullText2")}
       </p>
       <br />
       <p>
-        This tool will help parents view playgroups that work with their
-        schedule – choose to see what you like, based on time of day, age of
-        children, day of the week and other categories that make your visit
-        fantastic for you.
+      {t("headerText.fullText3")}
       </p>
       <br />
-      <p>Come and PLAY!</p>
+      <p>{t("headerText.fullText4")}</p>
     </>
   );
 
   const shortText = (
     <>
       <p>
-        Discover the ultimate tool for Ottawa parents to effortlessly find and
-        plan exciting EarlyON playgroup outings tailored to their schedule and
-        preferences!
+      {t("headerText.shortText")}
       </p>
     </>
   );
@@ -59,10 +47,12 @@ export const Header = () => {
             onClick={toggleTextVisibility}
             className="text-blue-500 mt-2"
           >
-            {isFullTextVisible ? "Show Less" : "Show More"}
+            {isFullTextVisible ? t("showLess") : t("showMore")}
           </button>
         </div>
       </div>
     </div>
   );
 };
+
+export default Header;
