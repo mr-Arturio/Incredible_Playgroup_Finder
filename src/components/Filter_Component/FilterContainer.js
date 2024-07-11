@@ -9,7 +9,7 @@ const FilterContainer = ({
   filterCriteria,
   setFilterCriteria,
   handleFilterChange,
-  locationOptions,
+  areaOptions,
   ageOptions,
   languageOptions,
   dayOptions,
@@ -31,12 +31,12 @@ const FilterContainer = ({
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
-            id="locationCriteria"
+            id="areCriteria"
             className="flex-grow"
-            value={filterCriteria.location}
-            options={locationOptions}
-            onChange={(e) => handleFilterChange("location", e.target.value)}
-            placeholder="Location"
+            value={filterCriteria.area}
+            options={areaOptions}
+            onChange={(e) => handleFilterChange("area", e.target.value)}
+            placeholder="Area"
             lng={lng}
           />
           <FilterComponent

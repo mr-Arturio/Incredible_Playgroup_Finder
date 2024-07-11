@@ -37,7 +37,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   const [filterCriteria, setFilterCriteria] = useState({
     // Stores the current filter settings
     date: "",
-    location: "",
+    area: "",
     language: "",
     day: "",
     name: "",
@@ -65,7 +65,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
       date: "",
-      location: "",
+      area: "",
       language: "",
       day: "",
       name: "",
@@ -111,16 +111,16 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
-    // Deselect marker when the name filter changes or when the location filter changes
-    if (key === "name" || key === "location") {
+    // Deselect marker when the name filter changes or when the area filter changes
+    if (key === "name" || key === "area") {
       setSelectedAddress(null);
     }
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
-  const locationOptions = useMemo(() => {
+  const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
+    return [...new Set(sheetData.map((item) => item.area).filter(Boolean))];
   }, [sheetData]);
 
   const languageOptions = useMemo(() => {
@@ -161,7 +161,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
           filterCriteria={filterCriteria}
           setFilterCriteria={setFilterCriteria}
           handleFilterChange={handleFilterChange}
-          locationOptions={locationOptions}
+          areaOptions={areaOptions}
           ageOptions={ageOptions}
           languageOptions={languageOptions}
           dayOptions={dayOptions}
