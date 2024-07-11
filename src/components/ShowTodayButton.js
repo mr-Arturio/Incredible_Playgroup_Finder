@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 const ShowTodayButton = ({ onShowToday }) => {
   const handleShowToday = () => {
     onShowToday();
@@ -8,7 +10,7 @@ const ShowTodayButton = ({ onShowToday }) => {
       className="p-2 md:text-base text-sm text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center"
       onClick={handleShowToday}
     >
-      Show Today&apos;s Playgroups
+      {t("ShowTodayButton")}
     </button>
   );
 };

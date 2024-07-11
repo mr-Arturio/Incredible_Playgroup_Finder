@@ -1,3 +1,5 @@
+"use client";
+
 import FilterComponent from "./FilterComponent";
 import DatePickerComponent from "./DatePickerComponent";
 import ResetFiltersButton from "./ResetFiltersButton";
@@ -17,6 +19,7 @@ const FilterContainer = ({
   setStartDate,
   resetFilters,
   dayMapping,
+  lng,
 }) => {
   const hasActiveFilters = Object.values(filterCriteria).some(
     (value) => value !== ""
@@ -34,6 +37,7 @@ const FilterContainer = ({
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
             placeholder="Location"
+            lng={lng}
           />
           <FilterComponent
             id="ageCriteria"
@@ -42,6 +46,7 @@ const FilterContainer = ({
             options={ageOptions}
             onChange={(e) => handleFilterChange("age", e.target.value)}
             placeholder="Age Group"
+            lng={lng}
           />
           <FilterComponent
             id="languageCriteria"
@@ -50,6 +55,7 @@ const FilterContainer = ({
             options={languageOptions}
             onChange={(e) => handleFilterChange("language", e.target.value)}
             placeholder="Language"
+            lng={lng}
           />
         </div>
         {/* Second row of filters */}
@@ -61,6 +67,7 @@ const FilterContainer = ({
             onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder="Day of the Week"
             mapping={dayMapping}
+            lng={lng}
           />
           <FilterComponent
             id="timeCriteria"
@@ -68,6 +75,7 @@ const FilterContainer = ({
             options={timeOptions}
             onChange={(e) => handleFilterChange("time", e.target.value)}
             placeholder="Time of the Day"
+            lng={lng}
           />
           <FilterComponent
             id="nameCriteria"
@@ -75,6 +83,7 @@ const FilterContainer = ({
             options={nameOptions}
             onChange={(e) => handleFilterChange("name", e.target.value)}
             placeholder="Facility"
+            lng={lng}
           />
         </div>
         {/* Third row for active filters */}
@@ -97,6 +106,7 @@ const FilterContainer = ({
           }`}
         >
           <DatePickerComponent
+            lng={lng}
             onDateChange={(date) =>
               handleDateChange(
                 date,
@@ -109,7 +119,7 @@ const FilterContainer = ({
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
-          <ResetFiltersButton resetFilters={resetFilters} />
+          <ResetFiltersButton resetFilters={resetFilters} lng={lng} />
         </div>
       </div>
       {/* Third row for active filters */}

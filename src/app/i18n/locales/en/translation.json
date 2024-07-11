@@ -11,6 +11,13 @@
 
   "showMore": "Show More",
   "showLess": "Show Less",
+  "ShowTodayButton": "Show Today's Playgroups",
+
+  "filterContainer": {
+  "showAll": "Show All",
+  "datePicker": "Select a Date",
+  "reset": "Reset Filters"
+},
 
   "contactForm": {
     "needHelp": "Need Help?",

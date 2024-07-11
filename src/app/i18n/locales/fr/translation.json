@@ -9,8 +9,15 @@
     "shortText": "Découvrez l'outil ultime pour les parents d'Ottawa afin de trouver et planifier facilement des sorties excitantes pour les groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs préférences!"
   },
 
-  "showMore": "Afficher plus",
-  "showLess": "Afficher moins",
+  "showMore": "Afficher Plus",
+  "showLess": "Afficher Moins",
+  "ShowTodayButton": "Afficher les groupes de jeu du jour",
+
+  "filterContainer": {
+  "showAll": "Afficher Tout",
+  "datePicker": "Choisis une Date",
+  "reset": "Réinitialiser"
+  },
 
   "contactForm": {
     "needHelp": "Besoin d'aide?",
