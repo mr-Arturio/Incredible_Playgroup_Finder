@@ -5,7 +5,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "../app/i18n/client";
 import { useEffect, useState } from "react";
 
-function Navbar({ lng }) {
+const Navbar = ({ lng }) => {
   const { t, i18n } = useTranslation(lng);
   const [loading, setLoading] = useState(true);
 
@@ -40,6 +40,6 @@ function Navbar({ lng }) {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

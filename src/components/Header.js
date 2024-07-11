@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "../app/i18n/client";
 
-function Header({ lng })  {
-  const { t, i18n } = useTranslation(lng);
+const Header = ({ lng }) => {
+  const { t } = useTranslation(lng);
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
 
   const toggleTextVisibility = () => {

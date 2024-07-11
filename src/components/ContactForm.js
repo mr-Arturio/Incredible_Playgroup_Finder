@@ -3,7 +3,7 @@
 import React from "react";
 import { useTranslation } from "../app/i18n/client";
 
-function ContactForm({ lng }) {
+const ContactForm = ({ lng }) => {
   const { t } = useTranslation(lng, "translation");
 
   return (
