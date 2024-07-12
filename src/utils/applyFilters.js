@@ -20,7 +20,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
     if (noOtherCriteria && selectedAddress === item.Address) return true;
 
-    if (criteria.location && item.Location !== criteria.location) return false;
+    if (criteria.area && item.Area !== criteria.area) return false;
 
     if (criteria.language && item.Language !== criteria.language) return false;
 
