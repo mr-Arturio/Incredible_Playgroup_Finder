@@ -2,22 +2,20 @@
 
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useTranslation } from "../app/i18n/client";
-import { useEffect, useState } from "react";
+import { t } from "i18next";
 
-const Navbar = ({ lng }) => {
-  const { t, i18n } = useTranslation(lng);
-  const [loading, setLoading] = useState(true);
+const Navbar = () => {
 
-  useEffect(() => {
-    const changeLanguage = async () => {
-      await i18n.changeLanguage(lng);
-      setLoading(false);
-    };
-    changeLanguage();
-  }, [lng, i18n]);
 
-  if (loading) return null;
+  // useEffect(() => {
+  //   const changeLanguage = async () => {
+  //     await i18n.changeLanguage(lng);
+  //     setLoading(false);
+  //   };
+  //   changeLanguage();
+  // }, [lng, i18n]);
+
+  // if (loading) return null;
 
   return (
     <nav className="bg-plum text-white py-2">

@@ -1,10 +1,9 @@
-"use client";
+
 
 import React, { useState } from "react";
-import { useTranslation } from "../app/i18n/client";
+import { t } from "i18next";
 
-const Header = ({ lng }) => {
-  const { t } = useTranslation(lng);
+const Header = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
 
   const toggleTextVisibility = () => {
@@ -13,17 +12,11 @@ const Header = ({ lng }) => {
 
   const fullText = (
     <>
-      <p>
-{t("headerText.fullText1")}
-      </p>
+      <p>{t("headerText.fullText1")}</p>
       <br />
-      <p>
-      {t("headerText.fullText2")}
-      </p>
+      <p>{t("headerText.fullText2")}</p>
       <br />
-      <p>
-      {t("headerText.fullText3")}
-      </p>
+      <p>{t("headerText.fullText3")}</p>
       <br />
       <p>{t("headerText.fullText4")}</p>
     </>
@@ -31,9 +24,7 @@ const Header = ({ lng }) => {
 
   const shortText = (
     <>
-      <p>
-      {t("headerText.shortText")}
-      </p>
+      <p>{t("headerText.shortText")}</p>
     </>
   );
 
@@ -43,10 +34,7 @@ const Header = ({ lng }) => {
         <div className="hidden md:block">{fullText}</div>
         <div className="block md:hidden">
           {isFullTextVisible ? fullText : shortText}
-          <button
-            onClick={toggleTextVisibility}
-            className="text-blue-500 mt-2"
-          >
+          <button onClick={toggleTextVisibility} className="text-blue-500 mt-2">
             {isFullTextVisible ? t("showLess") : t("showMore")}
           </button>
         </div>

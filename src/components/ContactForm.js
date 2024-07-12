@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "../app/i18n/client";
+import { t } from "i18next";
 
-const ContactForm = ({ lng }) => {
-  const { t } = useTranslation(lng, "translation");
+const ContactForm = () => {
+
 
   return (
     <div className="flex flex-col items-start justify-center bg-gray-100 py-4">

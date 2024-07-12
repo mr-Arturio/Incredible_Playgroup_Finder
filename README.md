@@ -101,6 +101,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - adjust positioning for select a Date and reset button
 - fix positioning for Active filter list
 - add LanguageSwitcher component and button to the NavBar
+- fix LanguageSwitcher button positioning
+- implement favicon
 - first attemps to implemet french languge
 - decided to use two technique: Conditional Logic in Data Fetching(information from database) and next-i18next library for dynamic language switc from special files
 

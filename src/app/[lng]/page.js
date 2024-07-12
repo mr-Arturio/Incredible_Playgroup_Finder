@@ -6,7 +6,7 @@ import RenderSheetDataTable from "../../components/RenderSheetDataTable";
 import Header  from "../../components/Header";
 import ContactForm from "../../components/ContactForm";
 
-function Home({ lng }) {
+function Home() {
   const [sheetData, setSheetData] = useState(null);
 
   useEffect(() => {
@@ -20,12 +20,12 @@ function Home({ lng }) {
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
       <div className="container pb-4">
-        <Header lng={lng}/>
+        <Header />
       </div>
       <main className="container flex-1">
         <RenderSheetDataTable sheetData={sheetData} />
         <section>
-          <ContactForm lng={lng} />
+          <ContactForm  />
         </section>
       </main>
     </div>
