@@ -120,7 +120,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
 
   const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.area).filter(Boolean))];
+    return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))];
   }, [sheetData]);
 
   const languageOptions = useMemo(() => {
