@@ -1,4 +1,3 @@
-
 const getIcons = (Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
   time: "time.svg",
   location: "location.svg",
@@ -13,6 +12,7 @@ const getIcons = (Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
     src: "coffee.svg",
     tooltip: "Coffee",
   },
+  // Uncomment if needed
   // wifi: {
   //   show: WiFi === "Yes",
   //   src: "wifi.svg",
@@ -36,9 +36,27 @@ const getIcons = (Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
   // Assuming Language should always be shown; adjust if needed
   language: {
     show: true,
-    src: `${Language.toLowerCase()}.svg`, //// Dynamic path to your language icon
+    src: `${Language.toLowerCase()}.svg`, // Dynamic path to your language icon
     tooltip: Language,
   },
 });
 
-export default getIcons;
+const getSocialIcons = (FB, Insta, Eventbrite) => ({
+  fb: {
+    show: FB.trim() !== "", // Show icon if FB is not empty
+    src: "facebook.svg",
+    tooltip: "Facebook",
+  },
+  insta: {
+    show: Insta.trim() !== "", // Show icon if Insta is not empty
+    src: "instagram.svg",
+    tooltip: "Instagram",
+  },
+  eventbrite: {
+    show: Eventbrite.trim() !== "", // Show icon if Eventbrite is not empty
+    src: "eventbrite.svg",
+    tooltip: "Eventbrite",
+  },
+});
+
+export { getIcons, getSocialIcons };
