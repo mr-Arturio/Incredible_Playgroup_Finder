@@ -20,6 +20,7 @@ const config: Config = {
         plum: '#A34298',
         amber: '#FCBE22',
         orange: '#EF682A',
+        pink: '#E22A69',
       },
     },
   },
