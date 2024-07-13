@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Tooltip from "./Tooltip";
-import AddToCalendar from "./AddToCalendar";
+// import AddToCalendar from "./AddToCalendar";
 
 function CardFooter({
   icons,
+  social,
   tooltip,
   setTooltip,
   onExpand,
@@ -59,18 +60,32 @@ function CardFooter({
             </div>
           </button>
         )}
-        <div className="ml-3 hidden sm:flex">
-          <AddToCalendar
-            name={name}
-            address={address}
-            date={date}
-            startTime={startTime}
-            endTime={endTime}
-            Cancelled={Cancelled}
-          />
+        <div className="flex space-x-1 ml-2.5">
+          {Object.entries(social).map(
+            ([key, { show, src, tooltip: iconTooltip }]) =>
+              show && (
+                <Tooltip
+                  key={key}
+                  text={tooltip === iconTooltip ? iconTooltip : ""}
+                >
+                  <div
+                    onMouseEnter={() => setTooltip(iconTooltip)}
+                    onMouseLeave={() => setTooltip("")}
+                  >
+                    <Image
+                      src={src}
+                      alt={iconTooltip}
+                      className="h-6 w-6"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                </Tooltip>
+              )
+          )}
         </div>
       </div>
-      <div className="flex items-center md:space-x-3 space-x-2">
+      <div className="flex items-center space-x-2">
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
@@ -85,9 +100,9 @@ function CardFooter({
                   <Image
                     src={src}
                     alt={iconTooltip}
-                    className="h-7 w-7"
-                    width={28}
-                    height={28}
+                    className="h-6 w-6"
+                    width={24}
+                    height={24}
                   />
                 </div>
               </Tooltip>

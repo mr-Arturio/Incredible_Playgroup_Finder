@@ -107,6 +107,11 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - decided to use two technique: Conditional Logic in Data Fetching(information from database) and next-i18next library for dynamic language switc from special files
 - i have tried to implement translation with i18n: first try - infinity loop, second attempt -Text content does not match server-rendered HTML. Will do conditional logic for now - need to check more info (videos) for i18n and ask some people. 
 - column name change implementation - Location to Area
+- move AddToCalendar element from the Cardfooter to same space where it is displaying in mobile screens
+- add registration recuired info with url redirection
+- add social icons
+- adjust icons position and size
+
 
 
 ### Future Development
