@@ -60,7 +60,7 @@ function CardFooter({
             </div>
           </button>
         )}
-        <div className="flex space-x-1 ml-2.5">
+        <div className="flex space-x-1.5 ml-2.5">
           {Object.entries(social).map(
             ([key, { show, src, tooltip: iconTooltip }]) =>
               show && (
@@ -75,9 +75,9 @@ function CardFooter({
                     <Image
                       src={src}
                       alt={iconTooltip}
-                      className="h-6 w-6"
-                      width={24}
-                      height={24}
+                      className="h-5 w-5"
+                      width={20}
+                      height={20}
                     />
                   </div>
                 </Tooltip>

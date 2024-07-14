@@ -44,17 +44,17 @@ const getIcons = (Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
 const getSocialIcons = (FB, Insta, Eventbrite) => ({
   fb: {
     show: FB.trim() !== "", // Show icon if FB is not empty
-    src: "facebook.svg",
+    src: "facebook_color.svg",
     tooltip: "Facebook",
   },
   insta: {
     show: Insta.trim() !== "", // Show icon if Insta is not empty
-    src: "instagram.svg",
+    src: "instagram_color.svg",
     tooltip: "Instagram",
   },
   eventbrite: {
     show: Eventbrite.trim() !== "", // Show icon if Eventbrite is not empty
-    src: "eventbrite.svg",
+    src: "eventbrite_color.svg",
     tooltip: "Eventbrite",
   },
 });
