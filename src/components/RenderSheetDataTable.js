@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/LargePlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import MapComponent from "./MapComponent";
-import Loading from "../app/loading";
+import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
@@ -13,20 +13,20 @@ import ShowTodayButton from "./ShowTodayButton";
 const RenderSheetDataTable = ({ sheetData, language }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
- // Define text mappings based on the selected language
- const translations = {
-  toggledOn: language === 'fr' ? 'Masquer les filtres' : 'Hide Filters',
-  toggledOff: language === 'fr' ? 'Afficher les filtres' : 'Show Filters',
-  daysOfWeek: {
-    Mon: language === 'fr' ? 'Lundi' : 'Monday',
-    Tue: language === 'fr' ? 'Mardi' : 'Tuesday',
-    Wed: language === 'fr' ? 'Mercredi' : 'Wednesday',
-    Thur: language === 'fr' ? 'Jeudi' : 'Thursday',
-    Fri: language === 'fr' ? 'Vendredi' : 'Friday',
-    Sat: language === 'fr' ? 'Samedi' : 'Saturday',
-    Sun: language === 'fr' ? 'Dimanche' : 'Sunday',
-  }
-};
+  // Define text mappings based on the selected language
+  const translations = {
+    toggledOn: language === "fr" ? "Masquer les filtres" : "Hide Filters",
+    toggledOff: language === "fr" ? "Afficher les filtres" : "Show Filters",
+    daysOfWeek: {
+      Mon: language === "fr" ? "Lundi" : "Monday",
+      Tue: language === "fr" ? "Mardi" : "Tuesday",
+      Wed: language === "fr" ? "Mercredi" : "Wednesday",
+      Thur: language === "fr" ? "Jeudi" : "Thursday",
+      Fri: language === "fr" ? "Vendredi" : "Friday",
+      Sat: language === "fr" ? "Samedi" : "Saturday",
+      Sun: language === "fr" ? "Dimanche" : "Sunday",
+    },
+  };
 
   // Reference for scrolling to today's playgroups section
   const todayPlaygroupsSectionRef = useRef(null);
@@ -37,7 +37,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   const [filterCriteria, setFilterCriteria] = useState({
     // Stores the current filter settings
     date: "",
-    location: "",
+    area: "",
     language: "",
     day: "",
     name: "",
@@ -65,7 +65,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
       date: "",
-      location: "",
+      area: "",
       language: "",
       day: "",
       name: "",
@@ -111,16 +111,16 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
-    // Deselect marker when the name filter changes or when the location filter changes
-    if (key === "name" || key === "location") {
+    // Deselect marker when the name filter changes or when the area filter changes
+    if (key === "name" || key === "area") {
       setSelectedAddress(null);
     }
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
-  const locationOptions = useMemo(() => {
+  const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
+    return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))];
   }, [sheetData]);
 
   const languageOptions = useMemo(() => {
@@ -161,7 +161,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
           filterCriteria={filterCriteria}
           setFilterCriteria={setFilterCriteria}
           handleFilterChange={handleFilterChange}
-          locationOptions={locationOptions}
+          areaOptions={areaOptions}
           ageOptions={ageOptions}
           languageOptions={languageOptions}
           dayOptions={dayOptions}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import getIcons from "../../utils/icons";
+import { getIcons, getSocialIcons } from "../../utils/icons";
 import CardHeader from "./CardHeader";
 import CardFooter from "./CardFooter";
 import CardDetails from "./CardDetails";
@@ -18,13 +18,19 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Parking,
     Coffee,
     WiFi,
+    FB,
+    Insta,
+    Eventbrite,
     Outdoor,
     Cancelled,
     Notes,
     Scale,
+    Registration,
+    Reg_URL,
   } = playgroup;
 
   const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
+  const social = getSocialIcons(FB, Insta, Eventbrite);
   const [tooltip, setTooltip] = useState("");
 
   // Split Time into start and end times
@@ -63,6 +69,8 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         date={Date}
         startTime={startTime}
         endTime={endTime}
+        Registration={Registration}
+        Reg_URL={Reg_URL}
       />
       {isExpanded && (
         <CardDetails
@@ -76,6 +84,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
       )}
       <CardFooter
         icons={icons}
+        social={social}
         tooltip={tooltip}
         setTooltip={setTooltip}
         onExpand={onExpand}

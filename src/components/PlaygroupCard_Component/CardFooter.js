@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Tooltip from "./Tooltip";
-import AddToCalendar from "./AddToCalendar";
+// import AddToCalendar from "./AddToCalendar";
 
 function CardFooter({
   icons,
+  social,
   tooltip,
   setTooltip,
   onExpand,
@@ -39,7 +40,7 @@ function CardFooter({
         ) : (
           <button
             onClick={onExpand}
-            className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 md:ml-3 ml-1"
+            className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-95 transition-transform duration-200 md:ml-3 ml-1"
             aria-label="More Information"
           >
             <Image
@@ -59,18 +60,35 @@ function CardFooter({
             </div>
           </button>
         )}
-        <div className="ml-3 hidden sm:flex">
-          <AddToCalendar
-            name={name}
-            address={address}
-            date={date}
-            startTime={startTime}
-            endTime={endTime}
-            Cancelled={Cancelled}
-          />
+        <div className="hidden sm:flex space-x-1.5 ml-2.5">
+          {Object.entries(social).map(
+            ([key, { show, src, tooltip: iconTooltip, url }]) =>
+              show && (
+                <Tooltip
+                  key={key}
+                  text={tooltip === iconTooltip ? iconTooltip : ""}
+                >
+                  <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setTooltip(iconTooltip)}
+                  onMouseLeave={() => setTooltip("")}
+                >
+                    <Image
+                      src={src}
+                      alt={iconTooltip}
+                      className="h-5 w-5 hover:scale-110"
+                      width={20}
+                      height={20}
+                    />
+                  </a>
+                </Tooltip>
+              )
+          )}
         </div>
       </div>
-      <div className="flex items-center md:space-x-3 space-x-2">
+      <div className="flex items-center space-x-2">
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
@@ -85,9 +103,9 @@ function CardFooter({
                   <Image
                     src={src}
                     alt={iconTooltip}
-                    className="h-7 w-7"
-                    width={28}
-                    height={28}
+                    className="h-6 w-6"
+                    width={24}
+                    height={24}
                   />
                 </div>
               </Tooltip>

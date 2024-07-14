@@ -13,6 +13,8 @@ function CardHeader({
   address,
   startTime,
   endTime,
+  Registration,
+  Reg_URL,
 }) {
   return (
     <div className="flex flex-col px-5 md:px-6 pt-3 ">
@@ -36,8 +38,21 @@ function CardHeader({
             {Day}, {Date}
           </p>
         </div>
-        <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
-          {Service}
+        <div>
+          <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
+            {Service}
+          </div>
+          {/* registration element for mibile screens */}
+          <div className=" hidden md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
+            <a
+              href={Reg_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
+            >
+              {Registration}
+            </a>
+          </div>
         </div>
       </div>
       <div className="flex items-center text-gray-700 justify-between pb-1 mt-2">
@@ -45,7 +60,7 @@ function CardHeader({
           <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2">{Time}</span>
         </div>
-        <div className="flex items-center sm:hidden">
+        <div className="flex items-center ml-auto mr-3">
           <AddToCalendar
             name={Name}
             address={address}
@@ -54,6 +69,16 @@ function CardHeader({
             endTime={endTime}
             Cancelled={Cancelled}
           />
+        </div>
+        <div className="md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
+          <a
+            href={Reg_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
+          >
+            {Registration}
+          </a>
         </div>
       </div>
     </div>
