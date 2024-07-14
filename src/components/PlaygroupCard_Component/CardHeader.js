@@ -38,8 +38,21 @@ function CardHeader({
             {Day}, {Date}
           </p>
         </div>
-        <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
-          {Service}
+        <div>
+          <div className="md:text-lg text-sm font-semibold text-gray-500 bg-gray-200 mt-2 px-2 py-1 rounded-full text-center">
+            {Service}
+          </div>
+          {/* registration element for mibile screens */}
+          <div className=" hidden md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
+            <a
+              href={Reg_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
+            >
+              {Registration}
+            </a>
+          </div>
         </div>
       </div>
       <div className="flex items-center text-gray-700 justify-between pb-1 mt-2">
@@ -58,16 +71,14 @@ function CardHeader({
           />
         </div>
         <div className="md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
-        
-            <a
-              href={Reg_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
-            >
-              {Registration}
+          <a
+            href={Reg_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
+          >
+            {Registration}
           </a>
-          
         </div>
       </div>
     </div>
