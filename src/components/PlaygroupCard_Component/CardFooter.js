@@ -40,7 +40,7 @@ function CardFooter({
         ) : (
           <button
             onClick={onExpand}
-            className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 md:ml-3 ml-1"
+            className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-95 transition-transform duration-200 md:ml-3 ml-1"
             aria-label="More Information"
           >
             <Image
@@ -60,26 +60,29 @@ function CardFooter({
             </div>
           </button>
         )}
-        <div className="flex space-x-1.5 ml-2.5">
+        <div className="hidden sm:flex space-x-1.5 ml-2.5">
           {Object.entries(social).map(
-            ([key, { show, src, tooltip: iconTooltip }]) =>
+            ([key, { show, src, tooltip: iconTooltip, url }]) =>
               show && (
                 <Tooltip
                   key={key}
                   text={tooltip === iconTooltip ? iconTooltip : ""}
                 >
-                  <div
-                    onMouseEnter={() => setTooltip(iconTooltip)}
-                    onMouseLeave={() => setTooltip("")}
-                  >
+                  <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setTooltip(iconTooltip)}
+                  onMouseLeave={() => setTooltip("")}
+                >
                     <Image
                       src={src}
                       alt={iconTooltip}
-                      className="h-5 w-5"
+                      className="h-5 w-5 hover:scale-110"
                       width={20}
                       height={20}
                     />
-                  </div>
+                  </a>
                 </Tooltip>
               )
           )}

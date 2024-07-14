@@ -111,6 +111,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - add registration recuired info with url redirection
 - add social icons
 - adjust icons position and size
+- work on registration component position - move in m
+obile view
+- add colored icons for social with hover effect and active URL
 
 
 

@@ -46,16 +46,19 @@ const getSocialIcons = (FB, Insta, Eventbrite) => ({
     show: FB.trim() !== "", // Show icon if FB is not empty
     src: "facebook_color.svg",
     tooltip: "Facebook",
+    url: FB.trim(),
   },
   insta: {
     show: Insta.trim() !== "", // Show icon if Insta is not empty
     src: "instagram_color.svg",
     tooltip: "Instagram",
+    url: Insta.trim(),
   },
   eventbrite: {
     show: Eventbrite.trim() !== "", // Show icon if Eventbrite is not empty
     src: "eventbrite_color.svg",
     tooltip: "Eventbrite",
+    url: Eventbrite.trim(),
   },
 });
 
