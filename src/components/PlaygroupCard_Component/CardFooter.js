@@ -10,12 +10,6 @@ function CardFooter({
   setTooltip,
   onExpand,
   isExpanded,
-  name,
-  address,
-  date,
-  startTime,
-  endTime,
-  Cancelled,
 }) {
   return (
     <div className="bg-blue-200 p-3 flex justify-between items-center mt-3">
@@ -23,7 +17,7 @@ function CardFooter({
         {isExpanded ? (
           <button
             onClick={onExpand}
-            className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-200 md:ml-3 ml-1"
+            className="flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transform hover:scale-95 transition-transform duration-200 md:ml-3 ml-1"
             aria-label="Show Less"
           >
             <Image

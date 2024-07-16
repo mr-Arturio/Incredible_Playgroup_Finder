@@ -12,7 +12,7 @@ const FilterContainer = ({
   languageOptions,
   dayOptions,
   timeOptions,
-  nameOptions,
+  locationOptions,
   handleDateChange,
   setStartDate,
   resetFilters,
@@ -70,10 +70,10 @@ const FilterContainer = ({
             placeholder="Time of the Day"
           />
           <FilterComponent
-            id="nameCriteria"
-            value={filterCriteria.name}
-            options={nameOptions}
-            onChange={(e) => handleFilterChange("name", e.target.value)}
+            id="locationCriteria"
+            value={filterCriteria.location}
+            options={locationOptions}
+            onChange={(e) => handleFilterChange("location", e.target.value)}
             placeholder="Facility"
           />
         </div>
