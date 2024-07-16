@@ -4,7 +4,7 @@ import AddToCalendar from "./AddToCalendar";
 
 function CardHeader({
   URL,
-  Name,
+  Location,
   Day,
   Date,
   Service,
@@ -28,10 +28,10 @@ function CardHeader({
                 rel="noopener noreferrer"
                 className="text-plum hover:text-hoverBlue transition duration-300 ease-in-out"
               >
-                {Name}
+                {Location}
               </a>
             ) : (
-              Name
+              Location
             )}
           </h2>
           <p className="mt-1 text-gray-600 text-sm">
@@ -62,7 +62,7 @@ function CardHeader({
         </div>
         <div className="flex items-center ml-auto mr-3">
           <AddToCalendar
-            name={Name}
+            name={Location}
             address={address}
             date={Date}
             startTime={startTime}

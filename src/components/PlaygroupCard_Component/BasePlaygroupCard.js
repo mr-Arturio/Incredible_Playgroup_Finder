@@ -8,7 +8,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const {
     Date,
     Time,
-    Name,
+    Location,
     Address,
     Age,
     Day,
@@ -58,13 +58,13 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
       )}
       <CardHeader
         URL={URL}
-        Name={Name}
+        Location={Location}
         Day={Day}
         Date={Date}
         Service={Service}
         Cancelled={Cancelled}
         Time={Time}
-        name={Name}
+        name={Location}
         address={Address}
         date={Date}
         startTime={startTime}
@@ -90,7 +90,6 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         onExpand={onExpand}
         isExpanded={isExpanded}
         URL={URL}
-        name={Name}
         address={Address}
         date={Date}
         startTime={startTime}

@@ -31,7 +31,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
         if (criteria.day && item.Day !== criteria.day) return false;
 
-        if (criteria.name && item.Name !== criteria.name) return false;
+        if (criteria.location && item.Location !== criteria.location) return false;
 
         if (criteria.age && item.Age !== criteria.age) return false;
 
