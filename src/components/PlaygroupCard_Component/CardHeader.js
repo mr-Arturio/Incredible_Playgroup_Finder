@@ -70,7 +70,7 @@ function CardHeader({
             Cancelled={Cancelled}
           />
         </div>
-        <div className="md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
+        <div className="md:text-sm sm:text-xs hidden xs:flex font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
           <a
             href={Reg_URL}
             target="_blank"
