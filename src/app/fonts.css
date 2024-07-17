@@ -1,7 +1,7 @@
 /* src/app/fonts.css */
 @font-face {
   font-family: 'Lazydog';
-  src: url('../../public/fonts/lazy_dog.ttf') format('truetype');
+  src: url('/fonts/lazy_dog.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
