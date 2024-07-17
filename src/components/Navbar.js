@@ -11,13 +11,13 @@ const Navbar = () => {
           <Image
             src="/Play_Goup.png"
             alt="Logo"
-            width={150}
-            height={150}
+            width={170}
+            height={170}
             className="rounded-full"
           />
         </div>
-        <h1 className="text-xl md:text-4xl font-bold text-center mt-4 mr-1">
-          Welcome to the Incredible Playgroup Finder!
+        <h1 className="text-xl md:text-5xl text-center mt-4 mr-4 font-lazydog">
+          Welcome to THE INCREDIBLE PLAYGROUP FINDER!
         </h1>
         <div>
         <LanguageSwitcher />
