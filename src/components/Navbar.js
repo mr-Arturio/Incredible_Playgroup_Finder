@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="logo">
           {/* Assuming you have a logo.png in your public folder */}
           <Image
-            src="/Play_Goup.png"
+            src="/IPFicon.svg"
             alt="Logo"
             width={170}
             height={170}
