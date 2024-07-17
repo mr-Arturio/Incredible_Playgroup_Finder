@@ -1,5 +1,6 @@
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
+import '../app/fonts.css';
 
 
 const Navbar = () => {
