@@ -12,7 +12,7 @@ function CardFooter({
   isExpanded,
 }) {
   return (
-    <div className="bg-blue-200 p-3 flex justify-between items-center mt-3">
+    <div className="bg-blue-200 p-3 flex justify-between items-center md:mt-3 mt-2">
       <div className="flex">
         {isExpanded ? (
           <button

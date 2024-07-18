@@ -74,7 +74,7 @@ const FilterContainer = ({
             value={filterCriteria.location}
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
-            placeholder="Facility"
+            placeholder="Location"
           />
         </div>
         {/* Third row for active filters */}
