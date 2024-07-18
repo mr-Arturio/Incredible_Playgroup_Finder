@@ -3,13 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import { getSheetData } from '../actions/getSheetData';
 import RenderSheetDataTable from '../components/RenderSheetDataTable';
-import  Header  from '../components/Header';
+import Header from '../components/Header';
 import ContactForm from '../components/ContactForm';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { useLanguage } from '../context/LanguageContext';
+import Navbar from '../components/Navbar';
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
-  const [language, setLanguage] = useState('en');
+  const { language } = useLanguage();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,15 +21,12 @@ function Home() {
     fetchData();
   }, []);
 
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-  };
-
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
+      <Navbar />
       <div className="container pb-4">
-        <Header language={language}/>
-        <LanguageSwitcher onLanguageChange={handleLanguageChange} />
+        <Header />
+        <LanguageSwitcher />
       </div>
       <main className="container flex-1">
         <RenderSheetDataTable sheetData={sheetData} language={language} />
@@ -41,4 +40,5 @@ function Home() {
 }
 
 export default Home;
+
 
