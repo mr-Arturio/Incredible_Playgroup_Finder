@@ -3,6 +3,7 @@ import { getIcons, getSocialIcons } from "../../utils/icons";
 import CardHeader from "./CardHeader";
 import CardFooter from "./CardFooter";
 import CardDetails from "./CardDetails";
+import { useLanguage } from '../../context/LanguageContext';
 
 function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const {
@@ -29,7 +30,8 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Reg_URL,
   } = playgroup;
 
-  const icons = getIcons(Parking, Coffee, WiFi, Outdoor, Language, Scale);
+  const { language } = useLanguage();
+  const icons = getIcons(language, Parking, Coffee, WiFi, Outdoor, Language, Scale);
   const social = getSocialIcons(FB, Insta, Eventbrite);
   const [tooltip, setTooltip] = useState("");
 

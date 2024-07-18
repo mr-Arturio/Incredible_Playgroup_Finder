@@ -111,14 +111,17 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - add registration recuired info with url redirection
 - add social icons
 - adjust icons position and size
-- work on registration component position - move in m
-obile view
+- work on registration component position - move in mobile view
 - add colored icons for social with hover effect and active URL
 - add and apply font for the Header
 - fix font issue
 - make different color schemas for playgroupcards
 - work on elements for mobile screens: hide registration for now, change add to callendar button size on smaller screens
 - update logo icon
+- translation for welcome message
+- translation for header
+- translation for contact form
+- translation for icons
 
 
 ### Future Development
