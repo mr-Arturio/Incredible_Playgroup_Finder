@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLanguage } from '../context/LanguageContext';
 
-const Header = ({ language }) => {
+const Header = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
+  const { language } = useLanguage();
 
   const toggleTextVisibility = () => {
     setIsFullTextVisible((prevVisibility) => !prevVisibility);
