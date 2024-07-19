@@ -17,6 +17,10 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   const translations = {
     toggledOn: language === "fr" ? "Masquer les filtres" : "Hide Filters",
     toggledOff: language === "fr" ? "Afficher les filtres" : "Show Filters",
+    hide: language === "fr" ? "Masquer la Carte" : "Hide Map",
+    show: language === "fr" ? "Afficher la Carte" : "Show Map",
+    showLess: language === "fr" ? "Afficher moins" : "Show Less",
+    showMore: language === "fr" ? "Afficher plus" : "Show More",
     daysOfWeek: {
       Mon: language === "fr" ? "Lundi" : "Monday",
       Tue: language === "fr" ? "Mardi" : "Tuesday",
@@ -25,6 +29,16 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
       Fri: language === "fr" ? "Vendredi" : "Friday",
       Sat: language === "fr" ? "Samedi" : "Saturday",
       Sun: language === "fr" ? "Dimanche" : "Sunday",
+    },
+    timesOfDay: {
+      Morning: language === "fr" ? "Matin" : "Morning",
+      Afternoon: language === "fr" ? "Après-midi" : "Afternoon",
+      Evening: language === "fr" ? "Soir" : "Evening",
+    },
+    ageOptions: {
+      Babies: language === "fr" ? "Bébés" : "Babies",
+      Toddlers: language === "fr" ? "Tout-petits" : "Toddlers",
+      Kids: language === "fr" ? "Enfants" : "Kids",
     },
   };
 
@@ -133,8 +147,8 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
   }, [sheetData]);
 
-  const timeOptions = ["Morning", "Afternoon", "Evening"];
-  const ageOptions = ["Babies", "Toddlers", "Kids"];
+  const timeOptions = Object.keys(translations.timesOfDay).map(key => translations.timesOfDay[key]);
+  const ageOptions = Object.keys(translations.ageOptions).map(key => translations.ageOptions[key]);
 
   if (isLoading) return <Loading />;
 
@@ -181,8 +195,8 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
           isToggled={isMapVisible}
           onToggle={() => setIsMapVisible(!isMapVisible)}
           labels={{
-            toggledOn: "Hide Map",
-            toggledOff: "Show Map",
+            toggledOn: translations.hide,
+            toggledOff: translations.show,
           }}
           className="md:hidden"
         />
@@ -227,8 +241,8 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
                     isToggled={false}
                     onToggle={handleShowMore}
                     labels={{
-                      toggledOn: "Show Less",
-                      toggledOff: "Show More",
+                      toggledOn: translations.showLess,
+                      toggledOff: translations.showMore,
                     }}
                   />
                 </div>
