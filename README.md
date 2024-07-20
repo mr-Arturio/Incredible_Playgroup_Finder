@@ -123,6 +123,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - translation for contact form
 - translation for icons
 - fix the issue with playgroupcards not showing after Marker clicked - remove cleanedAddress function that were removing spaces and periods...
+- implement localStorege in LanguageContext to keep the language after page reloads.
+- fix Hydration Mismatch - nwhen HTML contentb rendered on the server does not match the HTML content generated for the client. Refactore Navbar, Head and Contact form files...
 
 
 
