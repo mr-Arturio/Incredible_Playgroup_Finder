@@ -122,6 +122,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - translation for header
 - translation for contact form
 - translation for icons
+- fix the issue with playgroupcards not showing after Marker clicked - remove cleanedAddress function that were removing spaces and periods...
+
 
 
 ### Future Development
