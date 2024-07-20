@@ -2,6 +2,7 @@ import FilterComponent from "./FilterComponent";
 import DatePickerComponent from "./DatePickerComponent";
 import ResetFiltersButton from "./ResetFiltersButton";
 import ActiveFilters from "./ActiveFilters";
+import { useLanguage } from "../../context/LanguageContext";
 
 const FilterContainer = ({
   filterCriteria,
@@ -17,7 +18,9 @@ const FilterContainer = ({
   setStartDate,
   resetFilters,
   dayMapping,
-}) => {
+ }) => {
+  const { language } = useLanguage();
+
   const hasActiveFilters = Object.values(filterCriteria).some(
     (value) => value !== ""
   );
@@ -33,7 +36,7 @@ const FilterContainer = ({
             value={filterCriteria.area}
             options={areaOptions}
             onChange={(e) => handleFilterChange("area", e.target.value)}
-            placeholder="Area"
+            placeholder={language === "fr" ? "Zone" : "Area"}
           />
           <FilterComponent
             id="ageCriteria"
@@ -41,7 +44,7 @@ const FilterContainer = ({
             value={filterCriteria.age}
             options={ageOptions}
             onChange={(e) => handleFilterChange("age", e.target.value)}
-            placeholder="Age Group"
+            placeholder={language === "fr" ? "Groupe d'âge" : "Age Group"}
           />
           <FilterComponent
             id="languageCriteria"
@@ -49,7 +52,7 @@ const FilterContainer = ({
             value={filterCriteria.language}
             options={languageOptions}
             onChange={(e) => handleFilterChange("language", e.target.value)}
-            placeholder="Language"
+            placeholder={language === "fr" ? "Langue" : "Language"}
           />
         </div>
         {/* Second row of filters */}
@@ -59,7 +62,7 @@ const FilterContainer = ({
             value={filterCriteria.day}
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
-            placeholder="Day of the Week"
+            placeholder={language === "fr" ? "Jour de la semaine" : "Day of the Week"}
             mapping={dayMapping}
           />
           <FilterComponent
@@ -67,14 +70,14 @@ const FilterContainer = ({
             value={filterCriteria.time}
             options={timeOptions}
             onChange={(e) => handleFilterChange("time", e.target.value)}
-            placeholder="Time of the Day"
+            placeholder={language === "fr" ? "Moment de la journée" : "Time of the Day"}
           />
           <FilterComponent
             id="locationCriteria"
             value={filterCriteria.location}
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
-            placeholder="Location"
+            placeholder={language === "fr" ? "Lieu" : "Location"}
           />
         </div>
         {/* Third row for active filters */}
