@@ -1,24 +1,31 @@
+import { useEffect, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
 function ContactForm() {
   const { language } = useLanguage();
+  const [translations, setTranslations] = useState({
+    title: "",
+    contactUs: ""
+  });
 
-  const translations = {
-    title:
-      language === "fr" ? (
-        <p>
-          Si vous avez des suggestions, des commentaires ou si vous rencontrez
-          des problèmes avec l'horaire ou toute autre information, veuillez:
-        </p>
-      ) : (
-        <p>
-          {" "}
-          If you have any suggestions, comments, or found any issues with the
-          schedule or any other information, please:
-        </p>
-      ),
-    contactUs: language === "fr" ? "Contactez-nous" : "Contact Us",
-  };
+  useEffect(() => {
+    // Set translations based on current language
+    setTranslations({
+      title:
+        language === "fr" ? (
+          <p>
+            Si vous avez des suggestions, des commentaires ou si vous rencontrez
+            des problèmes avec l'horaire ou toute autre information, veuillez:
+          </p>
+        ) : (
+          <p>
+            If you have any suggestions, comments, or found any issues with the
+            schedule or any other information, please:
+          </p>
+        ),
+      contactUs: language === "fr" ? "Contactez-nous" : "Contact Us",
+    });
+  }, [language]);
 
   return (
     <div className="flex flex-col items-start justify-center bg-gray-100 py-4">

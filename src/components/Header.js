@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLanguage } from '../context/LanguageContext';
 
 const Header = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { language } = useLanguage();
 
+  useEffect(() => {
+    setIsClient(true); // Set client-side flag after component mounts
+  }, []);
+
   const toggleTextVisibility = () => {
-    setIsFullTextVisible((prevVisibility) => !prevVisibility);
+    setIsFullTextVisible(prevVisibility => !prevVisibility);
   };
 
   // Define text mappings based on the selected language
@@ -60,6 +65,11 @@ const Header = () => {
     showMore: language === "fr" ? "Afficher Plus" : "Show More",
     showLess: language === "fr" ? "Afficher Moins" : "Show Less"
   };
+
+  // Render a loading state until client-side hydration is complete
+  if (!isClient) {
+    return <div className="flex-col items-center justify-between"><div className="mt-8 md:mt-4 md:mb-8 text-left">Loading...</div></div>;
+  }
 
   return (
     <div className="flex-col items-center justify-between">
