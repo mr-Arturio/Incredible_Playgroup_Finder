@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from "../context/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
@@ -11,81 +12,133 @@ const Header = () => {
   }, []);
 
   const toggleTextVisibility = () => {
-    setIsFullTextVisible(prevVisibility => !prevVisibility);
+    setIsFullTextVisible((prevVisibility) => !prevVisibility);
   };
 
   // Define text mappings based on the selected language
   const translations = {
-    fullText: language === "fr" ? (
-      <>
-        <p>
-          Conçu et créé par une maman d&apos;Ottawa, les parents d&apos;Ottawa disposent désormais d&apos;un nouvel outil incroyablement utile pour planifier les sorties des groupes de jeu EarlyON avec leurs enfants.
+    fullText:
+      language === "fr" ? (
+        <>
+          <p className="mb-2">
+            Les Centres pour l&apos;enfant et la famille EarlyON offrent un
+            espace accueillant pour les enfants, les parents et les gardiens,
+            afin de participer à des programmes et des services de qualité qui
+            soutiennent le développement de l&apos;enfant, y compris :
+          </p>
+          <ul className="list-disc list-inside mb-2">
+            <li>
+              Programmes spécialement conçus pour les enfants jusqu&apos;à six
+              ans
+            </li>
+            <li>
+              Des expériences d&apos;apprentissage par le jeu amusantes et
+              engageantes – comme la peinture, le dessin, la construction, la
+              création, la lecture, les contes, le chant et bien plus encore
+            </li>
+            <li>
+              Des conseils de professionnels formés au développement de la
+              petite enfance
+            </li>
+            <li>
+              Informations ou références à des programmes et services
+              spécialisés dans la communauté
+            </li>
+            <li>
+              Opportunité de rencontrer et de créer des liens avec des familles
+              ayant de jeunes enfants
+            </li>
+          </ul>
+          <p>
+            Les parents peuvent facilement trouver des groupes de jeu locaux qui
+            répondent à leurs besoins en utilisant cet outil, qui filtre en
+            fonction du temps, de l&apos;âge, de l&apos;emplacement et
+            d&apos;autres catégories.
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="mb-2">
+            EarlyON Child and Family Centres provide a welcoming space for
+            children, parents, and caregivers to engage in quality programs and
+            services that support their child&apos;s development, including:
+          </p>
+          <ul className="list-disc list-inside mb-2">
+            <li>
+              Programs designed especially for children up to six years old
+            </li>
+            <li>
+              Play-based learning experiences that are fun and engaging – such
+              as painting, drawing, building, creating, reading, storytelling,
+              singing and much more
+            </li>
+            <li>
+              Advice from professionals trained in early childhood development
+            </li>
+            <li>
+              Information or referrals to specialized programs and services
+              within the community
+            </li>
+            <li>
+              Opportunity to meet and make connections with families with young
+              children
+            </li>
+          </ul>
+          <p>
+            Parents can easily find local playgroups that suit their needs using
+            this tool, which filters based on time, age, location and other
+            categories.
+          </p>
+        </>
+      ),
+    shortText:
+      language === "fr" ? (
+        <p className="mb-2">
+          Découvrez l&apos;outil ultime pour les parents d&apos;Ottawa afin de
+          trouver et planifier facilement des sorties passionnantes avec les
+          groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs
+          préférences !
         </p>
-        <br />
-        <p>
-          Les groupes de jeu EarlyON sont une partie importante de la croissance à Ottawa et sont souvent la première occasion pour nos petits de sortir dans le monde pour apprendre et socialiser. Les parents peuvent se faire de nouveaux amis qui commencent également une jeune famille, avoir un espace sûr et accueillant pour poser des questions sur la parentalité et rire de cette nouvelle aventure folle avec d&apos;autres parents. Chaque EarlyON a sa propre saveur unique et peut inclure l&apos;accès à des ressources telles que des bibliothèques de jouets, des espaces extérieurs sympas, des ressources parentales telles que des livres ou des opportunités de micro-apprentissage, des groupes de jeu dans différentes langues et même un parking gratuit ou des collations délicieuses !
+      ) : (
+        <p className="mb-2">
+          Discover the ultimate tool for Ottawa parents to effortlessly find and
+          plan exciting EarlyON playgroup outings tailored to their schedule and
+          preferences!
         </p>
-        <br />
-        <p>
-          Cet outil aidera les parents à voir les groupes de jeu qui correspondent à leur emploi du temps – choisissez de voir ce que vous aimez, en fonction de l&apos;heure de la journée, de l&apos;âge des enfants, du jour de la semaine et d&apos;autres catégories qui rendent votre visite fantastique pour vous.
-        </p>
-        <br />
-        <p>Venez et JOUEZ !</p>
-      </>
-    ) : (
-      <>
-        <p>
-          Conceived and created by an Ottawa Mom, Ottawa parents now have a new, incredibly useful tool to plan EarlyON playgroup outings with their children.
-        </p>
-        <br />
-        <p>
-          EarlyON playgroups are an important part of growing up in Ottawa, and are often the first opportunity our littles have to head out into the world to learn and socialize. Parents can make new friends who are also starting a young family, have a safe and welcoming space to ask parenting questions and laugh about this crazy new adventure with other parents. Each EarlyON has its own unique flavor, and can include access to resources such as toy libraries, cool outdoor spaces, parenting resources such as books or micro-learning opportunities, playgroups in different languages and even free parking or yummy snacks!
-        </p>
-        <br />
-        <p>
-          This tool will help parents view playgroups that work with their schedule – choose to see what you like, based on time of day, age of children, day of the week and other categories that make your visit fantastic for you.
-        </p>
-        <br />
-        <p>Come and PLAY!</p>
-      </>
-    ),
-    shortText: language === "fr" ? (
-      <>
-        <p>
-          Découvrez l&apos;outil ultime pour les parents d&apos;Ottawa afin de trouver et planifier facilement des sorties passionnantes avec les groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs préférences !
-        </p>
-      </>
-    ) : (
-      <>
-        <p>
-          Discover the ultimate tool for Ottawa parents to effortlessly find and plan exciting EarlyON playgroup outings tailored to their schedule and preferences!
-        </p>
-      </>
-    ),
-    showMore: language === "fr" ? "Afficher Plus" : "Show More",
-    showLess: language === "fr" ? "Afficher Moins" : "Show Less"
+      ),
+    showMore: language === "fr" ? "Lire la suite" : "Read More",
+    showLess: language === "fr" ? "Lire moins" : "Read Less",
   };
 
   // Render a loading state until client-side hydration is complete
   if (!isClient) {
-    return <div className="flex-col items-center justify-between"><div className="mt-8 md:mt-4 md:mb-8 text-left">Loading...</div></div>;
+    return (
+      <div className="flex-col items-center justify-between">
+        <div className="mt-8 md:mt-4 md:mb-8 text-left">Loading...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="flex-col items-center justify-between">
-      <div className="mt-8 md:mt-4 md:mb-8 text-left">
-        <div className="hidden md:block">{translations.fullText}</div>
-        <div className="block md:hidden">
-          {isFullTextVisible ? translations.fullText : translations.shortText}
-          <button
-            onClick={toggleTextVisibility}
-            className="text-blue-500 mt-2"
-          >
-            {isFullTextVisible ? translations.showLess : translations.showMore}
-          </button>
+    <>
+      <div className="flex-col items-center justify-between">
+        <div className="mt-8 md:mt-4 md:mb-6 text-left">
+          <div>{translations.shortText}</div>
+          <div>
+            {isFullTextVisible && translations.fullText}
+            <button
+              onClick={toggleTextVisibility}
+              className="text-blue-500 mt-2"
+            >
+              {isFullTextVisible
+                ? translations.showLess
+                : translations.showMore}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      <LanguageSwitcher />
+    </>
   );
 };
 

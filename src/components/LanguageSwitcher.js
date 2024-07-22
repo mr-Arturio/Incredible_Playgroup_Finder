@@ -19,9 +19,9 @@ const LanguageSwitcher = () => {
   if (clientLanguage === null) return null;
 
   return (
-    <div className="absolute top-1 md:mt-4 md:flex md:top-3 md:right-4 right-1 flex z-10">
+    <div className="absolute top-0 md:mt-0 md:flex md:top-0 md:right-4 right-1 flex z-10">
       <button
-        className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-l-lg shadow-lg transition-colors duration-300 ${
+        className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-bl-lg shadow-lg transition-colors duration-300 ${
           clientLanguage === 'en' ? 'bg-amber text-white' : 'bg-gray-200 text-gray-500'
         }`}
         onClick={() => handleLanguageChange('en')}
@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
         EN
       </button>
       <button
-        className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-r-lg shadow-lg transition-colors duration-300 ${
+        className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-br-lg shadow-lg transition-colors duration-300 ${
           clientLanguage === 'fr' ? 'bg-amber text-white' : 'bg-gray-200 text-gray-500'
         }`}
         onClick={() => handleLanguageChange('fr')}

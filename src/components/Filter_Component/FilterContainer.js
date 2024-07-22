@@ -36,7 +36,7 @@ const FilterContainer = ({
             value={filterCriteria.area}
             options={areaOptions}
             onChange={(e) => handleFilterChange("area", e.target.value)}
-            placeholder={language === "fr" ? "Zone" : "Area"}
+            placeholder={language === "fr" ? "Zone de la Ville" : "Area of the City"}
           />
           <FilterComponent
             id="ageCriteria"
