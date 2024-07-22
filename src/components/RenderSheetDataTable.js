@@ -17,6 +17,10 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   const translations = {
     toggledOn: language === "fr" ? "Masquer les filtres" : "Hide Filters",
     toggledOff: language === "fr" ? "Afficher les filtres" : "Show Filters",
+    hide: language === "fr" ? "Masquer la Carte" : "Hide Map",
+    show: language === "fr" ? "Afficher la Carte" : "Show Map",
+    showLess: language === "fr" ? "Afficher moins" : "Show Less",
+    showMore: language === "fr" ? "Afficher plus" : "Show More",
     daysOfWeek: {
       Mon: language === "fr" ? "Lundi" : "Monday",
       Tue: language === "fr" ? "Mardi" : "Tuesday",
@@ -25,6 +29,22 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
       Fri: language === "fr" ? "Vendredi" : "Friday",
       Sat: language === "fr" ? "Samedi" : "Saturday",
       Sun: language === "fr" ? "Dimanche" : "Sunday",
+    },
+    timesOfDay: {
+      Morning: language === "fr" ? "Matin" : "Morning",
+      Afternoon: language === "fr" ? "Après-midi" : "Afternoon",
+      Evening: language === "fr" ? "Soir" : "Evening",
+    },
+    areaOptions: {
+      East: language === "fr" ? "Est" : "East",
+      West: language === "fr" ? "Ouest" : "West",
+      Central: language === "fr" ? "Centre" : "Central",
+      South: language === "fr" ? "Sud" : "South",
+    },
+    ageOptions: {
+      Babies: language === "fr" ? "Bébés" : "Babies",
+      Toddlers: language === "fr" ? "Tout-petits" : "Toddlers",
+      Kids: language === "fr" ? "Enfants" : "Kids",
     },
   };
 
@@ -84,18 +104,6 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     }
   };
 
-  // const dayMapping = {
-  //   Mon: "Monday",
-  //   Tue: "Tuesday",
-  //   Wed: "Wednesday",
-  //   Thur: "Thursday",
-  //   Fri: "Friday",
-  //   Sat: "Saturday",
-  //   Sun: "Sunday",
-  // };
-
-  const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
-
   const filteredData = useMemo(() => {
     if (isLoading) return [];
 
@@ -120,8 +128,11 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
 
   const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))];
-  }, [sheetData]);
+    const uniqueAreas = [
+      ...new Set(sheetData.map((item) => item.Area).filter(Boolean)),
+    ];
+    return uniqueAreas.map((area) => translations.areaOptions[area] || area);
+  }, [sheetData, translations.areaOptions]);
 
   const languageOptions = useMemo(() => {
     if (!sheetData) return [];
@@ -133,15 +144,23 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
   }, [sheetData]);
 
-  const timeOptions = ["Morning", "Afternoon", "Evening"];
-  const ageOptions = ["Babies", "Toddlers", "Kids"];
+  const timeOptions = Object.keys(translations.timesOfDay).map(
+    (key) => translations.timesOfDay[key]
+  );
+  const ageOptions = Object.keys(translations.ageOptions).map(
+    (key) => translations.ageOptions[key]
+  );
+  const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
   if (isLoading) return <Loading />;
 
   return (
     <>
       <div className="flex justify-start md:mb-4 mb-2">
-        <ShowTodayButton onShowToday={showTodayPlaygroups} />
+        <ShowTodayButton
+          onShowToday={showTodayPlaygroups}
+          language={language}
+        />
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col" id="today-playgroups-section">
@@ -181,8 +200,8 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
           isToggled={isMapVisible}
           onToggle={() => setIsMapVisible(!isMapVisible)}
           labels={{
-            toggledOn: "Hide Map",
-            toggledOff: "Show Map",
+            toggledOn: translations.hide,
+            toggledOff: translations.show,
           }}
           className="md:hidden"
         />
@@ -221,14 +240,15 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
                 .map((playgroup) => (
                   <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                 ))}
+              {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
                 <div className="flex justify-center mb-2">
                   <ToggleButton
                     isToggled={false}
                     onToggle={handleShowMore}
                     labels={{
-                      toggledOn: "Show Less",
-                      toggledOff: "Show More",
+                      toggledOn: translations.showLess,
+                      toggledOff: translations.showMore,
                     }}
                   />
                 </div>

@@ -1,11 +1,12 @@
-## Parent Resource Playgroup Finder application. 
-www.incredibleplaygroupfinder.ca <br>
- Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map, filterable playgroup cards and option to add aevents to your calendar for a tailored experience.
+## Parent Resource Playgroup Finder application.
 
+www.incredibleplaygroupfinder.ca <br>
+Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map, filterable playgroup cards and option to add aevents to your calendar for a tailored experience.
 
 Our application stands out with its easy-to-use interactive map and a dynamic filtering system that allows users to search for playgroups by location, age group, language preference, date, day, and facility. Data is pulled in real-time from a Google Sheets database, ensuring the most current information is always at hand.
 
 Key features include:
+
 - **Interactive Map**: View playgroup locations across Ottawa, with the option to filter based on various criteria.
 - **Real-time Data**: Playgroup information is continuously updated, providing the latest event details.
 - **Filter Options**: Search for playgroups by location, age group, language, date, day, or name.
@@ -15,7 +16,6 @@ Key features include:
 - **Direct Navigation**: Clicking an address takes you to Google Maps to easily find directions.
 - **Date Picker**: React DatePicker is integrated for easy date selection.
 - **Add To Calendar**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
-
 
 ## Setup
 
@@ -27,10 +27,11 @@ cd [repository-directory]
 npm install
 npm run dev
 ```
+
 Navigate to http://localhost:3000 in your browser to view the app.
 
-
 ### Updates:
+
 - add Google Map API
 - Populate the spreadsheet with mock data.
 - Connect to the spreadsheet API.
@@ -81,7 +82,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Add 'Show Today's Playgroups' button
 - Make 'Show Today's Playgroups' filter and show groups for today
 - Redirect user to playgroup cards section with data after pressing 'Show Today's Playgroups'
--  useMemo to reduce useState calls
+- useMemo to reduce useState calls
 - logic to show full date names in filter (in data they are short: Mon, Tue... etc.)
 - Baby scale available icon adde with logic and tooltip + new column in DB
 - reduce redundancy and simplify the code for LargePlaygroupCard and SmallPlaygroupCard by creating a common base component - BasePlaygroupCard
@@ -105,19 +106,35 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - implement favicon
 - first attemps to implemet french languge
 - decided to use two technique: Conditional Logic in Data Fetching(information from database) and next-i18next library for dynamic language switc from special files
-- i have tried to implement translation with i18n: first try - infinity loop, second attempt -Text content does not match server-rendered HTML. Will do conditional logic for now - need to check more info (videos) for i18n and ask some people. 
+- i have tried to implement translation with i18n: first try - infinity loop, second attempt -Text content does not match server-rendered HTML. Will do conditional logic for now - need to check more info (videos) for i18n and ask some people.
 - column name change implementation - Location to Area
 - move AddToCalendar element from the Cardfooter to same space where it is displaying in mobile screens
 - add registration recuired info with url redirection
 - add social icons
 - adjust icons position and size
-- work on registration component position - move in m
-obile view
+- work on registration component position - move in mobile view
 - add colored icons for social with hover effect and active URL
-
+- add and apply font for the Header
+- fix font issue
+- make different color schemas for playgroupcards
+- work on elements for mobile screens: hide registration for now, change add to callendar button size on smaller screens
+- update logo icon
+- translation for welcome message
+- translation for header
+- translation for contact form
+- translation for icons
+- fix the issue with playgroupcards not showing after Marker clicked - remove cleanedAddress function that were removing spaces and periods...
+- implement localStorege in LanguageContext to keep the language after page reloads. x
+- fix Hydration Mismatch - nwhen HTML contentb rendered on the server does not match the HTML content generated for the client. Refactore Navbar, Head and Contact form files...
+- work on ActiveFilters component: use translation,apply short days name in french as well.
+- refactore languageswitcher to make language button to stay in active language after reload.
+- translate ShowTodayButton
+- move text from page to contaxt form and translate
+- logic for area translation: East, South, West, Central
 
 
 ### Future Development
+
 - more layout improvements
 - sticky main field
 - logic for add to the callendar option - in mobile screens
@@ -129,14 +146,15 @@ obile view
 - Set up a Google Cloud account for PRC and ensure the spreadsheet contains proper data.
 - Provide instructions on how to populate data in the spreadsheet.
 
-```npm install @react-google-maps/api```
-```npm install react-datepicker``` <br> 
+`npm install @react-google-maps/api`
+`npm install react-datepicker` <br>
 
 #### Color Palate
+
 ![Color Schema](./public/ColorPalate.png)
 
 Icons : https://uxwing.com/, https://iconduck.com/
-Address to GPS Coordinates: https://www.gps-coordinates.net/ 
+Address to GPS Coordinates: https://www.gps-coordinates.net/
 
 ## Learn More
 

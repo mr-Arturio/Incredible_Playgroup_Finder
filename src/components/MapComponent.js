@@ -43,12 +43,9 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     const addresses = new Set();
 
     markersWithLatLng.forEach((marker) => {
-      // Clean the address by removing trailing spaces and periods
-      const cleanedAddress = marker.Address.trim().replace(/\.*$/, "");
-
-      if (!addresses.has(cleanedAddress)) {
-        uniqueMarkers.push({ ...marker, Address: cleanedAddress });
-        addresses.add(cleanedAddress);
+      if (!addresses.has(marker.Address)) {
+        uniqueMarkers.push(marker);
+        addresses.add(marker.Address);
       }
     });
 
@@ -121,7 +118,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
                 }}
               >
                 <div>
-                  <h3>{marker.Name}</h3>
+                  <h3>{marker.Location}</h3>
                   <p>{marker.Address}</p>
                 </div>
               </InfoWindow>

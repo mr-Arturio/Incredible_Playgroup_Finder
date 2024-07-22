@@ -1,12 +1,10 @@
-import React from "react";
-
-const ResetFiltersButton = ({ resetFilters }) => {
+const ResetFiltersButton = ({ resetFilters, language }) => {
   return (
     <button
     onClick={resetFilters}
-    className="mt-4 lg:mt-0 bg-mainBlue hover:bg-hoverBlue text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline h-full lg:w-auto"
+    className="mt-4 lg:mt-0 bg-mainBlue hover:bg-hoverBlue text-white font-bold py-2 px-2 rounded-lg focus:outline-none focus:shadow-outline h-full lg:w-auto"
   >
-    Reset Filters
+    {language === "fr" ? "Réinitialiser les filtres" : "Reset Filters"}
   </button>
   )
 }

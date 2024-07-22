@@ -12,7 +12,7 @@ function CardFooter({
   isExpanded,
 }) {
   return (
-    <div className="bg-blue-200 p-3 flex justify-between items-center mt-3">
+    <div className="bg-blue-200 p-3 flex justify-between items-center md:mt-3 mt-2">
       <div className="flex">
         {isExpanded ? (
           <button
@@ -56,28 +56,24 @@ function CardFooter({
         )}
         <div className="hidden sm:flex space-x-1.5 ml-2.5">
           {Object.entries(social).map(
-            ([key, { show, src, tooltip: iconTooltip, url }]) =>
+            ([key, { show, src, url }]) =>
               show && (
-                <Tooltip
+                <a
                   key={key}
-                  text={tooltip === iconTooltip ? iconTooltip : ""}
-                >
-                  <a
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onMouseEnter={() => setTooltip(iconTooltip)}
+                  onMouseEnter={() => setTooltip(src)}
                   onMouseLeave={() => setTooltip("")}
                 >
-                    <Image
-                      src={src}
-                      alt={iconTooltip}
-                      className="h-5 w-5 hover:scale-110"
-                      width={20}
-                      height={20}
-                    />
-                  </a>
-                </Tooltip>
+                  <Image
+                    src={src}
+                    alt={src}
+                    className="h-5 w-5 hover:scale-110"
+                    width={20}
+                    height={20}
+                  />
+                </a>
               )
           )}
         </div>
