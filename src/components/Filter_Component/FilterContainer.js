@@ -18,7 +18,7 @@ const FilterContainer = ({
   setStartDate,
   resetFilters,
   dayMapping,
- }) => {
+}) => {
   const { language } = useLanguage();
 
   const hasActiveFilters = Object.values(filterCriteria).some(
@@ -62,7 +62,9 @@ const FilterContainer = ({
             value={filterCriteria.day}
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
-            placeholder={language === "fr" ? "Jour de la semaine" : "Day of the Week"}
+            placeholder={
+              language === "fr" ? "Jour de la semaine" : "Day of the Week"
+            }
             mapping={dayMapping}
           />
           <FilterComponent
@@ -70,7 +72,9 @@ const FilterContainer = ({
             value={filterCriteria.time}
             options={timeOptions}
             onChange={(e) => handleFilterChange("time", e.target.value)}
-            placeholder={language === "fr" ? "Moment de la journée" : "Time of the Day"}
+            placeholder={
+              language === "fr" ? "Moment de la journée" : "Time of the Day"
+            }
           />
           <FilterComponent
             id="locationCriteria"
@@ -85,6 +89,7 @@ const FilterContainer = ({
           <ActiveFilters
             filterCriteria={filterCriteria}
             handleFilterChange={handleFilterChange}
+            language={language}
           />
         </div>
       </div>
@@ -100,6 +105,7 @@ const FilterContainer = ({
           }`}
         >
           <DatePickerComponent
+            language={language}
             onDateChange={(date) =>
               handleDateChange(
                 date,
@@ -112,7 +118,7 @@ const FilterContainer = ({
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
-          <ResetFiltersButton resetFilters={resetFilters} />
+          <ResetFiltersButton resetFilters={resetFilters} language={language}/>
         </div>
       </div>
       {/* Third row for active filters */}
@@ -120,6 +126,7 @@ const FilterContainer = ({
         <ActiveFilters
           filterCriteria={filterCriteria}
           handleFilterChange={handleFilterChange}
+          language={language}
         />
       </div>
     </div>

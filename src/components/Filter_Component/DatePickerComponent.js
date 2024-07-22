@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Image from "next/image";
 
-const DatePickerComponent = ({ onDateChange }) => {
+const DatePickerComponent = ({ onDateChange, language }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,8 +25,8 @@ const DatePickerComponent = ({ onDateChange }) => {
   return (
     <div className="relative w-full flex flex-col items-center">
       {/* Calendar Icon */}
-      <h2 className="text-md font-semibold text-gray-700 mb-2">
-        Select a Date
+      <h2 className="text-md text-center font-semibold text-gray-700 mb-2">
+        {language === "fr" ? "Sélectionner une date" : "Select a Date"}
       </h2>
       <button
         onClick={toggleCalendar}

@@ -98,18 +98,6 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     }
   };
 
-  // const dayMapping = {
-  //   Mon: "Monday",
-  //   Tue: "Tuesday",
-  //   Wed: "Wednesday",
-  //   Thur: "Thursday",
-  //   Fri: "Friday",
-  //   Sat: "Saturday",
-  //   Sun: "Sunday",
-  // };
-
-  const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
-
   const filteredData = useMemo(() => {
     if (isLoading) return [];
 
@@ -147,15 +135,20 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
     return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
   }, [sheetData]);
 
-  const timeOptions = Object.keys(translations.timesOfDay).map(key => translations.timesOfDay[key]);
-  const ageOptions = Object.keys(translations.ageOptions).map(key => translations.ageOptions[key]);
+  const timeOptions = Object.keys(translations.timesOfDay).map(
+    (key) => translations.timesOfDay[key]
+  );
+  const ageOptions = Object.keys(translations.ageOptions).map(
+    (key) => translations.ageOptions[key]
+  );
+  const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
   if (isLoading) return <Loading />;
 
   return (
     <>
       <div className="flex justify-start md:mb-4 mb-2">
-        <ShowTodayButton onShowToday={showTodayPlaygroups} />
+        <ShowTodayButton onShowToday={showTodayPlaygroups} language={language}/>
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col" id="today-playgroups-section">
