@@ -35,6 +35,12 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
       Afternoon: language === "fr" ? "Après-midi" : "Afternoon",
       Evening: language === "fr" ? "Soir" : "Evening",
     },
+    areaOptions: {
+      East: language === "fr" ? "Est" : "East",
+      West: language === "fr" ? "Ouest" : "West",
+      Central: language === "fr" ? "Centre" : "Central",
+      South: language === "fr" ? "Sud" : "South",
+    },
     ageOptions: {
       Babies: language === "fr" ? "Bébés" : "Babies",
       Toddlers: language === "fr" ? "Tout-petits" : "Toddlers",
@@ -122,8 +128,11 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
 
   const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))];
-  }, [sheetData]);
+    const uniqueAreas = [
+      ...new Set(sheetData.map((item) => item.Area).filter(Boolean)),
+    ];
+    return uniqueAreas.map((area) => translations.areaOptions[area] || area);
+  }, [sheetData, translations.areaOptions]);
 
   const languageOptions = useMemo(() => {
     if (!sheetData) return [];
@@ -148,7 +157,10 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   return (
     <>
       <div className="flex justify-start md:mb-4 mb-2">
-        <ShowTodayButton onShowToday={showTodayPlaygroups} language={language}/>
+        <ShowTodayButton
+          onShowToday={showTodayPlaygroups}
+          language={language}
+        />
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col" id="today-playgroups-section">
@@ -228,6 +240,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
                 .map((playgroup) => (
                   <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
                 ))}
+              {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
                 <div className="flex justify-center mb-2">
                   <ToggleButton

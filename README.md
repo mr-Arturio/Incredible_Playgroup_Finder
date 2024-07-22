@@ -130,6 +130,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - refactore languageswitcher to make language button to stay in active language after reload.
 - translate ShowTodayButton
 - move text from page to contaxt form and translate
+- logic for area translation: East, South, West, Central
 
 
 ### Future Development
