@@ -19,15 +19,15 @@ const Header = () => {
     fullText: language === "fr" ? (
       <>
         <p>
-          Conçu et créé par une maman d'Ottawa, les parents d'Ottawa disposent désormais d'un nouvel outil incroyablement utile pour planifier les sorties des groupes de jeu EarlyON avec leurs enfants.
+          Conçu et créé par une maman d&apos;Ottawa, les parents d&apos;Ottawa disposent désormais d&apos;un nouvel outil incroyablement utile pour planifier les sorties des groupes de jeu EarlyON avec leurs enfants.
         </p>
         <br />
         <p>
-          Les groupes de jeu EarlyON sont une partie importante de la croissance à Ottawa et sont souvent la première occasion pour nos petits de sortir dans le monde pour apprendre et socialiser. Les parents peuvent se faire de nouveaux amis qui commencent également une jeune famille, avoir un espace sûr et accueillant pour poser des questions sur la parentalité et rire de cette nouvelle aventure folle avec d'autres parents. Chaque EarlyON a sa propre saveur unique et peut inclure l'accès à des ressources telles que des bibliothèques de jouets, des espaces extérieurs sympas, des ressources parentales telles que des livres ou des opportunités de micro-apprentissage, des groupes de jeu dans différentes langues et même un parking gratuit ou des collations délicieuses !
+          Les groupes de jeu EarlyON sont une partie importante de la croissance à Ottawa et sont souvent la première occasion pour nos petits de sortir dans le monde pour apprendre et socialiser. Les parents peuvent se faire de nouveaux amis qui commencent également une jeune famille, avoir un espace sûr et accueillant pour poser des questions sur la parentalité et rire de cette nouvelle aventure folle avec d&apos;autres parents. Chaque EarlyON a sa propre saveur unique et peut inclure l&apos;accès à des ressources telles que des bibliothèques de jouets, des espaces extérieurs sympas, des ressources parentales telles que des livres ou des opportunités de micro-apprentissage, des groupes de jeu dans différentes langues et même un parking gratuit ou des collations délicieuses !
         </p>
         <br />
         <p>
-          Cet outil aidera les parents à voir les groupes de jeu qui correspondent à leur emploi du temps – choisissez de voir ce que vous aimez, en fonction de l'heure de la journée, de l'âge des enfants, du jour de la semaine et d'autres catégories qui rendent votre visite fantastique pour vous.
+          Cet outil aidera les parents à voir les groupes de jeu qui correspondent à leur emploi du temps – choisissez de voir ce que vous aimez, en fonction de l&apos;heure de la journée, de l&apos;âge des enfants, du jour de la semaine et d&apos;autres catégories qui rendent votre visite fantastique pour vous.
         </p>
         <br />
         <p>Venez et JOUEZ !</p>
@@ -52,7 +52,7 @@ const Header = () => {
     shortText: language === "fr" ? (
       <>
         <p>
-          Découvrez l'outil ultime pour les parents d'Ottawa afin de trouver et planifier facilement des sorties passionnantes avec les groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs préférences !
+          Découvrez l&apos;outil ultime pour les parents d&apos;Ottawa afin de trouver et planifier facilement des sorties passionnantes avec les groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs préférences !
         </p>
       </>
     ) : (
