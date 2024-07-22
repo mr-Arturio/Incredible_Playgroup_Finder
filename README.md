@@ -133,6 +133,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - logic for area translation: East, South, West, Central
 - fix errors aand little bugs: ``& apos;``, missing dependency... 
 - refactore Header text
+- remove navbar and refactore languge switch bar
 
 
 ### Future Development
