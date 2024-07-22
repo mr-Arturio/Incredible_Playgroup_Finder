@@ -132,6 +132,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - move text from page to contaxt form and translate
 - logic for area translation: East, South, West, Central
 - fix errors aand little bugs: ``& apos;``, missing dependency... 
+- refactore Header text
 
 
 ### Future Development
