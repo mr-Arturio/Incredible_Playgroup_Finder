@@ -131,6 +131,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - translate ShowTodayButton
 - move text from page to contaxt form and translate
 - logic for area translation: East, South, West, Central
+- fix errors aand little bugs: ``& apos;``, missing dependency... 
 
 
 ### Future Development

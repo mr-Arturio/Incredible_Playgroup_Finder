@@ -15,7 +15,7 @@ function ContactForm() {
         language === "fr" ? (
           <p>
             Si vous avez des suggestions, des commentaires ou si vous rencontrez
-            des problèmes avec l'horaire ou toute autre information, veuillez:
+            des problèmes avec l&apos;horaire ou toute autre information, veuillez:
           </p>
         ) : (
           <p>

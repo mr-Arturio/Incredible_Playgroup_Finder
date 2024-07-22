@@ -82,7 +82,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
       // Use fallback center
       setCenter(fallbackCenter);
     }
-  }, []);
+  }, [fallbackCenter]);
 
   const createKey = (lat, lng, address) => `${lat}-${lng}-${address}`;
 
