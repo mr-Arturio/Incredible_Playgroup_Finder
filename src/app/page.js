@@ -33,7 +33,7 @@ function Home() {
         <main className="container flex-1">
           <RenderSheetDataTable sheetData={sheetData} language={language} />
           <section>
-            <h2 className="text-2xl font-bold mt-4">Need Help?</h2>
+            
             <ContactForm />
           </section>
         </main>

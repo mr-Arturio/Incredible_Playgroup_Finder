@@ -5,7 +5,7 @@ function ContactForm() {
   const { language } = useLanguage();
   const [translations, setTranslations] = useState({
     title: "",
-    contactUs: ""
+    contactUs: "",
   });
 
   useEffect(() => {
@@ -28,17 +28,22 @@ function ContactForm() {
   }, [language]);
 
   return (
-    <div className="flex flex-col items-start justify-center bg-gray-100 py-4">
-      <div className="text-lg text-center mb-4">{translations.title}</div>
-      <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLScriz1W2G8caKuIYcnJtb-V_j4JzNgFmyDOoULg0NDZHicoHg/viewform?usp=pp_url"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-mainBlue hover:bg-hoverBlue text-white font-bold py-2 px-4 rounded-lg"
-      >
-        {translations.contactUs}
-      </a>
-    </div>
+    <>
+      <h2 className="text-2xl font-bold mt-4">
+        {language === "fr" ? "Besoin d'aide?" : "Need Help?"}
+      </h2>
+      <div className="flex flex-col items-start justify-center bg-gray-100 py-4">
+        <div className="text-lg text-center mb-4">{translations.title}</div>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLScriz1W2G8caKuIYcnJtb-V_j4JzNgFmyDOoULg0NDZHicoHg/viewform?usp=pp_url"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-mainBlue hover:bg-hoverBlue text-white font-bold py-2 px-4 rounded-lg"
+        >
+          {translations.contactUs}
+        </a>
+      </div>
+    </>
   );
 }
 
