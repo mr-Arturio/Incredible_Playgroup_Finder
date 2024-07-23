@@ -36,7 +36,10 @@ const FilterContainer = ({
             value={filterCriteria.area}
             options={areaOptions}
             onChange={(e) => handleFilterChange("area", e.target.value)}
-            placeholder={language === "fr" ? "Zone de la Ville" : "Area of the City"}
+            placeholder={
+              language === "fr" ? "Zone de la Ville" : "Area of the City"
+            }
+            language={language}
           />
           <FilterComponent
             id="ageCriteria"
@@ -45,6 +48,7 @@ const FilterContainer = ({
             options={ageOptions}
             onChange={(e) => handleFilterChange("age", e.target.value)}
             placeholder={language === "fr" ? "Groupe d'âge" : "Age Group"}
+            language={language}
           />
           <FilterComponent
             id="languageCriteria"
@@ -53,6 +57,7 @@ const FilterContainer = ({
             options={languageOptions}
             onChange={(e) => handleFilterChange("language", e.target.value)}
             placeholder={language === "fr" ? "Langue" : "Language"}
+            language={language}
           />
         </div>
         {/* Second row of filters */}
@@ -66,6 +71,7 @@ const FilterContainer = ({
               language === "fr" ? "Jour de la semaine" : "Day of the Week"
             }
             mapping={dayMapping}
+            language={language}
           />
           <FilterComponent
             id="timeCriteria"
@@ -75,6 +81,7 @@ const FilterContainer = ({
             placeholder={
               language === "fr" ? "Moment de la journée" : "Time of the Day"
             }
+            language={language}
           />
           <FilterComponent
             id="locationCriteria"
@@ -82,6 +89,7 @@ const FilterContainer = ({
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
             placeholder={language === "fr" ? "Lieu" : "Location"}
+            language={language}
           />
         </div>
         {/* Third row for active filters */}
@@ -118,7 +126,7 @@ const FilterContainer = ({
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
-          <ResetFiltersButton resetFilters={resetFilters} language={language}/>
+          <ResetFiltersButton resetFilters={resetFilters} language={language} />
         </div>
       </div>
       {/* Third row for active filters */}

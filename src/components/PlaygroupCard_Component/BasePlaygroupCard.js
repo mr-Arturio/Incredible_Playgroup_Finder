@@ -97,6 +97,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         startTime={startTime}
         endTime={endTime}
         Cancelled={Cancelled}
+        language={language}
       />
     </div>
   );

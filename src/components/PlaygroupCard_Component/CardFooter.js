@@ -10,6 +10,7 @@ function CardFooter({
   setTooltip,
   onExpand,
   isExpanded,
+  language,
 }) {
   return (
     <div className="bg-blue-200 p-3 flex justify-between items-center md:mt-3 mt-2">
@@ -28,7 +29,7 @@ function CardFooter({
               className="inline-block"
             />
             <span className="md:ml-2 ml-1 inline-block sm:text-base text-sm">
-              Show Less
+              {language === "en" ? "Show Less" : "Mostrar Menos"}
             </span>
           </button>
         ) : (
@@ -46,10 +47,10 @@ function CardFooter({
             />
             <div>
               <span className="md:hidden inline-block sm:text-base text-sm ml-2 ">
-                More Info
+                {language === "en" ? "More Info" : "Más Info"}
               </span>
               <span className="hidden md:inline-block sm:text-base text-sm ml-2">
-                More Information
+                {language === "en" ? "More Information" : "Más Información"}
               </span>
             </div>
           </button>
