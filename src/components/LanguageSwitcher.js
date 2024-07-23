@@ -19,8 +19,8 @@ const LanguageSwitcher = () => {
   if (clientLanguage === null) return null;
 
   return (
-    <div className="absolute top-0 md:mt-0 md:flex md:top-0 md:right-4 right-1 flex z-10">
-      <button
+    <div className="absolute top-0  right-0 flex z-10">
+      <button 
         className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-bl-lg shadow-lg transition-colors duration-300 ${
           clientLanguage === 'en' ? 'bg-amber text-white' : 'bg-gray-200 text-gray-500'
         }`}
