@@ -40,6 +40,7 @@ const AddToCalendar = ({ name, address, date, startTime, endTime, Cancelled }) =
       listStyle="modal"
       buttonStyle="text"
       trigger="click"
+      language="fr"
     />
   );
 };
