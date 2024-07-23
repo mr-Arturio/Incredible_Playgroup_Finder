@@ -35,7 +35,7 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-gradient1  to-gradient2 text-white py-2">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex-1 text-center ml-2">
-          <h1 className="text-3xl md:text-5xl font-lazydog">
+          <h1 className="lg:ml-10 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
             {translations.header[language]}
           </h1>
         </div>

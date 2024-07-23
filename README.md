@@ -134,6 +134,10 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - fix errors aand little bugs: ``& apos;``, missing dependency... 
 - refactore Header text
 - remove navbar and refactore languge switch bar
+- move lang switcher to Header element
+- return navbar: add gradient background
+- made a bunch of test color schemas for playgroupcards
+- work on font size in navbar: different for screen sizes
 
 
 ### Future Development
