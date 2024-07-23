@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import PlaygroupCard from "./PlaygroupCard_Component/LargePlaygroupCard";
+import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
 import MapComponent from "./MapComponent";
 import Loading from "./Loading";

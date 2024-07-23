@@ -6,6 +6,7 @@ function ContactForm() {
   const [translations, setTranslations] = useState({
     title: "",
     contactUs: "",
+    needHelp: "",
   });
 
   useEffect(() => {

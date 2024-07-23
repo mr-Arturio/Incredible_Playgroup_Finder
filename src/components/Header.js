@@ -97,7 +97,7 @@ const Header = () => {
           Découvrez l&apos;outil ultime pour les parents d&apos;Ottawa afin de
           trouver et planifier facilement des sorties passionnantes avec les
           groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs
-          préférences !
+          préférences!
         </p>
       ) : (
         <p className="mb-2">

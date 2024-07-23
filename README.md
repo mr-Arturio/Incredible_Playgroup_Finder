@@ -138,7 +138,10 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - return navbar: add gradient background
 - made a bunch of test color schemas for playgroupcards
 - work on font size in navbar: different for screen sizes
-
+- translation for PlaygroupCard footer
+- translate NoData text
+- translate add to calendar button
+- 
 
 ### Future Development
 
