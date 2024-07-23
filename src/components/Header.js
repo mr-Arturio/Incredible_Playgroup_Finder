@@ -121,8 +121,11 @@ const Header = () => {
 
   return (
     <>
+      <div className="relative">
+        <LanguageSwitcher />
+      </div>
       <div className="flex-col items-center justify-between">
-        <div className="mt-8 md:mt-4 md:mb-6 text-left">
+        <div className="mt-10 md:mb-6 text-left">
           <div>{translations.shortText}</div>
           <div>
             {isFullTextVisible && translations.fullText}
@@ -137,7 +140,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <LanguageSwitcher />
     </>
   );
 };
