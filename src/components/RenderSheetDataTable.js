@@ -97,6 +97,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
   // Show today's playgroups and scroll to the target area
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
+    console.log("Today:", today);
     setFilterCriteria({ ...filterCriteria, date: today });
     setSelectedAddress(null); // Optionally reset selected address
     if (todayPlaygroupsSectionRef.current) {
@@ -113,6 +114,9 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
         (playgroup) => playgroup.Address === selectedAddress
       );
     }
+    // Sort filtered data by date in descending order
+    // filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
+
     return filtered;
   }, [sheetData, filterCriteria, selectedAddress, isLoading]);
 
@@ -226,14 +230,9 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
             <>
               {filteredData
                 .filter((playgroup) => {
-                  // Additional logic to check that playgroup is not in the past
-                  const playgroupDate = new Date(playgroup.Date);
-                  const today = new Date();
-                  today.setHours(0, 0, 0, 0);
                   return (
                     selectedAddress === null ||
-                    (playgroup.Address === selectedAddress &&
-                      playgroupDate >= today)
+                    playgroup.Address === selectedAddress
                   );
                 })
                 .slice(0, visibleCards)
