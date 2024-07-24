@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { useLanguage } from '../../context/LanguageContext';
 
 const AddToCalendar = ({ name, address, date, startTime, endTime, Cancelled }) => {
   const [buttonSize, setButtonSize] = useState("1");
+  const { language } = useLanguage();
 
   useEffect(() => {
     // Function to update the button size based on window width
@@ -40,7 +42,7 @@ const AddToCalendar = ({ name, address, date, startTime, endTime, Cancelled }) =
       listStyle="modal"
       buttonStyle="text"
       trigger="click"
-      language="fr"
+      language={language === "fr" ? "fr" : "en"}
     />
   );
 };
