@@ -51,10 +51,10 @@ function MapComponent({ sheetData, onMarkerSelect }) {
 
     setMarkers(uniqueMarkers);
     console.log(`Number of markers shown: ${uniqueMarkers.length}`);
-    console.log(
-      "Visible addresses:",
-      uniqueMarkers.map((marker) => marker.Address)
-    );
+    // console.log(
+    //   "Visible addresses:",
+    //   uniqueMarkers.map((marker) => marker.Address)
+    // );
   }, [sheetData]);
 
   // Fetch the user's location
