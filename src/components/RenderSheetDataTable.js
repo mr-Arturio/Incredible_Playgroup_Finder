@@ -115,7 +115,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
       );
     }
     // Sort filtered data by date in descending order
-    // filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
+    filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
 
     return filtered;
   }, [sheetData, filterCriteria, selectedAddress, isLoading]);
