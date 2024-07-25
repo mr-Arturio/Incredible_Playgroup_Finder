@@ -141,7 +141,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - translation for PlaygroupCard footer
 - translate NoData text
 - translate add to calendar button
-- 
+- fix date inconsistance issue, didn display date for today propperly...
+- show playgruop cards by date in descending order
+
 
 ### Future Development
 

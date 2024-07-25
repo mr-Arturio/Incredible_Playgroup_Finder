@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const LanguageSwitcher = () => {
-  const { language, toggleLanguage } = useLanguage();
+  const { translation, toggleTranslation } = useLanguage();
   const [clientLanguage, setClientLanguage] = useState(null);
 
   useEffect(() => {
-    setClientLanguage(language);
-  }, [language]);
+    setClientLanguage(translation);
+  }, [translation]);
 
   const handleLanguageChange = (lang) => {
-    toggleLanguage(lang);
+    toggleTranslation(lang);
   };
 
   // Render null until client-side language state is set

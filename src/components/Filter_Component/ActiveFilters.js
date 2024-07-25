@@ -1,4 +1,4 @@
-const ActiveFilters = ({ filterCriteria, handleFilterChange, language }) => {
+const ActiveFilters = ({ filterCriteria, handleFilterChange, translation }) => {
   const filters = Object.keys(filterCriteria).filter(
     (key) => filterCriteria[key]
   );
@@ -16,7 +16,7 @@ const ActiveFilters = ({ filterCriteria, handleFilterChange, language }) => {
   };
 
   const getTranslatedFilterValue = (filterValue) => {
-    if (language === "fr" && dayMapping[filterValue]) {
+    if (translation === "fr" && dayMapping[filterValue]) {
       return dayMapping[filterValue];
     }
     return filterValue;
@@ -25,7 +25,7 @@ const ActiveFilters = ({ filterCriteria, handleFilterChange, language }) => {
   return (
     <div className="flex flex-wrap gap-2 mt-4">
       <span className="font-bold">
-        {language === "fr" ? "Filtres Actifs:" : "Active Filters:"}
+        {translation === "fr" ? "Filtres Actifs:" : "Active Filters:"}
       </span>
       {filters.map((filter) => (
         <div

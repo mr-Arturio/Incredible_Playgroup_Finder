@@ -19,7 +19,7 @@ const FilterContainer = ({
   resetFilters,
   dayMapping,
 }) => {
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
 
   const hasActiveFilters = Object.values(filterCriteria).some(
     (value) => value !== ""
@@ -37,7 +37,7 @@ const FilterContainer = ({
             options={areaOptions}
             onChange={(e) => handleFilterChange("area", e.target.value)}
             placeholder={
-              language === "fr" ? "Zone de la Ville" : "Area of the City"
+              translation === "fr" ? "Zone de la Ville" : "Area of the City"
             }
           />
           <FilterComponent
@@ -46,15 +46,15 @@ const FilterContainer = ({
             value={filterCriteria.age}
             options={ageOptions}
             onChange={(e) => handleFilterChange("age", e.target.value)}
-            placeholder={language === "fr" ? "Groupe d'âge" : "Age Group"}
+            placeholder={translation === "fr" ? "Groupe d'âge" : "Age Group"}
           />
           <FilterComponent
             id="languageCriteria"
             className="flex-grow"
             value={filterCriteria.language}
             options={languageOptions}
-            onChange={(e) => handleFilterChange("language", e.target.value)}
-            placeholder={language === "fr" ? "Langue" : "Language"}
+            onChange={(e) => handleFilterChange("translation", e.target.value)}
+            placeholder={translation === "fr" ? "Langue" : "Language"}
           />
         </div>
         {/* Second row of filters */}
@@ -65,7 +65,7 @@ const FilterContainer = ({
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder={
-              language === "fr" ? "Jour de la semaine" : "Day of the Week"
+              translation === "fr" ? "Jour de la semaine" : "Day of the Week"
             }
             mapping={dayMapping}
           />
@@ -75,7 +75,7 @@ const FilterContainer = ({
             options={timeOptions}
             onChange={(e) => handleFilterChange("time", e.target.value)}
             placeholder={
-              language === "fr" ? "Moment de la journée" : "Time of the Day"
+              translation === "fr" ? "Moment de la journée" : "Time of the Day"
             }
           />
           <FilterComponent
@@ -83,7 +83,7 @@ const FilterContainer = ({
             value={filterCriteria.location}
             options={locationOptions}
             onChange={(e) => handleFilterChange("location", e.target.value)}
-            placeholder={language === "fr" ? "Lieu" : "Location"}
+            placeholder={translation === "fr" ? "Lieu" : "Location"}
           />
         </div>
         {/* Third row for active filters */}
@@ -91,7 +91,7 @@ const FilterContainer = ({
           <ActiveFilters
             filterCriteria={filterCriteria}
             handleFilterChange={handleFilterChange}
-            language={language}
+            translation={translation}
           />
         </div>
       </div>
@@ -107,7 +107,7 @@ const FilterContainer = ({
           }`}
         >
           <DatePickerComponent
-            language={language}
+            translation={translation}
             onDateChange={(date) =>
               handleDateChange(
                 date,
@@ -120,7 +120,7 @@ const FilterContainer = ({
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
-          <ResetFiltersButton resetFilters={resetFilters} language={language} />
+          <ResetFiltersButton resetFilters={resetFilters} translation={translation} />
         </div>
       </div>
       {/* Third row for active filters */}
@@ -128,7 +128,7 @@ const FilterContainer = ({
         <ActiveFilters
           filterCriteria={filterCriteria}
           handleFilterChange={handleFilterChange}
-          language={language}
+          translation={translation}
         />
       </div>
     </div>

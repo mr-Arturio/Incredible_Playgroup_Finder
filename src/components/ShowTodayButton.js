@@ -1,4 +1,4 @@
-const ShowTodayButton = ({ onShowToday, language }) => {
+const ShowTodayButton = ({ onShowToday, translation }) => {
   const handleShowToday = () => {
     onShowToday();
   };
@@ -8,7 +8,7 @@ const ShowTodayButton = ({ onShowToday, language }) => {
       className="p-2 md:text-base text-sm text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center"
       onClick={handleShowToday}
     >
-      {language === "fr" ? "Afficher les groupes d'aujourd'hui" : "Show Today's Playgroups"}
+      {translation === "fr" ? "Afficher les groupes d'aujourd'hui" : "Show Today's Playgroups"}
     </button>
   );
 };

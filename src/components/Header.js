@@ -5,7 +5,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 const Header = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
 
   useEffect(() => {
     setIsClient(true); // Set client-side flag after component mounts
@@ -18,7 +18,7 @@ const Header = () => {
   // Define text mappings based on the selected language
   const translations = {
     fullText:
-      language === "fr" ? (
+      translation === "fr" ? (
         <>
           <p className="mb-2">
             Les Centres pour l&apos;enfant et la famille EarlyON offrent un
@@ -92,7 +92,7 @@ const Header = () => {
         </>
       ),
     shortText:
-      language === "fr" ? (
+      translation === "fr" ? (
         <p className="mb-2">
           Découvrez l&apos;outil ultime pour les parents d&apos;Ottawa afin de
           trouver et planifier facilement des sorties passionnantes avec les
@@ -106,8 +106,8 @@ const Header = () => {
           preferences!
         </p>
       ),
-    showMore: language === "fr" ? "Lire la suite" : "Read More",
-    showLess: language === "fr" ? "Lire moins" : "Read Less",
+    showMore: translation === "fr" ? "Lire la suite" : "Read More",
+    showLess: translation === "fr" ? "Lire moins" : "Read Less",
   };
 
   // Render a loading state until client-side hydration is complete

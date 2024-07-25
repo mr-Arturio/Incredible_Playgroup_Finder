@@ -11,7 +11,7 @@ import { Footer } from "../components/Footer";
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ function Home() {
           <Header />
         </div>
         <main className="container flex-1">
-          <RenderSheetDataTable sheetData={sheetData} language={language} />
+          <RenderSheetDataTable sheetData={sheetData} translation={translation} />
           <section>
             <ContactForm />
           </section>

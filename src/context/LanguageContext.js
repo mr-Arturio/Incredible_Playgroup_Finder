@@ -8,7 +8,7 @@ export const useLanguage = () => useContext(LanguageContext);
 
 export const LanguageProvider = ({ children }) => {
   // Initialize state with a function to avoid accessing localStorage directly
-  const [language, setLanguage] = useState(() => {
+  const [translation, setTranslation] = useState(() => {
     if (typeof window !== 'undefined') {
       // Ensure we're running in the browser
       return localStorage.getItem('language') || 'en';
@@ -19,16 +19,16 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Ensure we're running in the browser before accessing localStorage
-      localStorage.setItem('language', language);
+      localStorage.setItem('language', translation);
     }
-  }, [language]);
+  }, [translation]);
 
-  const toggleLanguage = (lang) => {
-    setLanguage(lang);
+  const toggleTranslation = (lang) => {
+    setTranslation(lang);
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ translation, toggleTranslation }}>
       {children}
     </LanguageContext.Provider>
   );

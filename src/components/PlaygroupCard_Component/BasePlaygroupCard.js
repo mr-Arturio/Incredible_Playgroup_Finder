@@ -7,32 +7,41 @@ import { useLanguage } from "../../context/LanguageContext";
 
 function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const {
-    Date,
+    Organizer,
+    Organizer_fr,
+    Day,
     Time,
+    Date,
+    Service,
+    Service_fr,
     Location,
     Address,
-    Age,
-    Day,
-    Language,
+    Cancelled,
+    Paused,
+    Area,
     URL,
-    Service,
+    URL_fr,
+    PG_URL,
+    PG_URL_fr,
+    Age,
+    Language,
+    Outdoor,
+    WiFi,
     Parking,
     Coffee,
-    WiFi,
+    Scale,
     FB,
     Insta,
     Eventbrite,
-    Outdoor,
-    Cancelled,
-    Notes,
-    Scale,
     Registration,
-    Reg_URL,
+    Registration_URL,
+    Notes,
+    Notes_fr,
   } = playgroup;
 
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
   const icons = getIcons(
-    language,
+    translation,
     Parking,
     Coffee,
     WiFi,
@@ -67,19 +76,25 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         </div>
       )}
       <CardHeader
+        Organizer={Organizer}
+        Organizer_fr={Organizer_fr}
         URL={URL}
+        URL_fr={URL_fr}
+        PG_URL={PG_URL}
+        PG_URL_fr={PG_URL_fr}
         Location={Location}
         Day={Day}
         Date={Date}
         Service={Service}
+        Service_fr={Service_fr}
         Cancelled={Cancelled}
         Time={Time}
-        name={Location}
         address={Address}
         startTime={startTime}
         endTime={endTime}
         Registration={Registration}
-        Reg_URL={Reg_URL}
+        Registration_URL={Registration_URL}
+        translation={translation}
       />
       {isExpanded && (
         <CardDetails
@@ -87,6 +102,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Address={Address}
           Age={Age}
           Notes={Notes}
+          Notes_fr={Notes_fr}
           icons={icons}
           Cancelled={Cancelled}
         />
@@ -104,7 +120,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         startTime={startTime}
         endTime={endTime}
         Cancelled={Cancelled}
-        language={language}
+        translation={translation}
       />
     </div>
   );

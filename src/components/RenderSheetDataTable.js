@@ -10,41 +10,41 @@ import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 
-const RenderSheetDataTable = ({ sheetData, language }) => {
+const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
 
   // Define text mappings based on the selected language
   const translations = {
-    toggledOn: language === "fr" ? "Masquer les filtres" : "Hide Filters",
-    toggledOff: language === "fr" ? "Afficher les filtres" : "Show Filters",
-    hide: language === "fr" ? "Masquer la Carte" : "Hide Map",
-    show: language === "fr" ? "Afficher la Carte" : "Show Map",
-    showLess: language === "fr" ? "Afficher moins" : "Show Less",
-    showMore: language === "fr" ? "Afficher plus" : "Show More",
+    toggledOn: translation === "fr" ? "Masquer les filtres" : "Hide Filters",
+    toggledOff: translation === "fr" ? "Afficher les filtres" : "Show Filters",
+    hide: translation === "fr" ? "Masquer la Carte" : "Hide Map",
+    show: translation === "fr" ? "Afficher la Carte" : "Show Map",
+    showLess: translation === "fr" ? "Afficher moins" : "Show Less",
+    showMore: translation === "fr" ? "Afficher plus" : "Show More",
     daysOfWeek: {
-      Mon: language === "fr" ? "Lundi" : "Monday",
-      Tue: language === "fr" ? "Mardi" : "Tuesday",
-      Wed: language === "fr" ? "Mercredi" : "Wednesday",
-      Thur: language === "fr" ? "Jeudi" : "Thursday",
-      Fri: language === "fr" ? "Vendredi" : "Friday",
-      Sat: language === "fr" ? "Samedi" : "Saturday",
-      Sun: language === "fr" ? "Dimanche" : "Sunday",
+      Mon: translation === "fr" ? "Lundi" : "Monday",
+      Tue: translation === "fr" ? "Mardi" : "Tuesday",
+      Wed: translation === "fr" ? "Mercredi" : "Wednesday",
+      Thur: translation === "fr" ? "Jeudi" : "Thursday",
+      Fri: translation === "fr" ? "Vendredi" : "Friday",
+      Sat: translation === "fr" ? "Samedi" : "Saturday",
+      Sun: translation === "fr" ? "Dimanche" : "Sunday",
     },
     timesOfDay: {
-      Morning: language === "fr" ? "Matin" : "Morning",
-      Afternoon: language === "fr" ? "Après-midi" : "Afternoon",
-      Evening: language === "fr" ? "Soir" : "Evening",
+      Morning: translation === "fr" ? "Matin" : "Morning",
+      Afternoon: translation === "fr" ? "Après-midi" : "Afternoon",
+      Evening: translation === "fr" ? "Soir" : "Evening",
     },
     areaOptions: {
-      East: language === "fr" ? "Est" : "East",
-      West: language === "fr" ? "Ouest" : "West",
-      Central: language === "fr" ? "Centre" : "Central",
-      South: language === "fr" ? "Sud" : "South",
+      East: translation === "fr" ? "Est" : "East",
+      West: translation === "fr" ? "Ouest" : "West",
+      Central: translation === "fr" ? "Centre" : "Central",
+      South: translation === "fr" ? "Sud" : "South",
     },
     ageOptions: {
-      Babies: language === "fr" ? "Bébés" : "Babies",
-      Toddlers: language === "fr" ? "Tout-petits" : "Toddlers",
-      Kids: language === "fr" ? "Enfants" : "Kids",
+      Babies: translation === "fr" ? "Bébés" : "Babies",
+      Toddlers: translation === "fr" ? "Tout-petits" : "Toddlers",
+      Kids: translation === "fr" ? "Enfants" : "Kids",
     },
   };
 
@@ -163,7 +163,7 @@ const RenderSheetDataTable = ({ sheetData, language }) => {
       <div className="flex justify-start md:mb-4 mb-2">
         <ShowTodayButton
           onShowToday={showTodayPlaygroups}
-          language={language}
+          translation={translation}
         />
       </div>
       {/* Button to toggle filters */}
