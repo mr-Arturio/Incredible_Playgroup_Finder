@@ -7,39 +7,39 @@ import { useLanguage } from "../../context/LanguageContext";
 
 function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const {
-    Date,
+    Organizer,
+    Organizer_fr,
+    Day,
     Time,
+    Date,
+    Service,
+    Service_fr,
     Location,
     Address,
-    Age,
-    Day,
-    Language,
+    Cancelled,
+    Paused,
+    Area,
     URL,
-    Service,
+    URL_fr,
+    PG_URL,
+    PG_URL_fr,
+    Age,
+    Language,
+    Outdoor,
     Parking,
     Coffee,
-    WiFi,
+    Scale,
     FB,
     Insta,
     Eventbrite,
-    Outdoor,
-    Cancelled,
-    Notes,
-    Scale,
     Registration,
-    Reg_URL,
+    Registration_URL,
+    Notes,
+    Notes_fr,
   } = playgroup;
 
   const { language } = useLanguage();
-  const icons = getIcons(
-    language,
-    Parking,
-    Coffee,
-    WiFi,
-    Outdoor,
-    Language,
-    Scale
-  );
+  const icons = getIcons(language, Parking, Coffee, Outdoor, Language, Scale);
   const social = getSocialIcons(FB, Insta, Eventbrite);
   const [tooltip, setTooltip] = useState("");
 
@@ -67,19 +67,22 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         </div>
       )}
       <CardHeader
+        Organizer={Organizer}
+        Organizer_fr={Organizer_fr}
         URL={URL}
         Location={Location}
         Day={Day}
         Date={Date}
         Service={Service}
+        Service_fr={Service_fr}
         Cancelled={Cancelled}
         Time={Time}
-        name={Location}
         address={Address}
         startTime={startTime}
         endTime={endTime}
         Registration={Registration}
-        Reg_URL={Reg_URL}
+        Registration_URL={Registration_URL}
+        language={language}
       />
       {isExpanded && (
         <CardDetails
