@@ -26,6 +26,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Age,
     Language,
     Outdoor,
+    WiFi,
     Parking,
     Coffee,
     Scale,
@@ -43,6 +44,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     translation,
     Parking,
     Coffee,
+    WiFi,
     Outdoor,
     Language,
     Scale
@@ -77,6 +79,9 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         Organizer={Organizer}
         Organizer_fr={Organizer_fr}
         URL={URL}
+        URL_fr={URL_fr}
+        PG_URL={PG_URL}
+        PG_URL_fr={PG_URL_fr}
         Location={Location}
         Day={Day}
         Date={Date}
@@ -97,6 +102,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Address={Address}
           Age={Age}
           Notes={Notes}
+          Notes_fr={Notes_fr}
           icons={icons}
           Cancelled={Cancelled}
         />
