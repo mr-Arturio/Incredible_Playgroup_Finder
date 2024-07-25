@@ -26,7 +26,7 @@ const AddToCalendar = ({
       size="1|1|0"
       listStyle="modal"
       buttonStyle="text"
-      translation={translation === "fr" ? "fr" : "en"}
+      language={translation === "fr" ? "fr" : "en"}
     />
   );
 };
