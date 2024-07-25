@@ -6,6 +6,7 @@ function ContactForm() {
   const [translations, setTranslations] = useState({
     title: "",
     contactUs: "",
+    needHelp: "",
   });
 
   useEffect(() => {
@@ -24,13 +25,14 @@ function ContactForm() {
           </p>
         ),
       contactUs: language === "fr" ? "Contactez-nous" : "Contact Us",
+      needHelp: language === "fr" ? "Besoin d'aide?" : "Need Help?",
     });
   }, [language]);
 
   return (
     <>
       <h2 className="text-2xl font-bold mt-4">
-        {language === "fr" ? "Besoin d'aide?" : "Need Help?"}
+        {translations.needHelp}
       </h2>
       <div className="flex flex-col items-start justify-center bg-gray-100 py-4">
         <div className="text-lg text-center mb-4">{translations.title}</div>

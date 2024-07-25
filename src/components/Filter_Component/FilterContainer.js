@@ -36,7 +36,9 @@ const FilterContainer = ({
             value={filterCriteria.area}
             options={areaOptions}
             onChange={(e) => handleFilterChange("area", e.target.value)}
-            placeholder={language === "fr" ? "Zone de la Ville" : "Area of the City"}
+            placeholder={
+              language === "fr" ? "Zone de la Ville" : "Area of the City"
+            }
           />
           <FilterComponent
             id="ageCriteria"
@@ -118,7 +120,7 @@ const FilterContainer = ({
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
-          <ResetFiltersButton resetFilters={resetFilters} language={language}/>
+          <ResetFiltersButton resetFilters={resetFilters} language={language} />
         </div>
       </div>
       {/* Third row for active filters */}

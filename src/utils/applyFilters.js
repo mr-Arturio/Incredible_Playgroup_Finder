@@ -2,7 +2,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
   try {
     // Create a date object for today's date
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Ensure time portion is zeroed out
+    today.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
 
     console.log('Today\'s Date:', today.toISOString().split("T")[0]);
 
@@ -39,7 +39,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
         // Date check for past dates using Date objects
         const itemDate = new Date(item.Date);
-        itemDate.setHours(0, 0, 0, 0); // Ensure time portion is zeroed out
+        itemDate.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
         // console.log('Item Date:', itemDate.toISOString().split("T")[0]);
         if (itemDate < today) return false;
 
@@ -62,7 +62,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
         // Ensure data is in ISO format 'YYYY-MM-DD'
         if (criteria.date) {
           const itemDateString = itemDate.toISOString().split("T")[0];
-          console.log('Item Date String:', itemDateString);
+          // console.log('Item Date String:', itemDateString);
           if (itemDateString !== criteria.date) return false;
         }
 

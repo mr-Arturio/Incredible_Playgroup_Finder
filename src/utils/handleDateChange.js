@@ -4,16 +4,13 @@ export const handleDateChange = (
   setFilterCriteria,
   filterCriteria
 ) => {
-  // Create a new Date object with the time set to midnight
-  const adjustedDate = new Date(date.setHours(0, 0, 0, 0));
-
-  // Adjust the date to account for the timezone offset
-  const timezoneOffset = adjustedDate.getTimezoneOffset() * 60000; // 60 seconds
-  const localAdjustedDate = new Date(adjustedDate.getTime() - timezoneOffset);
+  // Create a new Date object with the time set to midnight in UTC
+  const adjustedDate = new Date(date);
+  adjustedDate.setUTCHours(0, 0, 0, 0);
 
   setStartDate(adjustedDate);
   setFilterCriteria({
     ...filterCriteria,
-    date: localAdjustedDate.toISOString().split("T")[0], //
+    date: adjustedDate.toISOString().split("T")[0], // Format as 'YYYY-MM-DD'
   });
 };
