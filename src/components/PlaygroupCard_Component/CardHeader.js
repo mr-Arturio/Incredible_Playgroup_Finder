@@ -19,14 +19,14 @@ function CardHeader({
   endTime,
   Registration,
   Registration_URL,
-  language,
+  translation,
 }) {
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="block mt-1 md:text-xl text-base leading-tight font-semibold text-hoverBlue">
-            {language === "en" || !Service_fr ? Service : Service_fr}
+            {translation === "en" || !Service_fr ? Service : Service_fr}
           </h2>
           <p className="mt-1 text-gray-600 text-sm">
             {Day}, {Date}
@@ -41,7 +41,7 @@ function CardHeader({
                 rel="noopener noreferrer"
                 className="text-plum hover:text-hoverBlue transition duration-300 ease-in-out"
               >
-                {language === "en" || !Organizer_fr ? Organizer : Organizer_fr}
+                {translation === "en" || !Organizer_fr ? Organizer : Organizer_fr}
               </a>
             ) : (
               Organizer
@@ -56,7 +56,7 @@ function CardHeader({
                 rel="noopener noreferrer"
                 className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
               >
-                {language === "en" ? "Registration" : "Inscription"}
+                {translation === "en" ? "Registration" : "Inscription"}
               </a>
             </div>
           )}
@@ -85,7 +85,7 @@ function CardHeader({
             rel="noopener noreferrer"
             className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
           >
-            {language === "en" ? "Registration" : "Inscription"}
+            {translation === "en" ? "Registration" : "Inscription"}
           </a>
         </div>
       )}

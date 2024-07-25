@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
 function ContactForm() {
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
   const [translations, setTranslations] = useState({
     title: "",
     contactUs: "",
@@ -13,7 +13,7 @@ function ContactForm() {
     // Set translations based on current language
     setTranslations({
       title:
-        language === "fr" ? (
+        translation === "fr" ? (
           <p>
             Si vous avez des suggestions, des commentaires ou si vous rencontrez
             des problèmes avec l&apos;horaire ou toute autre information, veuillez:
@@ -24,10 +24,10 @@ function ContactForm() {
             schedule or any other information, please:
           </p>
         ),
-      contactUs: language === "fr" ? "Contactez-nous" : "Contact Us",
-      needHelp: language === "fr" ? "Besoin d'aide?" : "Need Help?",
+      contactUs: translation === "fr" ? "Contactez-nous" : "Contact Us",
+      needHelp: translation === "fr" ? "Besoin d'aide?" : "Need Help?",
     });
-  }, [language]);
+  }, [translation]);
 
   return (
     <>

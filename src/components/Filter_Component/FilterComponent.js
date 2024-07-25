@@ -7,7 +7,7 @@ const FilterComponent = ({
   onChange,
   placeholder,
   mapping,
-  language,
+  translation,
 }) => {
   return (
     <div className="w-full lg:w-3/12 px-1 mb-2 lg:mb-0">
@@ -20,7 +20,7 @@ const FilterComponent = ({
         {/* Show "Show all" option when something is selected */}
         {value && (
           <option value="" className="font-bold">
-            {language === "en" ? "Show all" : "Afficher tout"}
+            {translation === "en" ? "Show all" : "Afficher tout"}
           </option>
         )}
         {/* Placeholder as the first option */}

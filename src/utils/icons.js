@@ -1,37 +1,37 @@
-const getIcons = (language, Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
+const getIcons = (translation, Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
   time: "time.svg",
   location: "location.svg",
   age: "age.svg",
   parking: {
     show: Parking === "Yes",
     src: "parking.svg",
-    tooltip: language === "fr" ? "Parking Disponible" : "Parking Available",
+    tooltip: translation === "fr" ? "Parking Disponible" : "Parking Available",
   },
   coffee: {
     show: Coffee === "Yes",
     src: "coffee.svg",
-    tooltip: language === "fr" ? "Café" : "Coffee",
+    tooltip: translation === "fr" ? "Café" : "Coffee",
   },
   // Uncomment if needed
   // wifi: {
   //   show: WiFi === "Yes",
   //   src: "wifi.svg",
-  //   tooltip: language === "fr" ? "WiFi Disponible" : "WiFi Available",
+  //   tooltip: translation === "fr" ? "WiFi Disponible" : "WiFi Available",
   // },
   // indoor: {
   //   show: Outdoor === "No",
   //   src: "indoor.svg",
-  //   tooltip: language === "fr" ? "Intérieur" : "Indoor",
+  //   tooltip: translation === "fr" ? "Intérieur" : "Indoor",
   // },
   outdoor: {
     show: Outdoor === "Yes",
     src: "outdoor.svg",
-    tooltip: language === "fr" ? "Extérieur" : "Outdoor",
+    tooltip: translation === "fr" ? "Extérieur" : "Outdoor",
   },
   scale: {
     show: Scale === "Yes",
     src: "scale.svg",
-    tooltip: language === "fr" ? "Pèse-bébé" : "Baby Scale",
+    tooltip: translation === "fr" ? "Pèse-bébé" : "Baby Scale",
   },
   // Assuming Language should always be shown; adjust if needed
   language: {

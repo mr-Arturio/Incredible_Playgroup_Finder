@@ -9,7 +9,7 @@ const AddToCalendar = ({
   endTime,
   Cancelled,
 }) => {
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
 
   if (Cancelled === "Yes") return null;
 
@@ -26,7 +26,7 @@ const AddToCalendar = ({
       size="1|1|0"
       listStyle="modal"
       buttonStyle="text"
-      language={language === "fr" ? "fr" : "en"}
+      translation={translation === "fr" ? "fr" : "en"}
     />
   );
 };

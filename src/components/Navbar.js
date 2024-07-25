@@ -5,7 +5,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
-  const { language } = useLanguage();
+  const { translation } = useLanguage();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex-1 text-center ml-2">
           <h1 className="lg:ml-10 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
-            {translations.header[language]}
+            {translations.header[translation]}
           </h1>
         </div>
         <div className="shrink ml-4">

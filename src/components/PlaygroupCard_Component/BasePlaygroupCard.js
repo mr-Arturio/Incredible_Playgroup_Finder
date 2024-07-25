@@ -38,8 +38,15 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Notes_fr,
   } = playgroup;
 
-  const { language } = useLanguage();
-  const icons = getIcons(language, Parking, Coffee, Outdoor, Language, Scale);
+  const { translation } = useLanguage();
+  const icons = getIcons(
+    translation,
+    Parking,
+    Coffee,
+    Outdoor,
+    Language,
+    Scale
+  );
   const social = getSocialIcons(FB, Insta, Eventbrite);
   const [tooltip, setTooltip] = useState("");
 
@@ -82,7 +89,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         endTime={endTime}
         Registration={Registration}
         Registration_URL={Registration_URL}
-        language={language}
+        translation={translation}
       />
       {isExpanded && (
         <CardDetails
@@ -107,7 +114,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         startTime={startTime}
         endTime={endTime}
         Cancelled={Cancelled}
-        language={language}
+        translation={translation}
       />
     </div>
   );
