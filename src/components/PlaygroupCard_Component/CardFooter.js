@@ -13,7 +13,7 @@ function CardFooter({
   translation,
 }) {
   return (
-    <div className={`bg-cardFooter p-3 flex justify-between items-center ${isExpanded ? 'md:mt-3' : 'mt-2'}`}>
+    <div className={`bg-cardFooter p-3 flex justify-between items-center ${isExpanded ? 'md:mt-3' : 'mt-1'}`}>
       <div className="flex">
         {isExpanded ? (
           <button
