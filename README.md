@@ -146,7 +146,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - apply colors for playgroupcard
 - fix bugs, position and margins
 -  reducing sensitivity to accidental touches senAddToCalendar element by wrapping it in <button>
-
+- get redirected to playgroup cards after pressing the button ShowTodays...
 
 
 ### Future Development
