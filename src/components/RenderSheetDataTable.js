@@ -211,8 +211,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         />
 
         <div
-          className={`w-full xl:w-1/2 ${isMapVisible ? "" : "hidden md:flex"} `}
-          style={{ height: "85vh" }}
+          className={`w-full md:h-[85vh] xl:w-1/2 ${
+            isMapVisible ? "" : "hidden md:flex"
+          } h-[55vh]`}
         >
           <MapComponent
             sheetData={filteredData}
