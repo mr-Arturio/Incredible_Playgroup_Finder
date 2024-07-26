@@ -31,11 +31,11 @@ function ContactForm() {
 
   return (
     <>
-      <h2 className="text-2xl font-bold mt-4">
+      <h2 className="text-xl md:text-2xl font-bold mt-4 lg:mt-2">
         {translations.needHelp}
       </h2>
-      <div className="flex flex-col items-start justify-center bg-gray-100 py-4">
-        <div className="text-lg text-center mb-4">{translations.title}</div>
+      <div className="flex flex-col items-start justify-center bg-gray-100 md:py-4 pb-4 pt-2">
+        <div className="text-sm md:text-lg mb-4">{translations.title}</div>
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLScriz1W2G8caKuIYcnJtb-V_j4JzNgFmyDOoULg0NDZHicoHg/viewform?usp=pp_url"
           target="_blank"
