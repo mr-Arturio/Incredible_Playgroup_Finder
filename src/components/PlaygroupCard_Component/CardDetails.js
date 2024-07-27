@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-function CardDetails({ Address, Age, Notes, icons }) {
+function CardDetails({ Address, Age, Notes, icons, social }) {
   return (
     <div className="px-4 md:px-6 flex flex-col md:flex-row justify-between">
-      <div className="flex flex-col justify-between mr-4 md:pr-10 pr-0">
+      <div className="flex flex-col justify-between  md:pr-10 pr-0">
         <div className="flex items-center  text-gray-700">
           <Image
             src={icons.location}
@@ -25,7 +25,8 @@ function CardDetails({ Address, Age, Notes, icons }) {
             {Address}
           </a>
         </div>
-        <div className="flex items-center py-1 mt-2 text-gray-700">
+        <div className="flex items-center text-gray-700 justify-between mb-2 mt-2">
+        <div className="flex items-center">
           <Image
             src={icons.age}
             alt="Age"
@@ -35,9 +36,31 @@ function CardDetails({ Address, Age, Notes, icons }) {
           />
           <span className="ml-2">{Age}</span>
         </div>
+        <div className="flex sm:hidden items-center md:py-2 py-1 space-x-2">
+          {Object.entries(social).map(
+            ([key, { show, src, url }]) =>
+              show && (
+                <a
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={src}
+                    alt={src}
+                    className="h-5 w-5 hover:scale-110"
+                    width={20}
+                    height={20}
+                  />
+                </a>
+              )
+          )}
+        </div>
+        </div>
       </div>
       {Notes && (
-        <div className="bg-gray-100 p-2 rounded-lg shadow-md mt-2 md:mt-0 md:max-w-sm flex-1">
+        <div className="bg-gray-100 p-2 rounded-lg shadow-md mb-2 md:my-0 md:max-w-sm flex-1">
           <p className="text-gray-800 text-sm">
             <span className="font-bold">Special Notes:</span> {Notes}
           </p>
