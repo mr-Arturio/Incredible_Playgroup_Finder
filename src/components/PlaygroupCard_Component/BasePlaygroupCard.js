@@ -104,6 +104,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Notes={Notes}
           Notes_fr={Notes_fr}
           icons={icons}
+          social={social}
           Cancelled={Cancelled}
         />
       )}

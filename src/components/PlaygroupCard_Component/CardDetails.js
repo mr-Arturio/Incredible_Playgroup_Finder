@@ -25,7 +25,7 @@ function CardDetails({ Address, Age, Notes, icons, social }) {
             {Address}
           </a>
         </div>
-        <div className="flex items-center text-gray-700 justify-between mb-2 mt-2">
+        <div className="flex items-center text-gray-700 justify-between mb-2 md:mb-0 mt-2">
         <div className="flex items-center">
           <Image
             src={icons.age}

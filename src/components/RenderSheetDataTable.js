@@ -244,7 +244,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
                 ))}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
-                <div className="flex justify-center mb-2">
+                <div className="flex justify-center mb-1 md:mb-2">
                   <ToggleButton
                     isToggled={false}
                     onToggle={handleShowMore}

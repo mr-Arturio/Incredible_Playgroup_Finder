@@ -64,8 +64,6 @@ function CardFooter({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onMouseEnter={() => setTooltip(src)}
-                  onMouseLeave={() => setTooltip("")}
                 >
                   <Image
                     src={src}
@@ -79,7 +77,7 @@ function CardFooter({
           )}
         </div>
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-1.5 md:space-x-2">
         {Object.entries(icons).map(
           ([key, { show, src, tooltip: iconTooltip }]) =>
             show && (
