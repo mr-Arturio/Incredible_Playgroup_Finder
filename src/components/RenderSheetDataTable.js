@@ -211,8 +211,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         />
 
         <div
-          className={`w-full xl:w-1/2 ${isMapVisible ? "" : "hidden md:flex"} `}
-          style={{ height: "85vh" }}
+          className={`w-full md:h-[85vh] xl:w-1/2 ${
+            isMapVisible ? "" : "hidden md:flex"
+          } h-[55vh]`}
         >
           <MapComponent
             sheetData={filteredData}
@@ -243,7 +244,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
                 ))}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
-                <div className="flex justify-center mb-2">
+                <div className="flex justify-center mb-1 md:mb-2">
                   <ToggleButton
                     isToggled={false}
                     onToggle={handleShowMore}

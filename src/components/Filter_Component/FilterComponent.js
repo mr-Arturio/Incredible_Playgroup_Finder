@@ -20,7 +20,7 @@ const FilterComponent = ({
         {/* Show "Show all" option when something is selected */}
         {value && (
           <option value="" className="font-bold">
-            {translation === "en" ? "Show all" : "Afficher tout"}
+            {translation === "fr" ? "Afficher tout" : "Show all" }
           </option>
         )}
         {/* Placeholder as the first option */}

@@ -75,7 +75,7 @@ function CardHeader({
           )}
         </div>
       </div>
-      <div className="flex items-center text-gray-700 justify-between pb-1 mt-2">
+      <div className="flex items-center text-gray-700 justify-between mb-1 mt-2">
         <div className="flex items-center">
           <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>

@@ -20,7 +20,7 @@ const Header = () => {
     fullText:
       translation === "fr" ? (
         <>
-          <p className="mb-2">
+          <p>
             Les Centres pour l&apos;enfant et la famille EarlyON offrent un
             espace accueillant pour les enfants, les parents et les gardiens,
             afin de participer à des programmes et des services de qualité qui
@@ -58,7 +58,7 @@ const Header = () => {
         </>
       ) : (
         <>
-          <p className="mb-2">
+          <p>
             EarlyON Child and Family Centres provide a welcoming space for
             children, parents, and caregivers to engage in quality programs and
             services that support their child&apos;s development, including:
@@ -93,14 +93,14 @@ const Header = () => {
       ),
     shortText:
       translation === "fr" ? (
-        <p className="mb-2">
+        <p>
           Découvrez l&apos;outil ultime pour les parents d&apos;Ottawa afin de
           trouver et planifier facilement des sorties passionnantes avec les
           groupes de jeu EarlyON adaptées à leur emploi du temps et à leurs
           préférences!
         </p>
       ) : (
-        <p className="mb-2">
+        <p>
           Discover the ultimate tool for Ottawa parents to effortlessly find and
           plan exciting EarlyON playgroup outings tailored to their schedule and
           preferences!
@@ -131,7 +131,7 @@ const Header = () => {
             {isFullTextVisible && translations.fullText}
             <button
               onClick={toggleTextVisibility}
-              className="text-blue-500 mt-2"
+              className="text-blue-500 mt-2 mb-2"
             >
               {isFullTextVisible
                 ? translations.showLess

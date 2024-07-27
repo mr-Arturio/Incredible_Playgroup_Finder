@@ -26,11 +26,12 @@ const FilterContainer = ({
   );
 
   return (
-    <div className="flex flex-col py-3 px-5 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg shadow mb-4 w-full">
+    <div className="flex flex-col py-3 px-5 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg shadow mb-4 lg:mb-6 w-full">
       <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-4">
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
+          translation={translation}
             id="areaCriteria"
             className="flex-grow"
             value={filterCriteria.area}
@@ -41,6 +42,7 @@ const FilterContainer = ({
             }
           />
           <FilterComponent
+          translation={translation}
             id="ageCriteria"
             className="flex-grow"
             value={filterCriteria.age}
@@ -49,17 +51,19 @@ const FilterContainer = ({
             placeholder={translation === "fr" ? "Groupe d'âge" : "Age Group"}
           />
           <FilterComponent
+          translation={translation}
             id="languageCriteria"
             className="flex-grow"
             value={filterCriteria.language}
             options={languageOptions}
-            onChange={(e) => handleFilterChange("translation", e.target.value)}
+            onChange={(e) => handleFilterChange("language", e.target.value)}
             placeholder={translation === "fr" ? "Langue" : "Language"}
           />
         </div>
         {/* Second row of filters */}
         <div className="md:flex justify-between gap-2 mb-3">
           <FilterComponent
+          translation={translation}
             id="dayCriteria"
             value={filterCriteria.day}
             options={dayOptions}
@@ -70,6 +74,7 @@ const FilterContainer = ({
             mapping={dayMapping}
           />
           <FilterComponent
+          translation={translation}
             id="timeCriteria"
             value={filterCriteria.time}
             options={timeOptions}
@@ -79,6 +84,7 @@ const FilterContainer = ({
             }
           />
           <FilterComponent
+          translation={translation}
             id="locationCriteria"
             value={filterCriteria.location}
             options={locationOptions}

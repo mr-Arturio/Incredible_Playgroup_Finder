@@ -147,6 +147,10 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - fix bugs, position and margins
 -  reducing sensitivity to accidental touches senAddToCalendar element by wrapping it in <button>
 - get redirected to playgroup cards after pressing the button ShowTodays...
+- add more language icons, fix lang filter
+- adjust map size for mobile,
+- add social icons for mobile screen
+- fix margin, sizeng, position here and there...
 
 
 ### Future Development

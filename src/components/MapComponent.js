@@ -88,9 +88,9 @@ function MapComponent({ sheetData, onMarkerSelect }) {
 
   if (!isLoaded) return <Loading />;
   return (
-    <div className="h-full w-full content-start mt-0 lg:ml-0">
+    <div className="h-full w-full content-start mt-0 lg:ml-0 xl:pl-1">
       <GoogleMap
-        mapContainerStyle={{ width: "100%", height: "80%" }}
+        mapContainerStyle={{ width: "100%", height: "90%" }}
         center={center}
         zoom={11}
       >
