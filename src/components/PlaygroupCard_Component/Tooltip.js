@@ -7,7 +7,7 @@ const Tooltip = ({ text, children }) => {
     <div className="relative">
       {children}
       {text && (
-        <div className="absolute bottom-full mb-2 -ml-4 px-2 py-1 bg-black text-white text-xs rounded-md z-10 whitespace-nowrap">
+        <div className="absolute bottom-full mb-1.5 -ml-5 px-2 py-1 bg-black text-white text-xs rounded-md z-50 whitespace-nowrap">
           {text}
         </div>
       )}
