@@ -1,6 +1,6 @@
 const ActiveFilters = ({ filterCriteria, handleFilterChange, translation }) => {
   const filters = Object.keys(filterCriteria).filter(
-    (key) => filterCriteria[key]
+    (key) => filterCriteria[key] !== ""
   );
 
   if (filters.length === 0) return null;

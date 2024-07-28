@@ -1,12 +1,15 @@
-const ResetFiltersButton = ({ resetFilters, translation }) => {
+const ResetFiltersButton = ({ resetFilters, translation, hasActiveFilters }) => {
   return (
     <button
-    onClick={resetFilters}
-    className="mt-4 lg:mt-0 bg-mainBlue hover:bg-hoverBlue text-white font-bold py-2 px-2 rounded-lg focus:outline-none focus:shadow-outline h-full lg:w-auto"
-  >
-    {translation === "fr" ? "Réinitialiser les filtres" : "Reset Filters"}
-  </button>
-  )
-}
+      onClick={resetFilters}
+      className={`mt-4 lg:mt-0 text-white font-bold py-2 px-2 rounded-lg focus:outline-none focus:shadow-outline h-full lg:w-auto ${
+        hasActiveFilters ? 'bg-mainBlue hover:bg-hoverBlue' : 'bg-gray-400 cursor-not-allowed'
+      }`}
+      disabled={!hasActiveFilters}
+    >
+      {translation === "fr" ? "Réinitialiser les filtres" : "Reset Filters"}
+    </button>
+  );
+};
 
 export default ResetFiltersButton;

@@ -68,15 +68,18 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   // Controls visibility of the map
   const [isMapVisible, setIsMapVisible] = useState(false);
-
   // State to control the number of visible cards
   const [visibleCards, setVisibleCards] = useState(6);
+  // State to track if any filters are active
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  
   const handleShowMore = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
   };
 
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address); // Set the address when a map marker is selected
+    setIsFilterActive(true); // Mark filter as active when a marker is selected
   };
 
   // Reset all filters to default states, including clearing selected markers
@@ -92,6 +95,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       age: "",
       time: "",
     });
+    setIsFilterActive(false); // Reset filter state
   };
 
   // Show today's playgroups and scroll to the target area
@@ -193,6 +197,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           handleDateChange={handleDateChange}
           setStartDate={setStartDate}
           resetFilters={resetFilters}
+          isFilterActive={isFilterActive}
           dayMapping={translations.daysOfWeek} // Pass the mapping to the FilterContainer
         />
       </div>
@@ -217,6 +222,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         >
           <MapComponent
             sheetData={filteredData}
+            selectedAddress={selectedAddress}
             onMarkerSelect={handleMarkerSelect}
           />
         </div>

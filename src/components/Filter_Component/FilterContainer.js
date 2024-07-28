@@ -18,6 +18,7 @@ const FilterContainer = ({
   setStartDate,
   resetFilters,
   dayMapping,
+  isFilterActive,
 }) => {
   const { translation } = useLanguage();
 
@@ -31,7 +32,7 @@ const FilterContainer = ({
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
-          translation={translation}
+            translation={translation}
             id="areaCriteria"
             className="flex-grow"
             value={filterCriteria.area}
@@ -42,7 +43,7 @@ const FilterContainer = ({
             }
           />
           <FilterComponent
-          translation={translation}
+            translation={translation}
             id="ageCriteria"
             className="flex-grow"
             value={filterCriteria.age}
@@ -51,7 +52,7 @@ const FilterContainer = ({
             placeholder={translation === "fr" ? "Groupe d'âge" : "Age Group"}
           />
           <FilterComponent
-          translation={translation}
+            translation={translation}
             id="languageCriteria"
             className="flex-grow"
             value={filterCriteria.language}
@@ -63,7 +64,7 @@ const FilterContainer = ({
         {/* Second row of filters */}
         <div className="md:flex justify-between gap-2 mb-3">
           <FilterComponent
-          translation={translation}
+            translation={translation}
             id="dayCriteria"
             value={filterCriteria.day}
             options={dayOptions}
@@ -74,7 +75,7 @@ const FilterContainer = ({
             mapping={dayMapping}
           />
           <FilterComponent
-          translation={translation}
+            translation={translation}
             id="timeCriteria"
             value={filterCriteria.time}
             options={timeOptions}
@@ -84,12 +85,16 @@ const FilterContainer = ({
             }
           />
           <FilterComponent
-          translation={translation}
+            translation={translation}
             id="organizerCriteria"
             value={filterCriteria.organizer}
             options={organizerOptions}
             onChange={(e) => handleFilterChange("organizer", e.target.value)}
-            placeholder={translation === "fr" ? "Fournisseur de groupe de jeu" : "Playgroup Provider"}
+            placeholder={
+              translation === "fr"
+                ? "Fournisseur de groupe de jeu"
+                : "Playgroup Provider"
+            }
           />
         </div>
         {/* Third row for active filters */}
@@ -126,7 +131,11 @@ const FilterContainer = ({
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
-          <ResetFiltersButton resetFilters={resetFilters} translation={translation} />
+          <ResetFiltersButton
+            resetFilters={resetFilters}
+            translation={translation}
+            hasActiveFilters={hasActiveFilters || isFilterActive}
+          />
         </div>
       </div>
       {/* Third row for active filters */}

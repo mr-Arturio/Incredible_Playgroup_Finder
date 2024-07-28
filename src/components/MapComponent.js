@@ -8,7 +8,7 @@ import {
 } from "@react-google-maps/api";
 // import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
-function MapComponent({ sheetData, onMarkerSelect }) {
+function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
