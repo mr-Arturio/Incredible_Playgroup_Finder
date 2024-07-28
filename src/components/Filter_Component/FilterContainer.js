@@ -13,7 +13,7 @@ const FilterContainer = ({
   languageOptions,
   dayOptions,
   timeOptions,
-  locationOptions,
+  organizerOptions,
   handleDateChange,
   setStartDate,
   resetFilters,
@@ -85,11 +85,11 @@ const FilterContainer = ({
           />
           <FilterComponent
           translation={translation}
-            id="locationCriteria"
-            value={filterCriteria.location}
-            options={locationOptions}
-            onChange={(e) => handleFilterChange("location", e.target.value)}
-            placeholder={translation === "fr" ? "Lieu" : "Location"}
+            id="organizerCriteria"
+            value={filterCriteria.organizer}
+            options={organizerOptions}
+            onChange={(e) => handleFilterChange("organizer", e.target.value)}
+            placeholder={translation === "fr" ? "Fournisseur de groupe de jeu" : "Playgroup Provider"}
           />
         </div>
         {/* Third row for active filters */}

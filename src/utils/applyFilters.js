@@ -52,7 +52,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
         if (criteria.area && item.Area !== criteria.area) return false;
         if (criteria.language && item.Language !== criteria.language) return false;
         if (criteria.day && item.Day !== criteria.day) return false;
-        if (criteria.location && item.Location !== criteria.location) return false;
+        if (criteria.organizer && item.Organizer !== criteria.organizer) return false;
         if (criteria.age && item.Age !== criteria.age) return false;
 
         const itemTimeCategory = categorizeTime(item.Time);

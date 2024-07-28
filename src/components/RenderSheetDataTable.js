@@ -60,7 +60,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     area: "",
     language: "",
     day: "",
-    location: "",
+    organizer: "",
     age: "",
     time: "",
   });
@@ -88,7 +88,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       area: "",
       language: "",
       day: "",
-      location: "",
+      organizer: "",
       age: "",
       time: "",
     });
@@ -124,7 +124,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const handleFilterChange = (key, value) => {
     // Deselect marker when the name filter changes or when the area filter changes
-    if (key === "location" || key === "area") {
+    if (key === "organizer" || key === "area") {
       setSelectedAddress(null);
     }
     setFilterCriteria({ ...filterCriteria, [key]: value });
@@ -143,9 +143,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
   }, [sheetData]);
 
-  const locationOptions = useMemo(() => {
+  const organizerOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
+    return [...new Set(sheetData.map((item) => item.Organizer).filter(Boolean))];
   }, [sheetData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(
@@ -189,7 +189,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           languageOptions={languageOptions}
           dayOptions={dayOptions}
           timeOptions={timeOptions}
-          locationOptions={locationOptions}
+          organizerOptions={organizerOptions}
           handleDateChange={handleDateChange}
           setStartDate={setStartDate}
           resetFilters={resetFilters}

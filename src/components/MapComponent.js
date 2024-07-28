@@ -118,7 +118,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
                 }}
               >
                 <div>
-                  <h3>{marker.Location}</h3>
+                  <h3>{marker.Organizer}</h3>
                   <p>{marker.Address}</p>
                 </div>
               </InfoWindow>
