@@ -60,7 +60,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     area: "",
     language: "",
     day: "",
-    location: "",
+    organizer: "",
     age: "",
     time: "",
   });
@@ -68,15 +68,18 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   // Controls visibility of the map
   const [isMapVisible, setIsMapVisible] = useState(false);
-
   // State to control the number of visible cards
   const [visibleCards, setVisibleCards] = useState(6);
+  // State to track if any filters are active
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  
   const handleShowMore = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
   };
 
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address); // Set the address when a map marker is selected
+    setIsFilterActive(true); // Mark filter as active when a marker is selected
   };
 
   // Reset all filters to default states, including clearing selected markers
@@ -88,10 +91,11 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       area: "",
       language: "",
       day: "",
-      location: "",
+      organizer: "",
       age: "",
       time: "",
     });
+    setIsFilterActive(false); // Reset filter state
   };
 
   // Show today's playgroups and scroll to the target area
@@ -124,7 +128,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const handleFilterChange = (key, value) => {
     // Deselect marker when the name filter changes or when the area filter changes
-    if (key === "location" || key === "area") {
+    if (key === "organizer" || key === "area") {
       setSelectedAddress(null);
     }
     setFilterCriteria({ ...filterCriteria, [key]: value });
@@ -143,9 +147,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
   }, [sheetData]);
 
-  const locationOptions = useMemo(() => {
+  const organizerOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Location).filter(Boolean))];
+    return [...new Set(sheetData.map((item) => item.Organizer).filter(Boolean))];
   }, [sheetData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(
@@ -189,10 +193,11 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           languageOptions={languageOptions}
           dayOptions={dayOptions}
           timeOptions={timeOptions}
-          locationOptions={locationOptions}
+          organizerOptions={organizerOptions}
           handleDateChange={handleDateChange}
           setStartDate={setStartDate}
           resetFilters={resetFilters}
+          isFilterActive={isFilterActive}
           dayMapping={translations.daysOfWeek} // Pass the mapping to the FilterContainer
         />
       </div>
@@ -217,6 +222,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         >
           <MapComponent
             sheetData={filteredData}
+            selectedAddress={selectedAddress}
             onMarkerSelect={handleMarkerSelect}
           />
         </div>

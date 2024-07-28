@@ -1,4 +1,19 @@
-const getIcons = (translation, Parking, Coffee, WiFi, Outdoor, Language, Scale) => ({
+const languageIconMap = {
+  English: "english.svg",
+  French: "french.svg",
+  Arabic: "arabic.svg",
+  Mandarin: "mandarin.svg",
+};
+
+const getIcons = (
+  translation,
+  Parking,
+  Coffee,
+  WiFi,
+  Outdoor,
+  Language,
+  Scale
+) => ({
   time: "time.svg",
   location: "location.svg",
   age: "age.svg",
@@ -36,8 +51,8 @@ const getIcons = (translation, Parking, Coffee, WiFi, Outdoor, Language, Scale) 
   // Assuming Language should always be shown; adjust if needed
   language: {
     show: true,
-    src: `${Language.toLowerCase()}.svg`, // Dynamic path to your language icon
-    tooltip: Language,
+    src: languageIconMap[Language] || "english_french.svg",
+    tooltip: Language === "English/French" ? "En/Fr" : Language,
   },
 });
 
