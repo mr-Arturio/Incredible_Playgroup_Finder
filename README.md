@@ -152,8 +152,10 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - add social icons for mobile screen
 - fix margin, sizeng, position here and there...
 - implement Organizers filter (Playgroup provider)
-- make rese filter button inactive when no filters apllied
-- make butoon active when map Marker chosen (works fine with regular filters)
+- make reset filter button inactive when no filters apllied, + orangw collor for active
+- make reset button active when map Marker chosen (works fine with regular filters)
+- work on Repeats (weekle, Biweekly...) logic
+- fix show todays button
 
 
 ### Future Development

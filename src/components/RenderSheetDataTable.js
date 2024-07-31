@@ -99,28 +99,33 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     setIsFilterActive(false); // Reset filter state
   };
 
-    // Show today's playgroups and scroll to the target area
-    const showTodayPlaygroups = () => {
-      const today = new Date().toLocaleDateString("en-CA");
-      console.log("Today:", today);
-      setFilterCriteria({ ...filterCriteria, date: today });
-      setSelectedAddress(null); // Optionally reset selected address
-      if (todayPlaygroupsSectionRef.current) {
-        todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-    };
+  const showTodayPlaygroups = () => {
+    const today = new Date().toLocaleDateString("en-CA");
+    console.log("Today (en-CA):", today);
+    console.log("Filter criteria before update:", filterCriteria);
+  
+    setFilterCriteria({ ...filterCriteria, date: today });
+    console.log("Filter criteria after update:", { ...filterCriteria, date: today });
+  
+    setSelectedAddress(null); // Optionally reset selected address
+    if (todayPlaygroupsSectionRef.current) {
+      todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   
     // Function to get next occurrence of playgroups based on repeats logic
     const getFilteredData = () => {
       if (isLoading) return [];
-  
+    
       let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+      console.log("Data after applying filters:", filtered);
+    
       if (selectedAddress) {
         filtered = filtered.filter(
           (playgroup) => playgroup.Address === selectedAddress
         );
       }
-  
+    
       filtered = filtered.map((playgroup) => {
         if (playgroup.Repeats) {
           const nextOccurrence = getNextOccurrence(playgroup.Day, playgroup.Repeats);
@@ -133,19 +138,20 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         }
         return playgroup;
       });
-  
+    
       // Sort filtered data by date in ascending order
       filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-  
+    
+      console.log("Filtered and processed data:", filtered);
       return filtered;
     };
   
-    const filteredData = useMemo(() => getFilteredData(), [
-      sheetData,
-      filterCriteria,
-      selectedAddress,
-      isLoading,
-    ]);
+    const filteredData = useMemo(() => {
+      const data = getFilteredData();
+      console.log("Filtered Data:", data);
+      return data;
+    }, [sheetData, filterCriteria, selectedAddress, isLoading]);
+    
   
     const noDataAvailable = filteredData.length === 0;
 

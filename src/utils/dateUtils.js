@@ -2,7 +2,7 @@ export const getNextOccurrence = (dayOfWeek, repeats) => {
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
 
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const dayIndex = daysOfWeek.indexOf(dayOfWeek);
 
   if (dayIndex === -1) return null;
@@ -15,7 +15,7 @@ export const getNextOccurrence = (dayOfWeek, repeats) => {
 
   if (repeats === "Weekly") {
     return nextOccurrence;
-  } else if (repeats === "Bi-Weekly") {
+  } else if (repeats === "Biweekly") {
     nextOccurrence.setUTCDate(nextOccurrence.getUTCDate() + 7);
     return nextOccurrence;
   } else if (repeats === "Monthly") {
