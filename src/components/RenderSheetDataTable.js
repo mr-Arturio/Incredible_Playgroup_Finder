@@ -1,53 +1,85 @@
-import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState, useMemo, useRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import PlaygroupCard from "./PlaygroupCard";
+import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
-import FilterComponent from "./FilterComponent";
 import MapComponent from "./MapComponent";
-import Loading from "../app/loading";
+import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
-import DatePickerComponent from "./DatePickerComponent";
+import FilterContainer from "./Filter_Component/FilterContainer";
+import ToggleButton from "./ToggleButton";
+import NoDataText from "./NoDataText";
+import ShowTodayButton from "./ShowTodayButton";
 
-const RenderSheetDataTable = ({ sheetData }) => {
-  const isLoading = !sheetData || sheetData.length === 0; //// Check if the data is still loading or empty
+const RenderSheetDataTable = ({ sheetData, translation }) => {
+  const isLoading = !sheetData || sheetData.length === 0;
+
+  // Define text mappings based on the selected language
+  const translations = {
+    toggledOn: translation === "fr" ? "Masquer les filtres" : "Hide Filters",
+    toggledOff: translation === "fr" ? "Afficher les filtres" : "Show Filters",
+    hide: translation === "fr" ? "Masquer la Carte" : "Hide Map",
+    show: translation === "fr" ? "Afficher la Carte" : "Show Map",
+    showLess: translation === "fr" ? "Afficher moins" : "Show Less",
+    showMore: translation === "fr" ? "Afficher plus" : "Show More",
+    daysOfWeek: {
+      Mon: translation === "fr" ? "Lundi" : "Monday",
+      Tue: translation === "fr" ? "Mardi" : "Tuesday",
+      Wed: translation === "fr" ? "Mercredi" : "Wednesday",
+      Thur: translation === "fr" ? "Jeudi" : "Thursday",
+      Fri: translation === "fr" ? "Vendredi" : "Friday",
+      Sat: translation === "fr" ? "Samedi" : "Saturday",
+      Sun: translation === "fr" ? "Dimanche" : "Sunday",
+    },
+    timesOfDay: {
+      Morning: translation === "fr" ? "Matin" : "Morning",
+      Afternoon: translation === "fr" ? "Après-midi" : "Afternoon",
+      Evening: translation === "fr" ? "Soir" : "Evening",
+    },
+    areaOptions: {
+      East: translation === "fr" ? "Est" : "East",
+      West: translation === "fr" ? "Ouest" : "West",
+      Central: translation === "fr" ? "Centre" : "Central",
+      South: translation === "fr" ? "Sud" : "South",
+    },
+    ageOptions: {
+      Babies: translation === "fr" ? "Bébés" : "Babies",
+      Toddlers: translation === "fr" ? "Tout-petits" : "Toddlers",
+      Kids: translation === "fr" ? "Enfants" : "Kids",
+    },
+  };
+
+  // Reference for scrolling to today's playgroups section
+  const todayPlaygroupsSectionRef = useRef(null);
 
   // State declarations
   const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
   const [selectedAddress, setSelectedAddress] = useState(null); // Tracks the selected address from map markers
-  const [filteredData, setFilteredData] = useState(sheetData || []); // Stores the filtered data based on criteria
   const [filterCriteria, setFilterCriteria] = useState({
     // Stores the current filter settings
     date: "",
-    location: "",
+    area: "",
     language: "",
     day: "",
-    name: "",
+    organizer: "",
     age: "",
     time: "",
   });
+  // State to control filter container visibility
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  // Controls visibility of the map
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  // State to control the number of visible cards
+  const [visibleCards, setVisibleCards] = useState(6);
+  // State to track if any filters are active
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  
+  const handleShowMore = () => {
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
+  };
 
-  // State for filter options, extracted from sheet data
-  const [locationOptions, setLocationOptions] = useState([]);
-  const [languageOptions, setLanguageOptions] = useState([]);
-  const [nameOptions, setNameOptions] = useState([]);
-  const [timeOptions, setTimeOptions] = useState([
-    "Morning",
-    "Afternoon",
-    "Evening",
-  ]);
-  const [ageOptions, setAgeOptions] = useState(["Babies", "Toddlers", "Kids"]);
-  const [dayOptions, setDayOptions] = useState([
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ]);
   const handleMarkerSelect = (Address) => {
     setSelectedAddress(Address); // Set the address when a map marker is selected
+    setIsFilterActive(true); // Mark filter as active when a marker is selected
   };
 
   // Reset all filters to default states, including clearing selected markers
@@ -56,186 +88,184 @@ const RenderSheetDataTable = ({ sheetData }) => {
     setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
       date: "",
-      location: "",
+      area: "",
       language: "",
       day: "",
-      name: "",
+      organizer: "",
       age: "",
       time: "",
     });
+    setIsFilterActive(false); // Reset filter state
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      // Extract all unique location, languge, facility from sheetData. If it's not in spreadsheet it will to be displayed in the filter
-      setLocationOptions([
-        ...new Set(sheetData.map((item) => item.Location).filter(Boolean)),
-      ]);
-      setLanguageOptions([
-        ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
-      ]);
-      setNameOptions([
-        ...new Set(sheetData.map((item) => item.Name).filter(Boolean)),
-      ]);
-
-      // Apply filters to the data
-      let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-
-      // If a specific location is selected via marker, filter by that as well
-      if (selectedAddress) {
-        filtered = filtered.filter(
-          (playgroup) => playgroup.Address === selectedAddress
-        );
-      }
-
-      setFilteredData(filtered);
+  // Show today's playgroups and scroll to the target area
+  const showTodayPlaygroups = () => {
+    const today = new Date().toLocaleDateString("en-CA");
+    console.log("Today:", today);
+    setFilterCriteria({ ...filterCriteria, date: today });
+    setSelectedAddress(null); // Optionally reset selected address
+    if (todayPlaygroupsSectionRef.current) {
+      todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [sheetData, filterCriteria, isLoading, selectedAddress]);
+  };
 
-  if (isLoading) return <Loading />;
-  //check for no data available
+  const filteredData = useMemo(() => {
+    if (isLoading) return [];
+
+    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+    if (selectedAddress) {
+      filtered = filtered.filter(
+        (playgroup) => playgroup.Address === selectedAddress
+      );
+    }
+    // Sort filtered data by date in descending order
+    filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
+
+    return filtered;
+  }, [sheetData, filterCriteria, selectedAddress, isLoading]);
+
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
-    // Deselect marker when the name filter changes or when the location filter changes
-    if (key === "name" || key === "location") {
+    // Deselect marker when the name filter changes or when the area filter changes
+    if (key === "organizer" || key === "area") {
       setSelectedAddress(null);
     }
     setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
+  const areaOptions = useMemo(() => {
+    if (!sheetData) return [];
+    const uniqueAreas = [
+      ...new Set(sheetData.map((item) => item.Area).filter(Boolean)),
+    ];
+    return uniqueAreas.map((area) => translations.areaOptions[area] || area);
+  }, [sheetData, translations.areaOptions]);
+
+  const languageOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
+  }, [sheetData]);
+
+  const organizerOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [...new Set(sheetData.map((item) => item.Organizer).filter(Boolean))];
+  }, [sheetData]);
+
+  const timeOptions = Object.keys(translations.timesOfDay).map(
+    (key) => translations.timesOfDay[key]
+  );
+  const ageOptions = Object.keys(translations.ageOptions).map(
+    (key) => translations.ageOptions[key]
+  );
+  const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
+
+  if (isLoading) return <Loading />;
+
   return (
-    <div className="flex flex-col md:flex-col">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 sticky top-0 bg-white rounded-lg shadow overflow-y-auto z-10 p-4 w-full">
-        {/* Filters container */}
-        <div className="flex flex-col space-y-0 md:space-y-0 md:flex-1">
-          {/* First row of filters */}
-          <div className="flex justify-around gap-2 mb-4">
-            <FilterComponent
-              id="locationCriteria"
-              className="flex-grow"
-              value={filterCriteria.location}
-              options={locationOptions}
-              onChange={(e) => handleFilterChange("location", e.target.value)}
-              placeholder="Location"
-            />
-            <FilterComponent
-              id="ageCriteria"
-              className="flex-grow"
-              value={filterCriteria.age}
-              options={ageOptions}
-              onChange={(e) => handleFilterChange("age", e.target.value)}
-              placeholder="Age Group"
-            />
-
-            <FilterComponent
-              id="languageCriteria"
-              className="flex-grow"
-              value={filterCriteria.language}
-              options={languageOptions}
-              onChange={(e) => handleFilterChange("language", e.target.value)}
-              placeholder="Language"
-            />
-          </div>
-          {/* Second row of filters */}
-          <div className="flex justify-around gap-2 mb-4">
-            <FilterComponent
-              id="dayCriteria"
-              value={filterCriteria.day}
-              options={dayOptions}
-              onChange={(e) => handleFilterChange("day", e.target.value)}
-              placeholder="Day of the Week"
-            />
-
-            <FilterComponent
-              id="timeCriteria"
-              value={filterCriteria.time}
-              options={timeOptions}
-              onChange={(e) => handleFilterChange("time", e.target.value)}
-              placeholder="Time of the Day"
-            />
-
-            <FilterComponent
-              id="nameCriteria"
-              value={filterCriteria.name}
-              options={nameOptions}
-              onChange={(e) => handleFilterChange("name", e.target.value)}
-              placeholder="Facility"
-            />
-          </div>
-        </div>
-
-        {/* Date picker and reset button */}
-        <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
-          <div className="w-full h-full md:flex md:items-center">
-            <DatePickerComponent
-              onDateChange={(date) =>
-                handleDateChange(
-                  date,
-                  setStartDate,
-                  setFilterCriteria,
-                  filterCriteria
-                )
-              }
-            />
-          </div>
-
-          {/* Reset button to clear all selected filters */}
-          <button
-            onClick={resetFilters}
-            className="mt-4 md:mt-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-full md:w-auto"
-          >
-            Reset Filters
-          </button>
-        </div>
+    <>
+      <div className="flex justify-start md:mb-4 mb-2">
+        <ShowTodayButton
+          onShowToday={showTodayPlaygroups}
+          translation={translation}
+        />
       </div>
-
+      {/* Button to toggle filters */}
+      <div className="flex flex-1 flex-col" id="today-playgroups-section">
+        <ToggleButton
+          isToggled={isFilterVisible}
+          onToggle={() => setIsFilterVisible(!isFilterVisible)}
+          labels={{
+            toggledOn: translations.toggledOn,
+            toggledOff: translations.toggledOff,
+          }}
+          className="md:hidden"
+        />
+      </div>
+      {/* Filters container */}
+      <div className={` ${isFilterVisible ? "" : "hidden md:flex"}`}>
+        <FilterContainer
+          filterCriteria={filterCriteria}
+          setFilterCriteria={setFilterCriteria}
+          handleFilterChange={handleFilterChange}
+          areaOptions={areaOptions}
+          ageOptions={ageOptions}
+          languageOptions={languageOptions}
+          dayOptions={dayOptions}
+          timeOptions={timeOptions}
+          organizerOptions={organizerOptions}
+          handleDateChange={handleDateChange}
+          setStartDate={setStartDate}
+          resetFilters={resetFilters}
+          isFilterActive={isFilterActive}
+          dayMapping={translations.daysOfWeek} // Pass the mapping to the FilterContainer
+        />
+      </div>
       {/* Content Sections */}
-      <div className="flex flex-1 md:flex-row ">
-        {/* Playgroup Cards Section */}
-        <div className="w-full md:w-3/5 pt-4 pr-4">
-          <div
-            className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
-            style={{ height: "80vh" }}
-          >
-            {noDataAvailable ? (
-              <div className="flex justify-center items-center h-full">
-                <span className="text-gray-500 text-center">
-                  No data found for the selected filters. Please adjust your
-                  search criteria.
-                </span>
-              </div>
-            ) : (
-              <div className="mt-12">
-                {filteredData
-                  .filter((playgroup) => {
-                    //additional logic to check that playgroup is not in the past
-                    const playgroupDate = new Date(playgroup.Date);
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0);
-                    return (
-                      selectedAddress === null ||
-                      (playgroup.Address === selectedAddress &&
-                        playgroupDate >= today)
-                    );
-                  })
-                  .map((playgroup) => (
-                    <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
-                  ))}
-              </div>
-            )}
-          </div>
-        </div>
-
+      <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
-        <div className="w-full md:w-2/5">
+        {/* Button to toggle map */}
+        <ToggleButton
+          isToggled={isMapVisible}
+          onToggle={() => setIsMapVisible(!isMapVisible)}
+          labels={{
+            toggledOn: translations.hide,
+            toggledOff: translations.show,
+          }}
+          className="md:hidden"
+        />
+
+        <div
+          className={`w-full md:h-[85vh] xl:w-1/2 ${
+            isMapVisible ? "" : "hidden md:flex"
+          } h-[55vh]`}
+        >
           <MapComponent
             sheetData={filteredData}
+            selectedAddress={selectedAddress}
             onMarkerSelect={handleMarkerSelect}
           />
         </div>
+        {/* Playgroup Cards Section */}
+        <div
+          ref={todayPlaygroupsSectionRef}
+          id="todayPlaygroupsSection"
+          className="w-full xl:w-1/2 pt-2 pr-2 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          style={{ height: "80vh" }}
+        >
+          {noDataAvailable ? (
+            <NoDataText />
+          ) : (
+            <>
+              {filteredData
+                .filter((playgroup) => {
+                  return (
+                    selectedAddress === null ||
+                    playgroup.Address === selectedAddress
+                  );
+                })
+                .slice(0, visibleCards)
+                .map((playgroup) => (
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                ))}
+              {/* Show more button if there are more playgroups to display */}
+              {visibleCards < filteredData.length && (
+                <div className="flex justify-center mb-1 md:mb-2">
+                  <ToggleButton
+                    isToggled={false}
+                    onToggle={handleShowMore}
+                    labels={{
+                      toggledOn: translations.showLess,
+                      toggledOff: translations.showMore,
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,43 +1,81 @@
 const applyFilters = (data, criteria, selectedAddress) => {
-  // Create a date string for today's date in 'YYYY-MM-DD' format
-  const today = new Date();
-  const todayDateString = today.toISOString().split("T")[0];
+  try {
+    // Create a date object for today's date
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
 
-  const categorizeTime = (timeString) => {
-    const startTime = parseInt(timeString.split(" - ")[0].replace(":", ""), 10);
-    if (startTime < 1200) return "Morning";
-    if (startTime >= 1200 && startTime < 1600) return "Afternoon";
-    if (startTime >= 1600) return "Evening";
-  };
+    console.log('Today\'s Date:', today.toISOString().split("T")[0]);
 
-  return data.filter((item) => {
-    // Date check for past dates
-    const itemDateString = new Date(item.Date).toISOString().split("T")[0];
-    if (itemDateString < todayDateString) return false;
+    const categorizeTime = (timeString) => {
+      if (!timeString || !timeString.includes(" - ")) {
+        console.error(`Invalid time format: ${timeString}`);
+        throw new Error(`Invalid time format: ${timeString}`);
+      }
 
-    // If there's a selected address and no other criteria, return true if the address matches
-    const noOtherCriteria = Object.values(criteria).every((val) => val === "");
+      const [startTimeString] = timeString.split(" - ");
+      const [hours, minutes] = startTimeString.split(":").map(Number);
+      const startTime = (hours || 0) * 100 + (minutes || 0);
 
-    if (noOtherCriteria && selectedAddress === item.Address) return true;
+      if (isNaN(startTime)) {
+        console.error(`Invalid time format: ${timeString}`);
+        throw new Error(`Invalid time format: ${timeString}`);
+      }
 
-    if (criteria.location && item.Location !== criteria.location) return false;
+      if (startTime < 1200) return "Morning";
+      if (startTime >= 1200 && startTime < 1600) return "Afternoon";
+      if (startTime >= 1600) return "Evening";
+    };
 
-    if (criteria.language && item.Language !== criteria.language) return false;
+    return data.filter((item) => {
+      try {
+        // Log the item being processed
+        // console.log('Processing item:', item);
 
-    if (criteria.day && item.Day !== criteria.day) return false;
+        // Check for missing or empty values
+        if (!item.Date || !item.Address) {
+          console.error(`Missing required property in item with ID ${item.ID}`);
+          return false;
+        }
 
-    if (criteria.name && item.Name !== criteria.name) return false;
+        // Date check for past dates using Date objects
+        const itemDate = new Date(item.Date);
+        itemDate.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
+        // console.log('Item Date:', itemDate.toISOString().split("T")[0]);
+        if (itemDate < today) return false;
 
-    if (criteria.age && item.Age !== criteria.age) return false;
+        // If there's a selected address and no other criteria, return true if the address matches
+        const noOtherCriteria = Object.values(criteria).every((val) => val === "");
+        // console.log('No Other Criteria:', noOtherCriteria);
 
-    if (criteria.time && categorizeTime(item.Time) !== criteria.time)
-      return false;
+        if (noOtherCriteria && selectedAddress === item.Address) return true;
 
-    // make sure data is in ISO format 'YYYY-MM-DD'
-    if (criteria.date && itemDateString !== criteria.date) return false;
+        if (criteria.area && item.Area !== criteria.area) return false;
+        if (criteria.language && item.Language !== criteria.language) return false;
+        if (criteria.day && item.Day !== criteria.day) return false;
+        if (criteria.organizer && item.Organizer !== criteria.organizer) return false;
+        if (criteria.age && item.Age !== criteria.age) return false;
 
-    return true;
-  });
+        const itemTimeCategory = categorizeTime(item.Time);
+        // console.log('Item Time Category:', itemTimeCategory);
+        if (criteria.time && itemTimeCategory !== criteria.time) return false;
+
+        // Ensure data is in ISO format 'YYYY-MM-DD'
+        if (criteria.date) {
+          const itemDateString = itemDate.toISOString().split("T")[0];
+          // console.log('Item Date String:', itemDateString);
+          if (itemDateString !== criteria.date) return false;
+        }
+
+        return true;
+      } catch (innerError) {
+        console.error(`Error processing item with ID ${item.id}: ${innerError.message}`);
+        return false;
+      }
+    });
+  } catch (error) {
+    console.error(`Error applying filters: ${error.message}`);
+    return [];
+  }
 };
 
 export default applyFilters;

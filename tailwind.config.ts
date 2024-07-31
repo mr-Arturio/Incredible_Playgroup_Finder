@@ -14,6 +14,21 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        mainBlue: '#4E8DCA',
+        hoverBlue: '#316191',
+        plum: '#A34298',
+        amber: '#FCBE22',
+        reset: '#EF682A',
+        resetHover: '#D95D25',
+        cardBody: '#dbeafe',
+        cardFooter: '#93c5fd',
+        gradient1: '#5a108f',
+        gradient2: '#8b2fc9',
+      },
+      fontFamily: {
+        lazydog: ['Lazydog', 'sans-serif'],
+      },
     },
   },
   plugins: [],

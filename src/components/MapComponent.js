@@ -1,7 +1,5 @@
-// "use client";
-
 import React, { useState, useEffect, useMemo } from "react";
-import Loading from "../app/loading";
+import Loading from "./Loading";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -10,7 +8,7 @@ import {
 } from "@react-google-maps/api";
 // import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
-function MapComponent({ sheetData, onMarkerSelect }) {
+function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
@@ -25,30 +23,41 @@ function MapComponent({ sheetData, onMarkerSelect }) {
 
   useEffect(() => {
     if (!sheetData) return;
-
     // Filter out the data with valid lat and lng information
     const markersWithLatLng = sheetData.filter((data) => {
       // Log the lat and lng values to check if they are numbers
       //console.log("Latitude:", data.lat, "Longitude:", data.lng);
-
       // Convert lat and lng strings to numbers
       const lat = parseFloat(data.lat);
       const lng = parseFloat(data.lng);
-
       // Check if lat and lng are valid numbers
       const isValidLatLng = !isNaN(lat) && !isNaN(lng);
-
+      // Log an error if lat or lng is invalid
       if (!isValidLatLng) {
         console.error("Invalid latitude or longitude:", data);
       }
-
       return isValidLatLng;
     });
+    // Filter unique addresses
+    const uniqueMarkers = [];
+    const addresses = new Set();
 
-    setMarkers(markersWithLatLng);
+    markersWithLatLng.forEach((marker) => {
+      if (!addresses.has(marker.Address)) {
+        uniqueMarkers.push(marker);
+        addresses.add(marker.Address);
+      }
+    });
+
+    setMarkers(uniqueMarkers);
+    console.log(`Number of markers shown: ${uniqueMarkers.length}`);
+    // console.log(
+    //   "Visible addresses:",
+    //   uniqueMarkers.map((marker) => marker.Address)
+    // );
   }, [sheetData]);
 
-  // Fetch the user's location and update the center of the map
+  // Fetch the user's location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -57,7 +66,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          setCenter(userCoords);
+          // setCenter(userCoords); // Center the map on the user's location(removed in case user is not in Ottawa)
           setUserLocation(userCoords); // Update user's location state
         },
         (error) => {
@@ -73,28 +82,35 @@ function MapComponent({ sheetData, onMarkerSelect }) {
       // Use fallback center
       setCenter(fallbackCenter);
     }
-  }, []);
+  }, [fallbackCenter]);
 
-  if (!isLoaded) return <Loading />;;
+  const createKey = (lat, lng, address) => `${lat}-${lng}-${address}`;
+
+  if (!isLoaded) return <Loading />;
   return (
-    <div className="h-full w-full content-center">
+    <div className="h-full w-full content-start mt-0 lg:ml-0 xl:pl-1">
       <GoogleMap
-        mapContainerStyle={{ width: "100%", height: "80%" }}
+        mapContainerStyle={{ width: "100%", height: "90%" }}
         center={center}
         zoom={11}
       >
-        {markers.map((marker, index) => (
+        {markers.map((marker) => (
           <Marker //need to parseFloat again to avoid error... thats where TypeScript would be useful
-            key={marker.ID}
+            key={createKey(marker.lat, marker.lng, marker.Address)}
             position={{
               lat: parseFloat(marker.lat),
               lng: parseFloat(marker.lng),
             }}
             onClick={() => onMarkerSelect(marker.Address)}
-            onMouseOver={() => setHoveredMarker(index)} // Assume each marker has a unique id
+            onMouseOver={() =>
+              setHoveredMarker(
+                createKey(marker.lat, marker.lng, marker.Address)
+              )
+            }
             onMouseOut={() => setHoveredMarker(null)}
           >
-            {hoveredMarker === index && (
+            {hoveredMarker ===
+              createKey(marker.lat, marker.lng, marker.Address) && (
               <InfoWindow
                 position={{
                   lat: parseFloat(marker.lat),
@@ -102,7 +118,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
                 }}
               >
                 <div>
-                  <h3>{marker.Name}</h3>
+                  <h3>{marker.Organizer}</h3>
                   <p>{marker.Address}</p>
                 </div>
               </InfoWindow>

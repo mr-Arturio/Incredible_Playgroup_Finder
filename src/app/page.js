@@ -3,31 +3,40 @@
 import React, { useEffect, useState } from "react";
 import { getSheetData } from "../actions/getSheetData";
 import RenderSheetDataTable from "../components/RenderSheetDataTable";
-import { Header } from "../components/Header";
+import Header from "../components/Header";
+import ContactForm from "../components/ContactForm";
+import { useLanguage } from "../context/LanguageContext";
+import Navbar from "../components/Navbar";
+import { Footer } from "../components/Footer";
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
+  const { translation } = useLanguage();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getSheetData();
-      setSheetData(response.props.sheetData); // Assuming the data is structured correctly
+      setSheetData(response.props.sheetData);
     };
     fetchData();
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen">
-      {/* Top Content Area - Always present */}
-      <div className=" max-w-screen-2xl w-11/12 p-4">
-        <Header />
+    <>
+      <Navbar />
+      <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
+        <div className="container">
+          <Header />
+        </div>
+        <main className="container flex-1">
+          <RenderSheetDataTable sheetData={sheetData} translation={translation} />
+          <section>
+            <ContactForm />
+          </section>
+        </main>
       </div>
-
-      <main className="max-w-screen-2xl flex-1  w-11/12">
-        {" "}
-        <RenderSheetDataTable sheetData={sheetData} />
-      </main>
-    </div>
+      <Footer />
+    </>
   );
 }
 

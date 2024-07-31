@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Footer } from "../components/Footer";
-import Navbar from "../components/Navbar";
+import "./fonts.css";
+
+import { LanguageProvider } from "../context/LanguageContext";
 
 // Initialize the font
 const inter = Inter({ subsets: ["latin"] });
@@ -11,14 +12,14 @@ export const metadata = {
   description: "EarlyON playgroups in Ottawa",
 };
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
