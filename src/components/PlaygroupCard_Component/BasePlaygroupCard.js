@@ -12,6 +12,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Day,
     Time,
     Date,
+    Repeats,
     Service,
     Service_fr,
     Location,
@@ -85,6 +86,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         Location={Location}
         Day={Day}
         Date={Date}
+        Repeats={Repeats}
         Service={Service}
         Service_fr={Service_fr}
         Cancelled={Cancelled}

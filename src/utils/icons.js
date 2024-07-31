@@ -58,19 +58,19 @@ const getIcons = (
 
 const getSocialIcons = (FB, Insta, Eventbrite) => ({
   fb: {
-    show: FB.trim() !== "", // Show icon if FB is not empty
+    show: (FB || "").trim() !== "", // Show icon if FB is not empty
     src: "facebook_color.svg",
-    url: FB.trim(),
+    url: (FB || "").trim(),
   },
   insta: {
-    show: Insta.trim() !== "", // Show icon if Insta is not empty
+    show: (Insta || "").trim() !== "", // Show icon if Insta is not empty
     src: "instagram_color.svg",
-    url: Insta.trim(),
+    url: (Insta || "").trim(),
   },
   eventbrite: {
-    show: Eventbrite.trim() !== "", // Show icon if Eventbrite is not empty
+    show: (Eventbrite || "").trim() !== "", // Show icon if Eventbrite is not empty
     src: "eventbrite_color.svg",
-    url: Eventbrite.trim(),
+    url: (Eventbrite || "").trim(),
   },
 });
 

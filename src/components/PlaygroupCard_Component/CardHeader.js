@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import AddToCalendar from "./AddToCalendar";
+import { getNextOccurrence } from "../../utils/dateUtils";
 
 function CardHeader({
   Organizer,
@@ -11,6 +12,7 @@ function CardHeader({
   PG_URL_fr,
   Day,
   Date,
+  Repeats,
   Service,
   Service_fr,
   Cancelled,
@@ -24,6 +26,9 @@ function CardHeader({
 }) {
   const serviceUrl = translation === "en" ? PG_URL : PG_URL_fr;
   const organizerUrl = translation === "en" ? URL : URL_fr;
+
+    // Calculate the next occurrence if Date is not provided
+    const displayDate = Date || getNextOccurrence(Day, Repeats)?.toISOString().split("T")[0] || "";
 
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
@@ -40,7 +45,7 @@ function CardHeader({
             </a>
           </div>
           <p className="mt-1 text-gray-600 text-sm">
-            {Day}, {Date}
+            {Day}, {displayDate}
           </p>
         </div>
         <div>
@@ -85,7 +90,7 @@ function CardHeader({
             <AddToCalendar
               name={Organizer}
               address={address}
-              date={Date}
+              date={displayDate}
               startTime={startTime}
               endTime={endTime}
               Cancelled={Cancelled}

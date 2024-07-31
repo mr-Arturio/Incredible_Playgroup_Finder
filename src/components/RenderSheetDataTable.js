@@ -9,6 +9,7 @@ import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
+import { getNextOccurrence } from "../utils/dateUtils";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -98,33 +99,55 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     setIsFilterActive(false); // Reset filter state
   };
 
-  // Show today's playgroups and scroll to the target area
-  const showTodayPlaygroups = () => {
-    const today = new Date().toLocaleDateString("en-CA");
-    console.log("Today:", today);
-    setFilterCriteria({ ...filterCriteria, date: today });
-    setSelectedAddress(null); // Optionally reset selected address
-    if (todayPlaygroupsSectionRef.current) {
-      todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const filteredData = useMemo(() => {
-    if (isLoading) return [];
-
-    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-    if (selectedAddress) {
-      filtered = filtered.filter(
-        (playgroup) => playgroup.Address === selectedAddress
-      );
-    }
-    // Sort filtered data by date in descending order
-    filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-
-    return filtered;
-  }, [sheetData, filterCriteria, selectedAddress, isLoading]);
-
-  const noDataAvailable = filteredData.length === 0;
+    // Show today's playgroups and scroll to the target area
+    const showTodayPlaygroups = () => {
+      const today = new Date().toLocaleDateString("en-CA");
+      console.log("Today:", today);
+      setFilterCriteria({ ...filterCriteria, date: today });
+      setSelectedAddress(null); // Optionally reset selected address
+      if (todayPlaygroupsSectionRef.current) {
+        todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+  
+    // Function to get next occurrence of playgroups based on repeats logic
+    const getFilteredData = () => {
+      if (isLoading) return [];
+  
+      let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+      if (selectedAddress) {
+        filtered = filtered.filter(
+          (playgroup) => playgroup.Address === selectedAddress
+        );
+      }
+  
+      filtered = filtered.map((playgroup) => {
+        if (playgroup.Repeats) {
+          const nextOccurrence = getNextOccurrence(playgroup.Day, playgroup.Repeats);
+          if (nextOccurrence) {
+            return {
+              ...playgroup,
+              Date: nextOccurrence.toISOString().split("T")[0],
+            };
+          }
+        }
+        return playgroup;
+      });
+  
+      // Sort filtered data by date in ascending order
+      filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
+  
+      return filtered;
+    };
+  
+    const filteredData = useMemo(() => getFilteredData(), [
+      sheetData,
+      filterCriteria,
+      selectedAddress,
+      isLoading,
+    ]);
+  
+    const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
     // Deselect marker when the name filter changes or when the area filter changes
