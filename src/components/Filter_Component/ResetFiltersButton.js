@@ -3,7 +3,7 @@ const ResetFiltersButton = ({ resetFilters, translation, hasActiveFilters }) => 
     <button
       onClick={resetFilters}
       className={`mt-4 lg:mt-0 text-white font-bold py-2 px-2 rounded-lg focus:outline-none focus:shadow-outline h-full lg:w-auto ${
-        hasActiveFilters ? 'bg-mainBlue hover:bg-hoverBlue' : 'bg-gray-400 cursor-not-allowed'
+        hasActiveFilters ? 'bg-reset hover:bg-resetHover' : 'bg-gray-400 cursor-not-allowed'
       }`}
       disabled={!hasActiveFilters}
     >

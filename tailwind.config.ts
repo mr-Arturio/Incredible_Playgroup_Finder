@@ -19,6 +19,8 @@ const config: Config = {
         hoverBlue: '#316191',
         plum: '#A34298',
         amber: '#FCBE22',
+        reset: '#EF682A',
+        resetHover: '#D95D25',
         cardBody: '#dbeafe',
         cardFooter: '#93c5fd',
         gradient1: '#5a108f',
