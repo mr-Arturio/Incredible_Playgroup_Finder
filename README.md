@@ -151,6 +151,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - adjust map size for mobile,
 - add social icons for mobile screen
 - fix margin, sizeng, position here and there...
+- implement Organizers filter (Playgroup provider)
+- make rese filter button inactive when no filters apllied
+- make butoon active when map Marker chosen (works fine with regular filters)
 
 
 ### Future Development
