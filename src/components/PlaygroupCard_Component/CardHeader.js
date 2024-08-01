@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import AddToCalendar from "./AddToCalendar";
+import { getNextOccurrence } from "../../utils/dateUtils";
 
 function CardHeader({
   Organizer,
@@ -11,8 +12,10 @@ function CardHeader({
   PG_URL_fr,
   Day,
   Date,
+  Repeats,
   Service,
   Service_fr,
+  Location,
   Cancelled,
   Time,
   address,
@@ -24,6 +27,9 @@ function CardHeader({
 }) {
   const serviceUrl = translation === "en" ? PG_URL : PG_URL_fr;
   const organizerUrl = translation === "en" ? URL : URL_fr;
+
+    // Calculate the next occurrence if Date is not provided
+    const displayDate = Date || getNextOccurrence(Day, Repeats)?.toISOString().split("T")[0] || "";
 
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
@@ -39,12 +45,15 @@ function CardHeader({
               {translation === "en" || !Service_fr ? Service : Service_fr}
             </a>
           </div>
-          <p className="mt-1 text-gray-600 text-sm">
-            {Day}, {Date}
+          <div className="text-sm md:text-base italic text-gray-500">
+            {Location}
+          </div>
+          <p className="mt-1 text-gray-600 md:text-sm text-xs">
+            {Day}, {displayDate}
           </p>
         </div>
         <div>
-          <div className="md:text-lg text-xs font-semibold text-plum bg-gray-200 px-1 md:py-2 py-1 rounded-full text-center">
+          <div className="md:text-lg text-xs mt-1 font-semibold text-plum bg-gray-200 px-1 md:py-2 py-1 rounded-full text-center">
             {Cancelled !== "Yes" ? (
               <a
                 href={organizerUrl}
@@ -60,22 +69,10 @@ function CardHeader({
               Organizer
             )}
           </div>
-          {/* registration element for mobile screens */}
-          {Registration && (
-            <div className=" hidden md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
-              <a
-                href={Registration_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
-              >
-                {translation === "en" ? "Registration" : "Inscription"}
-              </a>
-            </div>
-          )}
+         
         </div>
       </div>
-      <div className="flex items-center text-gray-700 justify-between mb-1 mt-2">
+      <div className="flex items-center text-gray-700 justify-between mb-1 mt-1">
         <div className="flex items-center">
           <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>
@@ -85,7 +82,7 @@ function CardHeader({
             <AddToCalendar
               name={Organizer}
               address={address}
-              date={Date}
+              date={displayDate}
               startTime={startTime}
               endTime={endTime}
               Cancelled={Cancelled}
@@ -93,7 +90,7 @@ function CardHeader({
           </button>
         </div>
         {Registration && (
-          <div className="md:text-sm sm:text-xs hidden sm:flex font-semibold  bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
+          <div className="md:text-sm text-xs sm:flex font-semibold  bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
             <a
               href={Registration_URL}
               target="_blank"

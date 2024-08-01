@@ -9,6 +9,7 @@ import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
+import { getNextOccurrence } from "../utils/dateUtils";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -42,9 +43,13 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       South: translation === "fr" ? "Sud" : "South",
     },
     ageOptions: {
-      Babies: translation === "fr" ? "Bébés" : "Babies",
-      Toddlers: translation === "fr" ? "Tout-petits" : "Toddlers",
-      Kids: translation === "fr" ? "Enfants" : "Kids",
+      "Baby (non-walking)": translation === "fr" ? "Bébé (non marchant)" : "Baby (non-walking)",
+      "Baby (0-12m)": translation === "fr" ? "Bébé (0-12mois)" : "Baby (0-12m)",
+      "Baby (0-18m)": translation === "fr" ? "Bébé (0-18mois)" : "Baby (0-18m)",
+      "Baby (0-24m)": translation === "fr" ? "Bébé (0-24mois)" : "Baby (0-24m)",
+      "Child (0-6y)": translation === "fr" ? "Enfant (0-6ans)" : "Child (0-6y)",
+      "Child (3-6y)": translation === "fr" ? "Enfant (3-6ans)" : "Child (3-6y)",
+      "Child (4-10y)": translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
     },
   };
 
@@ -72,7 +77,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const [visibleCards, setVisibleCards] = useState(6);
   // State to track if any filters are active
   const [isFilterActive, setIsFilterActive] = useState(false);
-  
+
   const handleShowMore = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
   };
@@ -98,30 +103,63 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     setIsFilterActive(false); // Reset filter state
   };
 
-  // Show today's playgroups and scroll to the target area
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
-    console.log("Today:", today);
+    console.log("Today (en-CA):", today);
+    console.log("Filter criteria before update:", filterCriteria);
+
     setFilterCriteria({ ...filterCriteria, date: today });
+    console.log("Filter criteria after update:", {
+      ...filterCriteria,
+      date: today,
+    });
+
     setSelectedAddress(null); // Optionally reset selected address
     if (todayPlaygroupsSectionRef.current) {
       todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const filteredData = useMemo(() => {
+  // Function to get next occurrence of playgroups based on repeats logic
+  const getFilteredData = () => {
     if (isLoading) return [];
 
     let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+    console.log("Data after applying filters:", filtered);
+
     if (selectedAddress) {
       filtered = filtered.filter(
         (playgroup) => playgroup.Address === selectedAddress
       );
     }
-    // Sort filtered data by date in descending order
+
+    filtered = filtered.map((playgroup) => {
+      if (playgroup.Repeats) {
+        const nextOccurrence = getNextOccurrence(
+          playgroup.Day,
+          playgroup.Repeats
+        );
+        if (nextOccurrence) {
+          return {
+            ...playgroup,
+            Date: nextOccurrence.toISOString().split("T")[0],
+          };
+        }
+      }
+      return playgroup;
+    });
+
+    // Sort filtered data by date in ascending order
     filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
 
+    console.log("Filtered and processed data:", filtered);
     return filtered;
+  };
+
+  const filteredData = useMemo(() => {
+    const data = getFilteredData();
+    console.log("Filtered Data:", data);
+    return data;
   }, [sheetData, filterCriteria, selectedAddress, isLoading]);
 
   const noDataAvailable = filteredData.length === 0;
@@ -149,15 +187,21 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const organizerOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Organizer).filter(Boolean))];
+    return [
+      ...new Set(sheetData.map((item) => item.Organizer).filter(Boolean)),
+    ];
   }, [sheetData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(
     (key) => translations.timesOfDay[key]
   );
-  const ageOptions = Object.keys(translations.ageOptions).map(
-    (key) => translations.ageOptions[key]
-  );
+  const ageOptions = useMemo(() => {
+    if (!sheetData) return [];
+    return [...new Set(sheetData.map((item) => item.Age).filter(Boolean))].map(
+      (age) => translations.ageOptions[age] || age
+    );
+  }, [sheetData, translations.ageOptions]);
+
   const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
   if (isLoading) return <Loading />;

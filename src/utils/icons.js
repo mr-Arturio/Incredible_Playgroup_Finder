@@ -18,33 +18,33 @@ const getIcons = (
   location: "location.svg",
   age: "age.svg",
   parking: {
-    show: Parking === "Yes",
+    show: Parking === "yes",
     src: "parking.svg",
     tooltip: translation === "fr" ? "Parking Disponible" : "Parking Available",
   },
   coffee: {
-    show: Coffee === "Yes",
+    show: Coffee === "yes",
     src: "coffee.svg",
     tooltip: translation === "fr" ? "Café" : "Coffee",
   },
   // Uncomment if needed
   // wifi: {
-  //   show: WiFi === "Yes",
+  //   show: WiFi === "nes",
   //   src: "wifi.svg",
   //   tooltip: translation === "fr" ? "WiFi Disponible" : "WiFi Available",
   // },
   // indoor: {
-  //   show: Outdoor === "No",
+  //   show: Outdoor === "no",
   //   src: "indoor.svg",
   //   tooltip: translation === "fr" ? "Intérieur" : "Indoor",
   // },
   outdoor: {
-    show: Outdoor === "Yes",
+    show: Outdoor === "yes",
     src: "outdoor.svg",
     tooltip: translation === "fr" ? "Extérieur" : "Outdoor",
   },
   scale: {
-    show: Scale === "Yes",
+    show: Scale === "yes",
     src: "scale.svg",
     tooltip: translation === "fr" ? "Pèse-bébé" : "Baby Scale",
   },
@@ -58,19 +58,19 @@ const getIcons = (
 
 const getSocialIcons = (FB, Insta, Eventbrite) => ({
   fb: {
-    show: FB.trim() !== "", // Show icon if FB is not empty
+    show: (FB || "").trim() !== "", // Show icon if FB is not empty
     src: "facebook_color.svg",
-    url: FB.trim(),
+    url: (FB || "").trim(),
   },
   insta: {
-    show: Insta.trim() !== "", // Show icon if Insta is not empty
+    show: (Insta || "").trim() !== "", // Show icon if Insta is not empty
     src: "instagram_color.svg",
-    url: Insta.trim(),
+    url: (Insta || "").trim(),
   },
   eventbrite: {
-    show: Eventbrite.trim() !== "", // Show icon if Eventbrite is not empty
+    show: (Eventbrite || "").trim() !== "", // Show icon if Eventbrite is not empty
     src: "eventbrite_color.svg",
-    url: Eventbrite.trim(),
+    url: (Eventbrite || "").trim(),
   },
 });
 

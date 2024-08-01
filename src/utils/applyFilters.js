@@ -1,10 +1,12 @@
+import { getNextOccurrence } from "./dateUtils";
+
 const applyFilters = (data, criteria, selectedAddress) => {
   try {
-    // Create a date object for today's date
     const today = new Date();
-    today.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
+    today.setUTCHours(0, 0, 0, 0);
 
-    console.log('Today\'s Date:', today.toISOString().split("T")[0]);
+    console.log("Today's Date (UTC):", today.toISOString().split("T")[0]);
+    console.log("Filter Criteria:", criteria);
 
     const categorizeTime = (timeString) => {
       if (!timeString || !timeString.includes(" - ")) {
@@ -28,25 +30,23 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
     return data.filter((item) => {
       try {
-        // Log the item being processed
-        // console.log('Processing item:', item);
+        const itemDate = item.Date ? new Date(item.Date) : null;
+        if (itemDate) itemDate.setUTCHours(0, 0, 0, 0);
 
-        // Check for missing or empty values
-        if (!item.Date || !item.Address) {
-          console.error(`Missing required property in item with ID ${item.ID}`);
-          return false;
+        let isUpcomingEvent = false;
+        let nextOccurrence = null;
+        if (itemDate && itemDate >= today) {
+          isUpcomingEvent = true;
+        } else if (!itemDate && item.Day && item.Repeats) {
+          nextOccurrence = getNextOccurrence(item.Day, item.Repeats);
+          isUpcomingEvent = nextOccurrence && nextOccurrence >= today;
         }
 
-        // Date check for past dates using Date objects
-        const itemDate = new Date(item.Date);
-        itemDate.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
-        // console.log('Item Date:', itemDate.toISOString().split("T")[0]);
-        if (itemDate < today) return false;
+        // console.log("Item ID:", item.ID, "Is Upcoming:", isUpcomingEvent, "Item Date:", item.Date, "Day:", item.Day, "Repeats:", item.Repeats, "Next Occurrence:", nextOccurrence);
 
-        // If there's a selected address and no other criteria, return true if the address matches
+        if (!isUpcomingEvent) return false;
+
         const noOtherCriteria = Object.values(criteria).every((val) => val === "");
-        // console.log('No Other Criteria:', noOtherCriteria);
-
         if (noOtherCriteria && selectedAddress === item.Address) return true;
 
         if (criteria.area && item.Area !== criteria.area) return false;
@@ -56,19 +56,16 @@ const applyFilters = (data, criteria, selectedAddress) => {
         if (criteria.age && item.Age !== criteria.age) return false;
 
         const itemTimeCategory = categorizeTime(item.Time);
-        // console.log('Item Time Category:', itemTimeCategory);
         if (criteria.time && itemTimeCategory !== criteria.time) return false;
 
-        // Ensure data is in ISO format 'YYYY-MM-DD'
-        if (criteria.date) {
-          const itemDateString = itemDate.toISOString().split("T")[0];
-          // console.log('Item Date String:', itemDateString);
-          if (itemDateString !== criteria.date) return false;
-        }
+        const displayDate = item.Date || nextOccurrence?.toISOString().split("T")[0] || "";
+        // console.log("Item ID:", item.ID, "Display Date:", displayDate, "Criteria Date:", criteria.date);
+
+        if (criteria.date && displayDate !== criteria.date) return false;
 
         return true;
       } catch (innerError) {
-        console.error(`Error processing item with ID ${item.id}: ${innerError.message}`);
+        console.error(`Error processing item with ID ${item.ID}: ${innerError.message}`);
         return false;
       }
     });
@@ -79,3 +76,4 @@ const applyFilters = (data, criteria, selectedAddress) => {
 };
 
 export default applyFilters;
+
