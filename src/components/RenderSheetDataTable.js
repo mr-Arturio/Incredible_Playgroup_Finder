@@ -47,7 +47,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       "Baby (0-12m)": translation === "fr" ? "Bébé (0-12mois)" : "Baby (0-12m)",
       "Baby (0-18m)": translation === "fr" ? "Bébé (0-18mois)" : "Baby (0-18m)",
       "Baby (0-24m)": translation === "fr" ? "Bébé (0-24mois)" : "Baby (0-24m)",
-      "Child (0-6y)": translation === "fr" ? "Enfant (0-6 ans)" : "Child (0-6y)",
+      "Child (0-6y)": translation === "fr" ? "Enfant (0-6ans)" : "Child (0-6y)",
       "Child (3-6y)": translation === "fr" ? "Enfant (3-6ans)" : "Child (3-6y)",
       "Child (4-10y)": translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
     },
