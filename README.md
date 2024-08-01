@@ -156,7 +156,9 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - make reset button active when map Marker chosen (works fine with regular filters)
 - work on Repeats (weekle, Biweekly...) logic
 - fix show todays button
-
+- add Location name to the card
+- display registration on mobile, 
+- change add to calendar button view on mobile
 
 ### Future Development
 
