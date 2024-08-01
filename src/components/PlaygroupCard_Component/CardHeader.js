@@ -69,22 +69,10 @@ function CardHeader({
               Organizer
             )}
           </div>
-          {/* registration element for mobile screens */}
-          {Registration && (
-            <div className=" hidden md:text-sm text-xs font-semibold  bg-gray-200 px-2 py-1 rounded-full text-center">
-              <a
-                href={Registration_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-orange hover:text-hoverBlue transition duration-300 ease-in-out"
-              >
-                {translation === "en" ? "Registration" : "Inscription"}
-              </a>
-            </div>
-          )}
+         
         </div>
       </div>
-      <div className="flex items-center text-gray-700 justify-between mb-1 mt-2">
+      <div className="flex items-center text-gray-700 justify-between mb-1 mt-1">
         <div className="flex items-center">
           <Image src="/time.svg" alt="Time" width={20} height={20} />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>
@@ -102,7 +90,7 @@ function CardHeader({
           </button>
         </div>
         {Registration && (
-          <div className="md:text-sm sm:text-xs hidden sm:flex font-semibold  bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
+          <div className="md:text-sm text-xs sm:flex font-semibold  bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
             <a
               href={Registration_URL}
               target="_blank"
