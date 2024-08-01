@@ -189,7 +189,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     if (!sheetData) return [];
     return [
       ...new Set(sheetData.map((item) => item.Organizer).filter(Boolean)),
-    ];
+    ].sort();
   }, [sheetData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(

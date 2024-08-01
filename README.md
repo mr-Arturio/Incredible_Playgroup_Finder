@@ -160,6 +160,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - display registration on mobile, 
 - change add to calendar button view on mobile
 - fix age group filter, add french
+- display Organizer alphabeticaly in filter drop down
 
 ### Future Development
 
