@@ -15,6 +15,7 @@ function CardHeader({
   Repeats,
   Service,
   Service_fr,
+  Location,
   Cancelled,
   Time,
   address,
@@ -44,12 +45,15 @@ function CardHeader({
               {translation === "en" || !Service_fr ? Service : Service_fr}
             </a>
           </div>
-          <p className="mt-1 text-gray-600 text-sm">
+          <div className="text-sm md:text-base italic text-gray-500">
+            {Location}
+          </div>
+          <p className="mt-1 text-gray-600 md:text-sm text-xs">
             {Day}, {displayDate}
           </p>
         </div>
         <div>
-          <div className="md:text-lg text-xs font-semibold text-plum bg-gray-200 px-1 md:py-2 py-1 rounded-full text-center">
+          <div className="md:text-lg text-xs mt-1 font-semibold text-plum bg-gray-200 px-1 md:py-2 py-1 rounded-full text-center">
             {Cancelled !== "Yes" ? (
               <a
                 href={organizerUrl}
