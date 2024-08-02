@@ -3,7 +3,7 @@ import { getNextOccurrence } from "./dateUtils";
 const applyFilters = (data, criteria, selectedAddress) => {
   try {
     const today = new Date();
-    today.setUTCHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
 
     console.log("Today's Date (UTC):", today.toISOString().split("T")[0]);
     console.log("Filter Criteria:", criteria);
@@ -31,7 +31,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
     return data.filter((item) => {
       try {
         const itemDate = item.Date ? new Date(item.Date) : null;
-        if (itemDate) itemDate.setUTCHours(0, 0, 0, 0);
+        if (itemDate) itemDate.setHours(0, 0, 0, 0);
 
         let isUpcomingEvent = false;
         let nextOccurrence = null;
