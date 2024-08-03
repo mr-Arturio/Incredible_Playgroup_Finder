@@ -165,6 +165,8 @@ Navigate to http://localhost:3000 in your browser to view the app.
  and select a date working fine
  - fix filter issue - when date is chosen, when you pick a day of the week it will reset the daate (other way atound not working yet)
  - ascending display playgroup cards by time (took a while...)
+ - add traanslation for age in playgroup cards
+ - adjust mobile view
 
 ### Future Development
 

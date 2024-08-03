@@ -28,8 +28,9 @@ function CardHeader({
   const serviceUrl = translation === "en" ? PG_URL : PG_URL_fr;
   const organizerUrl = translation === "en" ? URL : URL_fr;
 
-    // Calculate the next occurrence if Date is not provided
-    const displayDate = Date || getNextOccurrence(Day, Repeats)?.toISOString().split("T")[0] || "";
+  // Calculate the next occurrence if Date is not provided
+  const displayDate =
+    Date || getNextOccurrence(Day, Repeats)?.toISOString().split("T")[0] || "";
 
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
@@ -69,12 +70,17 @@ function CardHeader({
               Organizer
             )}
           </div>
-         
         </div>
       </div>
-      <div className="flex items-center text-gray-700 justify-between mb-1 mt-1">
+      <div className="flex items-center text-gray-700 justify-between mb-1 ">
         <div className="flex items-center">
-          <Image src="/time.svg" alt="Time" width={20} height={20} />
+          <Image
+            src="/time.svg"
+            alt="Time"
+            width={20}
+            height={20}
+            className="h-4 w-4 md:h-5 md:w-5 text-gray-500"
+          />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>
         </div>
         <div className="flex items-center ml-auto md:py-2 py-1">
