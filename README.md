@@ -164,6 +164,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - date and time works correct, show todays
  and select a date working fine
  - fix filter issue - when date is chosen, when you pick a day of the week it will reset the daate (other way atound not working yet)
+ - ascending display playgroup cards by time (took a while...)
 
 ### Future Development
 
