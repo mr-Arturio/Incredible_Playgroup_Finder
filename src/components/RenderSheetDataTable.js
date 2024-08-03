@@ -148,14 +148,11 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
     // Sort filtered data by date in ascending order
     filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-
-    console.log("Filtered and processed data:", filtered);
     return filtered;
   };
 
   const filteredData = useMemo(() => {
     const data = getFilteredData();
-    console.log("Filtered Data:", data);
     return data;
   }, [sheetData, filterCriteria, selectedAddress, isLoading]);
 
