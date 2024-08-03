@@ -108,6 +108,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           icons={icons}
           social={social}
           Cancelled={Cancelled}
+          translation={translation}
         />
       )}
       <CardFooter

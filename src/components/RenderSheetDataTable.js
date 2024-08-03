@@ -297,7 +297,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
                 })
                 .slice(0, visibleCards)
                 .map((playgroup) => (
-                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} translation={translation}/>
                 ))}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
