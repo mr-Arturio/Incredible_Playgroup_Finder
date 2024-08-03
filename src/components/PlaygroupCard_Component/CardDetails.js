@@ -1,7 +1,18 @@
 import React from "react";
 import Image from "next/image";
 
-function CardDetails({ Address, Age, Notes, icons, social }) {
+function CardDetails({ Address, Age, Notes, icons, social, translation }) {
+
+  const ageTranslations = {
+    "Baby (non-walking)": translation === "fr" ? "Bébé (non marchant)" : "Baby (non-walking)",
+    "Baby (0-12m)": translation === "fr" ? "Bébé (0-12mois)" : "Baby (0-12m)",
+    "Baby (0-18m)": translation === "fr" ? "Bébé (0-18mois)" : "Baby (0-18m)",
+    "Baby (0-24m)": translation === "fr" ? "Bébé (0-24mois)" : "Baby (0-24m)",
+    "Child (0-6y)": translation === "fr" ? "Enfant (0-6ans)" : "Child (0-6y)",
+    "Child (3-6y)": translation === "fr" ? "Enfant (3-6ans)" : "Child (3-6y)",
+    "Child (4-10y)": translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)"
+  };
+
   return (
     <div className="px-4 md:px-6 flex flex-col md:flex-row justify-between">
       <div className="flex flex-col justify-between  md:pr-10 pr-0">
@@ -9,7 +20,7 @@ function CardDetails({ Address, Age, Notes, icons, social }) {
           <Image
             src={icons.location}
             alt="Location"
-            className="h-5 w-5 text-gray-500"
+            className="h-4 w-4 md:h-5 md:w-5 text-gray-500"
             width={20}
             height={20}
           />
@@ -19,7 +30,7 @@ function CardDetails({ Address, Age, Notes, icons, social }) {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-2 text-blue-600 hover:text-blue-700"
+            className="ml-2 text-blue-600 hover:text-blue-700 md:text-base text-sm"
             style={{ textDecoration: "underline" }}
           >
             {Address}
@@ -30,11 +41,11 @@ function CardDetails({ Address, Age, Notes, icons, social }) {
           <Image
             src={icons.age}
             alt="Age"
-            className="h-5 w-5 text-gray-500"
+            className="h-4 w-4 md:h-5 md:w-5 text-gray-500"
             width={20}
             height={20}
           />
-          <span className="ml-2">{Age}</span>
+          <span className="ml-2 md:text-base text-sm">{ageTranslations[Age] || Age}</span>
         </div>
         <div className="flex sm:hidden items-center md:py-2 py-1 space-x-2">
           {Object.entries(social).map(

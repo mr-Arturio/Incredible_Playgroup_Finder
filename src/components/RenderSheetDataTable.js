@@ -43,13 +43,15 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       South: translation === "fr" ? "Sud" : "South",
     },
     ageOptions: {
-      "Baby (non-walking)": translation === "fr" ? "Bébé (non marchant)" : "Baby (non-walking)",
+      "Baby (non-walking)":
+        translation === "fr" ? "Bébé (non marchant)" : "Baby (non-walking)",
       "Baby (0-12m)": translation === "fr" ? "Bébé (0-12mois)" : "Baby (0-12m)",
       "Baby (0-18m)": translation === "fr" ? "Bébé (0-18mois)" : "Baby (0-18m)",
       "Baby (0-24m)": translation === "fr" ? "Bébé (0-24mois)" : "Baby (0-24m)",
       "Child (0-6y)": translation === "fr" ? "Enfant (0-6ans)" : "Child (0-6y)",
       "Child (3-6y)": translation === "fr" ? "Enfant (3-6ans)" : "Child (3-6y)",
-      "Child (4-10y)": translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
+      "Child (4-10y)":
+        translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
     },
   };
 
@@ -106,14 +108,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
     console.log("Today (en-CA):", today);
-    console.log("Filter criteria before update:", filterCriteria);
+    // console.log("Filter criteria before update:", filterCriteria);
 
     setFilterCriteria({ ...filterCriteria, date: today });
-    console.log("Filter criteria after update:", {
-      ...filterCriteria,
-      date: today,
-    });
-
     setSelectedAddress(null); // Optionally reset selected address
     if (todayPlaygroupsSectionRef.current) {
       todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
@@ -125,7 +122,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     if (isLoading) return [];
 
     let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-    console.log("Data after applying filters:", filtered);
+    // console.log("Data after applying filters:", filtered);
 
     if (selectedAddress) {
       filtered = filtered.filter(
@@ -151,25 +148,35 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
     // Sort filtered data by date in ascending order
     filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-
-    console.log("Filtered and processed data:", filtered);
     return filtered;
   };
 
   const filteredData = useMemo(() => {
     const data = getFilteredData();
-    console.log("Filtered Data:", data);
     return data;
   }, [sheetData, filterCriteria, selectedAddress, isLoading]);
 
   const noDataAvailable = filteredData.length === 0;
 
   const handleFilterChange = (key, value) => {
-    // Deselect marker when the name filter changes or when the area filter changes
-    if (key === "organizer" || key === "area") {
-      setSelectedAddress(null);
+    if (key === "day") {
+      // Reset date filter and date picker when day filter changes
+      setFilterCriteria((prevCriteria) => ({
+        ...prevCriteria,
+        day: value,
+        date: "", // Reset the date filter
+      }));
+      setStartDate(null); // Reset the date picker to today's date
+    } else {
+      // Deselect marker when the name filter changes or when the area filter changes
+      if (key === "organizer" || key === "area") {
+        setSelectedAddress(null);
+      }
+      setFilterCriteria((prevCriteria) => ({
+        ...prevCriteria,
+        [key]: value,
+      }));
     }
-    setFilterCriteria({ ...filterCriteria, [key]: value });
   };
 
   const areaOptions = useMemo(() => {
@@ -189,7 +196,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     if (!sheetData) return [];
     return [
       ...new Set(sheetData.map((item) => item.Organizer).filter(Boolean)),
-    ];
+    ].sort();
   }, [sheetData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(
@@ -290,7 +297,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
                 })
                 .slice(0, visibleCards)
                 .map((playgroup) => (
-                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} />
+                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} translation={translation}/>
                 ))}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (

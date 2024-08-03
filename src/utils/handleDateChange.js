@@ -4,9 +4,9 @@ export const handleDateChange = (
   setFilterCriteria,
   filterCriteria
 ) => {
-  // Create a new Date object with the time set to midnight in UTC
+  // Create a new Date object with the time set to midnight in local time
   const adjustedDate = new Date(date);
-  adjustedDate.setUTCHours(0, 0, 0, 0);
+  adjustedDate.setHours(0, 0, 0, 0);
 
   setStartDate(adjustedDate);
   setFilterCriteria({

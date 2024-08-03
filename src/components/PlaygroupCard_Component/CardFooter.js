@@ -26,7 +26,7 @@ function CardFooter({
               alt="Show Less"
               width={17}
               height={17}
-              className="inline-block"
+              className="inline-block h-3 w-3 md:h-4 md:w-4"
             />
             <span className="md:ml-2 ml-1 inline-block sm:text-base text-sm">
               {translation === "en" ? "Show Less" : "Mostrar Menos"}
@@ -43,7 +43,7 @@ function CardFooter({
               alt="More Information"
               width={16}
               height={16}
-              className="inline-block"
+              className="inline-block h-3 w-3 md:h-4 md:w-4"
             />
             <div>
               <span className="md:hidden inline-block sm:text-base text-sm ml-2 ">
@@ -92,7 +92,7 @@ function CardFooter({
                   <Image
                     src={src}
                     alt={iconTooltip}
-                    className="h-6 w-6"
+                    className="h-5 w-5 md:h-6 md:w-6"
                     width={24}
                     height={24}
                   />

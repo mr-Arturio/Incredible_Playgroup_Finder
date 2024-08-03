@@ -1,6 +1,6 @@
 export const getNextOccurrence = (dayOfWeek, repeats) => {
   const today = new Date();
-  today.setUTCHours(0, 0, 0, 0); // Ensure time portion is zeroed out in UTC
+  today.setHours(0, 0, 0, 0); // Ensure time portion is zeroed out in local time
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const dayIndex = daysOfWeek.indexOf(dayOfWeek);
