@@ -1,10 +1,10 @@
-// import Image from "next/image";
+import Image from "next/image";
 import "../app/fonts.css";
-// import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/LanguageContext";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
-  // const { translation } = useLanguage();
+  const { translation } = useLanguage();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -14,8 +14,14 @@ const Navbar = () => {
   // Translations
   const translations = {
     header: {
-      en: "INCREDIBLE PLAYGROUP FINDER!",
-      fr: "INCROYABLE RECHERCHE DE GROUPES DE JEU!",
+      en: {
+        firstLine: "INCREDIBLE",
+        secondLine: "PLAYGROUP FINDER!",
+      },
+      fr: {
+        firstLine: "INCROYABLE",
+        secondLine: "RECHERCHE DE GROUPES DE JEU!",
+      },
     },
   };
 
@@ -31,28 +37,31 @@ const Navbar = () => {
   }
 
   return (
-    <nav
-      className="h-24 md:h-52 2xl:h-96 xl:h-80 lg:h-72 bg-cover bg-center"
-      style={{ backgroundImage: "url('/NavImg.svg')" }}
-    ></nav>
-
-    // <nav className="bg-gradient-to-r from-gradient1  to-gradient2 text-white py-2">
-    // <div className="container mx-auto flex justify-between items-center">
-    //   <div className="flex-1 text-center ml-2">
-    //     <h1 className="lg:ml-10 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
-    //       {translations.header[translation]}
-    //     </h1>
-    //   </div>
-    //   <div className="shrink ml-4">
-    //     <Image
-    //       src="/IPFicon.svg"
-    //       alt="Logo"
-    //       width={170}
-    //       height={170}
-    //           />
-    //   </div>
-    // </div>
-    // </nav>
+    <nav className="bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 text-white pt-2 ">
+ <div className="bg-frame">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="flex-1 text-left ml-2" style={{ flexBasis: "70%" }}>
+            <h1 className="lg:ml-16 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
+              {translations.header[translation].firstLine}
+            </h1>
+            <h1 className="lg:ml-12 text-xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
+              {translations.header[translation].secondLine}
+            </h1>
+          </div>
+          <div
+            className="flex justify-end items-end ml-4"
+            style={{ flexBasis: "30%" }}
+          >
+            <Image
+              src="/docs/Parent1.svg"
+              alt="Logo"
+              width={370}
+              height={370}
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
