@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 
+.bg-frame {
+  @apply relative bg-frame-pattern bg-cover bg-no-repeat;
+}

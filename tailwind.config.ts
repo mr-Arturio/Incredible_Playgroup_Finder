@@ -10,9 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'frame-pattern': "url('/Background1.svg')",
       },
       colors: {
         mainBlue: '#4E8DCA',
@@ -25,6 +23,7 @@ const config: Config = {
         cardFooter: '#93c5fd',
         gradient1: '#5a108f',
         gradient2: '#8b2fc9',
+        gradient3: '#ff7e5f',
       },
       fontFamily: {
         lazydog: ['Lazydog', 'sans-serif'],

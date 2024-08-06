@@ -124,8 +124,8 @@ const Header = () => {
       <div className="relative">
         <LanguageSwitcher />
       </div>
-      <div className="flex-col items-center justify-between">
-        <div className="mt-10 md:mb-6 text-left">
+      <div className="flex-col items-center justify-between bg-cardBody/75 rounded-lg">
+        <div className="mt-10 pt-5 pl-5 md:mb-6 text-left">
           <div>{translations.shortText}</div>
           <div>
             {isFullTextVisible && translations.fullText}

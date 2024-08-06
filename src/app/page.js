@@ -24,12 +24,18 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
+      <div
+        className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4"
+        style={{ backgroundImage: "url('docs/BAck2.svg')" }}
+      >
         <div className="container">
           <Header />
         </div>
         <main className="container flex-1">
-          <RenderSheetDataTable sheetData={sheetData} translation={translation} />
+          <RenderSheetDataTable
+            sheetData={sheetData}
+            translation={translation}
+          />
           <section>
             <ContactForm />
           </section>
