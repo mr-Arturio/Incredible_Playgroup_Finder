@@ -2,6 +2,7 @@ import Image from "next/image";
 import "../app/fonts.css";
 import { useLanguage } from "../context/LanguageContext";
 import { useState, useEffect } from "react";
+import RandomImage from "../utils/RandomImage";
 
 const Navbar = () => {
   const { translation } = useLanguage();
@@ -38,7 +39,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 text-white pt-2 ">
- <div className="bg-frame">
+      <div className="bg-frame">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex-1 text-left ml-2" style={{ flexBasis: "70%" }}>
             <h1 className="lg:ml-16 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
@@ -52,12 +53,7 @@ const Navbar = () => {
             className="flex justify-end items-end ml-4"
             style={{ flexBasis: "30%" }}
           >
-            <Image
-              src="/docs/Parent1.svg"
-              alt="Logo"
-              width={370}
-              height={370}
-            />
+            <RandomImage />
           </div>
         </div>
       </div>
