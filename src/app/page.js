@@ -24,10 +24,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div
-        className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4"
-        style={{ backgroundImage: "url('docs/BAck2.svg')" }}
-      >
+      <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
         <div className="container">
           <Header />
         </div>
