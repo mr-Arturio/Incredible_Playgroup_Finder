@@ -24,6 +24,10 @@ const Navbar = () => {
         secondLine: "RECHERCHE DE GROUPES DE JEU!",
       },
     },
+    under:
+      translation === "en"
+        ? "Discover the perfect EarlyON playgroup for your busy schedule."
+        : "Découvrez le groupe de jeu EarlyON idéal pour votre emploi du temps chargé.",
   };
 
   // Render a loading state until client-side hydration is complete
@@ -41,13 +45,19 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 text-white">
       <div className="bg-frame">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="flex-1 text-left ml-2 lg:ml-40" style={{ flexBasis: "65%" }}>
-            <h1 className="lg:ml-6 ml-10 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
+          <div
+            className="flex-1 text-left ml-2 lg:ml-40"
+            style={{ flexBasis: "65%" }}
+          >
+            <h1 className="lg:ml-6 ml-10 text-2xl/5 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
               {translations.header[translation].firstLine}
             </h1>
-            <h1 className="lg:ml-0 ml-6 text-xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
+            <h1 className="lg:ml-0 ml-6 text-lg 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
               {translations.header[translation].secondLine}
             </h1>
+            <h3 className="hidden md:flex lg:ml-6 italic ml-3 md:ml-10  lg:text-xl md:text-base">
+              {translations.under}
+            </h3>
           </div>
           <div
             className="flex justify-end items-end ml-4"
