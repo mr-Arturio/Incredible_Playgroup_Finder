@@ -21,7 +21,7 @@ const LanguageSwitcher = () => {
   return (
     <div className="absolute top-0  right-0 flex z-10">
       <button 
-        className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-bl-lg shadow-lg transition-colors duration-300 ${
+        className={`px-1 py-1 text-sm md:text-base md:px-3 md:py-1 rounded-bl-lg shadow-lg transition-colors duration-300 ${
           clientLanguage === 'en' ? 'bg-amber text-white' : 'bg-gray-200 text-gray-500'
         }`}
         onClick={() => handleLanguageChange('en')}
@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
         EN
       </button>
       <button
-        className={`px-1 py-1 text-md md:px-3 md:py-1 rounded-br-lg shadow-lg transition-colors duration-300 ${
+        className={`px-1 py-1 text-sm md:text-base md:px-3 md:py-1 rounded-br-lg shadow-lg transition-colors duration-300 ${
           clientLanguage === 'fr' ? 'bg-amber text-white' : 'bg-gray-200 text-gray-500'
         }`}
         onClick={() => handleLanguageChange('fr')}

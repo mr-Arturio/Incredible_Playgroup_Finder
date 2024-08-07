@@ -10,7 +10,7 @@ const RandomImage = () => {
   }, []);
 
   return (
-    <Image src={randomImage} alt="Family Image" width={370} height={370} />
+    <Image src={randomImage} alt="Family Image" width={400} height={400} />
   );
 };
 
