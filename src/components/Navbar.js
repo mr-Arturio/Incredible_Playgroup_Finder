@@ -41,17 +41,17 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 text-white">
       <div className="bg-frame">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="flex-1 text-left ml-2" style={{ flexBasis: "70%" }}>
-            <h1 className="lg:ml-16 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
+          <div className="flex-1 text-left ml-2 lg:ml-40" style={{ flexBasis: "65%" }}>
+            <h1 className="lg:ml-6 ml-10 text-3xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
               {translations.header[translation].firstLine}
             </h1>
-            <h1 className="lg:ml-12 text-xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
+            <h1 className="lg:ml-0 ml-6 text-xl 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
               {translations.header[translation].secondLine}
             </h1>
           </div>
           <div
             className="flex justify-end items-end ml-4"
-            style={{ flexBasis: "30%" }}
+            style={{ flexBasis: "35%" }}
           >
             <RandomImage />
           </div>
