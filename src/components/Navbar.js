@@ -38,7 +38,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 text-white pt-2 ">
+    <nav className="bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 text-white">
       <div className="bg-frame">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex-1 text-left ml-2" style={{ flexBasis: "70%" }}>

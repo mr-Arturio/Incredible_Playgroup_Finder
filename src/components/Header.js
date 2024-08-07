@@ -125,13 +125,13 @@ const Header = () => {
         <LanguageSwitcher />
       </div>
       <div className="flex-col items-center justify-between bg-cardBody/75 rounded-lg">
-        <div className="mt-10 pt-5 pl-5 md:mb-6 text-left">
+        <div className="mt-8 md:pt-5 md:pl-5 pt-2 pl-2 mb-1 md:mb-6 text-left text-sm md:text-base">
           <div>{translations.shortText}</div>
           <div>
             {isFullTextVisible && translations.fullText}
             <button
               onClick={toggleTextVisibility}
-              className="text-blue-500 mt-2 mb-2"
+              className="text-blue-500 my-2"
             >
               {isFullTextVisible
                 ? translations.showLess
