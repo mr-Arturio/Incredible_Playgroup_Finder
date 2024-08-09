@@ -81,7 +81,9 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    <div className="hidden sm:block">
     <CarSlider position={position} handleSliderChange={handleSliderChange} />
+    </div>
     </>
   );
 };
