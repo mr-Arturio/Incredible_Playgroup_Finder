@@ -167,6 +167,14 @@ Navigate to http://localhost:3000 in your browser to view the app.
  - ascending display playgroup cards by time (took a while...)
  - add traanslation for age in playgroup cards
  - adjust mobile view
+ - text and space formating
+ - background option
+ - new link for contact info
+ - random images display in nav bar after each reload
+ - Car Slider: road and car image for slider
+ - working lofic and mechanic for slider
+ - add finish pin and confetti
+ - make slider change navBar gradient colors and polishing
 
 ### Future Development
 
