@@ -7,8 +7,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
     const categorizeTime = (timeString) => {
       if (!timeString || !timeString.includes(" - ")) {
-        console.error(`Invalid time format: ${timeString}`);
-        throw new Error(`Invalid time format: ${timeString}`);
+        return { startTime: null, timeCategory: "No Time Specified" };
       }
 
       const [startTimeString] = timeString.split(" - ");
@@ -32,7 +31,6 @@ const applyFilters = (data, criteria, selectedAddress) => {
       return { startTime, timeCategory };
     };
 
-
     return data
       .filter((item) => {
         try {
@@ -48,7 +46,8 @@ const applyFilters = (data, criteria, selectedAddress) => {
             isUpcomingEvent = nextOccurrence && nextOccurrence >= today;
           }
 
-          if (!isUpcomingEvent) return false;
+          //all events, regardless of their Date, Day, or Repeats columns, will be displayed
+          // if (!isUpcomingEvent) return false;
 
           const noOtherCriteria = Object.values(criteria).every(
             (val) => val === ""
@@ -81,6 +80,10 @@ const applyFilters = (data, criteria, selectedAddress) => {
       .sort((a, b) => {
         const { startTime: timeA } = categorizeTime(a.Time);
         const { startTime: timeB } = categorizeTime(b.Time);
+        // Ensure that items with null time are placed at the end of the list
+        if (timeA === null) return 1;
+        if (timeB === null) return -1;
+
         return timeA - timeB; // Ascending order
       });
   } catch (error) {
