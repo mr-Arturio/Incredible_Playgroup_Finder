@@ -50,7 +50,22 @@ function CardHeader({
             {Location}
           </div>
           <p className="mt-1 text-gray-600 md:text-sm text-xs">
-            {Day}, {displayDate}
+            {Day || displayDate ? (
+              <>
+                {Day && `${Day}, `}
+                {displayDate}
+              </>
+            ) : (
+              <span>
+                For information press {" "}
+                <a
+                  href={URL}
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  here
+                </a>
+              </span>
+            )}
           </p>
         </div>
         <div>
