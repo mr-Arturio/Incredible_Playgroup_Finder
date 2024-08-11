@@ -55,7 +55,7 @@ function CardHeader({
         </div>
         <div>
           <div className="md:text-lg text-xs mt-1 font-semibold text-plum bg-gray-200 px-1 md:py-2 py-1 rounded-full text-center">
-            {Cancelled !== "Yes" ? (
+            {Cancelled !== "yes" ? (
               <a
                 href={organizerUrl}
                 target="_blank"
