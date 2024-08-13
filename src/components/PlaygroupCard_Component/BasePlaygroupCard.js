@@ -11,7 +11,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Organizer_fr,
     Day,
     Time,
-    Date,
+    eventDate,
     Repeats,
     Service,
     Service_fr,
@@ -85,7 +85,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         PG_URL_fr={PG_URL_fr}
         Location={Location}
         Day={Day}
-        Date={Date}
+        eventDate={eventDate}
         Repeats={Repeats}
         Service={Service}
         Service_fr={Service_fr}
@@ -118,11 +118,6 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         setTooltip={setTooltip}
         onExpand={onExpand}
         isExpanded={isExpanded}
-        URL={URL}
-        address={Address}
-        date={Date}
-        startTime={startTime}
-        endTime={endTime}
         Cancelled={Cancelled}
         translation={translation}
       />
