@@ -2,7 +2,7 @@ export const getNextOccurrences = (dayOfWeek, repeats) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Reset time portion to midnight
 
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const dayIndex = daysOfWeek.indexOf(dayOfWeek);
 
   if (dayIndex === -1) return null;
