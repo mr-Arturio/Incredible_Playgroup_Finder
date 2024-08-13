@@ -26,7 +26,7 @@ const config: Config = {
         gradient3: '#ff7e5f',
       },
       fontFamily: {
-        lazydog: ['Lazydog', 'sans-serif'],
+        lazydog: ['Lazydog', 'cursive'],
       },
     },
   },

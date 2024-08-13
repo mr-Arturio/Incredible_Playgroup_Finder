@@ -20,6 +20,7 @@ function Home() {
     };
     fetchData();
   }, []);
+  
 
   return (
     <>
