@@ -108,7 +108,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
     console.log("Today (en-CA):", today);
-    // console.log("Filter criteria before update:", filterCriteria);
 
     setFilterCriteria({ ...filterCriteria, date: today });
     setSelectedAddress(null); // Optionally reset selected address
@@ -122,8 +121,8 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     if (isLoading) return [];
 
     let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-    // console.log("Data after applying filters:", filtered);
 
+    //logic for the map - selected pin will be the only one shown in map
     if (selectedAddress) {
       filtered = filtered.filter(
         (playgroup) => playgroup.Address === selectedAddress
@@ -148,16 +147,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         Date: eventDate || "",
       };
     });
-  
-    // Log filtered data before sorting
-    // console.log("Filtered Data Before Sorting:", filtered);
-  
-    // Sort filtered data by date in ascending order
+      // Sort filtered data by date in ascending order
     filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-  
-    // Log filtered data after sorting
-    // console.log("Filtered Data After Sorting:", filtered);
-  
+   
     return filtered;
   };
 

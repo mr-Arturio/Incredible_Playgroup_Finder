@@ -28,17 +28,12 @@ function CardHeader({
   const serviceUrl = translation === "en" ? PG_URL : PG_URL_fr;
   const organizerUrl = translation === "en" ? URL : URL_fr;
 
-  // Log prop values
-  // console.log("eventDate prop:", eventDate);
-  // console.log("Day prop:", Day);
-  // console.log("Repeats prop:", Repeats);
-
   // Calculate the next occurrence if eventDate is not provided
   const calculatedDate = eventDate
     ? new Date(eventDate).toISOString().split("T")[0]
     : getNextOccurrences(Day, Repeats)?.toISOString().split("T")[0] || "";
 
-  console.log("Calculated displayDate:", calculatedDate);
+  // console.log("Calculated displayDate:", calculatedDate);
 
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
