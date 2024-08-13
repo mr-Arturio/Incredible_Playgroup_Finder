@@ -9,7 +9,7 @@ import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
-import { getNextOccurrence } from "../utils/dateUtils";
+import { getNextOccurrences } from "../utils/dateUtils";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -131,23 +131,33 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     }
 
     filtered = filtered.map((playgroup) => {
-      if (playgroup.Repeats) {
-        const nextOccurrence = getNextOccurrence(
+      let eventDate;
+      if (playgroup.eventDate) {
+        eventDate = new Date(playgroup.eventDate).toISOString().split("T")[0];
+      } else if (playgroup.Repeats) {
+        const nextOccurrence = getNextOccurrences(
           playgroup.Day,
           playgroup.Repeats
         );
         if (nextOccurrence) {
-          return {
-            ...playgroup,
-            Date: nextOccurrence.toISOString().split("T")[0],
-          };
+          eventDate = nextOccurrence.toISOString().split("T")[0];
         }
       }
-      return playgroup;
+      return {
+        ...playgroup,
+        Date: eventDate || "",
+      };
     });
-
+  
+    // Log filtered data before sorting
+    // console.log("Filtered Data Before Sorting:", filtered);
+  
     // Sort filtered data by date in ascending order
     filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
+  
+    // Log filtered data after sorting
+    // console.log("Filtered Data After Sorting:", filtered);
+  
     return filtered;
   };
 
@@ -297,7 +307,11 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
                 })
                 .slice(0, visibleCards)
                 .map((playgroup) => (
-                  <PlaygroupCard key={playgroup.ID} playgroup={playgroup} translation={translation}/>
+                  <PlaygroupCard
+                    key={playgroup.ID}
+                    playgroup={playgroup}
+                    translation={translation}
+                  />
                 ))}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (

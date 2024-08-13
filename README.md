@@ -175,6 +175,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
  - working lofic and mechanic for slider
  - add finish pin and confetti
  - make slider change navBar gradient colors and polishing
+ - logic to display empty cards
 
 ### Future Development
 
@@ -189,15 +190,16 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Set up a Google Cloud account for PRC and ensure the spreadsheet contains proper data.
 - Provide instructions on how to populate data in the spreadsheet.
 
-`npm install @react-google-maps/api`
-`npm install react-datepicker` <br>
+`npm install @react-google-maps/api`<br>
+`npm install react-datepicker` 
 
 #### Color Palate
 
 ![Color Schema](./public/ColorPalate.png)
 
-Icons : https://uxwing.com/, https://iconduck.com/
-Address to GPS Coordinates: https://www.gps-coordinates.net/
+Icons : https://uxwing.com/, https://iconduck.com/ <br>
+Address to GPS Coordinates: https://www.gps-coordinates.net/ <br>
+Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
 
 ## Learn More
 
