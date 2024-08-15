@@ -9,7 +9,6 @@ import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
-import { getNextOccurrences } from "../utils/dateUtils";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -116,7 +115,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     }
   };
 
-  // Function to get next occurrence of playgroups based on repeats logic
   const getFilteredData = () => {
     if (isLoading) return [];
 
@@ -130,26 +128,18 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     }
 
     filtered = filtered.map((playgroup) => {
-      let eventDate;
-      if (playgroup.eventDate) {
-        eventDate = new Date(playgroup.eventDate).toISOString().split("T")[0];
-      } else if (playgroup.Repeats) {
-        const nextOccurrence = getNextOccurrences(
-          playgroup.Day,
-          playgroup.Repeats
-        );
-        if (nextOccurrence) {
-          eventDate = nextOccurrence.toISOString().split("T")[0];
-        }
-      }
+      let eventDate = playgroup.eventDate
+        ? new Date(playgroup.eventDate).toISOString().split("T")[0]
+        : "";
+
       return {
         ...playgroup,
-        Date: eventDate || "",
+        eventDate,
       };
     });
-      // Sort filtered data by date in ascending order
-    filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-   
+    // Sort filtered data by date in ascending order
+    filtered.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+
     return filtered;
   };
 
