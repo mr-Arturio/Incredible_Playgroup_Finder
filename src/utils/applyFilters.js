@@ -1,5 +1,3 @@
-import { getNextOccurrences } from "./dateUtils";
-
 const applyFilters = (data, criteria, selectedAddress) => {
   try {
     const today = new Date();
@@ -43,14 +41,10 @@ const applyFilters = (data, criteria, selectedAddress) => {
         const itemDate = parseDate(item.eventDate);
 
         let isUpcomingEvent = false;
-        let nextOccurrence = null;
 
         if (itemDate) {
           isUpcomingEvent = itemDate >= today;
-        } else if (!itemDate && item.Day && item.Repeats) {
-          nextOccurrence = getNextOccurrences(item.Day, item.Repeats);
-          isUpcomingEvent = nextOccurrence && nextOccurrence >= today;
-        } else if (!item.eventDate && !item.Day && !item.Repeats) {
+        } else if (!item.eventDate && !item.Day) {
           isUpcomingEvent = true;
         }
 
@@ -72,8 +66,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
         const { timeCategory } = categorizeTime(item.Time);
         if (criteria.time && timeCategory !== criteria.time) return false;
 
-        const displayDate =
-          item.eventDate || nextOccurrence?.toISOString().split("T")[0] || "";
+        const displayDate = item.eventDate || "";
         if (criteria.date && displayDate !== criteria.date) return false;
 
         return isUpcomingEvent;
