@@ -71,12 +71,17 @@ function CardHeader({
                 rel="noopener noreferrer"
                 className="hover:text-hoverBlue transition duration-300 ease-in-out"
               >
-                {translation === "en" || !Organizer_fr
-                  ? Organizer
-                  : Organizer_fr}
+                {" "}
+                {translation === "fr" && Organizer_fr
+                  ? Organizer_fr
+                  : Organizer}
               </a>
             ) : (
-              Organizer
+              <span>
+                {translation === "fr" && Organizer_fr
+                  ? Organizer_fr
+                  : Organizer}
+              </span>
             )}
           </div>
         </div>
@@ -104,8 +109,8 @@ function CardHeader({
             />
           </button>
         </div>
-        {Registration && (
-          <div className="md:text-sm text-xs sm:flex font-semibold  bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
+        {Cancelled !== "yes" && Registration && (
+          <div className="md:text-sm text-xs sm:flex font-semibold bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
             <a
               href={Registration_URL}
               target="_blank"

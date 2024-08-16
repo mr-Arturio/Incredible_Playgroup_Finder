@@ -11,7 +11,7 @@ const AddToCalendar = ({
 }) => {
   const { translation } = useLanguage();
 
-  if (Cancelled === "Yes") return null;
+  if (Cancelled === "yes") return null;
 
   return (
     <>

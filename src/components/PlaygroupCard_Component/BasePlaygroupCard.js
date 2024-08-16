@@ -67,7 +67,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           style={{ pointerEvents: "none" }}
         >
           <span
-            className="text-red-500 text-2xl font-bold"
+            className="text-red-600 text-2xl md:text-3xl rotate-[17deg] tracking-widest font-bold"
             style={{ pointerEvents: "auto" }}
           >
             Cancelled
@@ -104,7 +104,6 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Notes_fr={Notes_fr}
           icons={icons}
           social={social}
-          Cancelled={Cancelled}
           translation={translation}
         />
       )}
@@ -115,7 +114,6 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         setTooltip={setTooltip}
         onExpand={onExpand}
         isExpanded={isExpanded}
-        Cancelled={Cancelled}
         translation={translation}
       />
     </div>
