@@ -9,7 +9,6 @@ import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
-import { getNextOccurrences } from "../utils/dateUtils";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -108,7 +107,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
     console.log("Today (en-CA):", today);
-    // console.log("Filter criteria before update:", filterCriteria);
 
     setFilterCriteria({ ...filterCriteria, date: today });
     setSelectedAddress(null); // Optionally reset selected address
@@ -117,13 +115,12 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     }
   };
 
-  // Function to get next occurrence of playgroups based on repeats logic
   const getFilteredData = () => {
     if (isLoading) return [];
 
     let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
-    // console.log("Data after applying filters:", filtered);
 
+    //logic for the map - selected pin will be the only one shown in map
     if (selectedAddress) {
       filtered = filtered.filter(
         (playgroup) => playgroup.Address === selectedAddress
@@ -131,33 +128,18 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     }
 
     filtered = filtered.map((playgroup) => {
-      let eventDate;
-      if (playgroup.eventDate) {
-        eventDate = new Date(playgroup.eventDate).toISOString().split("T")[0];
-      } else if (playgroup.Repeats) {
-        const nextOccurrence = getNextOccurrences(
-          playgroup.Day,
-          playgroup.Repeats
-        );
-        if (nextOccurrence) {
-          eventDate = nextOccurrence.toISOString().split("T")[0];
-        }
-      }
+      let eventDate = playgroup.eventDate
+        ? new Date(playgroup.eventDate).toISOString().split("T")[0]
+        : "";
+
       return {
         ...playgroup,
-        Date: eventDate || "",
+        eventDate,
       };
     });
-  
-    // Log filtered data before sorting
-    // console.log("Filtered Data Before Sorting:", filtered);
-  
     // Sort filtered data by date in ascending order
-    filtered.sort((a, b) => new Date(a.Date) - new Date(b.Date));
-  
-    // Log filtered data after sorting
-    // console.log("Filtered Data After Sorting:", filtered);
-  
+    filtered.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+
     return filtered;
   };
 

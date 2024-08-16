@@ -15,6 +15,15 @@ export const metadata = {
 const RootLayout = ({ children }) => {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/lazyDog.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={inter.className}>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

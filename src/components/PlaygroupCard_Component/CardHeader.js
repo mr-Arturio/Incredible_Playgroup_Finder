@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import AddToCalendar from "./AddToCalendar";
-import { getNextOccurrences } from "../../utils/dateUtils";
 
 function CardHeader({
   Organizer,
@@ -12,7 +11,6 @@ function CardHeader({
   PG_URL_fr,
   Day,
   eventDate,
-  Repeats,
   Service,
   Service_fr,
   Location,
@@ -27,18 +25,6 @@ function CardHeader({
 }) {
   const serviceUrl = translation === "en" ? PG_URL : PG_URL_fr;
   const organizerUrl = translation === "en" ? URL : URL_fr;
-
-  // Log prop values
-  // console.log("eventDate prop:", eventDate);
-  // console.log("Day prop:", Day);
-  // console.log("Repeats prop:", Repeats);
-
-  // Calculate the next occurrence if eventDate is not provided
-  const calculatedDate = eventDate
-    ? new Date(eventDate).toISOString().split("T")[0]
-    : getNextOccurrences(Day, Repeats)?.toISOString().split("T")[0] || "";
-
-  console.log("Calculated displayDate:", calculatedDate);
 
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
@@ -58,14 +44,14 @@ function CardHeader({
             {Location}
           </div>
           <p className="mt-1 text-gray-600 md:text-sm text-xs">
-            {Day || calculatedDate ? (
+            {Day || eventDate ? (
               <>
                 {Day && `${Day}, `}
-                {calculatedDate}
+                {eventDate}
               </>
             ) : (
               <span>
-                For information press {" "}
+                For information press{" "}
                 <a
                   href={URL}
                   className="text-blue-500 underline hover:text-blue-700"
@@ -111,7 +97,7 @@ function CardHeader({
             <AddToCalendar
               name={Organizer}
               address={address}
-              date={calculatedDate}
+              date={eventDate}
               startTime={startTime}
               endTime={endTime}
               Cancelled={Cancelled}

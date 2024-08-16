@@ -176,6 +176,13 @@ Navigate to http://localhost:3000 in your browser to view the app.
  - add finish pin and confetti
  - make slider change navBar gradient colors and polishing
  - logic to display empty cards
+ - attenpt to set up iccurrence logic
+ - got occurrence but filter got messed up - my filter logic is relieing on the data from spreadsheet and occurance is not there - so all filter logic needs to be redone
+ - little distruction - worked on NavBar loading fix
+ - come up with the solution for ooccurrence - wrote a spreadsheet script that creates a new page with all necessery data (occurence logic + all regular data) and use it for the app. In that case we have our repeats logic, and filters works with the price of one button to press
+ Now we populate the sheet as before with repats logic and the rest and when we done - we run a screept that creeates all the occurrences for nessecery items and use it for the our app...
+ - remove occurrence logic and repeats - bag to original!
+ 
 
 ### Future Development
 
