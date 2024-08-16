@@ -26,7 +26,7 @@ const DatePickerComponent = ({ onDateChange, translation }) => {
     <div className="relative w-full flex flex-col items-center">
       {/* Calendar Icon */}
       <h2 className="text-md text-center font-semibold text-gray-700 mb-2">
-        {translation === "fr" ? "Sélectionner une date" : "Select a Date"}
+        {translation === "fr" ? "Choisir une date" : "Select a Date"}
       </h2>
       <button
         onClick={toggleCalendar}

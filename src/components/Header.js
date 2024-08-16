@@ -106,7 +106,7 @@ const Header = () => {
           preferences!
         </p>
       ),
-    showMore: translation === "fr" ? "Lire la suite" : "Read More",
+    showMore: translation === "fr" ? "En savoir plus" : "Read More",
     showLess: translation === "fr" ? "Lire moins" : "Read Less",
   };
 

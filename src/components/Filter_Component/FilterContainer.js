@@ -39,7 +39,7 @@ const FilterContainer = ({
             options={areaOptions}
             onChange={(e) => handleFilterChange("area", e.target.value)}
             placeholder={
-              translation === "fr" ? "Zone de la Ville" : "Area of the City"
+              translation === "fr" ? "Région d'Ottawa " : "Area of Ottawa"
             }
           />
           <FilterComponent
@@ -49,7 +49,7 @@ const FilterContainer = ({
             value={filterCriteria.age}
             options={ageOptions}
             onChange={(e) => handleFilterChange("age", e.target.value)}
-            placeholder={translation === "fr" ? "Groupe d'âge" : "Age Group"}
+            placeholder={translation === "fr" ? "Âge" : "Age"}
           />
           <FilterComponent
             translation={translation}
@@ -70,7 +70,7 @@ const FilterContainer = ({
             options={dayOptions}
             onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder={
-              translation === "fr" ? "Jour de la semaine" : "Day of the Week"
+              translation === "fr" ? "Jour de la semaine" : "Day of Week"
             }
             mapping={dayMapping}
           />
@@ -81,7 +81,7 @@ const FilterContainer = ({
             options={timeOptions}
             onChange={(e) => handleFilterChange("time", e.target.value)}
             placeholder={
-              translation === "fr" ? "Moment de la journée" : "Time of the Day"
+              translation === "fr" ? "Heure de la journée" : "Time of Day"
             }
           />
           <FilterComponent
@@ -92,7 +92,7 @@ const FilterContainer = ({
             onChange={(e) => handleFilterChange("organizer", e.target.value)}
             placeholder={
               translation === "fr"
-                ? "Fournisseur de groupe de jeu"
+                ? "Prestataire"
                 : "Playgroup Provider"
             }
           />

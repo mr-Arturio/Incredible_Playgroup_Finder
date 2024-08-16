@@ -39,8 +39,8 @@ const Navbar = () => {
         secondLine: "PLAYGROUP FINDER!",
       },
       fr: {
-        firstLine: "INCROYABLE",
-        secondLine: "RECHERCHE DE GROUPES DE JEU!",
+        firstLine: " L'OUTILL",
+        secondLine: "INCROYABLE!",
       },
     },
     under:

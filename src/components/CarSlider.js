@@ -37,7 +37,7 @@ const CarSlider = ({ position, handleSliderChange }) => {
           <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-yellow-500 transform -translate-y-1/2" />
 
           {/* Finish Pin Icon */}
-          <div className="absolute -right-3 transform -translate-y-1/2 -rotate-45">
+          <div className="absolute -right-2 transform -translate-y-1/2 ">
             <Image src="/IPFicon.svg" alt="Finish Pin" width={75} height={70} />
           </div>
 
