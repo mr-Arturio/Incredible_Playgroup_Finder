@@ -28,6 +28,9 @@ const config: Config = {
       fontFamily: {
         lazydog: ['Lazydog', 'cursive'],
       },
+      rotate: {
+        '17': '17deg',
+      },
     },
   },
   plugins: [],
