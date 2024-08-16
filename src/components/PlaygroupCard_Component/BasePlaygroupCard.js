@@ -56,7 +56,11 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
 
   // Conditional style classes
   const cardStyle =
-    Cancelled === "yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
+    Cancelled === "yes"
+      ? "bg-gray-400 opacity-50"
+      : Paused === "yes"
+      ? "bg-blue-100 opacity-50"
+      : "bg-blue-100";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-4 relative ${cardStyle}`;
 
   return (
@@ -67,10 +71,23 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           style={{ pointerEvents: "none" }}
         >
           <span
-            className="text-red-600 text-2xl md:text-3xl rotate-[17deg] tracking-widest font-bold"
+            className="text-red-600 text-2xl md:text-3xl rotate-[17deg] tracking-widest font-extrabold"
             style={{ pointerEvents: "auto" }}
           >
             Cancelled
+          </span>
+        </div>
+      )}
+       {Paused === "yes" && (
+        <div
+          className="absolute z-10 w-full h-full flex justify-center items-center"
+          style={{ pointerEvents: "none" }}
+        >
+          <span
+            className="text-blue-600 text-2xl md:text-3xl -rotate-[17deg] tracking-widest font-extrabold"
+            style={{ pointerEvents: "auto" }}
+          >
+            Paused
           </span>
         </div>
       )}
@@ -87,6 +104,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         Service={Service}
         Service_fr={Service_fr}
         Cancelled={Cancelled}
+        Paused={Paused}
         Time={Time}
         address={Address}
         startTime={startTime}

@@ -15,6 +15,7 @@ function CardHeader({
   Service_fr,
   Location,
   Cancelled,
+  Paused,
   Time,
   address,
   startTime,
@@ -106,10 +107,11 @@ function CardHeader({
               startTime={startTime}
               endTime={endTime}
               Cancelled={Cancelled}
+              Paused={Paused}
             />
           </button>
         </div>
-        {Cancelled !== "yes" && Registration && (
+        {Cancelled !== "yes" && Paused !== "yes" && Registration && (
           <div className="md:text-sm text-xs sm:flex font-semibold bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
             <a
               href={Registration_URL}
