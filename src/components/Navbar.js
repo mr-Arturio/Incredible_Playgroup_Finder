@@ -35,7 +35,7 @@ const Navbar = () => {
   const translations = {
     header: {
       en: {
-        firstLine: "INCREDIBLE",
+        firstLine: "THE INCREDIBLE",
         secondLine: "PLAYGROUP FINDER!",
       },
       fr: {
@@ -46,7 +46,7 @@ const Navbar = () => {
     under:
       translation === "en"
         ? "Discover the perfect EarlyON playgroup for your busy schedule."
-        : "Découvrez le groupe de jeu EarlyON idéal pour votre emploi du temps chargé.",
+        : "Découvrez votre groupe de jeu ONyVA idéal.",
   };
 
   return (

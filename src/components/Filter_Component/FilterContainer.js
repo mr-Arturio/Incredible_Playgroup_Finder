@@ -33,38 +33,6 @@ const FilterContainer = ({
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
             translation={translation}
-            id="areaCriteria"
-            className="flex-grow"
-            value={filterCriteria.area}
-            options={areaOptions}
-            onChange={(e) => handleFilterChange("area", e.target.value)}
-            placeholder={
-              translation === "fr" ? "Région d'Ottawa " : "Area of Ottawa"
-            }
-          />
-          <FilterComponent
-            translation={translation}
-            id="ageCriteria"
-            className="flex-grow"
-            value={filterCriteria.age}
-            options={ageOptions}
-            onChange={(e) => handleFilterChange("age", e.target.value)}
-            placeholder={translation === "fr" ? "Âge" : "Age"}
-          />
-          <FilterComponent
-            translation={translation}
-            id="languageCriteria"
-            className="flex-grow"
-            value={filterCriteria.language}
-            options={languageOptions}
-            onChange={(e) => handleFilterChange("language", e.target.value)}
-            placeholder={translation === "fr" ? "Langue" : "Language"}
-          />
-        </div>
-        {/* Second row of filters */}
-        <div className="md:flex justify-between gap-2 mb-3">
-          <FilterComponent
-            translation={translation}
             id="dayCriteria"
             value={filterCriteria.day}
             options={dayOptions}
@@ -86,14 +54,44 @@ const FilterContainer = ({
           />
           <FilterComponent
             translation={translation}
+            id="languageCriteria"
+            className="flex-grow"
+            value={filterCriteria.language}
+            options={languageOptions}
+            onChange={(e) => handleFilterChange("language", e.target.value)}
+            placeholder={translation === "fr" ? "Langue" : "Language"}
+          />
+        </div>
+        {/* Second row of filters */}
+        <div className="md:flex justify-between gap-2 mb-3">
+          <FilterComponent
+            translation={translation}
+            id="areaCriteria"
+            className="flex-grow"
+            value={filterCriteria.area}
+            options={areaOptions}
+            onChange={(e) => handleFilterChange("area", e.target.value)}
+            placeholder={
+              translation === "fr" ? "Région d'Ottawa " : "Area of Ottawa"
+            }
+          />
+          <FilterComponent
+            translation={translation}
+            id="ageCriteria"
+            className="flex-grow"
+            value={filterCriteria.age}
+            options={ageOptions}
+            onChange={(e) => handleFilterChange("age", e.target.value)}
+            placeholder={translation === "fr" ? "Âge" : "Age"}
+          />
+          <FilterComponent
+            translation={translation}
             id="organizerCriteria"
             value={filterCriteria.organizer}
             options={organizerOptions}
             onChange={(e) => handleFilterChange("organizer", e.target.value)}
             placeholder={
-              translation === "fr"
-                ? "Prestataire"
-                : "Playgroup Provider"
+              translation === "fr" ? "Prestataire" : "Playgroup Provider"
             }
           />
         </div>
