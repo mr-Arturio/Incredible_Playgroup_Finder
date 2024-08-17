@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { getSheetData } from "../actions/getSheetData";
 import RenderSheetDataTable from "../components/RenderSheetDataTable";
-import Header from "../components/Header";
+import IntroductionText from "../components/IntroductionText";
 import ContactForm from "../components/ContactForm";
 import { useLanguage } from "../context/LanguageContext";
-import Navbar from "../components/Navbar";
+import Header from "../components/Header";
 import { Footer } from "../components/Footer";
 
 function Home() {
@@ -24,7 +24,7 @@ function Home() {
 
   return (
     <>
-      <Navbar />
+      <Header />
       
       <div
   className="flex flex-col items-center justify-center min-h-screen"
@@ -35,7 +35,7 @@ function Home() {
   }}
 >
         <div className="container">
-          <Header />
+          <IntroductionText />
         </div>
         <main className="container flex-1">
           <RenderSheetDataTable
