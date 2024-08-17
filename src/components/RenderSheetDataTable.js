@@ -52,6 +52,13 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       "Child (4-10y)":
         translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
     },
+    languageOptions: {
+      English: translation === "fr" ? "Anglais" : "English",
+      French: translation === "fr" ? "Français" : "French",
+      "English/French": translation === "fr" ? "Anglais/Français" : "English/French",
+      Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
+      Arabic: translation === "fr" ? "Arabe" : "L'arabe",
+    },
   };
 
   // Reference for scrolling to today's playgroups section
@@ -173,16 +180,17 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    const uniqueAreas = [
-      ...new Set(sheetData.map((item) => item.Area).filter(Boolean)),
-    ];
-    return uniqueAreas.map((area) => translations.areaOptions[area] || area);
+    return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))].map(
+      (area) => translations.areaOptions[area] || area
+    );
   }, [sheetData, translations.areaOptions]);
 
   const languageOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
-  }, [sheetData]);
+    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))].map(
+      (language) => translations.languageOptions[language] || language
+    );
+  }, [sheetData, translations.languageOptions]);
 
   const organizerOptions = useMemo(() => {
     if (!sheetData) return [];
