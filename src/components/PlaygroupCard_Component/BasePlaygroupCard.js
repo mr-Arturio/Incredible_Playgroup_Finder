@@ -74,11 +74,11 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
             className="text-red-600 text-2xl md:text-3xl rotate-[17deg] tracking-widest font-extrabold"
             style={{ pointerEvents: "auto" }}
           >
-            Cancelled
+            {translation === "en" ? "Cancelled" : "Annulé"}
           </span>
         </div>
       )}
-       {Paused === "yes" && (
+      {Paused === "yes" && (
         <div
           className="absolute z-10 w-full h-full flex justify-center items-center"
           style={{ pointerEvents: "none" }}
@@ -87,7 +87,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
             className="text-blue-600 text-2xl md:text-3xl -rotate-[17deg] tracking-widest font-extrabold"
             style={{ pointerEvents: "auto" }}
           >
-            Paused
+            {translation === "en" ? "Paused" : "En Pause"}
           </span>
         </div>
       )}
