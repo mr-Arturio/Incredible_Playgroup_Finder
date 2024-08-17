@@ -1,92 +1,113 @@
-import "../app/fonts.css";
-import { useLanguage } from "../context/LanguageContext";
-import { useState, useEffect } from "react";
-import RandomImage from "../utils/RandomImage";
-import { gradients } from "../utils/gradient";
-import CarSlider from "./CarSlider";
+import React from "react";
+import Link from "next/link"; // Assuming you're using Next.js
 
-const Navbar = () => {
-  const { translation } = useLanguage();
-  const [isClient, setIsClient] = useState(false);
-  const [position, setPosition] = useState(0);
-
-  useEffect(() => {
-    setIsClient(true); // Set client-side flag after component mounts
-  }, []);
-
-  // Render a loading state until client-side hydration is complete
-  if (!isClient) {
-    return (
-      <nav className="bg-plum text-white py-2 min-h-[200px] flex justify-center items-center">
-        <span>Loading...</span>
-      </nav>
-    );
-  }
-
-  const handleSliderChange = (event) => {
-    const newPosition = event.target.value;
-    setPosition(Number(newPosition));
-  };
-
-  // Calculate gradient index based on position
-  const gradientIndex = Math.floor((position / 100) * (gradients.length - 1));
-
-  // Translations
-  const translations = {
-    header: {
-      en: {
-        firstLine: "THE INCREDIBLE",
-        secondLine: "PLAYGROUP FINDER!",
-      },
-      fr: {
-        firstLine: " L'OUTILL",
-        secondLine: "INCROYABLE!",
-      },
-    },
-    under:
-      translation === "en"
-        ? "Discover the perfect EarlyON playgroup for your busy schedule."
-        : "Découvrez votre groupe de jeu ONyVA idéal.",
-  };
-
+const NavBar = () => {
   return (
-    <>
-      <nav
-        className={`${gradients[gradientIndex]} transition-all ease-in-out duration-500 text-white`}
-      >
-        <div className="bg-frame">
-          <div className="container mx-auto flex justify-between items-center">
-            <div
-              className="flex-1 text-left ml-2 lg:ml-40"
-              style={{ flexBasis: "65%" }}
-            >
-              <h1 className="lg:ml-6 ml-10 text-2xl/5 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
-                {translations.header[translation].firstLine}
-              </h1>
-              <h1 className="lg:ml-0 ml-6 text-lg 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
-                {translations.header[translation].secondLine}
-              </h1>
-              <h3 className="hidden md:flex lg:ml-6 italic ml-3 md:ml-10  lg:text-xl md:text-base">
-                {translations.under}
-              </h3>
-            </div>
-            <div
-              className="flex justify-end items-end ml-4"
-              style={{ flexBasis: "35%" }}
-            >
-              <RandomImage />
-            </div>
+    <nav className="bg-white shadow-lg">
+      <div className="container mx-auto px-4 flex justify-between items-center py-3">
+        {/* Logo Section */}
+        <div className="flex items-center">
+          <img
+            src="/path-to-your-logo.png"
+            alt="Logo"
+            className="h-12 w-auto"
+          />
+          <div className="ml-2">
+            <h1 className="text-lg font-semibold">PARENT RESOURCE CENTRE</h1>
+            <p className="text-xs text-pink-500">OTTAWA</p>
           </div>
         </div>
-      </nav>
-      <div className="hidden sm:block">
-        <CarSlider
-          position={position}
-          handleSliderChange={handleSliderChange}
-        />
+
+        {/* Navigation Links */}
+        <div className="hidden md:flex space-x-6 text-sm">
+          <Link
+            href="/"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/get-involved"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            Get Involved
+          </Link>
+          <Link
+            href="/parents"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            Parents
+          </Link>
+          <Link
+            href="/professionals"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            Professionals
+          </Link>
+          <Link
+            href="/blog"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-block text-left leading-[50px] px-2 transition-colors duration-400 ease-out hover:text-purple-600"
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* Social Icons and Button */}
+        <div className="flex items-center space-x-3">
+          <a
+            href="https://www.facebook.com/parentresourcecentre"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://static.wixstatic.com/media/11062b_0bec1cadb27b4d4a9898a740648fc5a9~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_0bec1cadb27b4d4a9898a740648fc5a9~mv2.png"
+              alt="Facebook"
+              className="h-[39px] w-[39px] object-cover"
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/parentresource"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://static.wixstatic.com/media/11062b_482d38aa2aaa49a5b45774ebe9a5b544~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_482d38aa2aaa49a5b45774ebe9a5b544~mv2.png"
+              alt="Instagram"
+              className="h-[39px] w-[39px] object-cover"
+            />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://static.wixstatic.com/media/11062b_23e5890c2dfc4a04af80178b43ef66fd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_23e5890c2dfc4a04af80178b43ef66fd~mv2.png"
+              alt="LinkedIn"
+              className="h-[39px] w-[39px] object-cover"
+            />
+          </a>
+          <button className="relative bg-blue-500 text-white border-transparent border-solid border-0 rounded-lg shadow-lg px-4 py-2 hover:bg-blue-600 transition-colors duration-400 ease-out">
+            <span className="flex items-center justify-center w-full h-full">
+              Donate Now
+            </span>
+          </button>
+        </div>
       </div>
-    </>
+    </nav>
   );
 };
 
-export default Navbar;
+export default NavBar;
