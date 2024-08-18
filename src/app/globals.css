@@ -6,3 +6,9 @@
 .bg-frame {
   @apply relative bg-frame-pattern bg-cover bg-no-repeat;
 }
+
+@layer components {
+  .navBarText {
+    @apply inline-block 2xl:text-lg text-base text-left font-semibold leading-[50px] px-2 transition-colors duration-500 ease-out hover:text-navTextHover text-navText hover:scale-105;
+  }
+}
