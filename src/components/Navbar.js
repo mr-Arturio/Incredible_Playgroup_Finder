@@ -4,22 +4,21 @@ import Link from "next/link"; // Assuming you're using Next.js
 const NavBar = () => {
   return (
     <nav className="bg-white shadow-lg">
-      <div className="container mx-auto 2xl:px-10 flex justify-between items-center py-2.5">
+      <div className="container mx-auto 2xl:px-16 flex justify-between items-center py-2.5">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img
-            src="/logo_english.svg"
-            alt="Logo"
-            className="h-24 w-auto"
-          />
-           </div>
+          <a
+            href="https://www.parentresource.ca/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/logo_english.svg" alt="Logo" className="h-20 w-auto" />
+          </a>
+        </div>
 
         {/* Navigation Links */}
         <div className="hidden md:flex 2xl:space-x-6 space-x-3 mr-8">
-          <Link
-            href="https://www.parentresource.ca/"
-            className="navBarText"
-          >
+          <Link href="https://www.parentresource.ca/" className="navBarText">
             Home
           </Link>
           <Link
@@ -95,13 +94,16 @@ const NavBar = () => {
               className="h-[37px] w-[37px] object-cover hover:scale-110"
             />
           </a>
-          </div>
-          <div>
-          <button className="relative bg-mainBlue text-white border-transparent border-solid border-0 rounded-lg shadow-lg px-5 py-3 hover:bg-navButtonHover transition-colors duration-400 ease-out">
-            <span className="flex items-center justify-center w-full h-full">
-              Donate Now
-            </span>
-          </button>
+        </div>
+        <div>
+          <a
+            href="https://www.canadahelps.org/en/dn/27631"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative bg-mainBlue text-white border-transparent border-solid border-0 rounded-lg shadow-lg px-5 py-3 hover:bg-navButtonHover transition-colors duration-500 ease-in-out flex items-center justify-center"
+          >
+            Donate Now
+          </a>
         </div>
       </div>
     </nav>
