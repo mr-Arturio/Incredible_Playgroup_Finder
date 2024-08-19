@@ -26,7 +26,6 @@ const config: Config = {
         gradient3: '#ff7e5f',
         navText: 'rgb(64,0,128)',
         navTextHover: 'rgb(163,66,152)',
-        navButtonHover: 'rgb(252 190 34)',
       },
       fontFamily: {
         lazydog: ['Lazydog', 'cursive'],

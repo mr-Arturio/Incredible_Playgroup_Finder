@@ -82,7 +82,7 @@ const NavBar = () => {
             />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/company/parent-resource-centre/mycompany/"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -98,7 +98,7 @@ const NavBar = () => {
             href="https://www.canadahelps.org/en/dn/27631"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative bg-mainBlue text-white border-transparent border-solid border-0 rounded-lg shadow-lg px-5 py-3 hover:bg-navButtonHover transition-colors duration-500 ease-in-out flex items-center justify-center"
+            className="relative bg-mainBlue text-white border-transparent border-solid border-0 rounded-lg shadow-lg px-5 py-3 hover:bg-amber transition-colors duration-500 ease-in-out flex items-center justify-center"
           >
             Donate Now
           </a>
