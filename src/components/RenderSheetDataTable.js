@@ -41,21 +41,20 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       Central: translation === "fr" ? "Centre" : "Central",
       South: translation === "fr" ? "Sud" : "South",
     },
-    ageOptions: {
-      "Baby (non-walking)":
-        translation === "fr" ? "Bébé (non marchant)" : "Baby (non-walking)",
-      "Baby (0-12m)": translation === "fr" ? "Bébé (0-12mois)" : "Baby (0-12m)",
-      "Baby (0-18m)": translation === "fr" ? "Bébé (0-18mois)" : "Baby (0-18m)",
-      "Baby (0-24m)": translation === "fr" ? "Bébé (0-24mois)" : "Baby (0-24m)",
-      "Child (0-6y)": translation === "fr" ? "Enfant (0-6ans)" : "Child (0-6y)",
-      "Child (3-6y)": translation === "fr" ? "Enfant (3-6ans)" : "Child (3-6y)",
-      "Child (4-10y)":
-        translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
-    },
+    ageOptions: [
+      { en: "Baby (non-walking)", fr: "Bébé (non marchant)" },
+      { en: "Baby (0-12m)", fr: "Bébé (0-12mois)" },
+      { en: "Baby (0-18m)", fr: "Bébé (0-18mois)" },
+      { en: "Baby (0-24m)", fr: "Bébé (0-24mois)" },
+      { en: "Child (0-6y)", fr: "Enfant (0-6ans)" },
+      { en: "Child (3-6y)", fr: "Enfant (3-6ans)" },
+      { en: "Child (4-10y)", fr: "Enfant (4-10ans)" },
+    ],
     languageOptions: {
       English: translation === "fr" ? "Anglais" : "English",
       French: translation === "fr" ? "Français" : "French",
-      "English/French": translation === "fr" ? "Anglais/Français" : "English/French",
+      "English/French":
+        translation === "fr" ? "Anglais/Français" : "English/French",
       Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
       Arabic: translation === "fr" ? "Arabe" : "L'arabe",
     },
@@ -187,9 +186,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const languageOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))].map(
-      (language) => translations.languageOptions[language] || language
-    );
+    return [
+      ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
+    ].map((language) => translations.languageOptions[language] || language);
   }, [sheetData, translations.languageOptions]);
 
   const organizerOptions = useMemo(() => {
@@ -202,12 +201,17 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const timeOptions = Object.keys(translations.timesOfDay).map(
     (key) => translations.timesOfDay[key]
   );
+
   const ageOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Age).filter(Boolean))].map(
-      (age) => translations.ageOptions[age] || age
-    );
-  }, [sheetData, translations.ageOptions]);
+    const uniqueAges = [
+      ...new Set(sheetData.map((item) => item.Age).filter(Boolean)),
+    ];
+
+    return translations.ageOptions
+      .filter((option) => uniqueAges.includes(option.en))
+      .map((option) => option[translation === "fr" ? "fr" : "en"]);
+  }, [sheetData, translation]);
 
   const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
