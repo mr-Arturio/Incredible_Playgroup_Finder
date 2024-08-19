@@ -52,12 +52,17 @@ function CardHeader({
               </>
             ) : (
               <span>
-                For information press{" "}
+                {translation === "en"
+                  ? "For a complete schedule of French playgroups, please visit "
+                  : "Pour obtenir le calendrier complet des groupes de jeu en français, veuillez consulter le "}
+
                 <a
-                  href={URL}
+                  href="https://drive.google.com/file/d/1TzILt1grFGg0rqdl8TsfWFd2IUMPRDYI/view"
                   className="text-blue-500 underline hover:text-blue-700"
                 >
-                  here
+                  {translation === "en"
+                    ? "French Playgroup Schedules."
+                    : "Recueil d’activitiés francophones."}
                 </a>
               </span>
             )}
