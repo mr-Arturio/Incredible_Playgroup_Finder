@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "next/link"; // Assuming you're using Next.js
+import Link from "next/link";
+
 const NavBar = () => {
   return (
     <nav className="bg-white shadow-lg">

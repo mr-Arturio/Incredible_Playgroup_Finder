@@ -1,10 +1,16 @@
 import React from "react";
-import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="bg-white">
-      <div className="container mx-auto px-4">
+    <footer className="bg-white text-sm md:text-base font-light md:leading-relaxed ">
+      {/* Decorative Lines */}
+      <div className="w-full">
+        <div className="bg-mainBlue h-1"></div>
+        {/* <div className="bg-plum h-1"></div> */}
+        <div className="bg-amber h-3"></div>
+      </div>
+
+      <div className="container mx-auto px-4 mt-4">
         {/* Top Section */}
         <p className="text-left">
           The Parent Resource Centre (PRC) is a not-for-profit charity that
@@ -13,13 +19,13 @@ export const Footer = () => {
           supportive resources for children, youth, parents and caregivers in a
           welcoming environment.
         </p>
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+        <div className="flex flex-row justify-between md:items-center space-y-5 md:space-y-0">
           {/* Contact Information */}
-          <div className="text-left mt-10">
-            <h3 className="text-amber text-lg font-bold">
+          <div className="text-left mt-2 md:mt-6">
+            <h3 className="text-amber text-base md:text-lg font-bold">
               Contact Information
             </h3>
-            <p className="text-base">
+            <p className="md:text-base text-sm">
               300 Goulburn Crescent
               <br />
               Ottawa, ON
@@ -46,7 +52,7 @@ export const Footer = () => {
               <img
                 src="https://static.wixstatic.com/media/e316f544f9094143b9eac01f1f19e697.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e316f544f9094143b9eac01f1f19e697.png"
                 alt="Facebook"
-                className="h-10 w-10"
+                className="md:h-10 md:w-10 hover:scale-105 h-8 w-8"
               />
             </a>
             <a
@@ -57,7 +63,7 @@ export const Footer = () => {
               <img
                 src="https://static.wixstatic.com/media/8d6893330740455c96d218258a458aa4.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8d6893330740455c96d218258a458aa4.png"
                 alt="Instagram"
-                className="h-10 w-10"
+                className="md:h-10 md:w-10 hover:scale-105 h-8 w-8"
               />
             </a>
             <a
@@ -68,7 +74,7 @@ export const Footer = () => {
               <img
                 src="https://static.wixstatic.com/media/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png"
                 alt="LinkedIn"
-                className="h-10 w-10"
+                className="md:h-10 md:w-10 hover:scale-105 h-8 w-8"
               />
             </a>
             <a
@@ -79,7 +85,7 @@ export const Footer = () => {
               <img
                 src="https://static.wixstatic.com/media/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png"
                 alt="Other"
-                className="h-10 w-10"
+                className="md:h-10 md:w-10 hover:scale-105 h-8 w-8"
               />
             </a>
           </div>
@@ -87,13 +93,24 @@ export const Footer = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="w-full bg-mainBlue py-4 mt-8">
-        <div className="container mx-auto px-4 flex justify-between text-white">
+      <div className="w-full bg-mainBlue py-2 mt-6 px-4 text-xs md:text-sm">
+        <div className="container mx-auto flex justify-between text-white">
           <div>
             <p>&copy; 2024 Parent Resource Centre</p>
             <p>Charitable registration number: 119076487RR0001</p>
+            <p className="my-1 font-extralight">
+              {" "}
+              Built by{" "}
+              <a
+                href="https://github.com/mr-Arturio"
+                className="hover:text-amber"
+              >
+                {" "}
+                Artur
+              </a>{" "}
+            </p>
           </div>
-          <a href="/privacy-policy" className="font-semibold text-white">
+          <a href="/privacy-policy" className="font-semibold text-white hover:underline">
             Privacy Policy
           </a>
         </div>
