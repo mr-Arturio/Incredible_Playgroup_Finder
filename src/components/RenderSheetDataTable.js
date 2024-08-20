@@ -56,7 +56,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       "English/French":
         translation === "fr" ? "Anglais/Français" : "English/French",
       Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
-      Arabic: translation === "fr" ? "Arabe" : "L'arabe",
+      Arabic: translation === "fr" ? "L'arabe" : "Arabic",
     },
   };
 
