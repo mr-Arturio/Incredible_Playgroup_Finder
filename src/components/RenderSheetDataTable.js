@@ -219,11 +219,18 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   return (
     <>
-      <div className="flex justify-start md:mb-4 mb-2">
+      <div className="flex justify-between items-center md:mb-4 mb-2">
         <ShowTodayButton
           onShowToday={showTodayPlaygroups}
           translation={translation}
         />
+        {/* FAQ Link */}
+        <a
+          href="https://www.parentresource.ca/FAQIPF"
+          className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-base md:text-xl tracking-widest"
+        >
+          FAQ
+        </a>
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col" id="today-playgroups-section">
