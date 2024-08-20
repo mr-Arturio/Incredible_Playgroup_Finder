@@ -15,3 +15,8 @@
     @apply h-8 w-8 md:h-[30px] md:w-[30px] xl:h-[37px] xl:w-[37px] object-cover hover:scale-110
   }
 }
+
+/* Custom CSS to hide the close button in Google Maps InfoWindow */
+.gm-style-iw-chr .gm-ui-hover-effect {
+  display: none !important;
+}

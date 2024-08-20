@@ -45,7 +45,7 @@ const AddToCalendar = ({
           size="0"
           listStyle="modal"
           hideTextLabelButton
-          lightMode="system"
+          lightMode="light"
         />
       </div>
     </>

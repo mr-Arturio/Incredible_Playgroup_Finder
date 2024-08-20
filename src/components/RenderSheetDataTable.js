@@ -292,7 +292,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         <div
           ref={todayPlaygroupsSectionRef}
           id="todayPlaygroupsSection"
-          className="w-full xl:w-1/2 pt-2 pr-2 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+          className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
           style={{ height: "80vh" }}
         >
           {noDataAvailable ? (
