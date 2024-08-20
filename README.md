@@ -182,6 +182,13 @@ Navigate to http://localhost:3000 in your browser to view the app.
  - come up with the solution for ooccurrence - wrote a spreadsheet script that creates a new page with all necessery data (occurence logic + all regular data) and use it for the app. In that case we have our repeats logic, and filters works with the price of one button to press
  Now we populate the sheet as before with repats logic and the rest and when we done - we run a screept that creeates all the occurrences for nessecery items and use it for the our app...
  - remove occurrence logic and repeats - bag to original!
+ - add new NavBAr on top
+ - adjust aevery link in nav bar
+ - create HumburgerMenu for mobile screens for nav bar
+ - make new footer
+ - set up and style new footer
+ - polish styling, mobile views, translations etc.
+ - adjust tablet view
  
 
 ### Future Development
