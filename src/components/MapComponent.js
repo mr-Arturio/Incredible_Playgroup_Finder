@@ -13,11 +13,14 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
   const [hoveredMarker, setHoveredMarker] = useState(null); // Track hovered marker
+  const [clickedMarker, setClickedMarker] = useState(null); // Track clicked marker on mobile
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
     // libraries: ["places"],
   });
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   const [markers, setMarkers] = useState([]);
 
@@ -86,7 +89,14 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
 
   const createKey = (lat, lng, address) => `${lat}-${lng}-${address}`;
 
+  const handleMarkerClick = (markerKey) => {
+    if (isMobile) {
+      setClickedMarker(clickedMarker === markerKey ? null : markerKey);
+    }
+  };
+
   if (!isLoaded) return <Loading />;
+
   return (
     <div className="h-full w-full content-start mt-0 lg:ml-0 xl:pl-1">
       <GoogleMap
@@ -109,17 +119,27 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
             }
             onMouseOut={() => setHoveredMarker(null)}
           >
-            {hoveredMarker ===
-              createKey(marker.lat, marker.lng, marker.Address) && (
+            {(hoveredMarker ===
+              createKey(marker.lat, marker.lng, marker.Address) ||
+              clickedMarker ===
+                createKey(marker.lat, marker.lng, marker.Address)) && (
               <InfoWindow
                 position={{
                   lat: parseFloat(marker.lat),
                   lng: parseFloat(marker.lng),
                 }}
+                options={{ disableAutoPan: true }}
               >
-                <div>
-                  <h3>{marker.Organizer}</h3>
-                  <p>{marker.Address}</p>
+                <div className="max-w-xs font-sans p-1">
+                  <h3
+                    className="text-sm font-bold text-gray-800 -mt-2"
+                    aria-label={marker.Organizer}
+                  >
+                    {marker.Organizer}
+                  </h3>
+                  <p className="text-sm text-gray-600 -my-1">
+                    {marker.Address}
+                  </p>
                 </div>
               </InfoWindow>
             )}
