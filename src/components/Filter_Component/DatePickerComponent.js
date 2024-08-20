@@ -22,6 +22,10 @@ const DatePickerComponent = ({ onDateChange, translation }) => {
     return date.toLocaleDateString();
   };
 
+   // Calculate the max date as 6 weeks from today
+   const maxDate = new Date();
+   maxDate.setDate(maxDate.getDate() + 6 * 7);
+
   return (
     <div className="relative w-full flex flex-col items-center">
       {/* Calendar Icon */}
@@ -67,6 +71,7 @@ const DatePickerComponent = ({ onDateChange, translation }) => {
             selected={startDate}
             onChange={handleChange}
             minDate={new Date()}
+            maxDate={maxDate}
             inline
             className="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           />
