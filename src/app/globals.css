@@ -9,6 +9,9 @@
 
 @layer components {
   .navBarText {
-    @apply inline-block 2xl:text-lg text-base text-left font-semibold leading-[50px] px-2 transition-colors duration-500 ease-out hover:text-navTextHover text-navText hover:scale-105;
+    @apply inline-block 2xl:text-lg lg:text-base text-sm text-left font-semibold leading-[50px] px-2 transition-colors duration-500 ease-out hover:text-navTextHover text-navText hover:scale-105;
+  }
+  .navBarIcons {
+    @apply h-8 w-8 md:h-[30px] md:w-[30px] xl:h-[37px] xl:w-[37px] object-cover hover:scale-110
   }
 }
