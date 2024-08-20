@@ -8,10 +8,11 @@ const AddToCalendar = ({
   startTime,
   endTime,
   Cancelled,
+  Paused
 }) => {
   const { translation } = useLanguage();
 
-  if (Cancelled === "Yes") return null;
+  if (Cancelled === "yes" || Paused === "yes") return null;
 
   return (
     <>

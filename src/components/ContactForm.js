@@ -15,29 +15,28 @@ function ContactForm() {
       title:
         translation === "fr" ? (
           <p>
-            Si vous avez des suggestions, des commentaires ou si vous rencontrez
-            des problèmes avec l&apos;horaire ou toute autre information, veuillez:
+            N&apos;hésitez pas à nous faire part de vos questions, commentaires, corrections ou réactions:
           </p>
         ) : (
           <p>
-            If you have any suggestions, comments, or found any issues with the
-            schedule or any other information, please:
+            Please send us any questions, comments, corrections or feedback you
+            may have:
           </p>
         ),
-      contactUs: translation === "fr" ? "Contactez-nous" : "Contact Us",
-      needHelp: translation === "fr" ? "Besoin d'aide?" : "Need Help?",
+      contactUs: translation === "fr" ? "Qu'en pensez-vous?" : "Provide Feedback",
+      needHelp: translation === "fr" ? "Besoin d'aide?" : "Need Support?",
     });
   }, [translation]);
 
   return (
     <>
-      <h2 className="text-xl md:text-2xl font-bold mt-4 lg:mt-2 pl-5">
+      <h2 className="text-xl md:text-2xl font-bold mt-4 lg:mt-2 pl-2.5 md:pl-5">
         {translations.needHelp}
       </h2>
-      <div className="flex flex-col items-start justify-center bg-gray-100/25 md:py-4 pb-4 pt-2 pl-5 rounded-lg">
-        <div className="text-sm md:text-lg mb-4">{translations.title}</div>
+      <div className="flex flex-col items-start justify-center bg-gray-100/25 md:py-4 pb-3 pt-2 pl-2.5 md:pl-5 rounded-lg">
+        <div className="text-sm md:text-lg mb-2.5 md:mb-4">{translations.title}</div>
         <a
-          href="https://www.parentresource.ca/form?fbclid=IwY2xjawEeht9leHRuA2FlbQIxMAABHf0881tGf0VmSI2x2JFUcD5OMyh09vE0ZX6OlM78NDQDiYcemV3K78fC3g_aem_vG2nWhW41ZPZ4Oo9oUXiRQ"
+          href="https://www.surveymonkey.com/r/IPFprc"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-mainBlue hover:bg-hoverBlue text-white font-bold py-1 px-3 md:py-2 md:px-4 rounded-lg"

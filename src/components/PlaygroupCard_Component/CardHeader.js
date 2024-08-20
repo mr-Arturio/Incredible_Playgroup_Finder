@@ -15,6 +15,7 @@ function CardHeader({
   Service_fr,
   Location,
   Cancelled,
+  Paused,
   Time,
   address,
   startTime,
@@ -51,12 +52,17 @@ function CardHeader({
               </>
             ) : (
               <span>
-                For information press{" "}
+                {translation === "en"
+                  ? "For a complete schedule of French playgroups, please visit "
+                  : "Pour obtenir le calendrier complet des groupes de jeu en français, veuillez consulter le "}
+
                 <a
-                  href={URL}
+                  href="https://drive.google.com/file/d/1TzILt1grFGg0rqdl8TsfWFd2IUMPRDYI/view"
                   className="text-blue-500 underline hover:text-blue-700"
                 >
-                  here
+                  {translation === "en"
+                    ? "French Playgroup Schedules."
+                    : "Recueil d’activitiés francophones."}
                 </a>
               </span>
             )}
@@ -71,12 +77,17 @@ function CardHeader({
                 rel="noopener noreferrer"
                 className="hover:text-hoverBlue transition duration-300 ease-in-out"
               >
-                {translation === "en" || !Organizer_fr
-                  ? Organizer
-                  : Organizer_fr}
+                {" "}
+                {translation === "fr" && Organizer_fr
+                  ? Organizer_fr
+                  : Organizer}
               </a>
             ) : (
-              Organizer
+              <span>
+                {translation === "fr" && Organizer_fr
+                  ? Organizer_fr
+                  : Organizer}
+              </span>
             )}
           </div>
         </div>
@@ -101,11 +112,12 @@ function CardHeader({
               startTime={startTime}
               endTime={endTime}
               Cancelled={Cancelled}
+              Paused={Paused}
             />
           </button>
         </div>
-        {Registration && (
-          <div className="md:text-sm text-xs sm:flex font-semibold  bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
+        {Cancelled !== "yes" && Paused !== "yes" && Registration && (
+          <div className="md:text-sm text-xs sm:flex font-semibold bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
             <a
               href={Registration_URL}
               target="_blank"

@@ -29,7 +29,7 @@ function CardFooter({
               className="inline-block h-3 w-3 md:h-4 md:w-4"
             />
             <span className="md:ml-2 ml-1 inline-block sm:text-base text-sm">
-              {translation === "en" ? "Show Less" : "Mostrar Menos"}
+              {translation === "en" ? "Show Less" : "Voir Moins"}
             </span>
           </button>
         ) : (
@@ -47,10 +47,10 @@ function CardFooter({
             />
             <div>
               <span className="md:hidden inline-block sm:text-base text-sm ml-2 ">
-                {translation === "en" ? "More Info" : "Más Info"}
+                {translation === "en" ? "More Info" : "Plus d'infos"}
               </span>
               <span className="hidden md:inline-block sm:text-base text-sm ml-2">
-                {translation === "en" ? "More Information" : "Más Información"}
+                {translation === "en" ? "More Information" : "Voir plus d'information"}
               </span>
             </div>
           </button>

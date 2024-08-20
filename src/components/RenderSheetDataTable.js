@@ -41,16 +41,22 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       Central: translation === "fr" ? "Centre" : "Central",
       South: translation === "fr" ? "Sud" : "South",
     },
-    ageOptions: {
-      "Baby (non-walking)":
-        translation === "fr" ? "Bébé (non marchant)" : "Baby (non-walking)",
-      "Baby (0-12m)": translation === "fr" ? "Bébé (0-12mois)" : "Baby (0-12m)",
-      "Baby (0-18m)": translation === "fr" ? "Bébé (0-18mois)" : "Baby (0-18m)",
-      "Baby (0-24m)": translation === "fr" ? "Bébé (0-24mois)" : "Baby (0-24m)",
-      "Child (0-6y)": translation === "fr" ? "Enfant (0-6ans)" : "Child (0-6y)",
-      "Child (3-6y)": translation === "fr" ? "Enfant (3-6ans)" : "Child (3-6y)",
-      "Child (4-10y)":
-        translation === "fr" ? "Enfant (4-10ans)" : "Child (4-10y)",
+    ageOptions: [
+      { en: "Baby (non-walking)", fr: "Bébé (non marchant)" },
+      { en: "Baby (0-12m)", fr: "Bébé (0-12mois)" },
+      { en: "Baby (0-18m)", fr: "Bébé (0-18mois)" },
+      { en: "Baby (0-24m)", fr: "Bébé (0-24mois)" },
+      { en: "Child (0-6y)", fr: "Enfant (0-6ans)" },
+      { en: "Child (3-6y)", fr: "Enfant (3-6ans)" },
+      { en: "Child (4-10y)", fr: "Enfant (4-10ans)" },
+    ],
+    languageOptions: {
+      English: translation === "fr" ? "Anglais" : "English",
+      French: translation === "fr" ? "Français" : "French",
+      "English/French":
+        translation === "fr" ? "Anglais/Français" : "English/French",
+      Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
+      Arabic: translation === "fr" ? "Arabe" : "L'arabe",
     },
   };
 
@@ -173,16 +179,17 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const areaOptions = useMemo(() => {
     if (!sheetData) return [];
-    const uniqueAreas = [
-      ...new Set(sheetData.map((item) => item.Area).filter(Boolean)),
-    ];
-    return uniqueAreas.map((area) => translations.areaOptions[area] || area);
+    return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))].map(
+      (area) => translations.areaOptions[area] || area
+    );
   }, [sheetData, translations.areaOptions]);
 
   const languageOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Language).filter(Boolean))];
-  }, [sheetData]);
+    return [
+      ...new Set(sheetData.map((item) => item.Language).filter(Boolean)),
+    ].map((language) => translations.languageOptions[language] || language);
+  }, [sheetData, translations.languageOptions]);
 
   const organizerOptions = useMemo(() => {
     if (!sheetData) return [];
@@ -194,12 +201,17 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const timeOptions = Object.keys(translations.timesOfDay).map(
     (key) => translations.timesOfDay[key]
   );
+
   const ageOptions = useMemo(() => {
     if (!sheetData) return [];
-    return [...new Set(sheetData.map((item) => item.Age).filter(Boolean))].map(
-      (age) => translations.ageOptions[age] || age
-    );
-  }, [sheetData, translations.ageOptions]);
+    const uniqueAges = [
+      ...new Set(sheetData.map((item) => item.Age).filter(Boolean)),
+    ];
+
+    return translations.ageOptions
+      .filter((option) => uniqueAges.includes(option.en))
+      .map((option) => option[translation === "fr" ? "fr" : "en"]);
+  }, [sheetData, translation]);
 
   const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
@@ -207,11 +219,18 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   return (
     <>
-      <div className="flex justify-start md:mb-4 mb-2">
+      <div className="flex justify-between items-center px-2.5 md:mb-4 mb-2">
         <ShowTodayButton
           onShowToday={showTodayPlaygroups}
           translation={translation}
         />
+        {/* FAQ Link */}
+        <a
+          href="https://www.parentresource.ca/FAQIPF"
+          className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-base md:text-xl tracking-widest"
+        >
+          FAQ
+        </a>
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col" id="today-playgroups-section">

@@ -1,11 +1,12 @@
-import "../app/fonts.css";
-import { useLanguage } from "../context/LanguageContext";
+import "../../app/fonts.css";
+import { useLanguage } from "../../context/LanguageContext";
 import { useState, useEffect } from "react";
-import RandomImage from "../utils/RandomImage";
-import { gradients } from "../utils/gradient";
+import RandomImage from "../../utils/RandomImage";
+import { gradients } from "../../utils/gradient";
 import CarSlider from "./CarSlider";
+import NavBar from "./NavBar";
 
-const Navbar = () => {
+const Header = () => {
   const { translation } = useLanguage();
   const [isClient, setIsClient] = useState(false);
   const [position, setPosition] = useState(0);
@@ -35,23 +36,24 @@ const Navbar = () => {
   const translations = {
     header: {
       en: {
-        firstLine: "INCREDIBLE",
+        firstLine: "THE INCREDIBLE",
         secondLine: "PLAYGROUP FINDER!",
       },
       fr: {
-        firstLine: "INCROYABLE",
-        secondLine: "RECHERCHE DE GROUPES DE JEU!",
+        firstLine: " L'OUTILL",
+        secondLine: "INCROYABLE!",
       },
     },
     under:
       translation === "en"
         ? "Discover the perfect EarlyON playgroup for your busy schedule."
-        : "Découvrez le groupe de jeu EarlyON idéal pour votre emploi du temps chargé.",
+        : "Découvrez votre groupe de jeu ONyVA idéal.",
   };
 
   return (
     <>
-      <nav
+      <NavBar />
+      <div
         className={`${gradients[gradientIndex]} transition-all ease-in-out duration-500 text-white`}
       >
         <div className="bg-frame">
@@ -78,7 +80,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </div>
       <div className="hidden sm:block">
         <CarSlider
           position={position}
@@ -89,4 +91,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

@@ -33,23 +33,24 @@ const FilterContainer = ({
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
             translation={translation}
-            id="areaCriteria"
-            className="flex-grow"
-            value={filterCriteria.area}
-            options={areaOptions}
-            onChange={(e) => handleFilterChange("area", e.target.value)}
+            id="dayCriteria"
+            value={filterCriteria.day}
+            options={dayOptions}
+            onChange={(e) => handleFilterChange("day", e.target.value)}
             placeholder={
-              translation === "fr" ? "Zone de la Ville" : "Area of the City"
+              translation === "fr" ? "Jour de la semaine" : "Day of Week"
             }
+            mapping={dayMapping}
           />
           <FilterComponent
             translation={translation}
-            id="ageCriteria"
-            className="flex-grow"
-            value={filterCriteria.age}
-            options={ageOptions}
-            onChange={(e) => handleFilterChange("age", e.target.value)}
-            placeholder={translation === "fr" ? "Groupe d'âge" : "Age Group"}
+            id="timeCriteria"
+            value={filterCriteria.time}
+            options={timeOptions}
+            onChange={(e) => handleFilterChange("time", e.target.value)}
+            placeholder={
+              translation === "fr" ? "Heure de la journée" : "Time of Day"
+            }
           />
           <FilterComponent
             translation={translation}
@@ -65,24 +66,23 @@ const FilterContainer = ({
         <div className="md:flex justify-between gap-2 mb-3">
           <FilterComponent
             translation={translation}
-            id="dayCriteria"
-            value={filterCriteria.day}
-            options={dayOptions}
-            onChange={(e) => handleFilterChange("day", e.target.value)}
+            id="areaCriteria"
+            className="flex-grow"
+            value={filterCriteria.area}
+            options={areaOptions}
+            onChange={(e) => handleFilterChange("area", e.target.value)}
             placeholder={
-              translation === "fr" ? "Jour de la semaine" : "Day of the Week"
+              translation === "fr" ? "Région d'Ottawa " : "Area of Ottawa"
             }
-            mapping={dayMapping}
           />
           <FilterComponent
             translation={translation}
-            id="timeCriteria"
-            value={filterCriteria.time}
-            options={timeOptions}
-            onChange={(e) => handleFilterChange("time", e.target.value)}
-            placeholder={
-              translation === "fr" ? "Moment de la journée" : "Time of the Day"
-            }
+            id="ageCriteria"
+            className="flex-grow"
+            value={filterCriteria.age}
+            options={ageOptions}
+            onChange={(e) => handleFilterChange("age", e.target.value)}
+            placeholder={translation === "fr" ? "Âge" : "Age"}
           />
           <FilterComponent
             translation={translation}
@@ -91,9 +91,7 @@ const FilterContainer = ({
             options={organizerOptions}
             onChange={(e) => handleFilterChange("organizer", e.target.value)}
             placeholder={
-              translation === "fr"
-                ? "Fournisseur de groupe de jeu"
-                : "Playgroup Provider"
+              translation === "fr" ? "Prestataire" : "Playgroup Provider"
             }
           />
         </div>

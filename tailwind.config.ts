@@ -24,9 +24,14 @@ const config: Config = {
         gradient1: '#5a108f',
         gradient2: '#8b2fc9',
         gradient3: '#ff7e5f',
+        navText: 'rgb(64,0,128)',
+        navTextHover: 'rgb(163,66,152)',
       },
       fontFamily: {
         lazydog: ['Lazydog', 'cursive'],
+      },
+      rotate: {
+        '17': '17deg',
       },
     },
   },

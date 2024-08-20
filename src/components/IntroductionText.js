@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-const Header = () => {
+const IntroductionText = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { translation } = useLanguage();
@@ -106,7 +106,7 @@ const Header = () => {
           preferences!
         </p>
       ),
-    showMore: translation === "fr" ? "Lire la suite" : "Read More",
+    showMore: translation === "fr" ? "En savoir plus" : "Read More",
     showLess: translation === "fr" ? "Lire moins" : "Read Less",
   };
 
@@ -144,4 +144,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default IntroductionText;
