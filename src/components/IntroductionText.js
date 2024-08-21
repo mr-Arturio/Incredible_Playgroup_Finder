@@ -121,7 +121,7 @@ const IntroductionText = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative mr-2.5">
         <LanguageSwitcher />
       </div>
       <div className="flex-col items-center justify-between bg-cardBody/75 rounded-lg">

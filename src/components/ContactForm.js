@@ -39,7 +39,7 @@ function ContactForm() {
           href="https://www.surveymonkey.com/r/IPFprc"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-mainBlue hover:bg-hoverBlue text-white font-bold py-1 px-3 md:py-2 md:px-4 rounded-lg"
+          className="bg-mainBlue hover:bg-hoverBlue text-white text-sm md:text-base font-semibold md:font-bold py-1 px-3 md:py-2 md:px-4 rounded-lg"
         >
           {translations.contactUs}
         </a>

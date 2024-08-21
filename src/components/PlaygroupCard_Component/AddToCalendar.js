@@ -8,7 +8,7 @@ const AddToCalendar = ({
   startTime,
   endTime,
   Cancelled,
-  Paused
+  Paused,
 }) => {
   const { translation } = useLanguage();
 
@@ -30,6 +30,12 @@ const AddToCalendar = ({
           listStyle="modal"
           buttonStyle="text"
           language={translation === "fr" ? "fr" : "en"}
+          styleLight=".atcb-modal {
+            width: 200px;
+          }; 
+          .atcb-list-item {
+            font-size: 1.5em;
+          }"
         />
       </div>
       <div className="sm:hidden">
@@ -45,7 +51,13 @@ const AddToCalendar = ({
           size="0"
           listStyle="modal"
           hideTextLabelButton
-          lightMode="system"
+          lightMode="light"
+          styleLight=".atcb-modal {
+            width: 200px;
+          }; 
+          .atcb-list-item {
+            font-size: 1.25em;
+          }"
         />
       </div>
     </>

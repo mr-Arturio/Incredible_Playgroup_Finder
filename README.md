@@ -145,7 +145,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - show playgruop cards by date in descending order
 - apply colors for playgroupcard
 - fix bugs, position and margins
--  reducing sensitivity to accidental touches senAddToCalendar element by wrapping it in <button>
+-  reducing sensitivity to accidental touches senAddToCalendar element by wrapping it in `button` -not working
 - get redirected to playgroup cards after pressing the button ShowTodays...
 - add more language icons, fix lang filter
 - adjust map size for mobile,
@@ -189,17 +189,18 @@ Navigate to http://localhost:3000 in your browser to view the app.
  - set up and style new footer
  - polish styling, mobile views, translations etc.
  - adjust tablet view
+ - React Date picker configuration - make active only ffor 6 weeks ahead.
+ - restyle InfoWindow - check for mobile responce
+ - fix InfoWindow response on mobile devices
+ - fix addTocalendar info card size
  
 
 ### Future Development
 
-- more layout improvements
-- sticky main field
-- logic for add to the callendar option - in mobile screens
-- Improve geolocation logic - check and generate longitude and latitude for addresses that are missing and populate the spreadsheet for future use.
-- Use days of the week (Monday, Tuesday, etc.) to display recurring weekly playgroups. Consider shortening data entries but manage cancellations by adding a 'repetitive' column (Yes/No logic).
-- Offer a French version.
-- Incorporate charts.
+- connect hotjar - web analytics
+- google map pin info size, style, mobile behaviour
+- translations to separate file
+- add to calendar info card size and mobile location?
 - Consider deploying a server?
 - Set up a Google Cloud account for PRC and ensure the spreadsheet contains proper data.
 - Provide instructions on how to populate data in the spreadsheet.
@@ -211,9 +212,12 @@ Navigate to http://localhost:3000 in your browser to view the app.
 
 ![Color Schema](./public/ColorPalate.png)
 
-Icons : https://uxwing.com/, https://iconduck.com/ <br>
-Address to GPS Coordinates: https://www.gps-coordinates.net/ <br>
-Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
+- Add To Calendar configuration: https://add-to-calendar-button.com/#demo <br>
+  - CSS configuration example: `styleLight="--btn-background: #2f4377; --btn-text: #fff; --font: Georgia, 'Times New Roman', Times, serif;"` https://github.com/add2cal/add-to-calendar-button/blob/main/assets/css/atcb-text.css
+- React Date picker configuration: https://reactdatepicker.com/#example-custom-day <br>
+- Icons : https://uxwing.com/, https://iconduck.com/ <br>
+- Address to GPS Coordinates: https://www.gps-coordinates.net/ <br>
+- Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
 
 ## Learn More
 
