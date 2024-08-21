@@ -192,6 +192,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
  - React Date picker configuration - make active only ffor 6 weeks ahead.
  - restyle InfoWindow - check for mobile responce
  - fix InfoWindow response on mobile devices
+ - fix addTocalendar info card size
  
 
 ### Future Development
@@ -211,11 +212,12 @@ Navigate to http://localhost:3000 in your browser to view the app.
 
 ![Color Schema](./public/ColorPalate.png)
 
-Add To Calendar configuration: https://add-to-calendar-button.com/#demo <br>
-React Date picker configuration: https://reactdatepicker.com/#example-custom-day <br>
-Icons : https://uxwing.com/, https://iconduck.com/ <br>
-Address to GPS Coordinates: https://www.gps-coordinates.net/ <br>
-Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
+- Add To Calendar configuration: https://add-to-calendar-button.com/#demo <br>
+  - CSS configuration example: `styleLight="--btn-background: #2f4377; --btn-text: #fff; --font: Georgia, 'Times New Roman', Times, serif;"` https://github.com/add2cal/add-to-calendar-button/blob/main/assets/css/atcb-text.css
+- React Date picker configuration: https://reactdatepicker.com/#example-custom-day <br>
+- Icons : https://uxwing.com/, https://iconduck.com/ <br>
+- Address to GPS Coordinates: https://www.gps-coordinates.net/ <br>
+- Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
 
 ## Learn More
 
