@@ -226,7 +226,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         />
         {/* FAQ Link */}
         <a
-          href="https://www.parentresource.ca/FAQIPF"
+          href="https://www.parentresource.ca/faqipf"
           className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-base md:text-xl tracking-widest"
         >
           FAQ
