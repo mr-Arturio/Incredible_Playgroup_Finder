@@ -1,9 +1,27 @@
-const applyFilters = (data, criteria, selectedAddress) => {
+import { translationMappings } from "../utils/translationMappings";
+
+const applyFilters = (data, criteria, selectedAddress, translation) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to start of the day in local time
 
-    console.log("Today's Date (Local):", today.toISOString().split("T")[0]);
+    // Function to translate filter criteria from French to English
+    const translateCriteria = (value) => {
+      if (translation === "fr" && translationMappings.fr[value]) {
+        return translationMappings.fr[value];
+      }
+      return value;
+    };
+
+    const translatedCriteria = {
+      area: translateCriteria(criteria.area, "area"),
+      language: translateCriteria(criteria.language, "language"),
+      day: translateCriteria(criteria.day, "day"),
+      organizer: criteria.organizer,
+      age: translateCriteria(criteria.age, "age"),
+      time: translateCriteria(criteria.time, "time"),
+      date: criteria.date
+    };
 
     const parseDate = (dateString) => {
       if (!dateString) return null;
@@ -36,10 +54,7 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
     return data
       .filter((item) => {
-        console.log(`EVENT Date:`, item.eventDate);
-
         const itemDate = parseDate(item.eventDate);
-
         let isUpcomingEvent = false;
 
         if (itemDate) {
@@ -50,24 +65,29 @@ const applyFilters = (data, criteria, selectedAddress) => {
 
         if (!isUpcomingEvent) return false;
 
-        const noOtherCriteria = Object.values(criteria).every(
+        const noOtherCriteria = Object.values(translatedCriteria).every(
           (val) => val === ""
         );
         if (noOtherCriteria && selectedAddress === item.Address) return true;
 
-        if (criteria.area && item.Area !== criteria.area) return false;
-        if (criteria.language && item.Language !== criteria.language)
+        if (translatedCriteria.area && item.Area !== translatedCriteria.area)
           return false;
-        if (criteria.day && item.Day !== criteria.day) return false;
-        if (criteria.organizer && item.Organizer !== criteria.organizer)
+        if (translatedCriteria.language && item.Language !== translatedCriteria.language)
           return false;
-        if (criteria.age && item.Age !== criteria.age) return false;
+        if (translatedCriteria.day && item.Day !== translatedCriteria.day)
+          return false;
+        if (translatedCriteria.organizer && item.Organizer !== translatedCriteria.organizer)
+          return false;
+        if (translatedCriteria.age && item.Age !== translatedCriteria.age)
+          return false;
 
         const { timeCategory } = categorizeTime(item.Time);
-        if (criteria.time && timeCategory !== criteria.time) return false;
+        if (translatedCriteria.time && timeCategory !== translatedCriteria.time)
+          return false;
 
         const displayDate = item.eventDate || "";
-        if (criteria.date && displayDate !== criteria.date) return false;
+        if (translatedCriteria.date && displayDate !== translatedCriteria.date)
+          return false;
 
         return isUpcomingEvent;
       })

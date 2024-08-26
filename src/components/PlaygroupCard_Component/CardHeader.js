@@ -27,6 +27,20 @@ function CardHeader({
   const serviceUrl = translation === "en" ? PG_URL : PG_URL_fr;
   const organizerUrl = translation === "en" ? URL : URL_fr;
 
+   // Day translation mapping
+   const dayTranslations = {
+    Mon: "Lun",
+    Tue: "Mar",
+    Wed: "Mer",
+    Thur: "Jeu",
+    Fri: "Ven",
+    Sat: "Sam",
+    Sun: "Dim",
+  };
+
+  // Translate the day if the translation is in French
+  const translatedDay = translation === "fr" && Day ? dayTranslations[Day] : Day;
+
   return (
     <div className="flex flex-col px-4 md:px-6 pt-3 ">
       <div className="flex justify-between items-start">
@@ -44,10 +58,14 @@ function CardHeader({
           <div className="text-sm md:text-base italic text-gray-500">
             {Location}
           </div>
-          <p className="mt-1 text-gray-600 md:text-sm text-xs">
-            {Day || eventDate ? (
+          <p
+            className={`mt-1 text-gray-600 md:text-sm text-xs ${
+              Cancelled === "yes" || Paused === "yes" ? "mb-2" : ""
+            }`}
+          >
+            {translatedDay || eventDate ? (
               <>
-                {Day && `${Day}, `}
+                {translatedDay && `${translatedDay}, `}
                 {eventDate}
               </>
             ) : (

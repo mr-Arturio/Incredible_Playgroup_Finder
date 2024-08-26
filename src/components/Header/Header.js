@@ -81,12 +81,12 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="hidden sm:block">
+      {/* <div className="hidden sm:block">
         <CarSlider
           position={position}
           handleSliderChange={handleSliderChange}
         />
-      </div>
+      </div> */}
     </>
   );
 };

@@ -6,7 +6,7 @@ const RandomImage = () => {
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 12) + 1;
-    setRandomImage(`/docs/Families/${randomNumber}.svg`);
+    setRandomImage(`/docs/Families/${randomNumber}.webp`);
   }, []);
 
   return (

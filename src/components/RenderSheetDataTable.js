@@ -124,7 +124,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const getFilteredData = () => {
     if (isLoading) return [];
 
-    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress);
+    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress, translation);
 
     //logic for the map - selected pin will be the only one shown in map
     if (selectedAddress) {

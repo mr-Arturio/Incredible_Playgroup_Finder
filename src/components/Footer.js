@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 export const Footer = () => {
   return (
@@ -35,10 +35,10 @@ export const Footer = () => {
               (613) 565-2467
               <br />
               <a
-                href="mailto:information@parentresource.ca"
+                href="mailto:ipf@parentresource.ca"
                 className="text-purple-700"
               >
-                information@parentresource.ca
+                ipf@parentresource.ca
               </a>
             </p>
           </div>
@@ -49,20 +49,11 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                src="https://static.wixstatic.com/media/e316f544f9094143b9eac01f1f19e697.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e316f544f9094143b9eac01f1f19e697.png"
-                alt="Facebook"
-                className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
-              />
-            </a>
-            <a
-              href="https://www.instagram.com/parentresource"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
+              <Image
                 src="https://static.wixstatic.com/media/8d6893330740455c96d218258a458aa4.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8d6893330740455c96d218258a458aa4.png"
                 alt="Instagram"
+                width={39}
+                height={39}
                 className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
               />
             </a>
@@ -71,9 +62,11 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
+              <Image
                 src="https://static.wixstatic.com/media/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png"
                 alt="LinkedIn"
+                width={39}
+                height={39}
                 className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
               />
             </a>
@@ -82,9 +75,11 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
+              <Image
                 src="https://static.wixstatic.com/media/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png"
-                alt="Other"
+                alt="Eventbrite"
+                width={39}
+                height={39}
                 className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
               />
             </a>
@@ -110,7 +105,10 @@ export const Footer = () => {
               </a>{" "}
             </p>
           </div>
-          <a href="/privacy-policy" className="font-semibold text-white hover:underline">
+          <a
+            href="/privacy-policy"
+            className="font-semibold text-white hover:underline"
+          >
             Privacy Policy
           </a>
         </div>

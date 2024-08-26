@@ -13,9 +13,12 @@ Key features include:
 - **Responsive Design**: Whether on desktop, tablet or mobile, the experience is seamless.
 - **User Location Detection**: With permission, the app will show your location on the map for convenience.
 - **Detailed Event Information**: Reactive playgroup cards with detailed event information.
+- **Bilingual Support**: The app supports both English and French languages.
 - **Direct Navigation**: Clicking an address takes you to Google Maps to easily find directions.
 - **Date Picker**: React DatePicker is integrated for easy date selection.
 - **Add To Calendar**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
+- **Interactive Slider**: Enjoy an engaging slider element with a car that changes the header background color as you slide it, culminating in a confetti celebration at the destination.
+- **Pleasant and Nice Design**: The overall design is visually appealing and user-friendly.
 
 ## Setup
 
@@ -44,9 +47,7 @@ Navigate to http://localhost:3000 in your browser to view the app.
 `npm install @react-google-maps/api`<br>
 `npm install react-datepicker` 
 
-#### Color Palate
-
-![Color Schema](./public/ColorPalate.png)
+#### Development Resources
 
 - Add To Calendar configuration: https://add-to-calendar-button.com/#demo <br>
   - CSS configuration example: `styleLight="--btn-background: #2f4377; --btn-text: #fff; --font: Georgia, 'Times New Roman', Times, serif;"` https://github.com/add2cal/add-to-calendar-button/blob/main/assets/css/atcb-text.css
@@ -56,9 +57,3 @@ Navigate to http://localhost:3000 in your browser to view the app.
 - Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
 - Web page audits: https://pagespeed.web.dev/, https://lighthouse-metrics.com/
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
