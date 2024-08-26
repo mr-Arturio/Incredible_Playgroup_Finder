@@ -163,4 +163,8 @@
  - fix InfoWindow response on mobile devices
  - fix addTocalendar info card size
  - Set up a Google Cloud account for PRC and connect API
+ - transfer project to PRC Vercel account
+ - fix filtering in french language
+ - remove car slider
+ - small fixing here and there, thanslation, trext, links
  
