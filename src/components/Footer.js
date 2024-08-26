@@ -56,7 +56,12 @@ export const Footer = () => {
                 height={39}
                 className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
               />
-
+            </a>
+            <a
+              href="https://www.linkedin.com/company/parent-resource-centre/mycompany/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src="https://static.wixstatic.com/media/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png"
                 alt="LinkedIn"
@@ -64,10 +69,15 @@ export const Footer = () => {
                 height={39}
                 className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
               />
-
+            </a>
+            <a
+              href="https://www.eventbrite.ca/o/ottawa-parent-resource-centre-7963790017"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src="https://static.wixstatic.com/media/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png"
-                alt="Other"
+                alt="Eventbrite"
                 width={39}
                 height={39}
                 className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
