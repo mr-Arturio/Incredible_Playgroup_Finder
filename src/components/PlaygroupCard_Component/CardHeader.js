@@ -44,7 +44,11 @@ function CardHeader({
           <div className="text-sm md:text-base italic text-gray-500">
             {Location}
           </div>
-          <p className="mt-1 text-gray-600 md:text-sm text-xs">
+          <p
+            className={`mt-1 text-gray-600 md:text-sm text-xs ${
+              Cancelled === "yes" || Paused === "yes" ? "mb-2" : ""
+            }`}
+          >
             {Day || eventDate ? (
               <>
                 {Day && `${Day}, `}
