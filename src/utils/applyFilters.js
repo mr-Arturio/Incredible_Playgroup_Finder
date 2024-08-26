@@ -6,7 +6,7 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
     today.setHours(0, 0, 0, 0); // Normalize to start of the day in local time
 
     // Function to translate filter criteria from French to English
-    const translateCriteria = (value, category) => {
+    const translateCriteria = (value) => {
       if (translation === "fr" && translationMappings.fr[value]) {
         return translationMappings.fr[value];
       }

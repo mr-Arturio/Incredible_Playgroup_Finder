@@ -31,6 +31,13 @@ export const translationMappings = {
     "Anglais/Français": "English/French",
     "L'arabe": "Arabic",
 
+    "Hide Filters": "Masquer les Filtres",
+    "Show Filters": "Afficher les Filtres",
+    "Hide Map": "Masquer la Carte",
+    "Show Map": "Afficher la Carte",
+    "Show Less": "Afficher Moins",
+    "Show More": "Afficher Plus",
+
     // Day mapping located in Activefilters file
 
   }
