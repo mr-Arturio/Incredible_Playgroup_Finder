@@ -35,10 +35,10 @@ export const Footer = () => {
               (613) 565-2467
               <br />
               <a
-                href="mailto:information@parentresource.ca"
+                href="mailto:ipf@parentresource.ca"
                 className="text-purple-700"
               >
-                information@parentresource.ca
+                ipf@parentresource.ca
               </a>
             </p>
           </div>

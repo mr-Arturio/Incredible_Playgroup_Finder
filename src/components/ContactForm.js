@@ -15,11 +15,11 @@ function ContactForm() {
       title:
         translation === "fr" ? (
           <p>
-            N&apos;hésitez pas à nous faire part de vos questions, commentaires, corrections ou réactions:
+            N&apos;hésitez pas à nous faire part de vos questions, commentaires ou réactions:
           </p>
         ) : (
           <p>
-            Please send us any questions, comments, corrections or feedback you
+            Please send us any questions, comments or feedback you
             may have:
           </p>
         ),
