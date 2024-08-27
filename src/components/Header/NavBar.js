@@ -2,9 +2,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import HamburgerMenu from "./HamburgerMenu";
+import { useLanguage } from "../../context/LanguageContext";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { translation } = useLanguage();
+
+  const icon = translation === "en" ? "/logo_english.png" : "/logo_french.png";
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -20,7 +24,7 @@ const NavBar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/logo_english.svg" alt="Logo" className="h-14 lg:h-16 xl:h-20 w-auto" />
+            <img src={icon} alt="Logo" className="h-14 lg:h-16 xl:h-20 w-auto" />
           </a>
         </div>
 
