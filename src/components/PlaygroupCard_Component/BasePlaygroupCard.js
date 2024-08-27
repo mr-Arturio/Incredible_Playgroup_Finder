@@ -29,6 +29,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Parking,
     Coffee,
     Scale,
+    Toys,
     FB,
     Insta,
     Eventbrite,
@@ -46,7 +47,8 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     WiFi,
     Outdoor,
     Language,
-    Scale
+    Scale,
+    Toys
   );
   const social = getSocialIcons(FB, Insta, Eventbrite);
   const [tooltip, setTooltip] = useState("");
