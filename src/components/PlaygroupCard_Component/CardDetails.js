@@ -15,7 +15,7 @@ function CardDetails({ Address, Age, Notes, icons, social, translation }) {
 
   return (
     <div className="px-4 md:px-6 flex flex-col md:flex-row justify-between">
-      <div className="flex flex-col justify-between  md:pr-10 pr-0">
+      <div className="flex flex-col   md:pr-10 pr-0">
         <div className="flex items-center  text-gray-700">
           <Image
             src={icons.location}
@@ -36,7 +36,7 @@ function CardDetails({ Address, Age, Notes, icons, social, translation }) {
             {Address}
           </a>
         </div>
-        <div className="flex items-center text-gray-700 justify-between mb-2 md:mb-0 mt-2">
+        <div className="flex items-center text-gray-700 justify-between mb-2 md:mb-0 mt-3.5">
         <div className="flex items-center">
           <Image
             src={icons.age}
