@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./fonts.css";
+import { Analytics } from "@vercel/analytics/react";
 
 import { LanguageProvider } from "../context/LanguageContext";
 
@@ -25,7 +26,10 @@ const RootLayout = ({ children }) => {
         />
       </head>
       <body className={inter.className}>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   );

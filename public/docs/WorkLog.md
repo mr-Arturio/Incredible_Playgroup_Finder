@@ -170,4 +170,5 @@
  - add french PRC logo and IPF logo to the random chain in header
  - add Toys icon and logic to display
  - inroduction text - transaltion, style, format
+ - connect Vercel analytics
  
