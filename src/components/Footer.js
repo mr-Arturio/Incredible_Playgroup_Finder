@@ -88,7 +88,7 @@ export const Footer = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="w-full bg-mainBlue pt-2 mt-2.5 md:mt-6 px-2.5 md:px-4 text-xs md:text-sm">
+      <div className="w-full bg-mainBlue pt-2 mt-2.5 md:mt-6 px-2.5 md:px-4 text-xs md:text-sm/2">
         <div className="container mx-auto flex justify-between text-white">
           <div>
             <p>&copy; 2024 Parent Resource Centre</p>
@@ -98,11 +98,27 @@ export const Footer = () => {
               Built by{" "}
               <a
                 href="https://github.com/mr-Arturio"
-                className="hover:text-amber"
+                className="hover:text-amber "
               >
                 {" "}
                 Artur
               </a>{" "}
+              for{" "}
+              <a
+                href="https://www.parentresource.ca/"
+                className="hover:text-amber"
+              >
+                {" "}
+                PRC
+              </a>{" "}
+              / Background image is by
+              <a
+                href="https://www.svgbackgrounds.com/"
+                className="hover:text-amber"
+              >
+                {" "}
+                SVGBackgrounds.com
+              </a>
             </p>
           </div>
           <a

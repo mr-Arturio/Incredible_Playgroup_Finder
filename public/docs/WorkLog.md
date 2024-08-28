@@ -167,4 +167,8 @@
  - fix filtering in french language
  - remove car slider
  - small fixing here and there, thanslation, trext, links
+ - add french PRC logo and IPF logo to the random chain in header
+ - add Toys icon and logic to display
+ - inroduction text - transaltion, style, format
+ - connect Vercel analytics
  

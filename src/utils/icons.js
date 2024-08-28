@@ -12,7 +12,8 @@ const getIcons = (
   WiFi,
   Outdoor,
   Language,
-  Scale
+  Scale,
+  Toys
 ) => ({
   time: "time.svg",
   location: "location.svg",
@@ -26,6 +27,11 @@ const getIcons = (
     show: Coffee === "yes",
     src: "coffee.svg",
     tooltip: translation === "fr" ? "Café" : "Coffee",
+  },
+  toys: {
+    show: Toys === "yes",
+    src: "toys.svg",
+    tooltip: translation === "fr" ? "Ludothèque" : "Toy Library",
   },
   // Uncomment if needed
   // wifi: {

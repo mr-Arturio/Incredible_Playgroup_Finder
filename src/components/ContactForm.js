@@ -23,8 +23,8 @@ function ContactForm() {
             may have:
           </p>
         ),
-      contactUs: translation === "fr" ? "Qu'en pensez-vous?" : "Provide Feedback",
-      needHelp: translation === "fr" ? "Besoin d'aide?" : "Need Support?",
+      contactUs: translation === "fr" ? "Qu'en pensez-vous ?" : "Provide Feedback",
+      needHelp: translation === "fr" ? "Besoin d'aide ?" : "Need Support?",
     });
   }, [translation]);
 
