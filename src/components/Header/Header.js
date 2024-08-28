@@ -41,7 +41,7 @@ const Header = () => {
       },
       fr: {
         firstLine: " L'OUTILL",
-        secondLine: "INCROYABLE!",
+        secondLine: "INCROYABLE !",
       },
     },
     under:
@@ -68,9 +68,9 @@ const Header = () => {
               <h1 className="lg:ml-0 ml-6 text-lg 2xl:text-7xl lg:text-6xl md:text-5xl font-lazydog">
                 {translations.header[translation].secondLine}
               </h1>
-              <h3 className="hidden md:flex lg:ml-6 italic ml-3 md:ml-10 lg:text-xl md:text-sm mt-1">
+              <h2 className="hidden md:flex lg:ml-6 italic ml-3 md:ml-10 lg:text-xl md:text-sm mt-1">
                 {translations.under}
-              </h3>
+              </h2>
             </div>
             <div
               className="flex justify-end items-end ml-4"
