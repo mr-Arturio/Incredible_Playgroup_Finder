@@ -165,7 +165,7 @@ const IntroductionText = () => {
         </div>
       ) : (
         <div>
-          <p className="font-lazydog text-base md:text-lg text-introText mb-1 md:mb-2">
+          <p className="font-lazydog text-base md:text-2xl text-introText mb-1 md:mb-2">
             Put more play in your day!
           </p>
           <p>
