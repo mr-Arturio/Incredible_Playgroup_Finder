@@ -171,4 +171,4 @@
  - add Toys icon and logic to display
  - inroduction text - transaltion, style, format
  - connect Vercel analytics
- 
+ - README file

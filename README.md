@@ -1,24 +1,20 @@
-## Parent Resource Playgroup Finder application.
+## The Incredible Playgroup Finder
 
 www.incredibleplaygroupfinder.ca <br>
-Parent Resource Playgroup Finder is a user-friendly web application that connects parents in Ottawa with playgroup events suited for their children. Utilizing a real-time Google Sheets database, our application offers an interactive map, filterable playgroup cards and option to add aevents to your calendar for a tailored experience.
+The Incredible Playgroup Finder is a web app that connects Ottawa parents with local playgroup events. With real-time data from Google Sheets, the app features an interactive map, filterable playgroup cards, and calendar integration.
 
 Our application stands out with its easy-to-use interactive map and a dynamic filtering system that allows users to search for playgroups by location, age group, language preference, date, day, and facility. Data is pulled in real-time from a Google Sheets database, ensuring the most current information is always at hand.
 
 Key features include:
 
-- **Interactive Map**: View playgroup locations across Ottawa, with the option to filter based on various criteria.
-- **Real-time Data**: Playgroup information is continuously updated, providing the latest event details.
-- **Filter Options**: Search for playgroups by location, age group, language, date, day, or name.
-- **Responsive Design**: Whether on desktop, tablet or mobile, the experience is seamless.
-- **User Location Detection**: With permission, the app will show your location on the map for convenience.
-- **Detailed Event Information**: Reactive playgroup cards with detailed event information.
+- **Interactive Map & Filters**: View and filter playgroup locations by criteria such as location, age group, language, date, and facility.
+- **Real-time Data**: Always have the latest event details, updated directly from Google Sheets.
+- **Responsive Design**: Enjoy a seamless experience across all devices—desktop, tablet, and mobile.
+- **User-Friendly Features**:  Includes user location detection, detailed event cards, direct navigation to Google Maps.
 - **Bilingual Support**: The app supports both English and French languages.
-- **Direct Navigation**: Clicking an address takes you to Google Maps to easily find directions.
-- **Date Picker**: React DatePicker is integrated for easy date selection.
-- **Add To Calendar**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
+- **Calendar Integration**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
 - **Interactive Slider**: Enjoy an engaging slider element with a car that changes the header background color as you slide it, culminating in a confetti celebration at the destination.
-- **Pleasant and Nice Design**: The overall design is visually appealing and user-friendly.
+- **A Visually Appealing and Intuitive Design**: The overall design is visually appealing and user-friendly.
 
 #### Project Overview
 
@@ -27,6 +23,7 @@ This project leverages the following technologies:
 - **Tech Stack**: Next.js 14, Tailwind CSS
 - **APIs**: Google Maps JavaScript API, Google Sheets API
 - **Deployment**: Vercel
+- **DataBase**: [Google Spreadsheets](https://docs.google.com/spreadsheets/d/1C9zhAX6WgU1_dfSy3TC58kppei0ZcprT_E96wgsp0rA/edit?gid=0#gid=0)
 
 #### Dependencies
 
@@ -99,10 +96,10 @@ This project leverages the following technologies:
 │   │   ├── Footer.js            # Contains the footer layout and content
 │   │   ├── IntroductionText.js  # Displays the introductory text on the homepage
 │   │   ├── LanguageSwitcher.js  # Manages language switching functionality
-│   │   ├── Loading.js           # Displays a loading spinner or animation
+│   │   ├── Loading.js           # Displays a loading text
 │   │   ├── MapComponent.js      # Manages the display and interaction with maps
 │   │   ├── NoDataText.js        # Shows a message when no data is available
-│   │   ├── RenderSheetDataTable.js # Renders data from Google Sheets as a table
+│   │   ├── RenderSheetDataTable.js # Renders and filters playgroup data fetched from Google Sheets, allowing users to toggle between map and list views, apply filters, and view additional playgroups dynamically.
 │   │   ├── ShowTodayButton.js   # Toggles the display of today's events
 │   │   └── ToggleButton.js      # A generic toggle button component
 │   │
@@ -115,39 +112,23 @@ This project leverages the following technologies:
 │       ├── geocodeAddress.js    # Utility for geocoding addresses
 │       ├── gradient.js          # Utility for handling gradients
 │       ├── handleDateChange.js  # Utility for managing date changes
-│       ├── icons.js             # Utility for managing icons
-│       ├── RandomImage.js       # Utility for selecting random images
+│       ├── icons.js             # Utility for managing icons for PlaygroupCards footer
+│       ├── RandomImage.js       # Utility for selecting random images ffor header
 │       ├── transformDataToObjects.js # Transforms sheet data into objects
-│       ├── translationMapping.js # Manages translation mappings
+│       ├── translationMapping.js # Manages translation mappings for filters
 │       └── TTLCache.js          # Utility for handling time-to-live caching
 ```
 
 ## Setup
 
 Clone the repository to your local environment:
-
 ```bash
 git clone [repository-url]
 cd [repository-directory]
 npm install
 npm run dev
 ```
-
 Navigate to http://localhost:3000 in your browser to view the app.
-
-
-### Future Development
-
-- use page speed and other analitics to improve app performance
-- deploy on PRC Vercel
-- connect hotjar - web analytics
-- translations to separate file
-- add to calendar info card size and mobile location?
-- Provide instructions on how to populate data in the spreadsheet.
-- README
-
-`npm install @react-google-maps/api`<br>
-`npm install react-datepicker` 
 
 #### Development Resources
 
