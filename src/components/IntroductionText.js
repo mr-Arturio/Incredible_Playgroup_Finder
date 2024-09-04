@@ -20,7 +20,7 @@ const IntroductionText = () => {
     fullText:
       translation === "fr" ? (
         <>
-          <section className="mb-6 mt-2">
+          <section className="my-5">
             <h2 className="text-xl font-bold mb-3 text-blue-600">
               COMMENT UTILISER L&apos;OUTIL INCROYABLE
             </h2>
@@ -37,7 +37,7 @@ const IntroductionText = () => {
             </p>
           </section>
 
-          <section className="mb-6">
+          <section className="mb-5">
             <h2 className="text-xl font-bold mb-3 text-blue-600">
               POURQUOI LE JEU EST IMPORTANT ET POURQUOI DEVRAIS-JE JOUER AVEC
               MON ENFANT&#8239;?
@@ -56,7 +56,7 @@ const IntroductionText = () => {
             </p>
           </section>
 
-          <section className="mb-6">
+          <section className="mb-5">
             <h2 className="text-xl font-bold mb-3 text-blue-600">
               QU&apos;EST-CE QU&apos;UN EARLYON/ONyva ET POURQUOI DEVRAIS-JE Y
               ALLER&#8239;?
@@ -88,7 +88,7 @@ const IntroductionText = () => {
         </>
       ) : (
         <>
-          <section className="mb-6 mt-2">
+          <section className="my-5">
             <h2 className="text-xl font-bold mb-3 text-blue-600">
               HOW TO USE THE PLAYGROUP FINDER
             </h2>
@@ -103,7 +103,7 @@ const IntroductionText = () => {
             </p>
           </section>
 
-          <section className="mb-6">
+          <section className="mb-5">
             <h2 className="text-xl font-bold mb-3 text-blue-600">
               WHY IS PLAY IMPORTANT AND WHY SHOULD I PLAY WITH MY CHILD?
             </h2>
@@ -121,7 +121,7 @@ const IntroductionText = () => {
             </p>
           </section>
 
-          <section className="mb-6">
+          <section className="mb-5">
             <h2 className="text-xl font-bold mb-3 text-blue-600">
               WHAT’S AN EARLYON & WHY SHOULD I GO?
             </h2>

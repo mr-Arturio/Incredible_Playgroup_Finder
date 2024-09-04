@@ -50,6 +50,19 @@ export const Footer = () => {
               rel="noopener noreferrer"
             >
               <Image
+                src="https://static.wixstatic.com/media/e316f544f9094143b9eac01f1f19e697.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e316f544f9094143b9eac01f1f19e697.png"
+                alt="Facebook"
+                width={39}
+                height={39}
+                className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/parentresource"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
                 src="https://static.wixstatic.com/media/8d6893330740455c96d218258a458aa4.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8d6893330740455c96d218258a458aa4.png"
                 alt="Instagram"
                 width={39}
@@ -122,7 +135,7 @@ export const Footer = () => {
             </p>
           </div>
           <a
-            href="/privacy-policy"
+            href="https://www.parentresource.ca/pricacy"
             className="font-semibold text-white hover:underline"
           >
             Privacy Policy
