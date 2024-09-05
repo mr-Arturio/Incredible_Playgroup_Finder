@@ -24,6 +24,11 @@ This project leverages the following technologies:
 - **APIs**: Google Maps JavaScript API, Google Sheets API
 - **Deployment**: Vercel
 - **DataBase**: [Google Spreadsheets](https://docs.google.com/spreadsheets/d/1C9zhAX6WgU1_dfSy3TC58kppei0ZcprT_E96wgsp0rA/edit?gid=0#gid=0)
+ - There is a README sheet with instructions on how to fill in the data.
+ - WorkSheet: the sheet where data is filled in.
+ - MainSheet: the sheet that the app reads from.
+ - A script needs to be run after the MainSheet is filled (usually with new data for the month): `eventPopulator.gs`
+ - A copy of this script is available in `publiv/docs/SpreadSheetScript.md` just in case
 
 #### Dependencies
 
@@ -56,6 +61,7 @@ This project leverages the following technologies:
 ```bash
 ├── public                      # Contains various icon images used in the project.
 │   ├── docs                    # Contains the work log and related screenshots.
+│   │   └── SpreadSheetScript.md # Contaains a copy of a script for the Spreadsheet with explanation
 │   └── fonts                   # Contains the Lazy Dog font file used in the project.
 │
 ├── src
