@@ -172,3 +172,5 @@
  - inroduction text - transaltion, style, format
  - connect Vercel analytics
  - README file
+ - spreadsheet README instrucctuions
+ - script for backup
