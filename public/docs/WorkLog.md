@@ -172,3 +172,6 @@
  - inroduction text - transaltion, style, format
  - connect Vercel analytics
  - README file
+ - spreadsheet README instrucctuions
+ - script for backup
+ - refactore Note column to display multiple link/text pairs

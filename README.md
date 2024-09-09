@@ -29,6 +29,7 @@ This project leverages the following technologies:
  - MainSheet: the sheet that the app reads from.
  - A script needs to be run after the MainSheet is filled (usually with new data for the month): `eventPopulator.gs`
  - A copy of this script is available in `publiv/docs/SpreadSheetScript.md` just in case
+ - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1Yt0aWfkVSQQ61om9WAFlFduBHbTUVtf_)
 
 #### Dependencies
 
@@ -61,7 +62,8 @@ This project leverages the following technologies:
 ```bash
 ├── public                      # Contains various icon images used in the project.
 │   ├── docs                    # Contains the work log and related screenshots.
-│   │   └── SpreadSheetScript.md # Contaains a copy of a script for the Spreadsheet with explanation
+│   │   ├── SpreadSheetScript.md # Contains a copy of a script for the Spreadsheet with explanation
+│   │   └── BackUpScript.md     # Contains a script to back up spreadsheet to Google Drive Folder
 │   └── fonts                   # Contains the Lazy Dog font file used in the project.
 │
 ├── src
