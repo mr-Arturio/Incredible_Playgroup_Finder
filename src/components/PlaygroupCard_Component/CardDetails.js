@@ -14,28 +14,23 @@ function CardDetails({ Address, Age, Notes, icons, social, translation }) {
   };
 
   const renderNotes = (notes) => {
-    // Since your Notes text may come from a HYPERLINK formula in the spreadsheet
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const matches = notes.match(urlRegex);
-
-    if (matches) {
-      // Assume the first match is the URL, and use the remaining text as the link text
-      const [url] = matches;
-      const linkText = notes.replace(url, "").trim();
-      return (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-700"
-        >
-          {linkText || url}
-        </a>
-      );
-    } else {
-      return notes;
-    }
+    // Regular expression to match pairs of (URL linkText)
+    const linkRegex = /\((https?:\/\/[^\s]+) ([^)]+)\)/g;
+  
+    // Replace all occurrences of the (URL linkText) pattern
+    const noteWithLinks = notes.replace(linkRegex, (url, linkText) => {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-700">${linkText}</a>`;
+    });
+  
+    // Return a div with dangerouslySetInnerHTML to display the parsed HTML
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: noteWithLinks }}
+        className="notes-container"
+      />
+    );
   };
+  
 
   return (
     <div className="px-4 md:px-6 flex flex-col md:flex-row justify-between">
