@@ -10,7 +10,7 @@ Key features include:
 - **Interactive Map & Filters**: View and filter playgroup locations by criteria such as location, age group, language, date, and facility.
 - **Real-time Data**: Always have the latest event details, updated directly from Google Sheets.
 - **Responsive Design**: Enjoy a seamless experience across all devices—desktop, tablet, and mobile.
-- **User-Friendly Features**:  Includes user location detection, detailed event cards, direct navigation to Google Maps.
+- **User-Friendly Features**: Includes user location detection, detailed event cards, direct navigation to Google Maps.
 - **Bilingual Support**: The app supports both English and French languages.
 - **Calendar Integration**: Option to add an event to calendar of your choice (Google, Outlook, Apple)
 - **Interactive Slider**: Enjoy an engaging slider element with a car that changes the header background color as you slide it, culminating in a confetti celebration at the destination.
@@ -24,12 +24,35 @@ This project leverages the following technologies:
 - **APIs**: Google Maps JavaScript API, Google Sheets API
 - **Deployment**: Vercel
 - **DataBase**: [Google Spreadsheets](https://docs.google.com/spreadsheets/d/1C9zhAX6WgU1_dfSy3TC58kppei0ZcprT_E96wgsp0rA/edit?gid=0#gid=0)
+
   - There is a README sheet with instructions on how to fill in the data.
   - WorkSheet: the sheet where data is filled in.
   - MainSheet: the sheet that the app reads from.
   - A script needs to be run after the MainSheet is filled (usually with new data for the month): `eventPopulator.gs`
   - A copy of this script is available in `publiv/docs/SpreadSheetScript.md` just in case
-  - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1Yt0aWfkVSQQ61om9WAFlFduBHbTUVtf_)
+  - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1H4PflBSgPnWxcRR9fVM5be0s2sSiUwaG)
+
+  ## Project View
+
+  ![LiveDemo](./public/demo/IPF_Demo.gif)
+
+  #### Desktop View
+
+  ![DesktopView](./public/demo/DesktopView.png)
+
+  #### Mobile View
+
+  <div style="display: flex; justify-content: space-between;">
+    <img src="./public/demo/MobileView1.png" alt="MobileView1" style="width: 45%;" />
+    <img src="./public/demo/MobileView2.png" alt="MobileView2" style="width: 45%;" />
+    <img src="./public/demo/MobileView3.png" alt="MobileView3" style="width: 45%;" />
+  </div>
+
+#### Tablet View
+
+![TabletView1](./public/demo/TabletView1.png)
+![TabletView3](./public/demo/TabletView3.png)
+![TabletView2](./public/demo/TabletView2.png)
 
 #### Dependencies
 
@@ -58,7 +81,9 @@ This project leverages the following technologies:
     "node": "20.x"
 }
 ```
+
 ### Project File Structure
+
 ```bash
 ├── public                      # Contains various icon images used in the project.
 │   ├── docs                    # Contains the work log and related screenshots.
@@ -114,25 +139,34 @@ This project leverages the following technologies:
 │   ├── context
 │   │   └── LanguageContext.js   # Manages the language context for the application
 │   │
-│   └── utils
-│       ├── applyFilters.js      # Utility for applying filters to data
-│       ├── dateUtils.js         # Utility functions related to date handling
-│       ├── geocodeAddress.js    # Utility for geocoding addresses
-│       ├── gradient.js          # Utility for handling gradients
-│       ├── handleDateChange.js  # Utility for managing date changes
-│       ├── HotjarTracking.js    # Hotjar Tracking Code for IPF
-│       ├── icons.js             # Utility for managing icons for PlaygroupCards footer
-│       ├── RandomImage.js       # Utility for selecting random images ffor header
-│       ├── transformDataToObjects.js # Transforms sheet data into objects
-│       ├── translationMapping.js # Manages translation mappings for filters
-│       └── TTLCache.js          # Utility for handling time-to-live caching
+│   ├── utils
+│   │   ├── applyFilters.js      # Utility for applying filters to data
+│   │   ├── dateUtils.js         # Utility functions related to date handling
+│   │   ├── geocodeAddress.js    # Utility for geocoding addresses
+│   │   ├── gradient.js          # Utility for handling gradients
+│   │   ├── handleDateChange.js  # Utility for managing date changes
+│   │   ├── HotjarTracking.js    # Hotjar Tracking Code for IPF
+│   │   ├── icons.js             # Utility for managing icons for PlaygroupCards footer
+│   │   ├── RandomImage.js       # Utility for selecting random images ffor header
+│   │   ├── transformDataToObjects.js # Transforms sheet data into objects
+│   │   ├── translationMapping.js # Manages translation mappings for filters
+│   │   └── TTLCache.js          # Utility for handling time-to-live caching
+│   │
+│   ├── .env.local.sample        # Sample environment file for local development
+│   ├── .gitignore               # Git ignore file, specifying files and directories to be excluded from version control.
+│   ├── next.config.mjs           # Next.js configuration file, contains settings and customization options for the Next.js framework.
+│   ├── package.json             # Package manager configuration file
+│   ├── README.md                # Readme file
+│   ├── server.js                # Custom server file for Next.js, manages server-side operations and configurations beyond the default Next.js server.
+│   └── tailwind.config.ts       # Tailwind CSS configuration file, customizes the utility-first CSS framework settings for the project.
 ```
-
 
 ## Running Locally with HTTPS
 
 ### Clone the repository to your local environment and install dependencies
+
 Clone the repository to your local environment:
+
 ```bash
 git clone [repository-url]
 cd [repository-directory]
@@ -142,7 +176,8 @@ npm install
 To run the app with HTTPS locally, you’ll need to generate self-signed SSL certificates. Follow the steps below to set it up:
 
 ### Step 1: Generate SSL Certificate and Private Key
-Ensure that `OpenSSL` is installed on your machine. `OpenSSL` is required to generate the SSL certificate and key. 
+
+Ensure that `OpenSSL` is installed on your machine. `OpenSSL` is required to generate the SSL certificate and key.
 In your project root directory, create a folder named `certs` where your SSL certificates will be stored. Navigate to the newly created `certs` directory and run the following commands to generate the SSL certificate and private key:
 
 ```bash
@@ -157,26 +192,31 @@ openssl req -new -key localhost.key -out localhost.csr
 # Generate the self-signed certificate, valid for 365 days
 openssl x509 -req -days 365 -in localhost.csr -signkey localhost.key -out localhost.crt
 ```
+
 During the certificate generation process, OpenSSL will prompt you to enter some details. You can either provide real information or leave them blank by entering a period (.).
 
 ### Step 2: Set Up Environment Variables
-To connect to external services (Google Maps and Google Sheets), you will need to set up environment variables.
 
+To connect to external services (Google Maps and Google Sheets), you will need to set up environment variables.
 Create `.env.local` file and follow the `.env.local.sample` example add your API keys and credentials
 
 ### Step 3: Add the SSL Certificate Files to .gitignore
+
 Ensure that the certificate and key files are not pushed to the repository. Add the following lines to your .gitignore file
 
 ### Step 4: Start the Development Server with HTTPS
+
 Once the SSL certificate and key have been generated, you can start the development server. The server is already configured to use HTTPS with the generated certificate.
 
 Run the following command:
+
 ```bash
 npm run dev
 ```
 
 Navigate to https://localhost:3000 in your browser to view the app. Since you're using a self-signed certificate, your browser may show a warning. You can proceed by clicking on "Advanced" and selecting "Proceed to localhost."
-___
+
+---
 
 #### Development Resources
 

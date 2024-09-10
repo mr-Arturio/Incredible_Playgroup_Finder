@@ -31,7 +31,11 @@ function backupSpreadsheet() {
     if (response.getResponseCode() == 200) {
       // Set file name as IPFData with the current date in .xlsx format
       const blob = response.getBlob().setName('IPFData_' + dateString + '.xlsx');
-      const folder = DriveApp.getFolderById('1Yt0aWfkVSQQ61om9WAFlFduBHbTUVtf_');  // Set your Google Drive folder ID to store backup
+      const folder = DriveApp.getFolderById('1H4PflBSgPnWxcRR9fVM5be0s2sSiUwaG');  // Set your Google Drive folder ID to store backup
+      
+      // Double check if the blob name is correct
+      Logger.log('Setting file name to: ' + blob.getName());
+      
       folder.createFile(blob);  // Save backup file to Drive
 
       Logger.log('Spreadsheet backed up successfully!');
@@ -42,6 +46,4 @@ function backupSpreadsheet() {
     Logger.log('Skipping backup, today is not an even day.');
   }
 }
-
-
 ```
