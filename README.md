@@ -24,12 +24,12 @@ This project leverages the following technologies:
 - **APIs**: Google Maps JavaScript API, Google Sheets API
 - **Deployment**: Vercel
 - **DataBase**: [Google Spreadsheets](https://docs.google.com/spreadsheets/d/1C9zhAX6WgU1_dfSy3TC58kppei0ZcprT_E96wgsp0rA/edit?gid=0#gid=0)
- - There is a README sheet with instructions on how to fill in the data.
- - WorkSheet: the sheet where data is filled in.
- - MainSheet: the sheet that the app reads from.
- - A script needs to be run after the MainSheet is filled (usually with new data for the month): `eventPopulator.gs`
- - A copy of this script is available in `publiv/docs/SpreadSheetScript.md` just in case
- - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1Yt0aWfkVSQQ61om9WAFlFduBHbTUVtf_)
+  - There is a README sheet with instructions on how to fill in the data.
+  - WorkSheet: the sheet where data is filled in.
+  - MainSheet: the sheet that the app reads from.
+  - A script needs to be run after the MainSheet is filled (usually with new data for the month): `eventPopulator.gs`
+  - A copy of this script is available in `publiv/docs/SpreadSheetScript.md` just in case
+  - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1Yt0aWfkVSQQ61om9WAFlFduBHbTUVtf_)
 
 #### Dependencies
 
@@ -120,6 +120,7 @@ This project leverages the following technologies:
 │       ├── geocodeAddress.js    # Utility for geocoding addresses
 │       ├── gradient.js          # Utility for handling gradients
 │       ├── handleDateChange.js  # Utility for managing date changes
+│       ├── HotjarTracking.js    # Hotjar Tracking Code for IPF
 │       ├── icons.js             # Utility for managing icons for PlaygroupCards footer
 │       ├── RandomImage.js       # Utility for selecting random images ffor header
 │       ├── transformDataToObjects.js # Transforms sheet data into objects
@@ -158,10 +159,15 @@ openssl x509 -req -days 365 -in localhost.csr -signkey localhost.key -out localh
 ```
 During the certificate generation process, OpenSSL will prompt you to enter some details. You can either provide real information or leave them blank by entering a period (.).
 
-### Step 2: Add the SSL Certificate Files to .gitignore
+### Step 2: Set Up Environment Variables
+To connect to external services (Google Maps and Google Sheets), you will need to set up environment variables.
+
+Create `.env.local` file and follow the `.env.local.sample` example add your API keys and credentials
+
+### Step 3: Add the SSL Certificate Files to .gitignore
 Ensure that the certificate and key files are not pushed to the repository. Add the following lines to your .gitignore file
 
-### Step 3: Start the Development Server with HTTPS
+### Step 4: Start the Development Server with HTTPS
 Once the SSL certificate and key have been generated, you can start the development server. The server is already configured to use HTTPS with the generated certificate.
 
 Run the following command:
@@ -170,6 +176,7 @@ npm run dev
 ```
 
 Navigate to https://localhost:3000 in your browser to view the app. Since you're using a self-signed certificate, your browser may show a warning. You can proceed by clicking on "Advanced" and selecting "Proceed to localhost."
+___
 
 #### Development Resources
 
