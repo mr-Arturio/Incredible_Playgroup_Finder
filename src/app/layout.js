@@ -2,8 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./fonts.css";
 import { Analytics } from "@vercel/analytics/react";
-
 import { LanguageProvider } from "../context/LanguageContext";
+import HotjarTracking from "../utils/HotjarTracking";
 
 // Initialize the font
 const inter = Inter({ subsets: ["latin"] });
@@ -29,6 +29,7 @@ const RootLayout = ({ children }) => {
         <LanguageProvider>
           {children}
           <Analytics />
+          <HotjarTracking />
         </LanguageProvider>
       </body>
     </html>
