@@ -34,9 +34,9 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
       // Check if lat and lng are valid numbers
       const isValidLatLng = !isNaN(lat) && !isNaN(lng);
       // Log an error if lat or lng is invalid
-      if (!isValidLatLng) {
-        console.error("Invalid latitude or longitude:", data);
-      }
+      // if (!isValidLatLng) {
+      //   console.error("Invalid latitude or longitude:", data);
+      // }
       return isValidLatLng;
     });
     // Filter unique addresses
