@@ -127,25 +127,58 @@ This project leverages the following technologies:
 │       └── TTLCache.js          # Utility for handling time-to-live caching
 ```
 
-## Setup
 
+## Running Locally with HTTPS
+
+### Clone the repository to your local environment and install dependencies
 Clone the repository to your local environment:
 ```bash
 git clone [repository-url]
 cd [repository-directory]
 npm install
+```
+
+To run the app with HTTPS locally, you’ll need to generate self-signed SSL certificates. Follow the steps below to set it up:
+
+### Step 1: Generate SSL Certificate and Private Key
+Ensure that `OpenSSL` is installed on your machine. `OpenSSL` is required to generate the SSL certificate and key. 
+In your project root directory, create a folder named `certs` where your SSL certificates will be stored. Navigate to the newly created `certs` directory and run the following commands to generate the SSL certificate and private key:
+
+```bash
+cd certs
+
+# Generate a private key
+openssl genrsa -out localhost.key 2048
+
+# Generate a certificate signing request (CSR)
+openssl req -new -key localhost.key -out localhost.csr
+
+# Generate the self-signed certificate, valid for 365 days
+openssl x509 -req -days 365 -in localhost.csr -signkey localhost.key -out localhost.crt
+```
+During the certificate generation process, OpenSSL will prompt you to enter some details. You can either provide real information or leave them blank by entering a period (.).
+
+### Step 2: Add the SSL Certificate Files to .gitignore
+Ensure that the certificate and key files are not pushed to the repository. Add the following lines to your .gitignore file
+
+### Step 3: Start the Development Server with HTTPS
+Once the SSL certificate and key have been generated, you can start the development server. The server is already configured to use HTTPS with the generated certificate.
+
+Run the following command:
+```bash
 npm run dev
 ```
-Navigate to http://localhost:3000 in your browser to view the app.
+
+Navigate to https://localhost:3000 in your browser to view the app. Since you're using a self-signed certificate, your browser may show a warning. You can proceed by clicking on "Advanced" and selecting "Proceed to localhost."
 
 #### Development Resources
 
-- Add To Calendar configuration: https://add-to-calendar-button.com/#demo <br>
+- Add To Calendar configuration: https://add-to-calendar-button.com/#demo
   - CSS configuration example: `styleLight="--btn-background: #2f4377; --btn-text: #fff; --font: Georgia, 'Times New Roman', Times, serif;"` https://github.com/add2cal/add-to-calendar-button/blob/main/assets/css/atcb-text.css
-- React Date picker configuration: https://reactdatepicker.com/#example-custom-day <br>
-- Icons : https://uxwing.com/, https://iconduck.com/ <br>
-- Address to GPS Coordinates: https://www.gps-coordinates.net/ <br>
-- Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/ <br>
+- React Date picker configuration: https://reactdatepicker.com/#example-custom-day
+- Icons : https://uxwing.com/, https://iconduck.com/
+- Address to GPS Coordinates: https://www.gps-coordinates.net/
+- Background generators: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/, https://bgjar.com/, https://app.haikei.app/
 - Web page audits: https://pagespeed.web.dev/, https://lighthouse-metrics.com/
 - File Convertor: https://convertio.co/
-
+- Hotjar numbers and user behavior behind- https://www.hotjar.com/

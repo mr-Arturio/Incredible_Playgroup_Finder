@@ -1,6 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 secrets.json
+certs/localhost.crt
+certs/localhost.key
+certs/localhost.csr
+*.pem
+*.crt
+*.key
+*.csr
 
 # dependencies
 /node_modules
