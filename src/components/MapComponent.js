@@ -34,9 +34,9 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
       // Check if lat and lng are valid numbers
       const isValidLatLng = !isNaN(lat) && !isNaN(lng);
       // Log an error if lat or lng is invalid
-      if (!isValidLatLng) {
-        console.error("Invalid latitude or longitude:", data);
-      }
+      // if (!isValidLatLng) {
+      //   console.error("Invalid latitude or longitude:", data);
+      // }
       return isValidLatLng;
     });
     // Filter unique addresses
@@ -114,6 +114,9 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
         mapContainerStyle={{ width: "100%", height: "90%" }}
         center={center}
         zoom={11}
+        options={{
+          gestureHandling: isMobile ? "cooperative" : "auto", // Use "cooperative" to allow normal scrolling
+        }}
       >
         {markers.map((marker) => (
           <Marker //need to parseFloat again to avoid error... thats where TypeScript would be useful
