@@ -114,6 +114,9 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
         mapContainerStyle={{ width: "100%", height: "90%" }}
         center={center}
         zoom={11}
+        options={{
+          gestureHandling: isMobile ? "cooperative" : "auto", // Use "cooperative" to allow normal scrolling
+        }}
       >
         {markers.map((marker) => (
           <Marker //need to parseFloat again to avoid error... thats where TypeScript would be useful
