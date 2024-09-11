@@ -1,7 +1,7 @@
 ## The Incredible Playgroup Finder
 
 www.incredibleplaygroupfinder.ca <br>
-The Incredible Playgroup Finder is a web app that connects Ottawa parents with local playgroup events. With real-time data from Google Sheets, the app features an interactive map, filterable playgroup cards, and calendar integration.
+The Incredible Playgroup Finder is a web app that connects Ottawa parents with local playgroup events. With real-time data from Google Sheets, the app features an interactive map, filterable playgroup cards, calendar integration and it is Bilingual.
 
 Our application stands out with its easy-to-use interactive map and a dynamic filtering system that allows users to search for playgroups by location, age group, language preference, date, day, and facility. Data is pulled in real-time from a Google Sheets database, ensuring the most current information is always at hand.
 
@@ -30,7 +30,7 @@ This project leverages the following technologies:
   - MainSheet: the sheet that the app reads from.
   - A script needs to be run after the MainSheet is filled (usually with new data for the month): `eventPopulator.gs`
   - A copy of this script is available in `publiv/docs/SpreadSheetScript.md` just in case
-  - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1H4PflBSgPnWxcRR9fVM5be0s2sSiUwaG)
+  - A back up is run every even day and store in [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1H4PflBSgPnWxcRR9fVM5be0s2sSiUwaG) `PRC - IPF/IPF_BackUp` folder
 
   ## Project View
 
@@ -43,9 +43,8 @@ This project leverages the following technologies:
   #### Mobile View
 
   <div style="display: flex; justify-content: space-between;">
-    <img src="./public/demo/MobileView1.png" alt="MobileView1" style="width: 45%;" />
     <img src="./public/demo/MobileView2.png" alt="MobileView2" style="width: 45%;" />
-    <img src="./public/demo/MobileView3.png" alt="MobileView3" style="width: 45%;" />
+    <img src="./public/demo/MobileView1.png" alt="MobileView1" style="width: 45%;" />
   </div>
 
 #### Tablet View
