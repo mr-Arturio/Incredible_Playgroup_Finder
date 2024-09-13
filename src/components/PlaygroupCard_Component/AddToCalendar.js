@@ -16,7 +16,6 @@ const AddToCalendar = ({
 
   return (
     <>
-      <div className="hidden sm:inline">
         <AddToCalendarButton
           name={name}
           options={["Google", "Outlook.com", "Apple"]}
@@ -37,8 +36,7 @@ const AddToCalendar = ({
             font-size: 1.5em;
           }"
         />
-      </div>
-      <div className="sm:hidden">
+      {/* <div className="sm:hidden">
         <AddToCalendarButton
           name={name}
           options={["Google", "Outlook.com", "Apple"]}
@@ -59,7 +57,7 @@ const AddToCalendar = ({
             font-size: 1.25em;
           }"
         />
-      </div>
+      </div> */}
     </>
   );
 };
