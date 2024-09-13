@@ -108,7 +108,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         Cancelled={Cancelled}
         Paused={Paused}
         Time={Time}
-        address={Address}
+        Address={Address}
         startTime={startTime}
         endTime={endTime}
         Registration={Registration}
@@ -125,6 +125,12 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           icons={icons}
           social={social}
           translation={translation}
+          Organizer={Organizer}
+          eventDate={eventDate}
+          startTime={startTime}
+          endTime={endTime}
+          Cancelled={Cancelled}
+          Paused={Paused}
         />
       )}
       <CardFooter

@@ -17,7 +17,7 @@ function CardHeader({
   Cancelled,
   Paused,
   Time,
-  address,
+  Address,
   startTime,
   endTime,
   Registration,
@@ -110,7 +110,7 @@ function CardHeader({
           </div>
         </div>
       </div>
-      <div className="flex items-center text-gray-700 justify-between mb-1 ">
+      <div className="flex items-center text-gray-700 justify-between mb-2 md:mb-1 mt-3.5 md:mt-0">
         <div className="flex items-center">
           <Image
             src="/time.svg"
@@ -121,11 +121,11 @@ function CardHeader({
           />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>
         </div>
-        <div className="flex items-center ml-auto md:py-2 py-1">
+        <div className="flex items-center ml-auto md:py-2 py-1 sm:block hidden">
           <button>
             <AddToCalendar
               name={Organizer}
-              address={address}
+              address={Address}
               date={eventDate}
               startTime={startTime}
               endTime={endTime}
