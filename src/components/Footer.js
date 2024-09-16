@@ -133,6 +133,17 @@ export const Footer = () => {
                 SVGBackgrounds.com
               </a>
             </p>
+             {/* License Information */}
+             <p className="mt-2">
+              Licensed under the{" "}
+              <a
+                href="/LICENSE"
+                className="hover:text-amber underline"
+              >
+                MIT License
+              </a>
+              .
+            </p>
           </div>
           <a
             href="https://www.parentresource.ca/pricacy"
