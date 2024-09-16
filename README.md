@@ -95,6 +95,8 @@ This project leverages the following technologies:
 │   │   └── getSheetData.js     # Fetches and caches Google Sheets data, transforming it into objects
 │   │
 │   ├── app
+│   │   ├── LICENSE
+│   │   │   └── page.js         # MIT License file
 │   │   ├── favicon.ico         # Favicon for the app
 │   │   ├── fonts.css           # Defines font styles used in the project
 │   │   ├── global.css          # Contains custom global CSS styles
@@ -138,26 +140,27 @@ This project leverages the following technologies:
 │   ├── context
 │   │   └── LanguageContext.js   # Manages the language context for the application
 │   │
-│   ├── utils
-│   │   ├── applyFilters.js      # Utility for applying filters to data
-│   │   ├── dateUtils.js         # Utility functions related to date handling
-│   │   ├── geocodeAddress.js    # Utility for geocoding addresses
-│   │   ├── gradient.js          # Utility for handling gradients
-│   │   ├── handleDateChange.js  # Utility for managing date changes
-│   │   ├── HotjarTracking.js    # Hotjar Tracking Code for IPF
-│   │   ├── icons.js             # Utility for managing icons for PlaygroupCards footer
-│   │   ├── RandomImage.js       # Utility for selecting random images ffor header
-│   │   ├── transformDataToObjects.js # Transforms sheet data into objects
-│   │   ├── translationMapping.js # Manages translation mappings for filters
-│   │   └── TTLCache.js          # Utility for handling time-to-live caching
-│   │
-│   ├── .env.local.sample        # Sample environment file for local development
-│   ├── .gitignore               # Git ignore file, specifying files and directories to be excluded from version control.
-│   ├── next.config.mjs           # Next.js configuration file, contains settings and customization options for the Next.js framework.
-│   ├── package.json             # Package manager configuration file
-│   ├── README.md                # Readme file
-│   ├── server.js                # Custom server file for Next.js, manages server-side operations and configurations beyond the default Next.js server.
-│   └── tailwind.config.ts       # Tailwind CSS configuration file, customizes the utility-first CSS framework settings for the project.
+│   └── utils
+│       ├── applyFilters.js      # Utility for applying filters to data
+│       ├── dateUtils.js         # Utility functions related to date handling
+│       ├── geocodeAddress.js    # Utility for geocoding addresses
+│       ├── gradient.js          # Utility for handling gradients
+│       ├── handleDateChange.js  # Utility for managing date changes
+│       ├── HotjarTracking.js    # Hotjar Tracking Code for IPF
+│       ├── icons.js             # Utility for managing icons for PlaygroupCards footer
+│       ├── RandomImage.js       # Utility for selecting random images ffor header
+│       ├── transformDataToObjects.js # Transforms sheet data into objects
+│       ├── translationMapping.js # Manages translation mappings for filters
+│       └── TTLCache.js          # Utility for handling time-to-live caching
+│   
+├── .env.local.sample        # Sample environment file for local development
+├── .gitignore               # Git ignore file, specifying files and directories to be excluded from version control.
+├── LICENSE                  # MIT license
+├── next.config.mjs           # Next.js configuration file, contains settings and customization options for the Next.js framework.
+├── package.json             # Package manager configuration file
+├── README.md                # Readme file
+├── server.js                # Custom server file for Next.js, manages server-side operations and configurations beyond the default Next.js server.
+└── tailwind.config.ts       # Tailwind CSS configuration file, customizes the utility-first CSS framework settings for the project.
 ```
 
 ## Running Locally with HTTPS
@@ -228,3 +231,7 @@ Navigate to https://localhost:3000 in your browser to view the app. Since you're
 - Web page audits: https://pagespeed.web.dev/, https://lighthouse-metrics.com/
 - File Convertor: https://convertio.co/
 - Hotjar numbers and user behavior behind- https://www.hotjar.com/
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
