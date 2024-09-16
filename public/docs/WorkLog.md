@@ -175,3 +175,4 @@
  - spreadsheet README instrucctuions
  - script for backup
  - refactore Note column to display multiple link/text pairs
+  - add MIT license 
