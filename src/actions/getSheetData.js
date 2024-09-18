@@ -3,7 +3,7 @@ import { google } from "googleapis";
 import { transformDataToObjects } from "../utils/transformDataToObjects";
 import { TTLCache } from "../utils/TTLCache"; // Import the TTLCache class
 
-const sheetCache = new TTLCache(1000 * 60 * 60); // Cache TTL of 1 hour
+const sheetCache = new TTLCache(1000 * 60 * 15); // Cache TTL of 15 minutes
 
 export async function getSheetData() {
   const cacheKey = "sheetData";
