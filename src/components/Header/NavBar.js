@@ -31,6 +31,7 @@ const NavBar = () => {
               width={100}
               height={100}
               className="h-14 lg:h-16 xl:h-20 w-auto"
+              unoptimized
             />
           </a>
         </div>
