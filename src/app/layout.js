@@ -24,6 +24,8 @@ const RootLayout = ({ children }) => {
           type="font/ttf"
           crossOrigin="anonymous"
         />
+        {/* Google site veriffication */}
+        <meta name="google-site-verification" content="OMxCt92tQbDrp46CJaNuTYUDUAPnQYyuXpPNkVrHk4U" />
         {/* Open Graph meta tags */}
         <meta property="og:title" content="EarlyON playgroups in Ottawa." />
         <meta
