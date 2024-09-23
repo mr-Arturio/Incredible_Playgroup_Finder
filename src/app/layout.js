@@ -34,7 +34,7 @@ const RootLayout = ({ children }) => {
         />
         <meta
           property="og:image"
-          content="https://www.incredibleplaygroupfinder.ca/Preview_img.png"
+          content="https://www.incredibleplaygroupfinder.ca/Preview_img.jpg"
         />
         <meta
           property="og:url"
