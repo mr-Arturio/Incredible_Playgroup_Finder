@@ -31,7 +31,7 @@ const getIcons = (
   toys: {
     show: Toys === "yes",
     src: "toys.svg",
-    tooltip: translation === "fr" ? "Ludothèque" : "Toy Library",
+    tooltip: translation === "fr" ? "Joujouthèque" : "Toy Library",
   },
   // Uncomment if needed
   // wifi: {

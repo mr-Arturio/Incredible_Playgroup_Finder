@@ -153,7 +153,7 @@ const IntroductionText = () => {
       translation === "fr" ? (
         <div>
           <p className="font-lazydog text-introText mb-2">
-            Mettez plus de jeu dans votre journée!
+            Mettez plus de jeu dans votre journée&#8239;!
           </p>
           <p>
             Appel à tous les parents ! Saviez-vous que le temps de jeu est comme
