@@ -53,8 +53,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     languageOptions: {
       English: translation === "fr" ? "Anglais" : "English",
       French: translation === "fr" ? "Français" : "French",
-      "English/French":
-        translation === "fr" ? "Anglais/Français" : "English/French",
       Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
       Arabic: translation === "fr" ? "L'arabe" : "Arabic",
     },

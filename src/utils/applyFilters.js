@@ -54,9 +54,27 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
 
     // Mapping for hierarchical age filters
     const ageMapping = {
-      "Baby (0-24m)": ["Baby (0-24m)", "Baby (0-18m)", "Baby (0-12m)", "Baby (non-walking)"],
+      "Baby (0-24m)": [
+        "Baby (0-24m)",
+        "Baby (0-18m)",
+        "Baby (0-12m)",
+        "Baby (non-walking)",
+      ],
       "Baby (0-18m)": ["Baby (0-18m)", "Baby (0-12m)", "Baby (non-walking)"],
-      "Child (0-6y)": ["Child (0-6y)", "Child (3-6y)", "Baby (0-24m)", "Baby (0-18m)", "Baby (0-12m)", "Baby (non-walking)"],
+      "Child (0-6y)": [
+        "Child (0-6y)",
+        "Child (3-6y)",
+        "Baby (0-24m)",
+        "Baby (0-18m)",
+        "Baby (0-12m)",
+        "Baby (non-walking)",
+      ],
+    };
+
+    // Mapping for language filter logic
+    const languageMapping = {
+      English: ["English", "EN/FR"],
+      French: ["French", "EN/FR"],
     };
 
     return data
@@ -79,13 +97,20 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
 
         if (translatedCriteria.area && item.Area !== translatedCriteria.area)
           return false;
+
+        // Handle language mapping logic
+        const validLanguages = languageMapping[translatedCriteria.language] || [
+          translatedCriteria.language,
+        ];
         if (
           translatedCriteria.language &&
-          item.Language !== translatedCriteria.language
+          !validLanguages.includes(item.Language)
         )
           return false;
+
         if (translatedCriteria.day && item.Day !== translatedCriteria.day)
           return false;
+
         if (
           translatedCriteria.organizer &&
           item.Organizer !== translatedCriteria.organizer
