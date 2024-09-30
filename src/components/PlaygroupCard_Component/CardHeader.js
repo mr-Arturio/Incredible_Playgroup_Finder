@@ -58,6 +58,7 @@ function CardHeader({
           <div className="text-sm md:text-base italic text-gray-500">
             {Location}
           </div>
+          {/* Date and Date */}
           <p
             className={`mt-1 text-gray-600 md:text-sm text-xs ${
               Cancelled === "yes" || Paused === "yes" ? "mb-2" : ""
@@ -121,7 +122,7 @@ function CardHeader({
           />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>
         </div>
-        <div className="flex items-center ml-auto md:py-2 py-1 sm:block hidden">
+        <div className="items-center ml-auto md:py-2 py-1 sm:block hidden">
           <button>
             <AddToCalendar
               name={Organizer}
