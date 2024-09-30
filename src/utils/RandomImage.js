@@ -10,7 +10,7 @@ const RandomImage = () => {
 
     if (randomNumber < 40) {
       // 40% chance to display the logo
-      setImageData({ src: '/docs/Families/logo.svg', width: 300 });
+      setImageData({ src: '/docs/Families/IPF_logo.svg', width: 300 });
     } else {
       // 60% chance to display a random image from 1 to 12
       const randomImageNumber = Math.floor(Math.random() * 12) + 1;
