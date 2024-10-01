@@ -42,66 +42,86 @@ export const Footer = () => {
               </a>
             </p>
           </div>
-          {/* Social Icons */}
-          <div className="flex space-x-4">
-            <a
-              href="https://www.facebook.com/parentresourcecentre"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+
+          {/* Social Icons and OCF Image Section */}
+          <div className="flex flex-col items-center space-y-4">
+            {/* Social Icons */}
+            <div className="flex space-x-4">
+              <a
+                href="https://www.facebook.com/parentresourcecentre"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="https://static.wixstatic.com/media/e316f544f9094143b9eac01f1f19e697.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e316f544f9094143b9eac01f1f19e697.png"
+                  alt="Facebook"
+                  width={39}
+                  height={39}
+                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/parentresource"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="https://static.wixstatic.com/media/8d6893330740455c96d218258a458aa4.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8d6893330740455c96d218258a458aa4.png"
+                  alt="Instagram"
+                  width={39}
+                  height={39}
+                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/parent-resource-centre/mycompany/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="https://static.wixstatic.com/media/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png"
+                  alt="LinkedIn"
+                  width={39}
+                  height={39}
+                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                />
+              </a>
+              <a
+                href="https://www.eventbrite.ca/o/ottawa-parent-resource-centre-7963790017"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="https://static.wixstatic.com/media/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png"
+                  alt="Eventbrite"
+                  width={39}
+                  height={39}
+                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                />
+              </a>
+            </div>
+
+            {/* OCF Logo and Text */}
+            <div className="flex flex-col mt-2 ml-7 md:ml-0">
               <Image
-                src="https://static.wixstatic.com/media/e316f544f9094143b9eac01f1f19e697.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e316f544f9094143b9eac01f1f19e697.png"
-                alt="Facebook"
-                width={39}
-                height={39}
-                className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                src="/OCF_EN-retina.png"
+                alt="OCF Logo"
+                width={150}
+                height={60}
+                unoptimized
+                className="w-28 md:w-40"
               />
-            </a>
-            <a
-              href="https://www.instagram.com/parentresource"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="https://static.wixstatic.com/media/8d6893330740455c96d218258a458aa4.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8d6893330740455c96d218258a458aa4.png"
-                alt="Instagram"
-                width={39}
-                height={39}
-                className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
-              />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/parent-resource-centre/mycompany/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="https://static.wixstatic.com/media/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_9e78da3320da497ab23ce28d738d388a~mv2.png"
-                alt="LinkedIn"
-                width={39}
-                height={39}
-                className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
-              />
-            </a>
-            <a
-              href="https://www.eventbrite.ca/o/ottawa-parent-resource-centre-7963790017"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="https://static.wixstatic.com/media/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/f93ed4_ab61c4f988d44c38a1b97fc5708734bd~mv2.png"
-                alt="Eventbrite"
-                width={39}
-                height={39}
-                className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
-              />
-            </a>
+              <p className="mt-2 text-xxs md:text-xs">
+                Generously supported in part by<br /> the OCF&apos;s  Community
+                Grants Program
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Section */}
-      <div className="w-full bg-mainBlue pt-2 mt-2.5 md:mt-6 px-2.5 md:px-4 text-xs md:text-sm/2">
+      <div className="w-full bg-mainBlue pt-2 mt-2.5 md:mt-6 px-2.5 md:px-4 text-xxs md:text-sm/2">
         <div className="container mx-auto flex justify-between text-white">
           <div>
             <p>&copy; 2024 Parent Resource Centre</p>
@@ -133,13 +153,10 @@ export const Footer = () => {
                 SVGBackgrounds.com
               </a>
             </p>
-             {/* License Information */}
-             <p className="mt-2">
+            {/* License Information */}
+            <p className="mt-2">
               Licensed under the{" "}
-              <a
-                href="/LICENSE"
-                className="hover:text-amber underline"
-              >
+              <a href="/LICENSE" className="hover:text-amber underline">
                 MIT License
               </a>
               .

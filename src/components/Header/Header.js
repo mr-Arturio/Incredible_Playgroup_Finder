@@ -73,7 +73,7 @@ const Header = () => {
               </h2>
             </div>
             <div
-              className="flex justify-end items-end ml-4"
+              className="flex justify-end items-end ml-4 mr-2"
               style={{ flexBasis: "35%" }}
             >
               <RandomImage />

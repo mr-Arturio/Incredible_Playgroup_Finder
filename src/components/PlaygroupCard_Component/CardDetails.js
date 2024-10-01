@@ -30,13 +30,13 @@ function CardDetails({
 
   const renderNotes = (notes) => {
     // Regular expression to match pairs of (URL linkText)
-    const linkRegex = /\((https?:\/\/[^\s]+) ([^)]+)\)/g;
-
+    const linkRegex = /\((https?:\/\/[^\s]+)\s([^)]+)\)/g;
+  
     // Replace all occurrences of the (URL linkText) pattern
-    const noteWithLinks = notes.replace(linkRegex, (url, linkText) => {
+    const noteWithLinks = notes.replace(linkRegex, (match, url, linkText) => {
       return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-700">${linkText}</a>`;
     });
-
+  
     // Return a div with dangerouslySetInnerHTML to display the parsed HTML
     return (
       <div

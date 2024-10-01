@@ -20,7 +20,7 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
       organizer: criteria.organizer,
       age: translateCriteria(criteria.age, "age"),
       time: translateCriteria(criteria.time, "time"),
-      date: criteria.date
+      date: criteria.date,
     };
 
     const parseDate = (dateString) => {
@@ -52,6 +52,31 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
       return { startTime, timeCategory };
     };
 
+    // Mapping for hierarchical age filters
+    const ageMapping = {
+      "Baby (0-24m)": [
+        "Baby (0-24m)",
+        "Baby (0-18m)",
+        "Baby (0-12m)",
+        "Baby (non-walking)",
+      ],
+      "Baby (0-18m)": ["Baby (0-18m)", "Baby (0-12m)", "Baby (non-walking)"],
+      "Child (0-6y)": [
+        "Child (0-6y)",
+        "Child (3-6y)",
+        "Baby (0-24m)",
+        "Baby (0-18m)",
+        "Baby (0-12m)",
+        "Baby (non-walking)",
+      ],
+    };
+
+    // Mapping for language filter logic
+    const languageMapping = {
+      English: ["English", "EN/FR"],
+      French: ["French", "EN/FR"],
+    };
+
     return data
       .filter((item) => {
         const itemDate = parseDate(item.eventDate);
@@ -72,13 +97,31 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
 
         if (translatedCriteria.area && item.Area !== translatedCriteria.area)
           return false;
-        if (translatedCriteria.language && item.Language !== translatedCriteria.language)
+
+        // Handle language mapping logic
+        const validLanguages = languageMapping[translatedCriteria.language] || [
+          translatedCriteria.language,
+        ];
+        if (
+          translatedCriteria.language &&
+          !validLanguages.includes(item.Language)
+        )
           return false;
+
         if (translatedCriteria.day && item.Day !== translatedCriteria.day)
           return false;
-        if (translatedCriteria.organizer && item.Organizer !== translatedCriteria.organizer)
+
+        if (
+          translatedCriteria.organizer &&
+          item.Organizer !== translatedCriteria.organizer
+        )
           return false;
-        if (translatedCriteria.age && item.Age !== translatedCriteria.age)
+
+        // Handle age mapping logic
+        const validAges = ageMapping[translatedCriteria.age] || [
+          translatedCriteria.age,
+        ];
+        if (translatedCriteria.age && !validAges.includes(item.Age))
           return false;
 
         const { timeCategory } = categorizeTime(item.Time);

@@ -116,6 +116,7 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
         zoom={11}
         options={{
           gestureHandling: isMobile ? "cooperative" : "auto", // Use "cooperative" to allow normal scrolling
+          mapTypeControl: false, // Disables the map type (Satellite/Terrain) options
         }}
       >
         {markers.map((marker) => (

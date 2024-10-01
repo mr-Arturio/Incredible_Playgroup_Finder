@@ -53,8 +53,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     languageOptions: {
       English: translation === "fr" ? "Anglais" : "English",
       French: translation === "fr" ? "Français" : "French",
-      "English/French":
-        translation === "fr" ? "Anglais/Français" : "English/French",
       Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
       Arabic: translation === "fr" ? "L'arabe" : "Arabic",
     },
@@ -81,12 +79,12 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   // Controls visibility of the map
   const [isMapVisible, setIsMapVisible] = useState(false);
   // State to control the number of visible cards
-  const [visibleCards, setVisibleCards] = useState(6);
+  const [visibleCards, setVisibleCards] = useState(12);
   // State to track if any filters are active
   const [isFilterActive, setIsFilterActive] = useState(false);
 
   const handleShowMore = () => {
-    setVisibleCards((prevVisibleCards) => prevVisibleCards + 6);
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
   const handleMarkerSelect = (Address) => {
