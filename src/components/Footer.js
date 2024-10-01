@@ -112,7 +112,7 @@ export const Footer = () => {
                 className="w-28 md:w-40"
               />
               <p className="mt-2 text-xxs md:text-xs">
-                Generously supported in part by<br /> the OCF's  Community
+                Generously supported in part by<br /> the OCF&apos;s  Community
                 Grants Program
               </p>
             </div>
