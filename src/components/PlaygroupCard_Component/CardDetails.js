@@ -6,6 +6,7 @@ function CardDetails({
   Address,
   Age,
   Notes,
+  Notes_fr,
   icons,
   social,
   translation,
@@ -31,12 +32,12 @@ function CardDetails({
   const renderNotes = (notes) => {
     // Regular expression to match pairs of (URL linkText)
     const linkRegex = /\((https?:\/\/[^\s]+)\s([^)]+)\)/g;
-  
+
     // Replace all occurrences of the (URL linkText) pattern
     const noteWithLinks = notes.replace(linkRegex, (match, url, linkText) => {
       return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-700">${linkText}</a>`;
     });
-  
+
     // Return a div with dangerouslySetInnerHTML to display the parsed HTML
     return (
       <div
@@ -45,6 +46,9 @@ function CardDetails({
       />
     );
   };
+
+  // Determine whether to show English or French notes based on the translation prop
+  const displayedNotes = translation === "fr" ? Notes_fr : Notes;
 
   return (
     <div className="px-4 md:px-6 flex flex-col md:flex-row justify-between">
@@ -121,11 +125,11 @@ function CardDetails({
           </div>
         </div>
       </div>
-      {Notes && (
+      {displayedNotes && (
         <div className="bg-gray-100 p-2 rounded-lg shadow-md mb-2 md:my-0 md:max-w-sm flex-1">
           <p className="text-gray-800 text-sm">
             <span className="font-bold">Special Notes:</span>{" "}
-            {renderNotes(Notes)}
+            {renderNotes(displayedNotes)}
           </p>
         </div>
       )}
