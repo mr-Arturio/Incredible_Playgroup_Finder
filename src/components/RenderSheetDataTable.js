@@ -122,7 +122,12 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const getFilteredData = () => {
     if (isLoading) return [];
 
-    let filtered = applyFilters(sheetData, filterCriteria, selectedAddress, translation);
+    let filtered = applyFilters(
+      sheetData,
+      filterCriteria,
+      selectedAddress,
+      translation
+    );
 
     //logic for the map - selected pin will be the only one shown in map
     if (selectedAddress) {
@@ -222,13 +227,23 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           onShowToday={showTodayPlaygroups}
           translation={translation}
         />
-        {/* FAQ Link */}
-        <a
-          href="https://www.parentresource.ca/faqipf"
-          className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-base md:text-xl tracking-widest"
-        >
-          FAQ
-        </a>
+        <div>
+          {/* Our story link*/}
+          <a
+            href="https://www.parentresource.ca/ipfstory"
+            className="text-blue-500 hover:underline font-bold text-base md:text-xl tracking-widest"
+          >
+            IPF Story
+          </a>
+          <span className="px-1 text-blue-500">|</span>
+          {/* FAQ Link */}
+          <a
+            href="https://www.parentresource.ca/faqipf"
+            className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-base md:text-xl tracking-widest"
+          >
+            FAQ
+          </a>
+        </div>
       </div>
       {/* Button to toggle filters */}
       <div className="flex flex-1 flex-col" id="today-playgroups-section">
