@@ -55,7 +55,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       French: translation === "fr" ? "Français" : "French",
       Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
       Arabic: translation === "fr" ? "L'arabe" : "Arabic",
-    },
+    }
   };
 
   // Reference for scrolling to today's playgroups section
@@ -233,7 +233,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
             href="https://www.parentresource.ca/ipfstory"
             className="text-blue-500 hover:underline font-bold text-base md:text-xl tracking-widest"
           >
-            IPF Story
+            {translation === "fr" ? "Histoire d'OI" : "IPF Story"}
           </a>
           <span className="px-1 text-blue-500">|</span>
           {/* FAQ Link */}
