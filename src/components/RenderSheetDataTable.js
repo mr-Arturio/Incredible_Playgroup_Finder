@@ -222,7 +222,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center px-2.5 md:mb-4 mb-2">
+      <div className="flex justify-between items-center mt-1 px-2.5 md:mb-4 mb-2">
         <ShowTodayButton
           onShowToday={showTodayPlaygroups}
           translation={translation}
@@ -231,7 +231,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           {/* Our story link*/}
           <a
             href="https://www.parentresource.ca/ipfstory"
-            className="text-blue-500 hover:underline font-bold text-base md:text-xl tracking-widest"
+            className="text-blue-500 hover:underline font-bold text-sm md:text-xl tracking-widest"
           >
             {translation === "fr" ? "Histoire d'OI" : "IPF Story"}
           </a>
@@ -239,7 +239,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           {/* FAQ Link */}
           <a
             href="https://www.parentresource.ca/faqipf"
-            className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-base md:text-xl tracking-widest"
+            className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-sm md:text-xl tracking-widest"
           >
             FAQ
           </a>
