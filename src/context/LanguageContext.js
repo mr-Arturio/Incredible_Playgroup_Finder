@@ -1,27 +1,38 @@
 'use client';
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 const LanguageContext = createContext();
 
 export const useLanguage = () => useContext(LanguageContext);
 
 export const LanguageProvider = ({ children }) => {
-  // Initialize state with a function to avoid accessing localStorage directly
+  const pathname = usePathname();
+  const router = useRouter();
+
   const [translation, setTranslation] = useState(() => {
     if (typeof window !== 'undefined') {
-      // Ensure we're running in the browser
+      // Check URL pathname for initial language setting
+      if (pathname.startsWith('/fr')) return 'fr';
+      if (pathname.startsWith('/en')) return 'en';
+      // Fallback to localStorage if no URL parameter
       return localStorage.getItem('language') || 'en';
     }
-    return 'en'; // Default to 'en' if window is not defined
+    return 'en'; // Default for SSR (server-side rendering)
   });
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Ensure we're running in the browser before accessing localStorage
+      // If no language in URL, redirect to saved language in localStorage or default to /en
+      if (!pathname.startsWith('/fr') && !pathname.startsWith('/en')) {
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        router.replace(`/${savedLanguage}`);
+      }
+      // Update localStorage when translation changes
       localStorage.setItem('language', translation);
     }
-  }, [translation]);
+  }, [translation, pathname, router]);
 
   const toggleTranslation = (lang) => {
     setTranslation(lang);
