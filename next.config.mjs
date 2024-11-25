@@ -1,4 +1,10 @@
 const nextConfig = {
+  async rewrites() {
+    return [
+      { source: "/en/LICENSE", destination: "/LICENSE" },
+      { source: "/fr/LICENSE", destination: "/LICENSE" },
+    ];
+  },
   images: {
     remotePatterns: [
       {

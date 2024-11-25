@@ -1,6 +1,9 @@
+import { useParams } from "next/navigation";
 import Image from "next/image";
 
 export const Footer = () => {
+  const { lang } = useParams();
+
   return (
     <footer className="bg-white text-xs md:text-base font-light md:leading-relaxed ">
       {/* Decorative Lines */}
@@ -112,8 +115,8 @@ export const Footer = () => {
                 className="w-28 md:w-40"
               />
               <p className="mt-2 text-xxs md:text-xs">
-                Generously supported in part by<br /> the OCF&apos;s  Community
-                Grants Program
+                Generously supported in part by
+                <br /> the OCF&apos;s Community Grants Program
               </p>
             </div>
           </div>
@@ -156,7 +159,10 @@ export const Footer = () => {
             {/* License Information */}
             <p className="mt-2">
               Licensed under the{" "}
-              <a href="/LICENSE" className="hover:text-amber underline">
+              <a
+                href={`/${lang}/LICENSE`}
+                className="hover:text-amber underline"
+              >
                 MIT License
               </a>
               .
