@@ -40,7 +40,7 @@ const Header = () => {
         secondLine: "PLAYGROUP FINDER!",
       },
       fr: {
-        firstLine: " L'OUTILL",
+        firstLine: " L'OUTIL",
         secondLine: "INCROYABLE !",
       },
     },
