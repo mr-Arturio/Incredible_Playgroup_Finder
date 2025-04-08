@@ -28,12 +28,12 @@ const IntroductionText = () => {
               Utilisez un ou plusieurs filtres (jour, heure, âge, région, langue
               et prestataire) pour trouver le groupe de jeu idéal pour vos
               besoins. La carte interactive (nous vous recommandons de partager
-              votre emplacement) peut être utilisée pour afficher l&apos;emplacement
-              de tous les groupes de jeu qui correspondent à vos critères de
-              recherche. Vous pouvez également utiliser la carte pour rechercher
-              les groupes de jeu proposés dans un lieu spécifique. La carte
-              fournit également des indications pour vous aider à trouver votre
-              chemin.
+              votre emplacement) peut être utilisée pour afficher
+              l&apos;emplacement de tous les groupes de jeu qui correspondent à
+              vos critères de recherche. Vous pouvez également utiliser la carte
+              pour rechercher les groupes de jeu proposés dans un lieu
+              spécifique. La carte fournit également des indications pour vous
+              aider à trouver votre chemin.
             </p>
           </section>
 
@@ -62,18 +62,19 @@ const IntroductionText = () => {
               ALLER&#8239;?
             </h2>
             <p className="mb-3">
-              Les groupes de jeux ONyva s&apos;offre aux enfants un environnement
-              gratuit, amusant, stimulant et encourageant qui leur permet
-              d&apos;apprendre, de grandir et d&apos;acquérir des compétences
-              essentielles. Ces centres offrent une multitude de possibilités
-              d&apos;apprentissage par le jeu, favorisant la socialisation, la
-              créativité et le développement dans un cadre sûr et stimulant.
+              Les groupes de jeux ONyva s&apos;offre aux enfants un
+              environnement gratuit, amusant, stimulant et encourageant qui leur
+              permet d&apos;apprendre, de grandir et d&apos;acquérir des
+              compétences essentielles. Ces centres offrent une multitude de
+              possibilités d&apos;apprentissage par le jeu, favorisant la
+              socialisation, la créativité et le développement dans un cadre sûr
+              et stimulant.
             </p>
             <p>
               En outre, les parents peuvent entrer en contact avec d&apos;autres
               familles, accéder à des ressources et à un soutien précieux, et
-              apprendre de nouvelles façons d&apos;améliorer l&apos;expérience de la
-              petite enfance de leur enfant. Les centres ONyva sont une
+              apprendre de nouvelles façons d&apos;améliorer l&apos;expérience
+              de la petite enfance de leur enfant. Les centres ONyva sont une
               ressource inestimable pour les familles, car ils favorisent des
               relations parent-enfant positives et contribuent au bien-être et à
               la réussite des enfants.
@@ -201,7 +202,7 @@ const IntroductionText = () => {
             {isFullTextVisible && translations.fullText}
             <button
               onClick={toggleTextVisibility}
-              className="text-blue-500 my-2 md:my-0 md:mt-2"
+              className="text-blue-500 my-2 md:my-0 md:mt-2 hover:font-semibold transition duration-500 ease-in-out"
             >
               {isFullTextVisible
                 ? translations.showLess

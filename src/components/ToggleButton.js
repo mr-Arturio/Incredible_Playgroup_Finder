@@ -4,7 +4,7 @@ import Image from "next/image";
 const ToggleButton = ({ isToggled, onToggle, labels, className = "" }) => {
   return (
     <button
-      className={`p-1 mx-2.5 text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center mb-4 ${className}`}
+      className={`p-1 mx-2.5 text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center shadow-md hover:shadow-xl transition duration-200 ease-in-out mb-4 ${className}`}
       onClick={onToggle}
     >
       {isToggled ? (

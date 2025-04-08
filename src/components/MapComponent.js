@@ -109,9 +109,9 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
   if (!isLoaded) return <Loading />;
 
   return (
-    <div className="h-full w-full content-start mt-0 lg:ml-0 xl:pl-1">
+    <div className="w-full content-start mt-0 lg:ml-0 xl:pl-1 rounded-md overflow-hidden shadow-md h-full md:h-[80vh]">
       <GoogleMap
-        mapContainerStyle={{ width: "100%", height: "90%" }}
+        mapContainerStyle={{ width: "100%", height: "100%" }}
         center={center}
         zoom={11}
         options={{
@@ -128,13 +128,18 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
             }}
             onClick={() => handleMarkerClick(marker)}
             onMouseOver={() =>
-              setHoveredMarker(createKey(marker.lat, marker.lng, marker.Address))
+              setHoveredMarker(
+                createKey(marker.lat, marker.lng, marker.Address)
+              )
             }
             onMouseOut={() => setHoveredMarker(null)}
           >
-            {(hoveredMarker === createKey(marker.lat, marker.lng, marker.Address) ||
-              clickedMarker === createKey(marker.lat, marker.lng, marker.Address) ||
-              firstTapMarker === createKey(marker.lat, marker.lng, marker.Address)) && (
+            {(hoveredMarker ===
+              createKey(marker.lat, marker.lng, marker.Address) ||
+              clickedMarker ===
+                createKey(marker.lat, marker.lng, marker.Address) ||
+              firstTapMarker ===
+                createKey(marker.lat, marker.lng, marker.Address)) && (
               <InfoWindow
                 position={{
                   lat: parseFloat(marker.lat),
