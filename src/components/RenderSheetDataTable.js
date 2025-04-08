@@ -231,15 +231,16 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           {/* Our story link*/}
           <a
             href="https://www.parentresource.ca/ipfstory"
-            className="text-blue-500 hover:underline font-bold text-sm md:text-xl tracking-normal md:tracking-wide"
+            className="relative inline-block text-blue-500 font-bold text-sm md:text-xl tracking-normal md:tracking-wide after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full"
           >
             {translation === "fr" ? "Histoire d'OI" : "IPF Story"}
           </a>
+
           <span className="px-1 text-blue-500">|</span>
           {/* FAQ Link */}
           <a
             href="https://www.parentresource.ca/faqipf"
-            className="text-blue-500 hover:underline font-bold pr-1 md:pr-2 text-sm md:text-xl tracking-normal md:tracking-wide"
+            className="relative inline-block text-blue-500 font-bold pr-1 md:pr-2 text-sm md:text-xl tracking-normal md:tracking-wide after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full"
           >
             FAQ
           </a>
