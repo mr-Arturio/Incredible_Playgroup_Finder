@@ -109,7 +109,7 @@ function MapComponent({ sheetData, onMarkerSelect, selectedAddress }) {
   if (!isLoaded) return <Loading />;
 
   return (
-    <div className="w-full content-start mt-0 lg:ml-0 xl:pl-1 rounded-md overflow-hidden shadow-md h-full md:h-[80vh]">
+    <div className="w-full content-start mt-0 lg:ml-0 xl:pl-1 rounded-md md:rounded-t-none overflow-hidden shadow-md h-full md:h-[80vh]">
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100%" }}
         center={center}
