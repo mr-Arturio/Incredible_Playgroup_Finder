@@ -60,7 +60,7 @@ export const Footer = () => {
                   alt="Facebook"
                   width={39}
                   height={39}
-                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                  className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
                 />
               </a>
               <a
@@ -73,7 +73,7 @@ export const Footer = () => {
                   alt="Instagram"
                   width={39}
                   height={39}
-                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                  className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
                 />
               </a>
               <a
@@ -86,7 +86,7 @@ export const Footer = () => {
                   alt="LinkedIn"
                   width={39}
                   height={39}
-                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                  className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
                 />
               </a>
               <a
@@ -99,7 +99,7 @@ export const Footer = () => {
                   alt="Eventbrite"
                   width={39}
                   height={39}
-                  className="md:h-10 md:w-10 hover:scale-105 h-6 w-6"
+                  className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
                 />
               </a>
             </div>
