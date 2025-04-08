@@ -55,7 +55,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       French: translation === "fr" ? "Français" : "French",
       Mandarin: translation === "fr" ? "Mandarin" : "Mandarin",
       Arabic: translation === "fr" ? "L'arabe" : "Arabic",
-    }
+    },
   };
 
   // Reference for scrolling to today's playgroups section
@@ -305,8 +305,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         <div
           ref={todayPlaygroupsSectionRef}
           id="todayPlaygroupsSection"
-          className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
-          style={{ height: "80vh" }}
+          className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg shadow-md overflow-y-auto relative h-[80vh]"
         >
           {noDataAvailable ? (
             <NoDataText />
