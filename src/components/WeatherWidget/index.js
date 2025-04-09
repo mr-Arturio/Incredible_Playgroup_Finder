@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { format } from "date-fns";
 
-const WeatherWidget = () => {
+export default function WeatherWidget() {
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(true);
   const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
@@ -15,24 +16,17 @@ const WeatherWidget = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched weather data:", data);
-
-        // Group forecast data by date, choosing an entry near midday
+        // Group forecast data by date, picking an entry near midday
         const dailyForecast = {};
         data.list.forEach((item) => {
-          const date = new Date(item.dt * 1000).toISOString().split("T")[0];
+          const dateStr = new Date(item.dt * 1000).toISOString().split("T")[0];
           const hour = new Date(item.dt * 1000).getHours();
-          // Use a range between 11:00 and 15:00 to capture a near-noon entry
+          // Use a range between 11:00 and 15:00 for near-noon snapshot
           if (hour >= 11 && hour <= 15) {
-            dailyForecast[date] = item;
+            dailyForecast[dateStr] = item;
           }
         });
-        console.log("Daily forecast (grouped by near-noon snapshot):", dailyForecast);
-
-        // Convert to an array (today + next 7 days)
         const forecastArray = Object.values(dailyForecast).slice(0, 8);
-        console.log("Forecast array (first 8 days):", forecastArray);
-
         setForecast(forecastArray);
         setLoading(false);
       })
@@ -40,41 +34,57 @@ const WeatherWidget = () => {
         console.error("Error fetching weather data:", err);
         setLoading(false);
       });
-  }, [city, API_KEY]);
+  }, [API_KEY, city]);
 
+  // Kelvin-to-Celsius helper
   const kelvinToCelsius = (tempK) => (tempK - 273.15).toFixed(0);
 
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="flex overflow-auto bg-white border">
-      {forecast.map((day, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center justify-center p-3 m-2 border rounded shadow-sm min-w-[100px]"
-        >
-          <p className="text-xs font-medium">
-            {new Date(day.dt * 1000).toLocaleDateString(undefined, {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
-            })}
-          </p>
-          <div className="relative h-10 w-10">
-            <Image
-              src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-              alt={day.weather[0].description}
-              fill
-              sizes="(max-width: 768px) 50px, 100px"
-            />
+    <div className="flex flex-wrap gap-4 p-4 border-b bg-white">
+      {forecast.map((day, index) => {
+        const temp = kelvinToCelsius(day.main.temp);
+        const feelsLike = kelvinToCelsius(day.main.feels_like);
+        // const tempMin = kelvinToCelsius(day.main.temp_min);
+        // const tempMax = kelvinToCelsius(day.main.temp_max);
+
+        // const numericDate = format(new Date(day.dt * 1000), "dd.MM");
+        const dayOfWeek = format(new Date(day.dt * 1000), "EEE");
+
+        return (
+          <div
+            key={index}
+            className="rounded-md border-2 bg-blue-50 shadow-md w-[160px] py-1"
+          >
+            <section className="relative flex items-center px-1">
+              {/* Left Part: Weather Icon and Date */}
+              <div className="flex-1 flex flex-col items-center">
+                <div className="relative h-10 w-10">
+                  <Image
+                    src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                    alt={day.weather[0].description}
+                    fill
+                  />
+                </div>
+                <p className="text-xs">{dayOfWeek}</p>
+              </div>
+
+              {/* Vertical Divider (absolutely positioned) */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-10 w-px bg-gray-200"></div>
+
+              {/* Right Part: Temperature Info */}
+              <div className="flex-1 flex flex-col items-center">
+                <span className="text-3xl font-semibold">{temp}°</span>
+                <p className="text-xxs text-gray-600 leading-tight">
+                  Feels like {feelsLike}°
+                </p>
+
+              </div>
+            </section>
           </div>
-          <p className="text-md font-semibold">
-            {kelvinToCelsius(day.main.temp)}°C
-          </p>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
-};
-
-export default WeatherWidget;
+}

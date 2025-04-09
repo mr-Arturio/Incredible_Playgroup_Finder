@@ -278,7 +278,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           dayMapping={translations.daysOfWeek} // Pass the mapping to the FilterContainer
         />
       </div>
-      <div>
+      <div className="hidden md:flex md:flex-col">
         <WeatherWidget />
       </div>
       {/* Content Sections */}

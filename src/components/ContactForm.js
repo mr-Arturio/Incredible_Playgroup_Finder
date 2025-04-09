@@ -33,7 +33,7 @@ function ContactForm() {
       <h2 className="text-xl md:text-2xl font-bold mt-4 lg:mt-2 pl-2.5 md:pl-5">
         {translations.needHelp}
       </h2>
-      <div className="flex flex-col items-start justify-center bg-gray-100/25 md:py-4 pb-3 pt-2 pl-2.5 md:pl-5 rounded-lg">
+      <div className="flex flex-col items-start justify-center bg-gray-100/25 md:py-4 pb-3 pt-2 pl-2.5 md:pl-5 rounded-t-lg">
         <div className="text-sm md:text-lg mb-2.5 md:mb-4">{translations.title}</div>
         <button
           href="https://www.surveymonkey.com/r/IPFprc"
