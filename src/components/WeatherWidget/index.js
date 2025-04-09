@@ -42,7 +42,7 @@ export default function WeatherWidget() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-wrap gap-4 p-4 border-b bg-white">
+    <div className="flex flex-wrap gap-4 py-3 px-5 border-b bg-white">
       {forecast.map((day, index) => {
         const temp = kelvinToCelsius(day.main.temp);
         const feelsLike = kelvinToCelsius(day.main.feels_like);
@@ -55,19 +55,19 @@ export default function WeatherWidget() {
         return (
           <div
             key={index}
-            className="rounded-md border-2 bg-blue-50 shadow-md w-[160px] py-1"
+            className="rounded-md border-2 bg-blue-50 shadow-md w-[158px] py-1"
           >
             <section className="relative flex items-center px-1">
               {/* Left Part: Weather Icon and Date */}
               <div className="flex-1 flex flex-col items-center">
-                <div className="relative h-10 w-10">
+                <div className="relative h-8 w-8">
                   <Image
                     src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
                     alt={day.weather[0].description}
                     fill
                   />
                 </div>
-                <p className="text-xs">{dayOfWeek}</p>
+                <p className="text-xs/3">{dayOfWeek}</p>
               </div>
 
               {/* Vertical Divider (absolutely positioned) */}
@@ -75,7 +75,7 @@ export default function WeatherWidget() {
 
               {/* Right Part: Temperature Info */}
               <div className="flex-1 flex flex-col items-center">
-                <span className="text-3xl font-semibold">{temp}°</span>
+                <span className="text-2xl font-semibold">{temp}°</span>
                 <p className="text-xxs text-gray-600 leading-tight">
                   Feels like {feelsLike}°
                 </p>
