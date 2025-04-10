@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Tooltip from "./Tooltip";
-// import AddToCalendar from "./AddToCalendar";
+import Tooltip from "../../utils/Tooltip";
 
 function CardFooter({
   icons,
@@ -13,7 +12,11 @@ function CardFooter({
   translation,
 }) {
   return (
-    <div className={`bg-cardFooter p-3 flex justify-between items-center ${isExpanded ? 'md:mt-3' : 'mt-1'}`}>
+    <div
+      className={`bg-cardFooter p-3 flex justify-between items-center ${
+        isExpanded ? "md:mt-3" : "mt-1"
+      }`}
+    >
       <div className="flex">
         {isExpanded ? (
           <button
@@ -50,7 +53,9 @@ function CardFooter({
                 {translation === "en" ? "More Info" : "Plus d'infos"}
               </span>
               <span className="hidden md:inline-block sm:text-base text-sm ml-2">
-                {translation === "en" ? "More Information" : "Voir plus d'information"}
+                {translation === "en"
+                  ? "More Information"
+                  : "Voir plus d'information"}
               </span>
             </div>
           </button>

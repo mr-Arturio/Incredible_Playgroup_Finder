@@ -5,6 +5,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { FiDroplet } from "react-icons/fi";
 import { MdAir } from "react-icons/md";
+import Tooltip from "@/utils/Tooltip";
 
 export default function WeatherWidget() {
   const [forecast, setForecast] = useState([]);
@@ -43,7 +44,7 @@ export default function WeatherWidget() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="flex gap-4 py-3 px-5 border-b bg-white">
+    <div className="flex justify-center gap-4 xl:gap-10 py-2 px-5 border-b bg-cardBody shadow">
       {forecast.map((day, index) => {
         const temp = kelvinToCelsius(day.main.temp);
         const feelsLike = kelvinToCelsius(day.main.feels_like);
@@ -59,7 +60,7 @@ export default function WeatherWidget() {
           return (
             <div
               key={index}
-              className="rounded-md border border-blue-200 bg-cardFooter shadow-md px-1 max-w-xs w-full flex items-center space-x-4"
+              className="rounded-md border border-blue-200 bg-cardFooter shadow-md px-1 xl:px-2 max-w-xs w-full flex items-center space-x-4"
             >
               {/* Left Section: Weather Icon and Day Label */}
               <div className="flex-1 flex flex-col items-center">
@@ -88,13 +89,17 @@ export default function WeatherWidget() {
               <div className="flex flex-1 items-center justify-start gap-4">
                 {/* Humidity */}
                 <div className="flex flex-col items-center text-gray-700">
-                  <FiDroplet className="h-5 w-5 pt-1" />
+                  <Tooltip text="Humidity">
+                    <FiDroplet className="h-5 w-5 pt-1" />
+                  </Tooltip>
                   <span className="text-xs pt-1">{humidity}%</span>
                 </div>
 
                 {/* Wind */}
                 <div className="flex flex-col items-center text-gray-700">
-                  <MdAir className="h-5 w-5 pt-1" />
+                  <Tooltip text="Wind speed (km/h)">
+                    <MdAir className="h-5 w-5 pt-1" />
+                  </Tooltip>
                   <span className="text-xs pt-1">{wind}</span>
                 </div>
 
@@ -102,11 +107,11 @@ export default function WeatherWidget() {
                 <div className="flex flex-col items-center text-gray-700 pr-1">
                   <div className="flex items-center gap-1">
                     <span className="text-blue-600">↓</span>
-                    <span className="text-sm">{tempMin}°</span>
+                    <span className="text-xs">{tempMin}°</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <span className="text-red-600">↑</span>
-                    <span className="text-sm">{tempMax}°</span>
+                    <span className="text-xs">{tempMax}°</span>
                   </div>
                 </div>
               </div>
@@ -117,7 +122,7 @@ export default function WeatherWidget() {
           return (
             <div
               key={index}
-              className="rounded-md border border-blue-200 bg-cardFooter shadow-md w-[158px] py-1"
+              className="rounded-md border border-blue-200 bg-cardFooter shadow-md w-[158px]  xl:w-[240px] py-1"
             >
               <section className="relative flex items-center px-1">
                 <div className="flex-1 flex flex-col items-center">
