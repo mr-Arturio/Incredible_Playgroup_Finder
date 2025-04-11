@@ -9,6 +9,7 @@ import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
+import WeatherWidget from "./WeatherWidget";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -277,6 +278,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           dayMapping={translations.daysOfWeek} // Pass the mapping to the FilterContainer
         />
       </div>
+      {/* <div className="hidden md:flex md:flex-col">
+        <WeatherWidget />
+      </div> */}
       {/* Content Sections */}
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
         {/* Map Section */}
@@ -306,7 +310,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         <div
           ref={todayPlaygroupsSectionRef}
           id="todayPlaygroupsSection"
-          className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg shadow-md overflow-y-auto relative h-[80vh]"
+          className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg md:rounded-b-lg md:rounded-t-none shadow-md overflow-y-auto relative h-[80vh]"
         >
           {noDataAvailable ? (
             <NoDataText />

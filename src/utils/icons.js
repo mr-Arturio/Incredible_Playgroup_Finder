@@ -54,7 +54,6 @@ const getIcons = (
     src: "scale.svg",
     tooltip: translation === "fr" ? "Pèse-bébé" : "Baby Scale",
   },
-  // Assuming Language should always be shown; adjust if needed
   language: {
     show: true,
     src: languageIconMap[Language] || "english_french.svg",
@@ -64,17 +63,17 @@ const getIcons = (
 
 const getSocialIcons = (FB, Insta, Eventbrite) => ({
   fb: {
-    show: (FB || "").trim() !== "", // Show icon if FB is not empty
+    show: (FB || "").trim() !== "",
     src: "facebook_color.svg",
     url: (FB || "").trim(),
   },
   insta: {
-    show: (Insta || "").trim() !== "", // Show icon if Insta is not empty
+    show: (Insta || "").trim() !== "",
     src: "instagram_color.svg",
     url: (Insta || "").trim(),
   },
   eventbrite: {
-    show: (Eventbrite || "").trim() !== "", // Show icon if Eventbrite is not empty
+    show: (Eventbrite || "").trim() !== "",
     src: "eventbrite_color.svg",
     url: (Eventbrite || "").trim(),
   },

@@ -27,7 +27,7 @@ const FilterContainer = ({
   );
 
   return (
-    <div className="flex flex-col py-3 px-5 space-y-1 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg shadow mb-4 lg:mb-6 w-full">
+    <div className="flex flex-col py-3 px-5 space-y-1 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg md:rounded-t-lg md:rounded-b-none shadow mb-4 lg:mb-0 w-full border-b">
       <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-4">
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">

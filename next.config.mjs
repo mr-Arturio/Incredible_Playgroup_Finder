@@ -13,6 +13,10 @@ const nextConfig = {
         port: "", // leave empty for default port
         pathname: "/media/**", // this allows all images under the /media/ path
       },
+      {
+        protocol: "https",
+        hostname: "openweathermap.org",
+      },
     ],
   },
   async headers() {
