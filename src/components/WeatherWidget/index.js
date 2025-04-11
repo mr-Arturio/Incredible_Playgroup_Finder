@@ -62,7 +62,7 @@ export default function WeatherWidget() {
               key={index}
               className="rounded-md border border-blue-200 bg-cardFooter shadow-md px-1 xl:px-2 max-w-xs w-full flex items-center space-x-4"
             >
-              {/* Left Section: Weather Icon and Day Label */}
+              {/* Left Section */}
               <div className="flex-1 flex flex-col items-center">
                 <div className="relative h-8 w-8">
                   <Image
@@ -136,7 +136,7 @@ export default function WeatherWidget() {
                   <p className="text-xs/3">{dayLabel}</p>
                 </div>
                 {/* Divider */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 h-10 w-px bg-gray-200"></div>
+                <div className="md:hidden lg:flex absolute left-1/2 transform -translate-x-1/2 h-10 w-px bg-gray-200"></div>
                 <div className="flex-1 flex flex-col items-center">
                   <span className="text-2xl font-semibold">{temp}°</span>
                   <p className="text-xxs text-gray-600 leading-tight">
