@@ -24,7 +24,7 @@ const RootLayout = ({ children }) => {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        {/* Google site veriffication */}
+        {/* Google site verification */}
         <meta
           name="google-site-verification"
           content="OMxCt92tQbDrp46CJaNuTYUDUAPnQYyuXpPNkVrHk4U"
@@ -44,6 +44,14 @@ const RootLayout = ({ children }) => {
           content="https://www.incredibleplaygroupfinder.ca/"
         />
         <meta property="og:type" content="website" />
+        <meta name="apple-mobile-web-app-title" content="IPF" />
+
+        {/* PWA Integration */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body className={inter.className}>
         <LanguageProvider>
