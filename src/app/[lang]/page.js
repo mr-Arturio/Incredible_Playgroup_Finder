@@ -17,15 +17,10 @@ function Home() {
   const { lang } = useParams();
 
   useEffect(() => {
-    console.log("Home component - URL lang:", lang);
-    console.log("Home component - Current translation:", translation);
-
     // Only update translation if it doesn't match the URL
     if (lang === "fr" && translation !== "fr") {
-      console.log("Switching to French");
       toggleTranslation("fr");
     } else if (!lang && translation !== "en") {
-      console.log("Switching to English");
       toggleTranslation("en");
     }
   }, [lang]); // Remove unnecessary dependencies to avoid re-triggering
