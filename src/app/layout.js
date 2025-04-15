@@ -4,6 +4,7 @@ import "./fonts.css";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "../context/LanguageContext";
 import HotjarTracking from "../utils/HotjarTracking";
+import SWRegistration from "../components/SWRegistration"
 
 // Initialize the font
 const inter = Inter({ subsets: ["latin"] });
@@ -54,6 +55,7 @@ const RootLayout = ({ children }) => {
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body className={inter.className}>
+      <SWRegistration />
         <LanguageProvider>
           {children}
           <Analytics />

@@ -1,21 +1,31 @@
 {
   "name": "The Incredible Playgroup Finder",
   "short_name": "IPF",
+  "start_url": "/en/",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "screenshots": [
+    {
+      "src": "demo/MobileView2.png",
+      "sizes": "414x736",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
 }

@@ -1,3 +1,10 @@
+import nextPWA from "next-pwa";
+
+const withPWA = nextPWA({
+  dest: "public",
+
+});
+
 const nextConfig = {
   async rewrites() {
     return [
@@ -63,4 +70,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);
