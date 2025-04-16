@@ -4,7 +4,8 @@ import "./fonts.css";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "../context/LanguageContext";
 import HotjarTracking from "../utils/HotjarTracking";
-import SWRegistration from "../components/SWRegistration"
+import SWRegistration from "../components/SWRegistration";
+import InstallButton from "../components/InstallButton";
 
 // Initialize the font
 const inter = Inter({ subsets: ["latin"] });
@@ -18,6 +19,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <head>
+        {/* Preload font */}
         <link
           rel="preload"
           href="/fonts/lazyDog.ttf"
@@ -25,6 +27,8 @@ const RootLayout = ({ children }) => {
           type="font/ttf"
           crossOrigin="anonymous"
         />
+        {/* Preload background image */}
+        <link rel="preload" as="image" href="/Background1.svg" />
         {/* Google site verification */}
         <meta
           name="google-site-verification"
@@ -55,7 +59,8 @@ const RootLayout = ({ children }) => {
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body className={inter.className}>
-      <SWRegistration />
+        <SWRegistration />
+        <InstallButton />
         <LanguageProvider>
           {children}
           <Analytics />
