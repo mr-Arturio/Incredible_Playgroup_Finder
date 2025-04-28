@@ -25,14 +25,15 @@ const NavBar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src={icon}
-              alt="Logo"
-              width={100}
-              height={100}
-              className="h-14 lg:h-16 xl:h-20 w-auto"
-              unoptimized
-            />
+            <div className="relative h-14 w-24 lg:h-16 lg:w-28 xl:h-20 xl:w-36">
+              <Image
+                src={icon}
+                alt="Logo"
+                fill
+                style={{ objectFit: "contain" }}
+                unoptimized
+              />
+            </div>
           </a>
         </div>
         {/* Hamburger Icon for Mobile */}

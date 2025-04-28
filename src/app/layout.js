@@ -17,6 +17,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <head>
+        {/* Preload font */}
         <link
           rel="preload"
           href="/fonts/lazyDog.ttf"
@@ -24,7 +25,9 @@ const RootLayout = ({ children }) => {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        {/* Google site veriffication */}
+        {/* Preload background image */}
+        <link rel="preload" as="image" href="/Background1.svg" />
+        {/* Google site verification */}
         <meta
           name="google-site-verification"
           content="OMxCt92tQbDrp46CJaNuTYUDUAPnQYyuXpPNkVrHk4U"
