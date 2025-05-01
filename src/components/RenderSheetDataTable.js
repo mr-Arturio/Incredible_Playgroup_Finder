@@ -228,6 +228,11 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           onShowToday={showTodayPlaygroups}
           translation={translation}
         />
+        <a href="https://www.parentresource.ca/ipfstory">
+          <p className="hidden md:flex font-bold text-5xl text-introText cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)]">
+            IPD WORKSHOP
+          </p>
+        </a>
         <div>
           {/* Our story link*/}
           <a
