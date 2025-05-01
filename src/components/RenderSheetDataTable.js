@@ -10,6 +10,7 @@ import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 import WeatherWidget from "./WeatherWidget";
+import Tooltip from "./../utils/Tooltip";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -228,11 +229,21 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           onShowToday={showTodayPlaygroups}
           translation={translation}
         />
-        <a href="https://www.parentresource.ca/ipfstory">
-          <p className="hidden md:flex font-bold text-5xl text-introText cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)]">
-            IPD WORKSHOP
-          </p>
-        </a>
+        {/* Highlight text/promo */}
+        <Tooltip
+          text="Incredible Playgroup Data Workshop – learn more about the project"
+          className="bg-gray-100/25 text-sm font-sans -right-14 border border-gray-300 shadow-md"
+        >
+          <a
+            href="https://www.parentresource.ca/ipfstory"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p className="hidden md:flex font-bold text-4xl text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105">
+              IPD WORKSHOP
+            </p>
+          </a>
+        </Tooltip>
         <div>
           {/* Our story link*/}
           <a
