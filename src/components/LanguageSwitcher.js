@@ -11,7 +11,7 @@ const LanguageSwitcher = () => {
 
   useEffect(() => {
     setClientLanguage(translation);
-    console.log("Language updated in useEffect:", translation);
+    // console.log("Language updated in useEffect:", translation);
   }, [translation]);
 
   const handleLanguageChange = (lang) => {
