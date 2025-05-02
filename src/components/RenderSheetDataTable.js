@@ -10,6 +10,7 @@ import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 import WeatherWidget from "./WeatherWidget";
+import Tooltip from "./../utils/Tooltip";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -111,7 +112,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
-    console.log("Today (en-CA):", today);
 
     setFilterCriteria({ ...filterCriteria, date: today });
     setSelectedAddress(null); // Optionally reset selected address
@@ -228,6 +228,21 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           onShowToday={showTodayPlaygroups}
           translation={translation}
         />
+        {/* Highlight text/promo */}
+        <Tooltip
+          text="Individualized Education Plans Workshop"
+          className="bg-gray-100/25 text-sm font-sans border border-gray-300 shadow-md hidden md:flex"
+        >
+          <a
+            href="https://www.eventbrite.ca/e/individualized-education-plans-tickets-1308536139819?aff=oddtdtcreator"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p className="hidden md:flex font-bold text-2xl text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105">
+              IEP Workshop - May 10
+            </p>
+          </a>
+        </Tooltip>
         <div>
           {/* Our story link*/}
           <a
