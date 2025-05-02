@@ -7,7 +7,10 @@ const PromoLink = ({
   linkClassName = "hidden md:flex font-bold text-2xl text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105",
 }) => {
   const handleClick = () => {
-    track("iep_workshop_click", { label: "IEP Workshop – May 10" });
+    track("iep_workshop_click", {
+      label: "IEP Workshop – May 10",
+      device: isMobile ? "mobile" : "desktop",
+    });
   };
 
   return (
