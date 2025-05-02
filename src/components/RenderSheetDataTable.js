@@ -65,7 +65,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   // State declarations
   const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
-  const [selectedAddress, setSelectedAddress] = useState(null); // Tracks the selected address from map markers
   const [filterCriteria, setFilterCriteria] = useState({
     // Stores the current filter settings
     date: "",
@@ -75,6 +74,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     organizer: "",
     age: "",
     time: "",
+    address: "",
   });
   // State to control filter container visibility
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -90,13 +90,14 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   };
 
   const handleMarkerSelect = (Address) => {
-    setSelectedAddress(Address); // Set the address when a map marker is selected
-    setIsFilterActive(true); // Mark filter as active when a marker is selected
+    setFilterCriteria((prev) => ({
+      ...prev,
+      address: prev.address === Address ? "" : Address,
+    }));
   };
 
   // Reset all filters to default states, including clearing selected markers
   const resetFilters = () => {
-    setSelectedAddress(null);
     setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
       date: "",
@@ -106,6 +107,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       organizer: "",
       age: "",
       time: "",
+      address: "",
     });
     setIsFilterActive(false); // Reset filter state
   };
@@ -113,8 +115,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
 
-    setFilterCriteria({ ...filterCriteria, date: today });
-    setSelectedAddress(null); // Optionally reset selected address
+    setFilterCriteria({ ...filterCriteria, date: today, address: "" });
     if (todayPlaygroupsSectionRef.current) {
       todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -123,19 +124,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const getFilteredData = () => {
     if (isLoading) return [];
 
-    let filtered = applyFilters(
-      sheetData,
-      filterCriteria,
-      selectedAddress,
-      translation
-    );
-
-    //logic for the map - selected pin will be the only one shown in map
-    if (selectedAddress) {
-      filtered = filtered.filter(
-        (playgroup) => playgroup.Address === selectedAddress
-      );
-    }
+    let filtered = applyFilters(sheetData, filterCriteria, translation);
 
     filtered = filtered.map((playgroup) => {
       let eventDate = playgroup.eventDate
@@ -156,7 +145,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const filteredData = useMemo(() => {
     const data = getFilteredData();
     return data;
-  }, [sheetData, filterCriteria, selectedAddress, isLoading]);
+  }, [sheetData, filterCriteria, isLoading]);
 
   const noDataAvailable = filteredData.length === 0;
 
@@ -171,12 +160,11 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       setStartDate(null); // Reset the date picker to today's date
     } else {
       // Deselect marker when the name filter changes or when the area filter changes
-      if (key === "organizer" || key === "area") {
-        setSelectedAddress(null);
-      }
       setFilterCriteria((prevCriteria) => ({
         ...prevCriteria,
         [key]: value,
+        // if you change area or organizer, also clear the address-pin
+        ...(key === "area" || key === "organizer" ? { address: "" } : {}),
       }));
     }
   };
@@ -317,7 +305,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         >
           <MapComponent
             sheetData={filteredData}
-            selectedAddress={selectedAddress}
             onMarkerSelect={handleMarkerSelect}
           />
         </div>
@@ -331,21 +318,13 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
             <NoDataText />
           ) : (
             <>
-              {filteredData
-                .filter((playgroup) => {
-                  return (
-                    selectedAddress === null ||
-                    playgroup.Address === selectedAddress
-                  );
-                })
-                .slice(0, visibleCards)
-                .map((playgroup) => (
-                  <PlaygroupCard
-                    key={playgroup.ID}
-                    playgroup={playgroup}
-                    translation={translation}
-                  />
-                ))}
+              {filteredData.slice(0, visibleCards).map((playgroup) => (
+                <PlaygroupCard
+                  key={playgroup.ID}
+                  playgroup={playgroup}
+                  translation={translation}
+                />
+              ))}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
                 <div className="flex justify-center mb-1 md:mb-2">
