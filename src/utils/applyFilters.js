@@ -1,6 +1,6 @@
 import { translationMappings } from "../utils/translationMappings";
 
-const applyFilters = (data, criteria, selectedAddress, translation) => {
+const applyFilters = (data, criteria, translation) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to start of the day in local time
@@ -21,6 +21,7 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
       age: translateCriteria(criteria.age, "age"),
       time: translateCriteria(criteria.time, "time"),
       date: criteria.date,
+      address: criteria.address,
     };
 
     const parseDate = (dateString) => {
@@ -79,9 +80,12 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
 
     return data
       .filter((item) => {
+        if (criteria.address && item.Address !== criteria.address) {
+          return false;
+        }
+
         const itemDate = parseDate(item.eventDate);
         let isUpcomingEvent = false;
-
         if (itemDate) {
           isUpcomingEvent = itemDate >= today;
         } else if (!item.eventDate && !item.Day) {
@@ -93,7 +97,6 @@ const applyFilters = (data, criteria, selectedAddress, translation) => {
         const noOtherCriteria = Object.values(translatedCriteria).every(
           (val) => val === ""
         );
-        if (noOtherCriteria && selectedAddress === item.Address) return true;
 
         if (translatedCriteria.area && item.Area !== translatedCriteria.area)
           return false;

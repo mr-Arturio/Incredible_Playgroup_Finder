@@ -99,7 +99,9 @@ const FilterContainer = ({
         <div className="lg:flex hidden justify-between">
           <ActiveFilters
             filterCriteria={filterCriteria}
-            handleFilterChange={handleFilterChange}
+            handleFilterChange={(key, val) =>
+              setFilterCriteria((prev) => ({ ...prev, [key]: val }))
+            }
             translation={translation}
           />
         </div>
@@ -140,7 +142,9 @@ const FilterContainer = ({
       <div className="lg:hidden flex justify-between">
         <ActiveFilters
           filterCriteria={filterCriteria}
-          handleFilterChange={handleFilterChange}
+          handleFilterChange={(key, val) =>
+            setFilterCriteria((prev) => ({ ...prev, [key]: val }))
+          }
           translation={translation}
         />
       </div>

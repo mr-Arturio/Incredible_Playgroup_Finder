@@ -60,8 +60,11 @@ This project leverages the following technologies:
     "@react-google-maps/api": "^2.19.3",
     "@vercel/analytics": "^1.3.1",
     "add-to-calendar-button-react": "^2.6.16",
+    "date-fns": "^4.1.0",
     "googleapis": "^133.0.0",
     "next": "14.1.0",
+    "next-i18next": "^15.3.0",
+    "next-sitemap": "^4.2.3",
     "react": "^18",
     "react-confetti": "^6.1.0",
     "react-datepicker": "^6.6.0",
@@ -88,13 +91,17 @@ This project leverages the following technologies:
 │   ├── docs                    # Contains the work log and related screenshots.
 │   │   ├── SpreadSheetScript.md # Contains a copy of a script for the Spreadsheet with explanation
 │   │   └── BackUpScript.md     # Contains a script to back up spreadsheet to Google Drive Folder
-│   └── fonts                   # Contains the Lazy Dog font file used in the project.
+│   ├── fonts                   # Contains the Lazy Dog font file used in the project.
+│   ├── sitemap.xml             # Search engines index the website
+│   └── sw.js                   # Service worker script.
 │
 ├── src
 │   ├── actions
 │   │   └── getSheetData.js     # Fetches and caches Google Sheets data, transforming it into objects
 │   │
 │   ├── app
+│   │   ├── lang
+│   │   │   └── page.js         # Language-specific homepage component, which dynamically adjusts content based on the URL language
 │   │   ├── LICENSE
 │   │   │   └── page.js         # MIT License file
 │   │   ├── favicon.ico         # Favicon for the app
@@ -123,9 +130,12 @@ This project leverages the following technologies:
 │   │   │   ├── CardDetails.js
 │   │   │   ├── CardFooter.js
 │   │   │   ├── CardHeader.js
-│   │   │   ├── PlaygroupCard.js
-│   │   │   └── Tooltip.js
+│   │   │   └── PlaygroupCard.js
 │   │   │
+│   │   ├── WeatherWidget
+│   │   │   └── index.js         # Display weather for 5 days (not in use) 
+│   │   │
+│   │   ├── Background.js        # Background image file
 │   │   ├── ContactForm.js       # Handles the contact form functionality
 │   │   ├── Footer.js            # Contains the footer layout and content
 │   │   ├── IntroductionText.js  # Displays the introductory text on the homepage
@@ -149,14 +159,16 @@ This project leverages the following technologies:
 │       ├── HotjarTracking.js    # Hotjar Tracking Code for IPF
 │       ├── icons.js             # Utility for managing icons for PlaygroupCards footer
 │       ├── RandomImage.js       # Utility for selecting random images ffor header
+│       ├── Tooltip.js           # Displays a tooltip with custom text when the user hovers
 │       ├── transformDataToObjects.js # Transforms sheet data into objects
 │       ├── translationMapping.js # Manages translation mappings for filters
 │       └── TTLCache.js          # Utility for handling time-to-live caching
-│   
+│
 ├── .env.local.sample        # Sample environment file for local development
 ├── .gitignore               # Git ignore file, specifying files and directories to be excluded from version control.
 ├── LICENSE                  # MIT license
-├── next.config.mjs           # Next.js configuration file, contains settings and customization options for the Next.js framework.
+├── next-sitemap.config.js         
+├── next.config.mjs          # Next.js configuration file, contains settings and customization options for the Next.js framework.
 ├── package.json             # Package manager configuration file
 ├── README.md                # Readme file
 ├── server.js                # Custom server file for Next.js, manages server-side operations and configurations beyond the default Next.js server.
