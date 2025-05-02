@@ -22,7 +22,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     hide: translation === "fr" ? "Masquer la Carte" : "Hide Map",
     show: translation === "fr" ? "Afficher la Carte" : "Show Map",
     showLess: translation === "fr" ? "Afficher moins" : "Show Less",
-    showMore: translation === "fr" ? "Afficher plus" : "Show More",
+    showMore: translation === "fr" ? "Afficher 12 de Plus" : "Show 12 More",
     daysOfWeek: {
       Mon: translation === "fr" ? "Lundi" : "Monday",
       Tue: translation === "fr" ? "Mardi" : "Tuesday",
