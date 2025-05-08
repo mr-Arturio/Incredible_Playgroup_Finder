@@ -17,6 +17,9 @@ function Home() {
   const { lang } = useParams();
 
   useEffect(() => {
+    // console.log("Home component - URL lang:", lang);
+    // console.log("Home component - Current translation:", translation);
+
     // Only update translation if it doesn't match the URL
     if (lang === "fr" && translation !== "fr") {
       toggleTranslation("fr");

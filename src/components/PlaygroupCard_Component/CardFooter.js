@@ -89,6 +89,7 @@ function CardFooter({
               <Tooltip
                 key={key}
                 text={tooltip === iconTooltip ? iconTooltip : ""}
+                className="bg-black text-white text-xs rounded-md -right-1 px-1.5 py-1 absolute bottom-full mb-1.5 -ml-5 z-50 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200"
               >
                 <div
                   onMouseEnter={() => setTooltip(iconTooltip)}

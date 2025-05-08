@@ -25,7 +25,7 @@ const NavBar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div className="relative h-14 w-24 lg:h-16 lg:w-24 xl:h-20 xl:w-36">
+            <div className="relative h-14 w-24 lg:h-16 lg:w-28 xl:h-20 xl:w-36">
               <Image
                 src={icon}
                 alt="Logo"

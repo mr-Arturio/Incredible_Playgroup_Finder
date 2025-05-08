@@ -1,6 +1,8 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
+import PromoLink from "./PromoLink";
 
 const IntroductionText = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
@@ -200,14 +202,21 @@ const IntroductionText = () => {
           <div>{translations.shortText}</div>
           <div>
             {isFullTextVisible && translations.fullText}
-            <button
-              onClick={toggleTextVisibility}
-              className="text-blue-500 my-2 md:my-0 md:mt-2 hover:font-semibold transition duration-500 ease-in-out"
-            >
-              {isFullTextVisible
-                ? translations.showLess
-                : translations.showMore}
-            </button>
+            <div className="flex items-center justify-between flex-wrap gap-y-2 mt-2">
+              <button
+                onClick={toggleTextVisibility}
+                className="text-blue-500 hover:font-semibold transition duration-500 ease-in-out"
+              >
+                {isFullTextVisible
+                  ? translations.showLess
+                  : translations.showMore}
+              </button>
+              {/* Highlight text/promo */}
+              <PromoLink
+                tooltipClassName="hidden"
+                linkClassName="md:hidden flex font-bold text-lg sm:text-xl text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105"
+              />
+            </div>
           </div>
         </div>
       </div>
