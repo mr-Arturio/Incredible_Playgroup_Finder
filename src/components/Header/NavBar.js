@@ -4,6 +4,7 @@ import Image from "next/image"; // Import the Image component
 import { FiMenu, FiX } from "react-icons/fi";
 import HamburgerMenu from "./HamburgerMenu";
 import { useLanguage } from "../../context/LanguageContext";
+import InstallButton from "../InstallButton";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white shadow-lg relative">
       <div className="container mx-auto 2xl:px-16 flex justify-between items-center py-2 sm:py-2.5 px-7 sm:px-4 lg:px-2.5 ">
         {/* Logo Section */}
         <div className="flex items-center">
@@ -35,6 +36,10 @@ const NavBar = () => {
               />
             </div>
           </a>
+        </div>
+        {/* Install App button */}
+        <div className="absolute inset-y-0 left-1/2 transform -translate-x-1/2 md:hidden flex items-center z-10">
+          <InstallButton />
         </div>
         {/* Hamburger Icon for Mobile */}
         <div className="md:hidden flex items-center">

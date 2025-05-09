@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "../context/LanguageContext";
 import HotjarTracking from "../utils/HotjarTracking";
 import SWRegistration from "../components/SWRegistration";
-import InstallButton from "../components/InstallButton";
 
 // Initialize the font
 const inter = Inter({ subsets: ["latin"] });
@@ -60,7 +59,6 @@ const RootLayout = ({ children }) => {
       </head>
       <body className={inter.className}>
         <SWRegistration />
-        <InstallButton />
         <LanguageProvider>
           {children}
           <Analytics />

@@ -2,19 +2,28 @@
 import { useEffect, useState } from "react";
 
 export default function InstallButton() {
-  // This state will store the deferred prompt event.
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  // Toggle the visibility of the install button.
   const [isVisible, setIsVisible] = useState(false);
 
+  // Platform checks - Android & Windows for now...
+  const isAndroid =
+    typeof window !== "undefined" &&
+    /android/i.test(window.navigator.userAgent);
+  const isWindows =
+    typeof window !== "undefined" &&
+    /windows/i.test(window.navigator.userAgent);
+
+  // Only proceed if on Android or Windows
+  const isSupported = isAndroid || isWindows;
+
   useEffect(() => {
-    // Listen for the beforeinstallprompt event.
+    if (!isSupported) return;
+
     const handler = (event) => {
-      // Prevent the mini-infobar from appearing on mobile.
+      // Prevent the mini-infobar from appearing
       event.preventDefault();
-      // Save the event for later use.
+      // Save the event for later and show our button
       setDeferredPrompt(event);
-      // Show install button.
       setIsVisible(true);
     };
 
@@ -23,34 +32,31 @@ export default function InstallButton() {
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
     };
-  }, []);
+  }, [isSupported]);
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
-    // Show the install prompt.
     deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt.
-    const choiceResult = await deferredPrompt.userChoice;
-    if (choiceResult.outcome === "accepted") {
-      console.log("User accepted the install prompt");
-    } else {
-      console.log("User dismissed the install prompt");
-    }
-    // Reset the deferred prompt variable; do not show the button anymore.
+    const choice = await deferredPrompt.userChoice;
+    console.log(
+      choice.outcome === "accepted"
+        ? "User accepted install"
+        : "User dismissed install"
+    );
     setDeferredPrompt(null);
     setIsVisible(false);
   };
 
-  if (!isVisible) {
-    return null;
-  }
+  // Only render for Android/Windows and once the prompt is available
+  if (!isSupported || !isVisible) return null;
 
   return (
     <button
+      aria-label="Add this app to your home screen"
       onClick={handleInstallClick}
-      className="px-4 py-2 bg-blue-500 text-white rounded-md"
+      className="px-4 py-2 text-xs text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center shadow-md hover:shadow-xl transition duration-200 ease-in-out"
     >
-      Add to Home Screen
+      Install App
     </button>
   );
 }
