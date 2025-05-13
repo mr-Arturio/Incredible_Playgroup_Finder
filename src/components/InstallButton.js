@@ -54,7 +54,7 @@ export default function InstallButton() {
     <button
       aria-label="Add this app to your home screen"
       onClick={handleInstallClick}
-      className="px-4 py-2 text-xs text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center shadow-md hover:shadow-xl transition duration-200 ease-in-out"
+      className="px-2 py-1 text-xs text-white bg-mainBlue hover:bg-hoverBlue rounded-lg flex items-center justify-center shadow-md hover:shadow-xl transition duration-200 ease-in-out"
     >
       Install App
     </button>

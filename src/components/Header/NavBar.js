@@ -38,7 +38,7 @@ const NavBar = () => {
           </a>
         </div>
         {/* Install App button */}
-        <div className="absolute inset-y-0 left-1/2 transform -translate-x-1/2 md:hidden flex items-center z-10">
+        <div className="absolute inset-y-0 left-1/2 transform -translate-x-1/2 +translate-x-1 md:hidden flex items-center z-10">
           <InstallButton />
         </div>
         {/* Hamburger Icon for Mobile */}
