@@ -212,10 +212,10 @@ const IntroductionText = () => {
                   : translations.showMore}
               </button>
               {/* Highlight text/promo */}
-              <PromoLink
+              {/* <PromoLink
                 tooltipClassName="hidden"
                 linkClassName="md:hidden flex font-bold text-lg sm:text-xl text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105"
-              />
+              /> */}
             </div>
           </div>
         </div>

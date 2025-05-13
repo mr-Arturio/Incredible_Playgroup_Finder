@@ -219,7 +219,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           translation={translation}
         />
         {/* Highlight text/promo */}
-        <PromoLink />
+        {/* <PromoLink /> */}
         <div>
           {/* Our story link*/}
           <a
