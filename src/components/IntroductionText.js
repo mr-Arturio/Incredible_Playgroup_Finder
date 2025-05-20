@@ -202,7 +202,7 @@ const IntroductionText = () => {
           <div>{translations.shortText}</div>
           <div>
             {isFullTextVisible && translations.fullText}
-            <div className="flex items-center justify-between flex-wrap gap-y-2 mt-2">
+            <div className="flex items-center justify-between flex-wrap gap-y-2 mt-2 pb-1">
               <button
                 onClick={toggleTextVisibility}
                 className="text-blue-500 hover:font-semibold transition duration-500 ease-in-out"
@@ -212,10 +212,11 @@ const IntroductionText = () => {
                   : translations.showMore}
               </button>
               {/* Highlight text/promo */}
-              {/* <PromoLink
+              <PromoLink
                 tooltipClassName="hidden"
-                linkClassName="md:hidden flex font-bold text-lg sm:text-xl text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105"
-              /> */}
+                mobileTextClassName="md:hidden flex font-bold text-md sm:text-lg text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105"
+                imageClassName = "hidden"
+                />
             </div>
           </div>
         </div>
