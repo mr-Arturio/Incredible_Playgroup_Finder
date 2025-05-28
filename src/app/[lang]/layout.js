@@ -12,7 +12,10 @@ const inter = Inter({ subsets: ["latin"] });
 export default function LangLayout({ children, params }) {
   const { lang } = params;
 
-  const canonicalUrl = `https://www.incredibleplaygroupfinder.ca/${lang}`;
+  const canonicalUrl =
+    lang === "en"
+      ? "https://www.incredibleplaygroupfinder.ca/"
+      : `https://www.incredibleplaygroupfinder.ca/${lang}`;
 
   return (
     <html lang={lang}>
