@@ -9,26 +9,28 @@ const PromoLink = ({
   mobileTextClassName = "md:hidden flex font-bold text-md sm:text-lg text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105 text-wrap",
 }) => {
   const handleClick = () => {
-    track("workshop_click", { label: "PRC Workshop – Jun 4" });
+    track("Countdown to Kindergarten", { label: "PRC Virtual Workshop - July 16" });
   };
+
+  const eventUrl = "https://www.eventbrite.ca/e/countdown-to-kindergarten-tickets-1405819998459?aff=oddtdtcreator";
 
   return (
     <>
       {/* Desktop */}
       {imageClassName !== "hidden" && (
         <Tooltip
-          text="June 4, 6:00pm. By Ottawa Parent Resource Centre."
+          text="July 16, 6:00pm. By Ottawa Parent Resource Centre."
           className={tooltipClassName}
         >
           <a
-            href="https://www.eventbrite.ca/e/navigating-your-child-care-options-tickets-1353456818779?aff=oddtdtcreator"
+            href={eventUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClick}
           >
             <img
-              src="/child_care.png"
-              alt="IEP Workshop Banner"
+              src="/Countdown_to_Kindergarten.png"
+              alt="Countdown to Kindergarten Workshop Banner"
               className={imageClassName}
             />
           </a>
@@ -38,17 +40,17 @@ const PromoLink = ({
       {/* Mobile */}
       {mobileTextClassName !== "hidden" && (
         <Tooltip
-        text="PRC Virtual Workshop - June 4"
+        text="PRC Virtual Workshop - July 16"
         className={mobileTooltipClassName}
         >
           <a
-            href="https://www.eventbrite.ca/e/navigating-your-child-care-options-tickets-1353456818779?aff=oddtdtcreator"
+            href={eventUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClick}
             className={mobileTextClassName}
           >
-            Navigating Your Child Care Options
+            Countdown to Kindergarten
           </a>
         </Tooltip>
       )}
