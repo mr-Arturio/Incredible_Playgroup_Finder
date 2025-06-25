@@ -10,6 +10,17 @@ This script automates the process of populating weekly event occurrences from a 
 - Skips unnecessary columns like "ID" and "Repeats" while updating the event dates.
 - Automatically generates row IDs and sorts the data by the "Organizer" column in alphabetical order.
 
+2025-06-25 Update
+Changes implemented:
+1. "Never" Support
+- Rows with `Repeats = "Never"` are now skipped and not copied to the `MainSheet`, allowing you to keep hidden or draft events in the `WorkSheet`.
+2. Smart Start Date for Weekly Events
+- If `Repeats = "Weekly"`:
+   - And `eventDate` is empty → the script starts generating dates from today.
+   - If `eventDate` is provided and matches the specified `Day`, it starts repeating from that specific eventDate.
+   - If `eventDate` is present but does not match the `cd..Day`, the row is skipped and logged as an error.
+
+
 ```JavaScript
 function populateWeeklyEvents() {
   try {
@@ -69,6 +80,15 @@ function populateWeeklyEvents() {
     // Iterate through each row in the source data
     data.forEach(function (row, rowIndex) {
       try {
+        const repeatsValue = row[repeatsCol];
+
+        // Skip if Repeats === "Never"
+        if (repeatsValue === "Never") {
+          Logger.log(`Row ${rowIndex + 2} skipped because Repeats = Never`);
+          return;
+        }
+
+        // Repeat Weekly logic
         if (row[repeatsCol] === "Weekly" && row[dayCol]) {
           // Calculate the next 5 dates for the weekly event
           const dayOfWeek = dayMapping[row[dayCol]];
@@ -76,7 +96,20 @@ function populateWeeklyEvents() {
             throw new Error(`Invalid day value "${row[dayCol]}" in row ${rowIndex + 2}.`);
           }
 
-          const eventDates = getNextFiveOccurrences(today, dayOfWeek);
+          // Use eventDate if provided and valid, otherwise default to today
+          let startDate = today;
+          const rawEventDate = row[eventDateCol];
+
+          if (rawEventDate && rawEventDate instanceof Date && !isNaN(rawEventDate)) {
+            if (rawEventDate.getDay() !== dayOfWeek) {
+              throw new Error(
+                `Mismatch between eventDate (${formatDate(rawEventDate)}) and Day (${row[dayCol]}) in row ${rowIndex + 2}`
+              );
+            }
+            startDate = rawEventDate;
+          }
+
+          const eventDates = getNextFiveOccurrences(startDate, dayOfWeek);
 
           // Create a new row for each date
           eventDates.forEach(function (date) {
@@ -163,5 +196,4 @@ function formatDate(date) {
   const day = date.getDate().toString().padStart(2, '0');
   return year + "-" + month + "-" + day;
 }
-
 ```
