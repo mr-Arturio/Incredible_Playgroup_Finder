@@ -94,10 +94,6 @@ const applyFilters = (data, criteria, translation) => {
 
         if (!isUpcomingEvent) return false;
 
-        const noOtherCriteria = Object.values(translatedCriteria).every(
-          (val) => val === ""
-        );
-
         if (translatedCriteria.area && item.Area !== translatedCriteria.area)
           return false;
 
@@ -140,6 +136,14 @@ const applyFilters = (data, criteria, translation) => {
       .sort((a, b) => {
         const { startTime: timeA } = categorizeTime(a.Time);
         const { startTime: timeB } = categorizeTime(b.Time);
+
+        const isPausedA = a.Paused === "yes";
+        const isPausedB = b.Paused === "yes";
+
+        // If one is paused and the other is not, move paused one to the bottom
+        if (isPausedA && !isPausedB) return 1;
+        if (!isPausedA && isPausedB) return -1;
+
         if (timeA === null) return 1;
         if (timeB === null) return -1;
         return timeA - timeB;
