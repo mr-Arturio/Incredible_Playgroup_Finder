@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getSheetData } from "../../actions/getSheetData";
 import RenderSheetDataTable from "../../components/RenderSheetDataTable";
 import IntroductionText from "../../components/IntroductionText";
 import ContactForm from "../../components/ContactForm";
 import { useLanguage } from "../../context/LanguageContext";
 import Header from "../../components/Header/Header";
 import { Footer } from "../../components/Footer";
-import Background  from "../../components/Background";
+import Background from "../../components/Background";
 import { useParams } from "next/navigation";
+
+const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
@@ -30,11 +31,41 @@ function Home() {
     }
   }, [lang]); // Remove unnecessary dependencies to avoid re-triggering
 
+  //  Fetch from backend
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getSheetData();
-      setSheetData(response.props.sheetData);
+      try {
+        const res = await fetch(`${BACKEND_BASE_URL}/api/sheets`, {
+          cache: "no-store",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          console.error("Response not ok:", res.status, errorText);
+          throw new Error(
+            `Failed to fetch sheet data: ${res.status} ${errorText}`
+          );
+        }
+
+        const responseData = await res.json();
+        const { data } = responseData;
+
+        if (!data || !Array.isArray(data)) {
+          console.error("Data is not an array:", data);
+          setSheetData([]);
+          return;
+        }
+
+        setSheetData(data);
+      } catch (err) {
+        console.error("Error fetching data from backend:", err);
+        setSheetData([]); // Fallback
+      }
     };
+
     fetchData();
   }, []);
 
