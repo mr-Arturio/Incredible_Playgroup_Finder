@@ -219,9 +219,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           translation={translation}
         />
         {/* Highlight text/promo */}
-        <PromoLink 
-        mobileTextClassName = 'hidden'
-        />
+        <PromoLink mobileTextClassName="hidden" />
         <div>
           {/* Our story link*/}
           <a
@@ -297,6 +295,8 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           <MapComponent
             sheetData={filteredData}
             onMarkerSelect={handleMarkerSelect}
+            filterCriteria={filterCriteria}
+            translation={translation}
           />
         </div>
         {/* Playgroup Cards Section */}

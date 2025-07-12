@@ -6,15 +6,24 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-// import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
-function MapComponent({ sheetData, onMarkerSelect }) {
+const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+function MapComponent({
+  sheetData,
+  onMarkerSelect,
+  filterCriteria = {},
+  translation = "en",
+}) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
   const [hoveredMarker, setHoveredMarker] = useState(null); // Track hovered marker
   const [clickedMarker, setClickedMarker] = useState(null); // Track clicked marker on mobile
   const [firstTapMarker, setFirstTapMarker] = useState(null); // Track first tap on mobile
+  const [markers, setMarkers] = useState([]);
+  const [isLoadingMarkers, setIsLoadingMarkers] = useState(false);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
@@ -22,41 +31,72 @@ function MapComponent({ sheetData, onMarkerSelect }) {
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  const [markers, setMarkers] = useState([]);
-
+  // Fetch markers from backend
   useEffect(() => {
-    if (!sheetData) return;
-    // Filter out the data with valid lat and lng information
-    const markersWithLatLng = sheetData.filter((data) => {
-      // Convert lat and lng strings to numbers
-      const lat = parseFloat(data.lat);
-      const lng = parseFloat(data.lng);
-      // Check if lat and lng are valid numbers
-      const isValidLatLng = !isNaN(lat) && !isNaN(lng);
-      // Log an error if lat or lng is invalid
-      // if (!isValidLatLng) {
-      //   console.error("Invalid latitude or longitude:", data);
-      // }
-      return isValidLatLng;
-    });
-    // Filter unique addresses
-    const uniqueMarkers = [];
-    const addresses = new Set();
+    const fetchMarkers = async () => {
+      try {
+        setIsLoadingMarkers(true);
 
-    markersWithLatLng.forEach((marker) => {
-      if (!addresses.has(marker.Address)) {
-        uniqueMarkers.push(marker);
-        addresses.add(marker.Address);
+        // Build query parameters from filter criteria
+        const params = new URLSearchParams();
+        Object.entries(filterCriteria).forEach(([key, value]) => {
+          if (value && value !== "") {
+            params.append(key, value);
+          }
+        });
+
+        // Add translation parameter
+        params.append("translation", translation);
+
+        const url = `${BACKEND_BASE_URL}/api/markers${
+          params.toString() ? `?${params.toString()}` : ""
+        }`;
+        const res = await fetch(url);
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const { markers } = await res.json();
+        setMarkers(markers || []);
+      } catch (err) {
+        console.error("Failed to fetch markers:", err);
+        setMarkers([]);
+      } finally {
+        setIsLoadingMarkers(false);
       }
-    });
+    };
 
-    setMarkers(uniqueMarkers);
-    // console.log(`Number of markers shown: ${uniqueMarkers.length}`);
-    // console.log(
-    //   "Visible addresses:",
-    //   uniqueMarkers.map((marker) => marker.Address)
-    // );
-  }, [sheetData]);
+    fetchMarkers();
+  }, [filterCriteria, translation]);
+
+  // Fallback: If backend fetch fails, process sheetData locally (for backward compatibility)
+  useEffect(() => {
+    if (markers.length === 0 && sheetData && !isLoadingMarkers) {
+      // Filter out the data with valid lat and lng information
+      const markersWithLatLng = sheetData.filter((data) => {
+        // Convert lat and lng strings to numbers
+        const lat = parseFloat(data.lat);
+        const lng = parseFloat(data.lng);
+        // Check if lat and lng are valid numbers
+        const isValidLatLng = !isNaN(lat) && !isNaN(lng);
+        return isValidLatLng;
+      });
+
+      // Filter unique addresses
+      const uniqueMarkers = [];
+      const addresses = new Set();
+
+      markersWithLatLng.forEach((marker) => {
+        if (!addresses.has(marker.Address)) {
+          uniqueMarkers.push(marker);
+          addresses.add(marker.Address);
+        }
+      });
+
+      setMarkers(uniqueMarkers);
+    }
+  }, [sheetData, markers.length, isLoadingMarkers]);
 
   // Fetch the user's location
   useEffect(() => {
