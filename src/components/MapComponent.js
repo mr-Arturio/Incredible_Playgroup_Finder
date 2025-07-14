@@ -14,6 +14,7 @@ function MapComponent({
   onMarkerSelect,
   filterCriteria = {},
   translation = "en",
+  filteredData = null, // Add filtered data prop
 }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
@@ -31,72 +32,44 @@ function MapComponent({
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  // Fetch markers from backend
+  // Process filtered data to create markers
   useEffect(() => {
-    const fetchMarkers = async () => {
-      try {
-        setIsLoadingMarkers(true);
-
-        // Build query parameters from filter criteria
-        const params = new URLSearchParams();
-        Object.entries(filterCriteria).forEach(([key, value]) => {
-          if (value && value !== "") {
-            params.append(key, value);
-          }
-        });
-
-        // Add translation parameter
-        params.append("translation", translation);
-
-        const url = `${BACKEND_BASE_URL}/api/markers${
-          params.toString() ? `?${params.toString()}` : ""
-        }`;
-        const res = await fetch(url);
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        const { markers } = await res.json();
-        setMarkers(markers || []);
-      } catch (err) {
-        console.error("Failed to fetch markers:", err);
-        setMarkers([]);
-      } finally {
-        setIsLoadingMarkers(false);
-      }
-    };
-
-    fetchMarkers();
-  }, [filterCriteria, translation]);
-
-  // Fallback: If backend fetch fails, process sheetData locally (for backward compatibility)
-  useEffect(() => {
-    if (markers.length === 0 && sheetData && !isLoadingMarkers) {
-      // Filter out the data with valid lat and lng information
-      const markersWithLatLng = sheetData.filter((data) => {
-        // Convert lat and lng strings to numbers
-        const lat = parseFloat(data.lat);
-        const lng = parseFloat(data.lng);
-        // Check if lat and lng are valid numbers
-        const isValidLatLng = !isNaN(lat) && !isNaN(lng);
-        return isValidLatLng;
-      });
-
-      // Filter unique addresses
-      const uniqueMarkers = [];
-      const addresses = new Set();
-
-      markersWithLatLng.forEach((marker) => {
-        if (!addresses.has(marker.Address)) {
-          uniqueMarkers.push(marker);
-          addresses.add(marker.Address);
-        }
-      });
-
-      setMarkers(uniqueMarkers);
+    if (!filteredData) {
+      console.log(`🗺️ Map: No filtered data provided`);
+      setMarkers([]);
+      return;
     }
-  }, [sheetData, markers.length, isLoadingMarkers]);
+
+    console.log(`🗺️ Map: Processing ${filteredData.length} filtered items`);
+
+    // Filter out the data with valid lat and lng information
+    const markersWithLatLng = filteredData.filter((data) => {
+      // Convert lat and lng strings to numbers
+      const lat = parseFloat(data.lat);
+      const lng = parseFloat(data.lng);
+      // Check if lat and lng are valid numbers
+      const isValidLatLng = !isNaN(lat) && !isNaN(lng);
+      return isValidLatLng;
+    });
+
+    // Filter unique addresses
+    const uniqueMarkers = [];
+    const addresses = new Set();
+
+    markersWithLatLng.forEach((marker) => {
+      if (!addresses.has(marker.Address)) {
+        uniqueMarkers.push(marker);
+        addresses.add(marker.Address);
+      }
+    });
+
+    console.log(
+      `🗺️ Map: Created ${uniqueMarkers.length} markers from ${filteredData.length} filtered items`
+    );
+    setMarkers(uniqueMarkers);
+  }, [filteredData]);
+
+
 
   // Fetch the user's location
   useEffect(() => {

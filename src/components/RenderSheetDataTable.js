@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
-import applyFilters from "../utils/applyFilters";
+// import applyFilters from "../utils/applyFilters";
 import MapComponent from "./MapComponent";
 import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
@@ -13,9 +13,21 @@ import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 import WeatherWidget from "./WeatherWidget";
 import PromoLink from "./PromoLink";
+import { useFilteredData } from "../utils/useFilteredData";
+import { SmoothLoadingIndicator, SmoothLoadingOverlay } from "./SmoothLoading";
+
+const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
+
+  // Use the smooth filtering hook
+  const {
+    data: filteredData,
+    loading: isFilteredLoading,
+    error,
+    updateFilters,
+  } = useFilteredData();
 
   // Define text mappings based on the selected language
   const translations = {
@@ -117,40 +129,32 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const showTodayPlaygroups = () => {
     const today = new Date().toLocaleDateString("en-CA");
 
-    setFilterCriteria({ ...filterCriteria, date: today, address: "" });
+    // Clear all filters and set only today's date
+    setFilterCriteria({
+      date: today,
+      area: "",
+      language: "",
+      day: "",
+      organizer: "",
+      age: "",
+      time: "",
+      address: "",
+    });
     if (todayPlaygroupsSectionRef.current) {
       todayPlaygroupsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const getFilteredData = () => {
-    if (isLoading) return [];
+  // Update filters when they change
+  useEffect(() => {
+    if (!sheetData || sheetData.length === 0) return;
 
-    let filtered = applyFilters(sheetData, filterCriteria, translation);
-
-    filtered = filtered.map((playgroup) => {
-      let eventDate = playgroup.eventDate
-        ? new Date(playgroup.eventDate).toISOString().split("T")[0]
-        : "";
-
-      return {
-        ...playgroup,
-        eventDate,
-      };
-    });
-    // Sort filtered data by date in ascending order
-    filtered.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
-
-    return filtered;
-  };
-
-  const filteredData = useMemo(() => {
-    const data = getFilteredData();
-    return data;
-  }, [sheetData, filterCriteria, isLoading]);
+    // Use the smooth filtering hook
+    updateFilters(filterCriteria, translation);
+  }, [filterCriteria, translation, sheetData, updateFilters]);
 
   const noDataAvailable = filteredData.length === 0;
-
+  console.log("🎯 Filtered data:", filteredData);
   const handleFilterChange = (key, value) => {
     if (key === "day") {
       // Reset date filter and date picker when day filter changes
@@ -169,6 +173,8 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
         ...(key === "area" || key === "organizer" ? { address: "" } : {}),
       }));
     }
+
+    // The smooth filtering hook will automatically handle the debouncing
   };
 
   const areaOptions = useMemo(() => {
@@ -297,6 +303,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
             onMarkerSelect={handleMarkerSelect}
             filterCriteria={filterCriteria}
             translation={translation}
+            filteredData={filteredData}
           />
         </div>
         {/* Playgroup Cards Section */}
@@ -305,17 +312,34 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           id="todayPlaygroupsSection"
           className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg md:rounded-b-lg md:rounded-t-none shadow-md overflow-y-auto relative h-[80vh]"
         >
+          {/* Smooth loading indicator */}
+          <SmoothLoadingIndicator
+            loading={isFilteredLoading}
+            message={
+              translation === "fr"
+                ? "Mise à jour des résultats..."
+                : "Updating results..."
+            }
+          />
+
           {noDataAvailable ? (
             <NoDataText />
           ) : (
             <>
-              {filteredData.slice(0, visibleCards).map((playgroup) => (
-                <PlaygroupCard
-                  key={playgroup.ID}
-                  playgroup={playgroup}
-                  translation={translation}
-                />
-              ))}
+              {filteredData.slice(0, visibleCards).map((playgroup) => {
+                console.log(
+                  "🧩 Rendering card for:",
+                  playgroup.ID,
+                  playgroup.Title
+                );
+                return (
+                  <PlaygroupCard
+                    key={playgroup.ID}
+                    playgroup={playgroup}
+                    translation={translation}
+                  />
+                );
+              })}
               {/* Show more button if there are more playgroups to display */}
               {visibleCards < filteredData.length && (
                 <div className="flex justify-center mb-1 md:mb-2">
