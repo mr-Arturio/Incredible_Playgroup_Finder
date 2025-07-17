@@ -20,26 +20,39 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
   });
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = useMemo(
+    () => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
+    []
+  );
 
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
     if (!sheetData) return;
-    // Filter out the data with valid lat and lng information
-    const markersWithLatLng = sheetData.filter((data) => {
-      // Convert lat and lng strings to numbers
-      const lat = parseFloat(data.lat);
-      const lng = parseFloat(data.lng);
-      // Check if lat and lng are valid numbers
-      const isValidLatLng = !isNaN(lat) && !isNaN(lng);
-      // Log an error if lat or lng is invalid
-      // if (!isValidLatLng) {
-      //   console.error("Invalid latitude or longitude:", data);
-      // }
-      return isValidLatLng;
-    });
-    // Filter unique addresses
+
+    const markersWithLatLng = sheetData
+      .map((data) => {
+        let lat, lng;
+
+        if (data.geopoint) {
+          lat = data.geopoint.latitude ?? data.geopoint._latitude;
+          lng = data.geopoint.longitude ?? data.geopoint._longitude;
+        } else {
+          lat = parseFloat(data.lat);
+          lng = parseFloat(data.lng);
+        }
+
+        if (isNaN(lat) || isNaN(lng)) return null;
+
+        return {
+          ...data,
+          lat,
+          lng,
+        };
+      })
+      .filter(Boolean);
+
+    // Deduplicate by address
     const uniqueMarkers = [];
     const addresses = new Set();
 
@@ -51,11 +64,6 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     });
 
     setMarkers(uniqueMarkers);
-    // console.log(`Number of markers shown: ${uniqueMarkers.length}`);
-    // console.log(
-    //   "Visible addresses:",
-    //   uniqueMarkers.map((marker) => marker.Address)
-    // );
   }, [sheetData]);
 
   // Fetch the user's location
