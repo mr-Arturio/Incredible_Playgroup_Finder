@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { getSheetData } from "../../actions/getSheetData";
 import { getFirestoreData } from "../../actions/getFirestoreData";
-import RenderSheetDataTable from "../../components/RenderSheetDataTable";
+import RenderEventDataTable from "../../components/RenderEventDataTable";
 import IntroductionText from "../../components/IntroductionText";
 import ContactForm from "../../components/ContactForm";
 import { useLanguage } from "../../context/LanguageContext";
@@ -13,7 +12,7 @@ import Background  from "../../components/Background";
 import { useParams } from "next/navigation";
 
 function Home() {
-  const [sheetData, setSheetData] = useState(null);
+  const [eventData, setEventData] = useState(null);
   const { translation, toggleTranslation } = useLanguage();
   const { lang } = useParams();
 
@@ -34,7 +33,7 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await getFirestoreData();
-      setSheetData(response.props.sheetData);
+      setEventData(response.props.eventData);
     };
     fetchData();
   }, []);
@@ -47,8 +46,8 @@ function Home() {
           <IntroductionText />
         </div>
         <main className="container flex-1">
-          <RenderSheetDataTable
-            sheetData={sheetData}
+          <RenderEventDataTable
+            eventData={eventData}
             translation={translation}
           />
           <section>

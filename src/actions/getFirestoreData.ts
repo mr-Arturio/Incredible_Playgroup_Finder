@@ -40,14 +40,14 @@ export async function getFirestoreData() {
 
     return {
       props: {
-        sheetData: JSON.parse(JSON.stringify(data)),
+        eventData: JSON.parse(JSON.stringify(data)),
       },
     };
   } catch (error) {
     console.error("❌ Firebase error:", error);
     return {
       props: {
-        sheetData: [],
+        eventData: [],
       },
     };
   }

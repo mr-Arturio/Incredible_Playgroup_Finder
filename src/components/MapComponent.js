@@ -8,7 +8,7 @@ import {
 } from "@react-google-maps/api";
 // import { geocodeAddresses } from "../utils/geocodeAddresses"; // Adjust the path as necessary
 
-function MapComponent({ sheetData, onMarkerSelect }) {
+function MapComponent({ eventData, onMarkerSelect }) {
   const fallbackCenter = useMemo(() => ({ lat: 45.424721, lng: -75.695 }), []);
   const [center, setCenter] = useState(fallbackCenter);
   const [userLocation, setUserLocation] = useState(null); // State to store user's location
@@ -28,9 +28,9 @@ function MapComponent({ sheetData, onMarkerSelect }) {
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
-    if (!sheetData) return;
+    if (!eventData) return;
 
-    const markersWithLatLng = sheetData
+    const markersWithLatLng = eventData
       .map((data) => {
         let lat, lng;
 
@@ -64,7 +64,7 @@ function MapComponent({ sheetData, onMarkerSelect }) {
     });
 
     setMarkers(uniqueMarkers);
-  }, [sheetData]);
+  }, [eventData]);
 
   // Fetch the user's location
   useEffect(() => {
