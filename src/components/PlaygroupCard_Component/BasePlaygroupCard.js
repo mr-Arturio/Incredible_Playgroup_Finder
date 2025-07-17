@@ -11,14 +11,13 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Organizer_fr,
     Day,
     Time,
-    Date,
+    eventDate,
     Service,
     Service_fr,
     Location,
     Address,
     Cancelled,
     Paused,
-    Area,
     URL,
     URL_fr,
     PG_URL,
@@ -30,6 +29,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     Parking,
     Coffee,
     Scale,
+    Toys,
     FB,
     Insta,
     Eventbrite,
@@ -47,31 +47,51 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
     WiFi,
     Outdoor,
     Language,
-    Scale
+    Scale,
+    Toys
   );
   const social = getSocialIcons(FB, Insta, Eventbrite);
   const [tooltip, setTooltip] = useState("");
 
   // Split Time into start and end times
-  const [startTime, endTime] = Time.split(" - ");
+  const [startTime, endTime] = typeof Time === "string" && Time.includes(" - ")
+  ? Time.split(" - ")
+  : ["", ""];
 
   // Conditional style classes
   const cardStyle =
-    Cancelled === "Yes" ? "bg-gray-400 opacity-50" : "bg-blue-100";
+    Cancelled === "yes"
+      ? "bg-gray-400 opacity-50"
+      : Paused === "yes"
+      ? "bg-blue-100 opacity-50"
+      : "bg-blue-100";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-4 relative ${cardStyle}`;
 
   return (
     <div className={cardClasses}>
-      {Cancelled === "Yes" && (
+      {Cancelled === "yes" && (
         <div
           className="absolute z-10 w-full h-full flex justify-center items-center"
           style={{ pointerEvents: "none" }}
         >
           <span
-            className="text-red-500 text-2xl font-bold"
+            className="text-red-600 text-2xl md:text-3xl rotate-[17deg] tracking-widest font-extrabold"
             style={{ pointerEvents: "auto" }}
           >
-            Cancelled
+            {translation === "en" ? "Cancelled" : "Annulé"}
+          </span>
+        </div>
+      )}
+      {Paused === "yes" && (
+        <div
+          className="absolute z-10 w-full h-full flex justify-center items-center"
+          style={{ pointerEvents: "none" }}
+        >
+          <span
+            className="text-blue-600 text-2xl md:text-3xl -rotate-[17deg] tracking-widest font-extrabold"
+            style={{ pointerEvents: "auto" }}
+          >
+            {translation === "en" ? "Paused" : "En Pause"}
           </span>
         </div>
       )}
@@ -83,13 +103,14 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         PG_URL={PG_URL}
         PG_URL_fr={PG_URL_fr}
         Location={Location}
-        Day={Day}
-        Date={Date}
+        // Day={Day}
+        eventDate={eventDate}
         Service={Service}
         Service_fr={Service_fr}
         Cancelled={Cancelled}
+        Paused={Paused}
         Time={Time}
-        address={Address}
+        Address={Address}
         startTime={startTime}
         endTime={endTime}
         Registration={Registration}
@@ -105,7 +126,13 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           Notes_fr={Notes_fr}
           icons={icons}
           social={social}
+          translation={translation}
+          Organizer={Organizer}
+          eventDate={eventDate}
+          startTime={startTime}
+          endTime={endTime}
           Cancelled={Cancelled}
+          Paused={Paused}
         />
       )}
       <CardFooter
@@ -115,12 +142,6 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         setTooltip={setTooltip}
         onExpand={onExpand}
         isExpanded={isExpanded}
-        URL={URL}
-        address={Address}
-        date={Date}
-        startTime={startTime}
-        endTime={endTime}
-        Cancelled={Cancelled}
         translation={translation}
       />
     </div>

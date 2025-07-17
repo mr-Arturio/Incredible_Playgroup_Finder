@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Tooltip from "./Tooltip";
-// import AddToCalendar from "./AddToCalendar";
+import Tooltip from "../../utils/Tooltip";
 
 function CardFooter({
   icons,
@@ -13,7 +12,11 @@ function CardFooter({
   translation,
 }) {
   return (
-    <div className={`bg-cardFooter p-3 flex justify-between items-center ${isExpanded ? 'md:mt-3' : 'mt-1'}`}>
+    <div
+      className={`bg-cardFooter p-3 flex justify-between items-center ${
+        isExpanded ? "md:mt-3" : "mt-1"
+      }`}
+    >
       <div className="flex">
         {isExpanded ? (
           <button
@@ -26,10 +29,10 @@ function CardFooter({
               alt="Show Less"
               width={17}
               height={17}
-              className="inline-block"
+              className="inline-block h-3 w-3 md:h-4 md:w-4"
             />
             <span className="md:ml-2 ml-1 inline-block sm:text-base text-sm">
-              {translation === "en" ? "Show Less" : "Mostrar Menos"}
+              {translation === "en" ? "Show Less" : "Voir Moins"}
             </span>
           </button>
         ) : (
@@ -43,14 +46,16 @@ function CardFooter({
               alt="More Information"
               width={16}
               height={16}
-              className="inline-block"
+              className="inline-block h-3 w-3 md:h-4 md:w-4"
             />
             <div>
               <span className="md:hidden inline-block sm:text-base text-sm ml-2 ">
-                {translation === "en" ? "More Info" : "Más Info"}
+                {translation === "en" ? "More Info" : "Plus d'infos"}
               </span>
               <span className="hidden md:inline-block sm:text-base text-sm ml-2">
-                {translation === "en" ? "More Information" : "Más Información"}
+                {translation === "en"
+                  ? "More Information"
+                  : "Voir plus d'information"}
               </span>
             </div>
           </button>
@@ -84,6 +89,7 @@ function CardFooter({
               <Tooltip
                 key={key}
                 text={tooltip === iconTooltip ? iconTooltip : ""}
+                className="bg-black text-white text-xs rounded-md -right-1 px-1.5 py-1 absolute bottom-full mb-1.5 -ml-5 z-50 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200"
               >
                 <div
                   onMouseEnter={() => setTooltip(iconTooltip)}
@@ -92,7 +98,7 @@ function CardFooter({
                   <Image
                     src={src}
                     alt={iconTooltip}
-                    className="h-6 w-6"
+                    className="h-5 w-5 md:h-6 md:w-6"
                     width={24}
                     height={24}
                   />

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 845.48 431.61">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ef682a;
+      }
+
+      .cls-2 {
+        fill: #2eb257;
+      }
+
+      .cls-3 {
+        fill: #fcbe22;
+      }
+
+      .cls-4 {
+        fill: #4e8dca;
+      }
+
+      .cls-5 {
+        fill: #a34298;
+      }
+
+      .cls-6 {
+        font-size: 47.95px;
+      }
+
+      .cls-6, .cls-7 {
+        fill: #e22a69;
+      }
+
+      .cls-8 {
+        font-family: AvenirNext-Regular, 'Avenir Next';
+      }
+
+      .cls-9 {
+        letter-spacing: -.06em;
+      }
+
+      .cls-10 {
+        letter-spacing: -.06em;
+      }
+
+      .cls-11 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-12 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-13 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-14 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-15 {
+        fill: #232121;
+        font-size: 75.06px;
+      }
+    </style>
+  </defs>
+  <text class="cls-8" transform="translate(406.65 116.19) scale(.98 1)"><tspan class="cls-15"><tspan class="cls-9" x="0" y="0">P</tspan><tspan x="39.03" y="0">AREN</tspan><tspan class="cls-11" x="238.31" y="0">T</tspan></tspan><tspan class="cls-15"><tspan x="0" y="83.81">RESOURCE</tspan></tspan><tspan class="cls-15"><tspan x="0" y="173.88">CENTRE</tspan></tspan><tspan class="cls-6"><tspan class="cls-13" x="0" y="246.02">O</tspan><tspan x="39.32" y="246.02">T</tspan><tspan class="cls-10" x="66.65" y="246.02">T</tspan><tspan class="cls-14" x="91.11" y="246.02">AW</tspan><tspan class="cls-12" x="170.14" y="246.02">A</tspan></tspan></text>
+  <g>
+    <rect class="cls-7" y="66.98" width="61.75" height="219.54" rx="12" ry="12"/>
+    <rect class="cls-1" x="76.79" width="58.6" height="168.19" rx="12" ry="12"/>
+    <rect class="cls-2" x="76.79" y="181.85" width="58.6" height="158.49" rx="12" ry="12"/>
+    <rect class="cls-2" x="223.67" y="241.74" width="59.31" height="98.6" rx="12" ry="12"/>
+    <rect class="cls-4" x="151.58" y="324.08" width="57.26" height="75.28" rx="12" ry="12"/>
+    <rect class="cls-3" x="150.21" y="66.98" width="58.63" height="245.4" rx="12" ry="12"/>
+    <rect class="cls-4" x="223.67" y="3.29" width="59.31" height="226.74" rx="12" ry="12"/>
+    <rect class="cls-5" x="297.59" y="66.98" width="59.53" height="219.54" rx="12" ry="12"/>
+  </g>
+</svg>

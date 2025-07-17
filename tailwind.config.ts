@@ -10,24 +10,32 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "frame-pattern": "url('/Background1.svg')",
       },
       colors: {
-        mainBlue: '#4E8DCA',
-        hoverBlue: '#316191',
-        plum: '#A34298',
-        amber: '#FCBE22',
-        reset: '#EF682A',
-        resetHover: '#D95D25',
-        cardBody: '#dbeafe',
-        cardFooter: '#93c5fd',
-        gradient1: '#5a108f',
-        gradient2: '#8b2fc9',
+        mainBlue: "#4E8DCA",
+        hoverBlue: "#316191",
+        plum: "#A34298",
+        amber: "#FCBE22",
+        reset: "#EF682A",
+        resetHover: "#D95D25",
+        cardBody: "#dbeafe",
+        cardFooter: "#93c5fd",
+        gradient1: "#5a108f",
+        gradient2: "#8b2fc9",
+        gradient3: "#ff7e5f",
+        navText: "rgb(64,0,128)",
+        navTextHover: "rgb(163,66,152)",
+        introText: "#E22A69",
       },
       fontFamily: {
-        lazydog: ['Lazydog', 'sans-serif'],
+        lazydog: ["Lazydog", "cursive"],
+      },
+      fontSize: {
+        xxs: "0.625rem",
+      },
+      rotate: {
+        "17": "17deg",
       },
     },
   },

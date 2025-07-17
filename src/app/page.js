@@ -1,43 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { getSheetData } from "../actions/getSheetData";
-import RenderSheetDataTable from "../components/RenderSheetDataTable";
-import Header from "../components/Header";
-import ContactForm from "../components/ContactForm";
-import { useLanguage } from "../context/LanguageContext";
-import Navbar from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-function Home() {
-  const [sheetData, setSheetData] = useState(null);
-  const { translation } = useLanguage();
+export default function Index() {
+  const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getSheetData();
-      setSheetData(response.props.sheetData);
-    };
-    fetchData();
-  }, []);
+    // Redirect to /en if no specific language is set in the URL
+    router.replace("/en");
+  }, [router]);
 
-  return (
-    <>
-      <Navbar />
-      <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen px-4">
-        <div className="container">
-          <Header />
-        </div>
-        <main className="container flex-1">
-          <RenderSheetDataTable sheetData={sheetData} translation={translation} />
-          <section>
-            <ContactForm />
-          </section>
-        </main>
-      </div>
-      <Footer />
-    </>
-  );
+  return null;
 }
-
-export default Home;
