@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getSheetData } from "../../actions/getSheetData";
+// import { getSheetData } from "../../actions/getSheetData";
+import { getFirestoreData } from "../../actions/getFirestoreData";
 import RenderSheetDataTable from "../../components/RenderSheetDataTable";
 import IntroductionText from "../../components/IntroductionText";
 import ContactForm from "../../components/ContactForm";
@@ -32,7 +33,7 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getSheetData();
+      const response = await getFirestoreData();
       setSheetData(response.props.sheetData);
     };
     fetchData();
