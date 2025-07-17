@@ -54,7 +54,9 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   const [tooltip, setTooltip] = useState("");
 
   // Split Time into start and end times
-  const [startTime, endTime] = Time.split(" - ");
+  const [startTime, endTime] = typeof Time === "string" && Time.includes(" - ")
+  ? Time.split(" - ")
+  : ["", ""];
 
   // Conditional style classes
   const cardStyle =
@@ -101,7 +103,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         PG_URL={PG_URL}
         PG_URL_fr={PG_URL_fr}
         Location={Location}
-        Day={Day}
+        // Day={Day}
         eventDate={eventDate}
         Service={Service}
         Service_fr={Service_fr}

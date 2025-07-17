@@ -26,14 +26,28 @@ const applyFilters = (data, criteria, translation) => {
 
     const parseDate = (dateString) => {
       if (!dateString) return null;
-      const date = new Date(dateString.trim() + "T00:00:00"); // Ensure time part is set
-      if (isNaN(date.getTime())) {
-        console.error(`Invalid date string: "${dateString}"`);
-        return null;
-      }
-      date.setHours(0, 0, 0, 0); // Normalize to start of the day
-      return date;
-    };
+
+  // If already a Date object, just return it normalized
+  if (dateString instanceof Date) {
+    const date = new Date(dateString);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+
+  // If it looks like a natural date string (already has time zone info), don’t append T00:00:00
+  const looksLikeNaturalDate = /\d{4}/.test(dateString) && dateString.includes("GMT");
+  const date = new Date(
+    looksLikeNaturalDate ? dateString : dateString.trim() + "T00:00:00"
+  );
+
+  if (isNaN(date.getTime())) {
+    console.error(`❌ Invalid date string: "${dateString}"`);
+    return null;
+  }
+
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
 
     const categorizeTime = (timeString) => {
       if (!timeString || !timeString.includes(" - ")) {
