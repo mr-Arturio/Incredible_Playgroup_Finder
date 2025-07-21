@@ -33,7 +33,7 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
       console.log("📦 Using cached data");
       return {
         props: {
-          eventData: cache.data,
+          eventData: JSON.parse(JSON.stringify(cache.data)),
         },
       };
     }
@@ -66,7 +66,7 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
 
     return {
       props: {
-        eventData: JSON.parse(JSON.stringify(data)),
+        eventData: JSON.parse(JSON.stringify(cache.data)),
       },
     };
   } catch (error: any) {
@@ -77,7 +77,7 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
       console.log("⚠️ Quota exceeded, using cached data");
       return {
         props: {
-          eventData: cache.data,
+          eventData: JSON.parse(JSON.stringify(cache.data)),
         },
       };
     }
