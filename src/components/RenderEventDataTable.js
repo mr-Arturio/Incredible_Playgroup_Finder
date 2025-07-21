@@ -129,19 +129,9 @@ const RenderEventTable = ({ eventData, translation }) => {
     let filtered = applyFilters(eventData, filterCriteria, translation);
 
     filtered = filtered.map((playgroup) => {
-      let eventDate = "";
-
-      if (playgroup.eventDate) {
-        const rawDate = playgroup.eventDate;
-
-        if (rawDate.toDate) {
-          // Firestore Timestamp object
-          eventDate = rawDate.toDate().toDateString();
-        } else if (typeof rawDate === "string" || rawDate instanceof Date) {
-          // Already a valid date string or JS Date
-          eventDate = new Date(rawDate).toDateString();
-        }
-      }
+      let eventDate = playgroup.eventDate
+        ? new Date(playgroup.eventDate).toISOString().split("T")[0]
+        : "";
 
       return {
         ...playgroup,

@@ -103,7 +103,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
         PG_URL={PG_URL}
         PG_URL_fr={PG_URL_fr}
         Location={Location}
-        // Day={Day}
+        Day={Day}
         eventDate={eventDate}
         Service={Service}
         Service_fr={Service_fr}

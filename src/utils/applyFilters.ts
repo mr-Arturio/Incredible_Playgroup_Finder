@@ -59,19 +59,12 @@ const applyFilters = (
     const parseDate = (dateString: string | undefined): Date | null => {
       if (!dateString) return null;
 
-      // If it looks like a natural date string (already has time zone info), don't append T00:00:00
-      const looksLikeNaturalDate =
-        /\d{4}/.test(dateString) && dateString.includes("GMT");
-      const date = new Date(
-        looksLikeNaturalDate ? dateString : dateString.trim() + "T00:00:00"
-      );
-
+      const date = new Date(dateString.trim() + "T00:00:00"); // Ensure time part is set
       if (isNaN(date.getTime())) {
-        console.error(`❌ Invalid date string: "${dateString}"`);
+        console.error(`Invalid date string: "${dateString}"`);
         return null;
       }
-
-      date.setHours(0, 0, 0, 0);
+      date.setHours(0, 0, 0, 0); // Normalize to start of the day
       return date;
     };
 
