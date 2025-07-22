@@ -1,0 +1,7 @@
+functions/
+firebase.json
+firestore.indexes.json
+firestore.rules
+.env.local
+.env
+*.log
