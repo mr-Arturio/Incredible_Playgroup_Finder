@@ -18,13 +18,18 @@ if (!getApps().length) {
 
 const db = getFirestore();
 
+//  Connect to Firestore Emulator if running locally
+if (process.env.FIRESTORE_EMULATOR_HOST) {
+  process.env.FIRESTORE_EMULATOR_HOST = process.env.FIRESTORE_EMULATOR_HOST;
+}
+
 // Simple in-memory cache
 let cache: {
   data: PlaygroupEvent[];
   timestamp: number;
 } | null = null;
 
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 60 * 60 * 1000; // 5 minutes
 
 export async function getFirestoreData(): Promise<FirestoreDataResponse> {
   try {
@@ -33,13 +38,15 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
       console.log("📦 Using cached data");
       return {
         props: {
-          eventData: cache.data,
+          eventData: JSON.parse(JSON.stringify(cache.data)),
         },
       };
     }
 
     console.log("🔥 Fetching fresh data from Firestore");
     const snapshot = await db.collection("playgroups").get();
+
+    const invalidDates: any[] = [];
 
     const data: PlaygroupEvent[] = snapshot.docs.map((doc) => {
       const plainData = doc.data() as PlaygroupEvent;
@@ -55,6 +62,15 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
       // Optional: Add document ID if needed
       plainData.id = doc.id;
 
+      // Check for invalid or missing eventDate
+      if (
+        typeof plainData.eventDate !== "string" ||
+        !plainData.eventDate.match(/^\d{4}-\d{2}-\d{2}$/)
+      ) {
+        invalidDates.push(plainData);
+        console.warn("Invalid eventDate in document:", plainData);
+      }
+
       return plainData;
     });
 
@@ -66,7 +82,7 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
 
     return {
       props: {
-        eventData: JSON.parse(JSON.stringify(data)),
+        eventData: JSON.parse(JSON.stringify(cache.data)),
       },
     };
   } catch (error: any) {
@@ -77,7 +93,7 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
       console.log("⚠️ Quota exceeded, using cached data");
       return {
         props: {
-          eventData: cache.data,
+          eventData: JSON.parse(JSON.stringify(cache.data)),
         },
       };
     }

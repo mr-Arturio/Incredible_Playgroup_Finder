@@ -1,4 +1,3 @@
-// Core Firestore data types
 export interface PlaygroupEvent {
   id?: string;
   Address: string;
