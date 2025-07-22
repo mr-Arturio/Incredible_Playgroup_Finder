@@ -19,6 +19,7 @@
     "firebase-functions": "^6.4.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
