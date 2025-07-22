@@ -18,6 +18,11 @@ if (!getApps().length) {
 
 const db = getFirestore();
 
+//  Connect to Firestore Emulator if running locally
+if (process.env.FIRESTORE_EMULATOR_HOST) {
+  process.env.FIRESTORE_EMULATOR_HOST = process.env.FIRESTORE_EMULATOR_HOST;
+}
+
 // Simple in-memory cache
 let cache: {
   data: PlaygroupEvent[];
