@@ -19,38 +19,38 @@ const getIcons = (
   location: "location.svg",
   age: "age.svg",
   parking: {
-    show: Parking === "yes",
+    show: Parking === true,
     src: "parking.svg",
     tooltip: translation === "fr" ? "Parking Disponible" : "Parking Available",
   },
   coffee: {
-    show: Coffee === "yes",
+    show: Coffee === true,
     src: "coffee.svg",
     tooltip: translation === "fr" ? "Café" : "Coffee",
   },
   toys: {
-    show: Toys === "yes",
+    show: Toys === true,
     src: "toys.svg",
     tooltip: translation === "fr" ? "Joujouthèque" : "Toy Library",
   },
   // Uncomment if needed
   // wifi: {
-  //   show: WiFi === "nes",
+  //   show: WiFi === true,
   //   src: "wifi.svg",
   //   tooltip: translation === "fr" ? "WiFi Disponible" : "WiFi Available",
   // },
   // indoor: {
-  //   show: Outdoor === "no",
+  //   show: Outdoor === false,
   //   src: "indoor.svg",
   //   tooltip: translation === "fr" ? "Intérieur" : "Indoor",
   // },
   outdoor: {
-    show: Outdoor === "yes",
+    show: Outdoor === true,
     src: "outdoor.svg",
     tooltip: translation === "fr" ? "Extérieur" : "Outdoor",
   },
   scale: {
-    show: Scale === "yes",
+    show: Scale === true,
     src: "scale.svg",
     tooltip: translation === "fr" ? "Pèse-bébé" : "Baby Scale",
   },
