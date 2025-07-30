@@ -61,7 +61,7 @@ async function runMigration() {
 
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: GOOGLE_SHEET_ID,
-    range: "MainSheet!A1:Z", // adjust sheet name if needed
+    range: "MainSheet!A1:AH",
   });
 
   const rows = res.data.values;
