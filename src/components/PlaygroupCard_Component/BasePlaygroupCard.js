@@ -59,17 +59,16 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
   : ["", ""];
 
   // Conditional style classes
-  const cardStyle =
-    Cancelled === "yes"
-      ? "bg-gray-400 opacity-50"
-      : Paused === "yes"
-      ? "bg-blue-100 opacity-50"
-      : "bg-blue-100";
+  const cardStyle = Cancelled
+  ? "bg-gray-400 opacity-50"
+  : Paused
+  ? "bg-blue-100 opacity-50"
+  : "bg-blue-100";
   const cardClasses = `shadow-lg rounded-lg overflow-hidden m-4 relative ${cardStyle}`;
 
   return (
     <div className={cardClasses}>
-      {Cancelled === "yes" && (
+      {Cancelled && (
         <div
           className="absolute z-10 w-full h-full flex justify-center items-center"
           style={{ pointerEvents: "none" }}
@@ -82,7 +81,7 @@ function BasePlaygroupCard({ playgroup, onExpand, isExpanded }) {
           </span>
         </div>
       )}
-      {Paused === "yes" && (
+      {Paused  && (
         <div
           className="absolute z-10 w-full h-full flex justify-center items-center"
           style={{ pointerEvents: "none" }}

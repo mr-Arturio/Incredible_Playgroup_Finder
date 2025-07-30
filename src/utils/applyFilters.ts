@@ -170,8 +170,8 @@ const applyFilters = (
         const { startTime: timeA } = categorizeTime(a.Time);
         const { startTime: timeB } = categorizeTime(b.Time);
 
-        const isPausedA = a.Paused === "yes";
-        const isPausedB = b.Paused === "yes";
+        const isPausedA = a.Paused;
+        const isPausedB = b.Paused;
 
         // If one is paused and the other is not, move paused one to the bottom
         if (isPausedA && !isPausedB) return 1;
