@@ -47,6 +47,7 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
     const snapshot = await db.collection("playgroups").get();
 
     const invalidDates: any[] = [];
+    const invalidTimes: any[] = [];
 
     const data: PlaygroupEvent[] = snapshot.docs.map((doc) => {
       const plainData = doc.data() as PlaygroupEvent;
@@ -69,6 +70,20 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
       ) {
         invalidDates.push(plainData);
         console.warn("Invalid eventDate in document:", plainData);
+      }
+
+      // ✅ Validate time (adjust this if your format is a range like "08:30 - 12:30")
+      if (
+        typeof plainData.Time !== "string" ||
+        !/^\d{2}:\d{2}(\s*-\s*\d{2}:\d{2})?$/.test(plainData.Time.trim())
+      ) {
+        invalidTimes.push(plainData);
+        console.warn(
+          "⏰ Invalid time format:",
+          plainData.Time,
+          "in:",
+          plainData
+        );
       }
 
       return plainData;
