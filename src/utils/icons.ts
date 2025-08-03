@@ -12,7 +12,7 @@ interface SocialIconConfig {
   url: string;
 }
 
-interface IconsReturn {
+export interface IconsReturn {
   time: string;
   location: string;
   age: string;
@@ -24,7 +24,7 @@ interface IconsReturn {
   language: IconConfig;
 }
 
-interface SocialIconsReturn {
+export interface SocialIconsReturn {
   fb: SocialIconConfig;
   insta: SocialIconConfig;
   eventbrite: SocialIconConfig;

@@ -19,11 +19,17 @@ export interface PlaygroupEvent {
   Parking: boolean;
   Scale: boolean;
   Service: string;
+  Service_fr: string;
   Time: string;
   Toys: boolean;
   URL: string;
   URL_fr: string;
   eventDate: string;
+  WiFi: boolean;
+  Insta: string;
+  Eventbrite: string;
+  Registration: string;
+  Registration_URL: string;
   geopoint?: {
     latitude: number;
     longitude: number;
