@@ -13,12 +13,35 @@ import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 import WeatherWidget from "./WeatherWidget";
 import PromoLink from "./PromoLink";
+import { PlaygroupEvent, Language, FilterCriteria } from "../types";
 
-const RenderEventTable = ({ eventData, translation }) => {
+interface RenderEventDataTableProps {
+  eventData: PlaygroupEvent[] | null;
+  translation: Language;
+}
+
+interface Translations {
+  toggledOn: string;
+  toggledOff: string;
+  hide: string;
+  show: string;
+  showLess: string;
+  showMore: string;
+  daysOfWeek: Record<string, string>;
+  timesOfDay: Record<string, string>;
+  areaOptions: Record<string, string>;
+  ageOptions: Array<{ en: string; fr: string }>;
+  languageOptions: Record<string, string>;
+}
+
+const RenderEventTable: React.FC<RenderEventDataTableProps> = ({
+  eventData,
+  translation,
+}) => {
   const isLoading = !eventData || eventData.length === 0;
 
   // Define text mappings based on the selected language
-  const translations = {
+  const translations: Translations = {
     toggledOn: translation === "fr" ? "Masquer les filtres" : "Hide Filters",
     toggledOff: translation === "fr" ? "Afficher les filtres" : "Show Filters",
     hide: translation === "fr" ? "Masquer la Carte" : "Hide Map",
@@ -63,11 +86,11 @@ const RenderEventTable = ({ eventData, translation }) => {
   };
 
   // Reference for scrolling to today's playgroups section
-  const todayPlaygroupsSectionRef = useRef(null);
+  const todayPlaygroupsSectionRef = useRef<HTMLDivElement>(null);
 
   // State declarations
-  const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
-  const [filterCriteria, setFilterCriteria] = useState({
+  const [startDate, setStartDate] = useState<Date>(new Date()); // Handles the selected date for filtering
+  const [filterCriteria, setFilterCriteria] = useState<FilterCriteria>({
     // Stores the current filter settings
     date: "",
     area: "",
@@ -79,19 +102,19 @@ const RenderEventTable = ({ eventData, translation }) => {
     address: "",
   });
   // State to control filter container visibility
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   // Controls visibility of the map
-  const [isMapVisible, setIsMapVisible] = useState(false);
+  const [isMapVisible, setIsMapVisible] = useState<boolean>(false);
   // State to control the number of visible cards
-  const [visibleCards, setVisibleCards] = useState(12);
+  const [visibleCards, setVisibleCards] = useState<number>(12);
   // State to track if any filters are active
-  const [isFilterActive, setIsFilterActive] = useState(false);
+  const [isFilterActive, setIsFilterActive] = useState<boolean>(false);
 
-  const handleShowMore = () => {
+  const handleShowMore = (): void => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
-  const handleMarkerSelect = (Address) => {
+  const handleMarkerSelect = (Address: string): void => {
     setFilterCriteria((prev) => ({
       ...prev,
       address: prev.address === Address ? "" : Address,
@@ -99,7 +122,7 @@ const RenderEventTable = ({ eventData, translation }) => {
   };
 
   // Reset all filters to default states, including clearing selected markers
-  const resetFilters = () => {
+  const resetFilters = (): void => {
     setStartDate(new Date()); // Reset the date picker to today's date
     setFilterCriteria({
       date: "",
@@ -114,7 +137,7 @@ const RenderEventTable = ({ eventData, translation }) => {
     setIsFilterActive(false); // Reset filter state
   };
 
-  const showTodayPlaygroups = () => {
+  const showTodayPlaygroups = (): void => {
     const today = new Date().toLocaleDateString("en-CA");
 
     setFilterCriteria({ ...filterCriteria, date: today, address: "" });
@@ -123,7 +146,7 @@ const RenderEventTable = ({ eventData, translation }) => {
     }
   };
 
-  const getFilteredData = () => {
+  const getFilteredData = (): PlaygroupEvent[] => {
     if (isLoading) return [];
 
     let filtered = applyFilters(eventData, filterCriteria, translation);
@@ -139,7 +162,10 @@ const RenderEventTable = ({ eventData, translation }) => {
       };
     });
     // Sort filtered data by date in ascending order
-    filtered.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+    filtered.sort(
+      (a, b) =>
+        new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+    );
 
     return filtered;
   };
@@ -151,7 +177,10 @@ const RenderEventTable = ({ eventData, translation }) => {
 
   const noDataAvailable = filteredData.length === 0;
 
-  const handleFilterChange = (key, value) => {
+  const handleFilterChange = (
+    key: keyof FilterCriteria,
+    value: string
+  ): void => {
     if (key === "day") {
       // Reset date filter and date picker when day filter changes
       setFilterCriteria((prevCriteria) => ({
@@ -159,7 +188,7 @@ const RenderEventTable = ({ eventData, translation }) => {
         day: value,
         date: "", // Reset the date filter
       }));
-      setStartDate(null); // Reset the date picker to today's date
+      setStartDate(new Date()); // Reset the date picker to today's date
     } else {
       // Deselect marker when the name filter changes or when the area filter changes
       setFilterCriteria((prevCriteria) => ({
@@ -173,23 +202,23 @@ const RenderEventTable = ({ eventData, translation }) => {
 
   const areaOptions = useMemo(() => {
     if (!eventData) return [];
-    return [...new Set(eventData.map((item) => item.Area).filter(Boolean))].map(
-      (area) => translations.areaOptions[area] || area
-    );
+    return Array.from(
+      new Set(eventData.map((item) => item.Area).filter(Boolean))
+    ).map((area) => translations.areaOptions[area] || area);
   }, [eventData, translations.areaOptions]);
 
   const languageOptions = useMemo(() => {
     if (!eventData) return [];
-    return [
-      ...new Set(eventData.map((item) => item.Language).filter(Boolean)),
-    ].map((language) => translations.languageOptions[language] || language);
+    return Array.from(
+      new Set(eventData.map((item) => item.Language).filter(Boolean))
+    ).map((language) => translations.languageOptions[language] || language);
   }, [eventData, translations.languageOptions]);
 
   const organizerOptions = useMemo(() => {
     if (!eventData) return [];
-    return [
-      ...new Set(eventData.map((item) => item.Organizer).filter(Boolean)),
-    ].sort();
+    return Array.from(
+      new Set(eventData.map((item) => item.Organizer).filter(Boolean))
+    ).sort();
   }, [eventData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(
@@ -198,9 +227,9 @@ const RenderEventTable = ({ eventData, translation }) => {
 
   const ageOptions = useMemo(() => {
     if (!eventData) return [];
-    const uniqueAges = [
-      ...new Set(eventData.map((item) => item.Age).filter(Boolean)),
-    ];
+    const uniqueAges = Array.from(
+      new Set(eventData.map((item) => item.Age).filter(Boolean))
+    );
 
     return translations.ageOptions
       .filter((option) => uniqueAges.includes(option.en))
@@ -311,7 +340,6 @@ const RenderEventTable = ({ eventData, translation }) => {
                 <PlaygroupCard
                   key={playgroup.id || playgroup.eventDate + playgroup.Address}
                   playgroup={playgroup}
-                  translation={translation}
                 />
               ))}
               {/* Show more button if there are more playgroups to display */}
