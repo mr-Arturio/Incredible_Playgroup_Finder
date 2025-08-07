@@ -91,7 +91,7 @@ const DashboardPage: React.FC = () => {
 
       try {
         setLoading(true);
-        const organizerEvents = await getOrganizerEvents(user.organizerName);
+        const organizerEvents = mockEvents;
         setEvents(organizerEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
