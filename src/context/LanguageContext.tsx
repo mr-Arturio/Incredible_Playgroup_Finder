@@ -52,7 +52,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   useEffect(() => {
     if (typeof window !== "undefined") {
       // If no language in URL, redirect to saved language in localStorage or default to /en
-      if (!pathname.startsWith("/fr") && !pathname.startsWith("/en")) {
+      // But exclude dashboard routes from language-based routing
+      if (
+        !pathname.startsWith("/fr") &&
+        !pathname.startsWith("/en") &&
+        !pathname.startsWith("/dashboard") &&
+        !pathname.startsWith("/login")
+      ) {
         const savedLanguage =
           (localStorage.getItem("language") as Language) || Language.ENGLISH;
         router.replace(`/${savedLanguage}`);
