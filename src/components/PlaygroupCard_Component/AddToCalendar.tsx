@@ -9,7 +9,7 @@ interface AddToCalendarProps {
   startTime: string;
   endTime: string;
   Cancelled: boolean;
-  Paused?: string;
+  Paused?: boolean;
 }
 
 const AddToCalendar: React.FC<AddToCalendarProps> = ({
@@ -23,7 +23,7 @@ const AddToCalendar: React.FC<AddToCalendarProps> = ({
 }) => {
   const { translation } = useLanguage();
 
-  if (Cancelled || Paused === "yes") return null;
+  if (Cancelled || Paused) return null;
 
   return (
     <>

@@ -29,7 +29,7 @@ interface CardDetailsProps {
   startTime: string;
   endTime: string;
   Cancelled: boolean;
-  Paused?: string;
+  Paused?: boolean;
 }
 
 function CardDetails({

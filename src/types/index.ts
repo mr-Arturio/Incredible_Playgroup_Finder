@@ -35,9 +35,10 @@ export interface PlaygroupEvent {
     longitude: number;
   };
   // Optional fields that might exist
-  Paused?: string;
+  Paused?: boolean;
   lat?: number;
   lng?: number;
+  approved?: boolean;
 }
 
 // Filter criteria interface

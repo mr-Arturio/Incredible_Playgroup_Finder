@@ -16,7 +16,7 @@ interface CardHeaderProps {
   Service_fr: string;
   Location: string;
   Cancelled: boolean;
-  Paused?: string;
+  Paused?: boolean;
   Time: string;
   Address: string;
   startTime: string;
@@ -86,7 +86,7 @@ function CardHeader({
           {/* Date and Date */}
           <p
             className={`mt-1 text-gray-600 md:text-sm text-xs ${
-              Cancelled || Paused === "yes" ? "mb-2" : ""
+              Cancelled || Paused ? "mb-2" : ""
             }`}
           >
             {translatedDay || eventDate ? (
@@ -160,7 +160,7 @@ function CardHeader({
             />
           </button>
         </div>
-        {!Cancelled && Paused !== "yes" && Registration && (
+        {!Cancelled && !Paused && Registration && (
           <div className="md:text-sm text-xs sm:flex font-semibold bg-gray-200 px-2 py-1 md:ml-2 rounded-full text-center">
             <a
               href={Registration_URL}
