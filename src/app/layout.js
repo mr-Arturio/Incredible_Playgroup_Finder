@@ -3,6 +3,7 @@ import "./globals.css";
 import "./fonts.css";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "../context/LanguageContext";
+import { AuthProvider } from "../context/AuthContext";
 import HotjarTracking from "../utils/HotjarTracking";
 
 // Initialize the font
@@ -49,11 +50,13 @@ const RootLayout = ({ children }) => {
         <meta property="og:type" content="website" />
       </head>
       <body className={inter.className}>
-        <LanguageProvider>
-          {children}
-          <Analytics />
-          <HotjarTracking />
-        </LanguageProvider>
+        <AuthProvider>
+          <LanguageProvider>
+            {children}
+            <Analytics />
+            <HotjarTracking />
+          </LanguageProvider>
+        </AuthProvider>
       </body>
     </html>
   );

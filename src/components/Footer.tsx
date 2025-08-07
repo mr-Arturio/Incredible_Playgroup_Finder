@@ -169,13 +169,18 @@ export const Footer: React.FC = () => {
               .
             </p>
           </div>
+          <div className="flex flex-col items-center">
           <a
             href="https://www.parentresource.ca/pricacy"
             className="font-semibold text-white hover:underline"
           >
             Privacy Policy
-          </a>
-        </div>
+          </a>{" "}
+          <a href="/login" className="font-semibold text-white hover:underline">
+              Organizer Login
+            </a>
+          </div>
+        </div>{" "}
       </div>
     </footer>
   );
