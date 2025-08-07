@@ -6,6 +6,9 @@ import { TTLCache } from "../utils/TTLCache"; // Import the TTLCache class
 const sheetCache = new TTLCache(1000 * 60 * 15); // Cache TTL of 15 minutes
 
 export async function getSheetData() {
+  // Clear expired entries periodically
+  sheetCache.clearExpired();
+
   const cacheKey = "sheetData";
 
   // Try to get cached data
