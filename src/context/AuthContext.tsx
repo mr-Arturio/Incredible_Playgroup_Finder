@@ -54,10 +54,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     try {
       // Mock authentication - replace with real Firebase Auth
-      if (email === "sarah@example.com" && password === "password") {
+      if (email === "prc@example.com" && password === "password") {
         const mockUser: User = {
           uid: "user123",
-          email: "sarah@example.com",
+          email: "prc@example.com",
           organizerName: "Sarah Johnson",
         };
 

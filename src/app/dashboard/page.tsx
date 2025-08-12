@@ -111,8 +111,8 @@ const DashboardPage: React.FC = () => {
   const handleDelete = async (eventId: string) => {
     if (confirm("Are you sure you want to delete this event?")) {
       try {
-        await deleteEvent(eventId);
-        setEvents(events.filter((event) => event.id !== eventId));
+        // Mock-only: update local state
+        setEvents((prev) => prev.filter((event) => event.id !== eventId));
       } catch (error) {
         console.error("Error deleting event:", error);
         alert("Failed to delete event. Please try again.");

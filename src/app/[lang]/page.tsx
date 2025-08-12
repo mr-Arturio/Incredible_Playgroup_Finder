@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getFirestoreData } from "../../actions/getFirestoreData";
+// import { getFirestoreData } from "../../actions/getFirestoreData";
 import RenderEventDataTable from "../../components/RenderEventDataTable";
 import IntroductionText from "../../components/IntroductionText";
 import ContactForm from "../../components/ContactForm";
@@ -33,8 +33,15 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getFirestoreData();
-      setEventData(response.props.eventData);
+      try {
+        const res = await fetch("/api/playgroups", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch");
+        const json = await res.json();
+        setEventData(json.eventData as PlaygroupEvent[]);
+      } catch (e) {
+        console.error("Failed to load events:", e);
+        setEventData([]);
+      }
     };
     fetchData();
   }, []);

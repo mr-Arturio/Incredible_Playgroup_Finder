@@ -143,7 +143,7 @@ const LoginPage: React.FC = () => {
               </h3>
               <div className="text-sm text-gray-600 space-y-1">
                 <p>
-                  <strong>Email:</strong> sarah@example.com
+                  <strong>Email:</strong> prc@example.com
                 </p>
                 <p>
                   <strong>Password:</strong> password
