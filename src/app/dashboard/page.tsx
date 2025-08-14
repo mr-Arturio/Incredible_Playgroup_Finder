@@ -281,15 +281,27 @@ const DashboardPage: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex space-x-2 ml-6">
+                  <button
+                      onClick={() => handleDelete(event.id!)}
+                      className="bg-sky-400 hover:bg-sky-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Pause
+                    </button>
+                    <button
+                      onClick={() => handleDelete(event.id!)}
+                      className="bg-orange-400 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Cancel
+                    </button>
                     <a
                       href={`/dashboard/edit/${event.id}`}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       Edit
                     </a>
                     <button
                       onClick={() => handleDelete(event.id!)}
-                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       Delete
                     </button>
