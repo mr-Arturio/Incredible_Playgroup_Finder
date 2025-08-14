@@ -280,25 +280,31 @@ const DashboardPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex space-x-2 ml-6">
-                  <button
-                      onClick={() => handleDelete(event.id!)}
-                      className="bg-sky-400 hover:bg-sky-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  <div className="flex items-center space-x-2 ml-6">
+                    <a
+                      href={`/dashboard/edit/${event.id}`}
+                      className="bg-blue-500 hover:bg-blue-700 text-white mr-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Edit
+                    </a>
+
+                    {/* Separator */}
+                    <div className="w-px h-12 bg-gray-200" />
+
+                    <button
+                      onClick={() => handlePause(event.id!)}
+                      className="bg-sky-400 hover:bg-sky-600 text-white ml-4  px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       Pause
                     </button>
+
                     <button
-                      onClick={() => handleDelete(event.id!)}
+                      onClick={() => handleCancel(event.id!)}
                       className="bg-orange-400 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       Cancel
                     </button>
-                    <a
-                      href={`/dashboard/edit/${event.id}`}
-                      className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                    >
-                      Edit
-                    </a>
+
                     <button
                       onClick={() => handleDelete(event.id!)}
                       className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
