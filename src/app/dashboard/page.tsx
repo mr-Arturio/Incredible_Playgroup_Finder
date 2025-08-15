@@ -292,14 +292,14 @@ const DashboardPage: React.FC = () => {
                     <div className="w-px h-12 bg-gray-200" />
 
                     <button
-                      onClick={() => handlePause(event.id!)}
+                      // onClick={() => handlePause(event.id!)}
                       className="bg-sky-400 hover:bg-sky-600 text-white ml-4  px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       Pause
                     </button>
 
                     <button
-                      onClick={() => handleCancel(event.id!)}
+                      // onClick={() => handleCancel(event.id!)}
                       className="bg-orange-400 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       Cancel
