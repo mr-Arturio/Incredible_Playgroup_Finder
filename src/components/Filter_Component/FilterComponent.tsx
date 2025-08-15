@@ -23,7 +23,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`w-full lg:w-3/12 px-1 mb-2 lg:mb-0 ${className}`}>
+    <div className={`w-full lg:w-3/12 px-1 mb-2 lg:mb-0`}>
       <select
         id={id}
         value={value}
