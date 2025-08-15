@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-sitemap": "next-sitemap"
+    "generate-sitemap": "next-sitemap",
+    "migrate:organizer": "node ./src/actions/migrateOrganizer.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",

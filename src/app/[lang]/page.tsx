@@ -34,7 +34,9 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/playgroups", { cache: "no-store" });
+        const useNewApi = process.env.NEXT_PUBLIC_USE_EVENTS_API === "true";
+        const url = useNewApi ? "/api/events" : "/api/playgroups";
+        const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch");
         const json = await res.json();
         setEventData(json.eventData as PlaygroupEvent[]);

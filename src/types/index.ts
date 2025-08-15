@@ -143,6 +143,89 @@ export interface FirestoreDataResponse {
   };
 }
 
+// ---------- New normalized dashboard types ----------
+export interface Organizer {
+  id?: string;
+  name_en: string;
+  name_fr?: string;
+  slug: string;
+  adminEmails: string[]; // initial admin identity; later can move to UIDs/claims
+  active: boolean;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+}
+
+export interface Service {
+  id?: string;
+  name_en: string;
+  name_fr?: string;
+  ageRange?: string;
+  languages?: string[];
+  area?: string;
+  urls?: {
+    website_en?: string;
+    website_fr?: string;
+    pg_en?: string;
+    pg_fr?: string;
+    fb?: string;
+    insta?: string;
+    eventbrite?: string;
+    registration_en?: string;
+    registration_fr?: string;
+  };
+  notes_en?: string;
+  notes_fr?: string;
+  paused?: boolean;
+  isActive?: boolean;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+}
+
+export interface Offering {
+  id?: string;
+  locationName?: string;
+  address?: string;
+  area?: string;
+  geopoint?: { latitude: number; longitude: number } | null;
+  day?: string; // Mon, Tue, ...
+  time?: string; // "HH:mm - HH:mm"
+  repeats?: "weekly" | "none";
+  paused?: boolean;
+  // Flags are offering-specific
+  coffee?: boolean;
+  parking?: boolean;
+  toys?: boolean;
+  outdoor?: boolean;
+  scale?: boolean;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+}
+
+export interface EventOccurrence {
+  id?: string;
+  organizerName: string;
+  serviceName: string;
+  locationName?: string;
+  area?: string;
+  languages?: string[];
+  ageRange?: string;
+  geopoint?: { latitude: number; longitude: number } | null;
+  day?: string;
+  time?: string;
+  eventDate?: string; // YYYY-MM-DD
+  startTime: any; // Firestore Timestamp when read via Admin SDK
+  endTime: any;
+  cancelled: boolean;
+  // Denormalized offering flags used by UI filters
+  Coffee?: boolean;
+  Parking?: boolean;
+  Toys?: boolean;
+  Outdoor?: boolean;
+  Scale?: boolean;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+}
+
 // Utility types
 export type TranslationKey = keyof TranslationMappings;
 export type FilterKey = keyof FilterCriteria;
