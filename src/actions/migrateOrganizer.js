@@ -204,12 +204,10 @@ function parseRegistration(val) {
 }
 
 function pickServiceDefaults(entry) {
+  // Services: ONLY names, urls
   return {
     name_en: entry.Service || "",
     name_fr: entry.Service_fr || "",
-    ageRange: entry.Age || "",
-    languages: splitLanguages(entry.Language),
-    area: entry.Area || "",
     urls: {
       website_en: entry.URL || "",
       website_fr: entry.URL_fr || "",
@@ -219,9 +217,6 @@ function pickServiceDefaults(entry) {
       insta: entry.Insta || "",
       eventbrite: entry.Eventbrite || "",
     },
-    notes_en: entry.Notes || "",
-    notes_fr: entry.Notes_fr || "",
-    paused: parseBoolean(entry.Paused),
   };
 }
 
@@ -239,6 +234,10 @@ function pickOffering(entry) {
       ? "weekly"
       : "none",
     paused: parseBoolean(entry.Paused),
+    // Offering-level fields (can vary by location/time)
+    languages: splitLanguages(entry.Language),
+    notes_en: entry.Notes || "",
+    notes_fr: entry.Notes_fr || "",
     // Flags are offering-specific
     coffee: parseBoolean(entry.Coffee),
     parking: parseBoolean(entry.Parking),
@@ -288,8 +287,10 @@ async function ensureService(orgRef, defaults) {
   const ref = orgRef.collection("services").doc(serviceId);
   const payload = {
     orgId: orgRef.id,
-    ...defaults,
-    isActive: !defaults.paused,
+    name_en: defaults.name_en,
+    name_fr: defaults.name_fr,
+    urls: defaults.urls,
+    isActive: true,
     createdAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
   };
@@ -309,11 +310,25 @@ async function ensureOffering(serviceRef, ofr) {
     orgId: serviceRef.parent.parent.id,
     serviceId: serviceRef.id,
     ...ofr,
+    // Make sure these are present on offerings per requirements
+    area: ofr.area,
+    paused: !!ofr.paused,
+    languages: Array.isArray(ofr.languages) ? ofr.languages : [],
+    notes_en: ofr.notes_en || "",
+    notes_fr: ofr.notes_fr || "",
     createdAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
   };
   await ref.set(payload, { merge: true });
   return { ref, id };
+}
+
+// Helper: compute timeOfDay from a Date
+function computeTimeOfDay(date) {
+  const hour = date.getHours();
+  if (hour < 12) return "morning";
+  if (hour < 16) return "afternoon";
+  return "evening";
 }
 
 // Optionally clear existing events under an offering to avoid duplicates
@@ -355,6 +370,7 @@ async function createEventDocs(offeringRef, context) {
     monthsAhead,
     timeZone,
     entry,
+    serviceDefaults,
   } = context;
   const { start, end } = parseTimeRange(ofr.time);
 
@@ -377,6 +393,7 @@ async function createEventDocs(offeringRef, context) {
       const dayBucket = `${y}-${String(m).padStart(2, "0")}-${String(
         d
       ).padStart(2, "0")}`;
+      const timeOfDay = computeTimeOfDay(startDate);
       writes.push((b) =>
         b.set(evRef, {
           orgId,
@@ -389,14 +406,20 @@ async function createEventDocs(offeringRef, context) {
           serviceName,
           locationName: ofr.locationName,
           area: ofr.area,
-          languages: context.serviceDefaults.languages || [],
-          ageRange: context.serviceDefaults.ageRange || "",
+          // Copy down offering-level fields
+          paused: !!ofr.paused,
+          languages: Array.isArray(ofr.languages) ? ofr.languages : [],
+          notes_en: ofr.notes_en || "",
+          notes_fr: ofr.notes_fr || "",
+          // Legacy/denormalized fields
+          ageRange: serviceDefaults.ageRange || "",
           geopoint: ofr.geopoint || null,
           address: ofr.address || "",
           day: ofr.day,
           eventDate: dayBucket,
           dayBucket,
           time: ofr.time,
+          timeOfDay,
           // Denormalized offering flags (lowercase)
           coffee: !!ofr.coffee,
           parking: !!ofr.parking,
@@ -405,16 +428,14 @@ async function createEventDocs(offeringRef, context) {
           scale: !!ofr.scale,
           registration: ofr.registration || "none",
           registrationUrl: ofr.registrationUrl || "",
-          // Denormalized notes and urls from service defaults
-          notes_en: context.serviceDefaults.notes_en || "",
-          notes_fr: context.serviceDefaults.notes_fr || "",
-          website_en: context.serviceDefaults.urls?.website_en || "",
-          website_fr: context.serviceDefaults.urls?.website_fr || "",
-          pg_en: context.serviceDefaults.urls?.pg_en || "",
-          pg_fr: context.serviceDefaults.urls?.pg_fr || "",
-          fb: context.serviceDefaults.urls?.fb || "",
-          insta: context.serviceDefaults.urls?.insta || "",
-          eventbrite: context.serviceDefaults.urls?.eventbrite || "",
+          // Denormalized urls from service defaults
+          website_en: serviceDefaults.urls?.website_en || "",
+          website_fr: serviceDefaults.urls?.website_fr || "",
+          pg_en: serviceDefaults.urls?.pg_en || "",
+          pg_fr: serviceDefaults.urls?.pg_fr || "",
+          fb: serviceDefaults.urls?.fb || "",
+          insta: serviceDefaults.urls?.insta || "",
+          eventbrite: serviceDefaults.urls?.eventbrite || "",
           createdAt: FieldValue.serverTimestamp(),
           updatedAt: FieldValue.serverTimestamp(),
         })
@@ -441,6 +462,7 @@ async function createEventDocs(offeringRef, context) {
         const dayBucket = `${y}-${String(m).padStart(2, "0")}-${String(
           d
         ).padStart(2, "0")}`;
+        const timeOfDay = computeTimeOfDay(startDate);
         writes.push((b) =>
           b.set(evRef, {
             orgId,
@@ -453,14 +475,19 @@ async function createEventDocs(offeringRef, context) {
             serviceName,
             locationName: ofr.locationName,
             area: ofr.area,
-            languages: context.serviceDefaults.languages || [],
-            ageRange: context.serviceDefaults.ageRange || "",
+            // Copy down offering-level fields
+            paused: !!ofr.paused,
+            languages: Array.isArray(ofr.languages) ? ofr.languages : [],
+            notes_en: ofr.notes_en || "",
+            notes_fr: ofr.notes_fr || "",
+            ageRange: serviceDefaults.ageRange || "",
             geopoint: ofr.geopoint || null,
             address: ofr.address || "",
             day: ofr.day,
             eventDate: dayBucket,
             dayBucket,
             time: ofr.time,
+            timeOfDay,
             coffee: !!ofr.coffee,
             parking: !!ofr.parking,
             toys: !!ofr.toys,
@@ -468,15 +495,13 @@ async function createEventDocs(offeringRef, context) {
             scale: !!ofr.scale,
             registration: ofr.registration || "none",
             registrationUrl: ofr.registrationUrl || "",
-            notes_en: context.serviceDefaults.notes_en || "",
-            notes_fr: context.serviceDefaults.notes_fr || "",
-            website_en: context.serviceDefaults.urls?.website_en || "",
-            website_fr: context.serviceDefaults.urls?.website_fr || "",
-            pg_en: context.serviceDefaults.urls?.pg_en || "",
-            pg_fr: context.serviceDefaults.urls?.pg_fr || "",
-            fb: context.serviceDefaults.urls?.fb || "",
-            insta: context.serviceDefaults.urls?.insta || "",
-            eventbrite: context.serviceDefaults.urls?.eventbrite || "",
+            website_en: serviceDefaults.urls?.website_en || "",
+            website_fr: serviceDefaults.urls?.website_fr || "",
+            pg_en: serviceDefaults.urls?.pg_en || "",
+            pg_fr: serviceDefaults.urls?.pg_fr || "",
+            fb: serviceDefaults.urls?.fb || "",
+            insta: serviceDefaults.urls?.insta || "",
+            eventbrite: serviceDefaults.urls?.eventbrite || "",
             createdAt: FieldValue.serverTimestamp(),
             updatedAt: FieldValue.serverTimestamp(),
           })

@@ -53,14 +53,77 @@ function titleCaseLanguage(value: any): string {
   return pick;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     const db = initAdmin();
     if (process.env.FIRESTORE_EMULATOR_HOST) {
       process.env.FIRESTORE_EMULATOR_HOST = process.env.FIRESTORE_EMULATOR_HOST;
     }
 
+    const url = new URL(req.url);
+    const debug = url.searchParams.get("debug");
+
     const snap = await db.collectionGroup("events").get();
+
+    // Debug: log raw Firestore data for the first event (shows nested types like Timestamp/GeoPoint)
+    if (snap.docs.length > 0) {
+      const firstDoc = snap.docs[0];
+      const raw = firstDoc.data();
+      console.log("[DEBUG] Raw first Firestore event doc:", raw);
+
+      if (debug === "full") {
+        const orgId = (raw as any).orgId;
+        const serviceId = (raw as any).serviceId;
+        const offeringId = (raw as any).offeringId;
+        const eventId = firstDoc.id;
+
+        if (orgId && serviceId && offeringId && eventId) {
+          try {
+            const orgRef = db.collection("organizers").doc(orgId);
+            const serviceRef = orgRef.collection("services").doc(serviceId);
+            const offeringRef = serviceRef
+              .collection("offerings")
+              .doc(offeringId);
+            const eventRef = offeringRef.collection("events").doc(eventId);
+
+            const [orgSnap, serviceSnap, offeringSnap, eventSnap] =
+              await Promise.all([
+                orgRef.get(),
+                serviceRef.get(),
+                offeringRef.get(),
+                eventRef.get(),
+              ]);
+
+            console.log(
+              "[DEBUG] Organizer doc:",
+              orgSnap.exists ? orgSnap.data() : null
+            );
+            console.log(
+              "[DEBUG] Service doc:",
+              serviceSnap.exists ? serviceSnap.data() : null
+            );
+            console.log(
+              "[DEBUG] Offering doc:",
+              offeringSnap.exists ? offeringSnap.data() : null
+            );
+            console.log(
+              "[DEBUG] Event doc:",
+              eventSnap.exists ? eventSnap.data() : null
+            );
+          } catch (e) {
+            console.log("[DEBUG] Failed to fetch parent docs:", e);
+          }
+        } else {
+          console.log("[DEBUG] Missing parent IDs for full chain:", {
+            orgId,
+            serviceId,
+            offeringId,
+            eventId,
+          });
+        }
+      }
+    }
+
     const data = snap.docs.map((d) => {
       const e: any = d.data();
       const date = toPlainDate(e.startTime);

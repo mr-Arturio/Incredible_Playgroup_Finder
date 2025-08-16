@@ -35,10 +35,19 @@ const Home: React.FC = () => {
     const fetchData = async () => {
       try {
         const useNewApi = process.env.NEXT_PUBLIC_USE_EVENTS_API === "true";
-        const url = useNewApi ? "/api/events" : "/api/playgroups";
+        let url = useNewApi ? "/api/events" : "/api/playgroups";
+        if (useNewApi) {
+          url += "?debug=full";
+        }
         const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch");
         const json = await res.json();
+        console.log("Sample event (first item):", json?.eventData?.[0]);
+        console.log(
+          "Organizer of first event:",
+          json?.eventData?.[0]?.Organizer
+        );
+        console.log("First event (full object):", json?.eventData?.[0]);
         setEventData(json.eventData as PlaygroupEvent[]);
       } catch (e) {
         console.error("Failed to load events:", e);

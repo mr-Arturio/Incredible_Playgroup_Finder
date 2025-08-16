@@ -58,6 +58,12 @@ export async function getFirestoreData(): Promise<FirestoreDataResponse> {
 
     const snapshot = await db.collection("playgroups").get();
 
+    // Debug: log raw Firestore data for the first playgroups document
+    if (snapshot.docs.length > 0) {
+      const raw = snapshot.docs[0].data();
+      console.log("[DEBUG] Raw first Firestore playgroups doc:", raw);
+    }
+
     const invalidDates: any[] = [];
     const invalidTimes: any[] = [];
 
