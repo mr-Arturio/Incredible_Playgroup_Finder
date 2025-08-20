@@ -2,7 +2,6 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import "../../app/fonts.css";
 import { useLanguage } from "../../context/LanguageContext";
 import RandomImage from "../../utils/RandomImage";
-import { gradients } from "../../utils/gradient";
 import CarSlider from "./CarSlider";
 import NavBar from "./NavBar";
 
@@ -29,8 +28,17 @@ const Header: React.FC = () => {
     setPosition(Number(newPosition));
   };
 
-  // Calculate gradient index based on position
-  const gradientIndex = Math.floor((position / 100) * (gradients.length - 1));
+  // Compute smooth gradient stop positions based on slider position (0-100)
+  const t = position / 100;
+  const fromStop = 5 + 30 * t; // 5% -> 35%
+  const viaStop1 = 20 + 25 * t; // 20% -> 45%
+  const viaStop2 = viaStop1 + 10; // plateau width ~10%
+  const toStop = 95 - 10 * t; // 95% -> 85%
+  const gradientBackground = `linear-gradient(to right, #6366f1 0%, #6366f1 ${fromStop}%, #0ea5e9 ${viaStop1}%, #0ea5e9 ${viaStop2}%, #8b2fc9 ${toStop}%, #8b2fc9 100%)`;
+  const gradientStyle = {
+    backgroundImage: gradientBackground,
+    transition: "background-image 200ms ease-out",
+  } as React.CSSProperties;
 
   // Translations
   const translations = {
@@ -53,9 +61,7 @@ const Header: React.FC = () => {
   return (
     <>
       <NavBar />
-      <div
-        className={`${gradients[gradientIndex]} transition-all ease-in-out duration-500 text-white`}
-      >
+      <div className={"text-white"} style={gradientStyle}>
         <div className="bg-frame">
           <div className="container mx-auto flex justify-between items-center">
             <div
@@ -81,12 +87,12 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* <div className="hidden sm:block">
+      <div className="hidden sm:block">
         <CarSlider
           position={position}
           handleSliderChange={handleSliderChange}
         />
-      </div> */}
+      </div>
     </>
   );
 };

@@ -54,6 +54,7 @@ const CarSlider: React.FC<CarSliderProps> = ({
             type="range"
             min="0"
             max="100"
+            step="0.1"
             value={position}
             onChange={handleSliderChange}
             className="absolute top-1/2 left-0 right-0 w-full h-full opacity-0 cursor-pointer"
@@ -61,8 +62,12 @@ const CarSlider: React.FC<CarSliderProps> = ({
 
           {/* Car Icon */}
           <div
-            className="absolute -top-3 left-0 transform -translate-y-1/2 pointer-events-none"
-            style={{ transform: `translateX(${calculateCarPosition()}px)` }} // use vw to match w-screen
+            className="absolute top-2/3 left-0 pointer-events-none"
+            style={{
+              transform: `translate3d(${calculateCarPosition()}px, -50%, 0)`,
+              transition: "transform 80ms linear",
+              willChange: "transform",
+            }}
           >
             <Image src="/car.svg" alt="Car" width={100} height={100} />
           </div>
