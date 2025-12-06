@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
-// import PromoLink from "./PromoLink";
+import PromoLink from "./PromoLink";
 
 const IntroductionText = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
@@ -212,11 +212,11 @@ const IntroductionText = () => {
                   : translations.showMore}
               </button>
               {/* Highlight text/promo */}
-              {/* <PromoLink
+              <PromoLink
                 tooltipClassName="hidden"
                 mobileTextClassName="md:hidden flex font-bold text-md sm:text-lg text-introText tracking-wider cursor-pointer drop-shadow-[0_0_10px_rgba(255,105,180,0.6)] transition duration-300 hover:drop-shadow-[0_0_20px_rgba(255,105,180,0.9)] hover:scale-105"
                 imageClassName = "hidden"
-                /> */}
+                />
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ import ToggleButton from "./ToggleButton";
 import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 import WeatherWidget from "./WeatherWidget";
-// import PromoLink from "./PromoLink";
+import PromoLink from "./PromoLink";
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -219,9 +219,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           translation={translation}
         />
         {/* Highlight text/promo */}
-        {/* <PromoLink 
+        <PromoLink 
         mobileTextClassName = 'hidden'
-        /> */}
+        />
         <div>
           {/* Our story link*/}
           <a
