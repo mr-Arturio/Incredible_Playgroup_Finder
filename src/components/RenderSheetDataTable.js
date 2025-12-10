@@ -213,7 +213,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center mt-1 px-2.5 md:mb-4 mb-2">
+      <div className="flex justify-between items-end px-2.5 md:mb-4 mb-2">
         <ShowTodayButton
           onShowToday={showTodayPlaygroups}
           translation={translation}
