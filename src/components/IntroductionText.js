@@ -198,7 +198,7 @@ const IntroductionText = () => {
         <LanguageSwitcher />
       </div>
       <div className="flex-col items-center m-1.5 justify-between bg-cardBody/75 rounded-lg">
-        <div className="mt-8 md:p-5 md:pl-5 pt-2 px-2.5 mb-1 md:mb-5 text-justify text-sm md:text-base">
+        <div className="mt-8 md:p-5 md:pl-5 pt-2 px-2.5 mb-1 md:mb-3 text-justify text-sm md:text-base">
           <div>{translations.shortText}</div>
           <div>
             {isFullTextVisible && translations.fullText}

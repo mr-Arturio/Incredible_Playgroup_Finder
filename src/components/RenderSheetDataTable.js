@@ -219,14 +219,15 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           translation={translation}
         />
         {/* Highlight text/promo */}
-        <PromoLink 
-        mobileTextClassName = 'hidden'
+        <PromoLink
+          mobileTextClassName="hidden"
+          className="translate-y-2 md:translate-y-3"
         />
         <div>
           {/* Our story link*/}
           <a
             href="https://www.parentresource.ca/ipfstory"
-            className="relative inline-block text-blue-500 font-bold text-sm md:text-xl tracking-normal md:tracking-wide after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full"
+            className="relative inline-block text-blue-500 font-bold text-sm md:text-lg lg:text-xl  tracking-normal md:tracking-wide after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full"
           >
             {translation === "fr" ? "Histoire d'OI" : "IPF Story"}
           </a>
@@ -235,7 +236,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           {/* FAQ Link */}
           <a
             href="https://www.parentresource.ca/faqipf"
-            className="relative inline-block text-blue-500 font-bold pr-1 md:pr-2 text-sm md:text-xl tracking-normal md:tracking-wide after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full"
+            className="relative inline-block text-blue-500 font-bold pr-1 md:pr-2 text-sm md:text-lg lg:text-xl  tracking-normal md:tracking-wide after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full"
           >
             FAQ
           </a>
