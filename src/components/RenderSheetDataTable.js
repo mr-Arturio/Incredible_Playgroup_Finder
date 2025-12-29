@@ -219,10 +219,10 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           translation={translation}
         />
         {/* Highlight text/promo */}
-        <PromoLink
+        {/* <PromoLink
           mobileTextClassName="hidden"
           className="translate-y-2 md:translate-y-3"
-        />
+        /> */}
         <div>
           {/* Our story link*/}
           <a
