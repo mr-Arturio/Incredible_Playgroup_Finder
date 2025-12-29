@@ -108,16 +108,8 @@ const FilterContainer = ({
         </div>
       </div>
       {/* Date picker and reset button */}
-      <div
-        className={`flex flex-row lg:space-x-6 ${
-          hasActiveFilters ? "lg:items-start" : "lg:items-middle"
-        }`}
-      >
-        <div
-          className={`w-full h-full lg:flex flex-col ${
-            hasActiveFilters ? "lg:items-start" : "lg:items-middle"
-          }`}
-        >
+      <div className="flex flex-row lg:space-x-6 lg:items-start">
+        <div className="w-full h-full lg:flex flex-col lg:items-start">
           <DatePickerComponent
             translation={translation}
             onDateChange={(date) =>
@@ -129,15 +121,15 @@ const FilterContainer = ({
               )
             }
           />
-          <ShowActiveOnly />
         </div>
         {/* Reset button to clear all selected filters */}
-        <div className="relative w-full flex flex-col items-center">
+        <div className="relative w-full flex flex-col items-start justify-between lg:items-start">
           <ResetFiltersButton
             resetFilters={resetFilters}
             translation={translation}
             hasActiveFilters={hasActiveFilters || isFilterActive}
           />
+          <ShowActiveOnly />
         </div>
       </div>
       {/* Third row for active filters */}

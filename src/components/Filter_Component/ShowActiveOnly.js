@@ -4,7 +4,7 @@ const ShowActiveOnly = () => {
   const { translation } = useLanguage();
 
   return (
-    <div className="mt-3 flex items-center">
+    <div className="mt-6 flex items-center">
       <input
         type="checkbox"
         id="showActiveOnly"
