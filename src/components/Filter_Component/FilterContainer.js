@@ -130,9 +130,21 @@ const FilterContainer = ({
             hasActiveFilters={hasActiveFilters || isFilterActive}
           />
           <div className="hidden lg:block">
-            <ShowActiveOnly />
+            <ShowActiveOnly
+              containerClassName="mt-6 flex items-center"
+              checkboxClassName="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+              labelClassName="ml-2 text-xs text-gray-700 cursor-pointer whitespace-nowrap"
+            />
           </div>
         </div>
+      </div>
+      {/* Show active only checkbox for mobile */}
+      <div className="lg:hidden md:hidden">
+        <ShowActiveOnly
+          containerClassName="flex items-center justify-center mt-4 mb-1"
+          checkboxClassName="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+          labelClassName="ml-3 text-sm font-semibold text-gray-700 cursor-pointer whitespace-nowrap"
+        />
       </div>
       {/* Third row for active filters */}
       <div className="lg:hidden flex justify-between">
@@ -143,10 +155,6 @@ const FilterContainer = ({
           }
           translation={translation}
         />
-      </div>
-      {/* Show active only checkbox for mobile */}
-      <div className="lg:hidden md:hidden mt-3">
-        <ShowActiveOnly />
       </div>
     </div>
   );

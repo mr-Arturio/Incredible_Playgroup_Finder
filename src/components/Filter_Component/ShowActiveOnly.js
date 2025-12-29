@@ -1,18 +1,22 @@
 import { useLanguage } from "../../context/LanguageContext";
 
-const ShowActiveOnly = () => {
+const ShowActiveOnly = ({
+  containerClassName = "",
+  checkboxClassName = "",
+  labelClassName = "",
+}) => {
   const { translation } = useLanguage();
 
   return (
-    <div className="mt-6 flex items-center">
+    <div className={containerClassName}>
       <input
         type="checkbox"
         id="showActiveOnly"
-        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+        className={checkboxClassName}
       />
       <label
         htmlFor="showActiveOnly"
-        className="ml-2 text-xs text-gray-700 cursor-pointer whitespace-nowrap"
+        className={labelClassName}
       >
         {translation === "fr"
           ? "Afficher uniquement les actifs"
