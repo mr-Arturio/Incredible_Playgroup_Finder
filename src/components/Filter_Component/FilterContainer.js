@@ -2,6 +2,7 @@ import FilterComponent from "./FilterComponent";
 import DatePickerComponent from "./DatePickerComponent";
 import ResetFiltersButton from "./ResetFiltersButton";
 import ActiveFilters from "./ActiveFilters";
+import ShowActiveOnly from "./ShowActiveOnly";
 import { useLanguage } from "../../context/LanguageContext";
 
 const FilterContainer = ({
@@ -28,7 +29,7 @@ const FilterContainer = ({
 
   return (
     <div className="flex flex-col py-3 px-5 space-y-1 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg md:rounded-t-lg md:rounded-b-none shadow mb-4 lg:mb-0 w-full border-b">
-      <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-4">
+      <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-2">
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
@@ -108,12 +109,12 @@ const FilterContainer = ({
       </div>
       {/* Date picker and reset button */}
       <div
-        className={`flex flex-row lg:space-x-4 ${
+        className={`flex flex-row lg:space-x-6 ${
           hasActiveFilters ? "lg:items-start" : "lg:items-middle"
         }`}
       >
         <div
-          className={`w-full h-full lg:flex ${
+          className={`w-full h-full lg:flex flex-col ${
             hasActiveFilters ? "lg:items-start" : "lg:items-middle"
           }`}
         >
@@ -128,6 +129,7 @@ const FilterContainer = ({
               )
             }
           />
+          <ShowActiveOnly />
         </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col items-center">
