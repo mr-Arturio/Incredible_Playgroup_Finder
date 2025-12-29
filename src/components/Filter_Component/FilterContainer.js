@@ -123,13 +123,15 @@ const FilterContainer = ({
           />
         </div>
         {/* Reset button to clear all selected filters */}
-        <div className="relative w-full flex flex-col items-start justify-between lg:items-start">
+        <div className="relative w-full flex flex-col justify-between items-center xl:items-start">
           <ResetFiltersButton
             resetFilters={resetFilters}
             translation={translation}
             hasActiveFilters={hasActiveFilters || isFilterActive}
           />
-          <ShowActiveOnly />
+          <div className="hidden lg:block">
+            <ShowActiveOnly />
+          </div>
         </div>
       </div>
       {/* Third row for active filters */}
@@ -141,6 +143,10 @@ const FilterContainer = ({
           }
           translation={translation}
         />
+      </div>
+      {/* Show active only checkbox for mobile */}
+      <div className="lg:hidden md:hidden mt-3">
+        <ShowActiveOnly />
       </div>
     </div>
   );
