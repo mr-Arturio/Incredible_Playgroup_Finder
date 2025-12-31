@@ -122,6 +122,14 @@ const FilterContainer = ({
             }
           />
         </div>
+        {/* Show active only checkbox for tablet */}
+        <div className="hidden md:block lg:hidden mt-4 mb-1">
+          <ShowActiveOnly
+            containerClassName="flex items-center justify-center mt-4 mb-1"
+            checkboxClassName="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+            labelClassName="ml-3 text-sm font-semibold text-gray-700 cursor-pointer whitespace-nowrap"
+          />
+        </div>
         {/* Reset button to clear all selected filters */}
         <div className="relative w-full flex flex-col justify-between items-center xl:items-start">
           <ResetFiltersButton
@@ -129,6 +137,7 @@ const FilterContainer = ({
             translation={translation}
             hasActiveFilters={hasActiveFilters || isFilterActive}
           />
+          {/* Show active only checkbox for desktop */}
           <div className="hidden lg:block">
             <ShowActiveOnly
               containerClassName="mt-6 flex items-center"
