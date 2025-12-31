@@ -127,7 +127,7 @@ export const Footer = () => {
       <div className="w-full bg-mainBlue pt-2 mt-2.5 md:mt-6 px-2.5 md:px-4 text-xxs md:text-sm/2">
         <div className="container mx-auto flex justify-between text-white">
           <div>
-            <p>&copy; 2024 Parent Resource Centre</p>
+            <p>&copy; 2026 Parent Resource Centre</p>
             <p>Charitable registration number: 119076487RR0001</p>
             <p className="my-1 font-extralight">
               {" "}
