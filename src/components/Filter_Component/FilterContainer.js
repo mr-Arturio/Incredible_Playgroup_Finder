@@ -128,6 +128,8 @@ const FilterContainer = ({
             containerClassName="flex items-center justify-center mt-4 mb-1"
             checkboxClassName="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
             labelClassName="ml-3 text-sm font-semibold text-gray-700 cursor-pointer whitespace-nowrap"
+            checked={filterCriteria.showActiveOnly}
+            onChange={(e) => handleFilterChange("showActiveOnly", e.target.checked)}
           />
         </div>
         {/* Reset button to clear all selected filters */}
@@ -143,6 +145,8 @@ const FilterContainer = ({
               containerClassName="mt-6 flex items-center"
               checkboxClassName="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
               labelClassName="ml-2 text-xs text-gray-700 cursor-pointer whitespace-nowrap"
+              checked={filterCriteria.showActiveOnly}
+              onChange={(e) => handleFilterChange("showActiveOnly", e.target.checked)}
             />
           </div>
         </div>
@@ -153,6 +157,8 @@ const FilterContainer = ({
           containerClassName="flex items-center justify-center mt-4 mb-1"
           checkboxClassName="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
           labelClassName="ml-3 text-sm font-semibold text-gray-700 cursor-pointer whitespace-nowrap"
+          checked={filterCriteria.showActiveOnly}
+          onChange={(e) => handleFilterChange("showActiveOnly", e.target.checked)}
         />
       </div>
       {/* Third row for active filters */}

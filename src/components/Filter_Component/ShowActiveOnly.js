@@ -4,6 +4,8 @@ const ShowActiveOnly = ({
   containerClassName = "",
   checkboxClassName = "",
   labelClassName = "",
+  checked = false,
+  onChange,
 }) => {
   const { translation } = useLanguage();
 
@@ -13,6 +15,8 @@ const ShowActiveOnly = ({
         type="checkbox"
         id="showActiveOnly"
         className={checkboxClassName}
+        checked={checked}
+        onChange={onChange}
       />
       <label
         htmlFor="showActiveOnly"
