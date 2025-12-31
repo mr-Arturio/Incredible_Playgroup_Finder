@@ -77,6 +77,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     age: "",
     time: "",
     address: "",
+    showActiveOnly: false,
   });
   // State to control filter container visibility
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -110,6 +111,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       age: "",
       time: "",
       address: "",
+      showActiveOnly: false,
     });
     setIsFilterActive(false); // Reset filter state
   };

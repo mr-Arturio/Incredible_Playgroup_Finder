@@ -80,6 +80,13 @@ const applyFilters = (data, criteria, translation) => {
 
     return data
       .filter((item) => {
+        // Filter out cancelled and paused events if showActiveOnly is true
+        if (criteria.showActiveOnly) {
+          if (item.Cancelled === "yes" || item.Paused === "yes") {
+            return false;
+          }
+        }
+
         if (criteria.address && item.Address !== criteria.address) {
           return false;
         }

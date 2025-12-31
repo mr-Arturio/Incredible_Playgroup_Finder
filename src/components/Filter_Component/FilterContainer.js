@@ -2,6 +2,7 @@ import FilterComponent from "./FilterComponent";
 import DatePickerComponent from "./DatePickerComponent";
 import ResetFiltersButton from "./ResetFiltersButton";
 import ActiveFilters from "./ActiveFilters";
+import ShowActiveOnly from "./ShowActiveOnly";
 import { useLanguage } from "../../context/LanguageContext";
 
 const FilterContainer = ({
@@ -28,7 +29,7 @@ const FilterContainer = ({
 
   return (
     <div className="flex flex-col py-3 px-5 space-y-1 lg:flex-row lg:space-y-0 lg:space-x-4 bg-white rounded-lg md:rounded-t-lg md:rounded-b-none shadow mb-4 lg:mb-0 w-full border-b">
-      <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-4">
+      <div className="flex flex-col space-y-0 lg:space-y-0 lg:flex-1 mr-2">
         {/* First row of filters */}
         <div className="md:flex justify-between gap-2 lg:mb-3">
           <FilterComponent
@@ -107,16 +108,8 @@ const FilterContainer = ({
         </div>
       </div>
       {/* Date picker and reset button */}
-      <div
-        className={`flex flex-row lg:space-x-4 ${
-          hasActiveFilters ? "lg:items-start" : "lg:items-middle"
-        }`}
-      >
-        <div
-          className={`w-full h-full lg:flex ${
-            hasActiveFilters ? "lg:items-start" : "lg:items-middle"
-          }`}
-        >
+      <div className="flex flex-row lg:space-x-6 lg:items-start">
+        <div className="w-full h-full lg:flex flex-col lg:items-start">
           <DatePickerComponent
             translation={translation}
             onDateChange={(date) =>
@@ -129,14 +122,44 @@ const FilterContainer = ({
             }
           />
         </div>
+        {/* Show active only checkbox for tablet */}
+        <div className="hidden md:block lg:hidden mt-4 mb-1">
+          <ShowActiveOnly
+            containerClassName="flex items-center justify-center mt-4 mb-1"
+            checkboxClassName="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+            labelClassName="ml-3 text-sm font-semibold text-gray-700 cursor-pointer whitespace-nowrap"
+            checked={filterCriteria.showActiveOnly}
+            onChange={(e) => handleFilterChange("showActiveOnly", e.target.checked)}
+          />
+        </div>
         {/* Reset button to clear all selected filters */}
-        <div className="relative w-full flex flex-col items-center">
+        <div className="relative w-full flex flex-col justify-between items-center xl:items-start">
           <ResetFiltersButton
             resetFilters={resetFilters}
             translation={translation}
             hasActiveFilters={hasActiveFilters || isFilterActive}
           />
+          {/* Show active only checkbox for desktop */}
+          <div className="hidden lg:block">
+            <ShowActiveOnly
+              containerClassName="mt-6 flex items-center"
+              checkboxClassName="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+              labelClassName="ml-2 text-xs text-gray-700 cursor-pointer whitespace-nowrap"
+              checked={filterCriteria.showActiveOnly}
+              onChange={(e) => handleFilterChange("showActiveOnly", e.target.checked)}
+            />
+          </div>
         </div>
+      </div>
+      {/* Show active only checkbox for mobile */}
+      <div className="lg:hidden md:hidden">
+        <ShowActiveOnly
+          containerClassName="flex items-center justify-center mt-4 mb-1"
+          checkboxClassName="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+          labelClassName="ml-3 text-sm font-semibold text-gray-700 cursor-pointer whitespace-nowrap"
+          checked={filterCriteria.showActiveOnly}
+          onChange={(e) => handleFilterChange("showActiveOnly", e.target.checked)}
+        />
       </div>
       {/* Third row for active filters */}
       <div className="lg:hidden flex justify-between">
