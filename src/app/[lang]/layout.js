@@ -6,8 +6,11 @@ import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "../../context/LanguageContext";
 import HotjarTracking from "../../utils/HotjarTracking";
 
-// Initialize the font
-const inter = Inter({ subsets: ["latin"] });
+// Initialize the font with display: swap for better performance
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function LangLayout({ children, params }) {
   const { lang } = params;
@@ -28,7 +31,8 @@ export default function LangLayout({ children, params }) {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        <link rel="preload" as="image" href="/Background1.svg" />
+        {/* Preload LCP background image with high priority */}
+        <link rel="preload" as="image" href="/Background1.svg" fetchPriority="high" />
         <meta
           name="google-site-verification"
           content="OMxCt92tQbDrp46CJaNuTYUDUAPnQYyuXpPNkVrHk4U"
@@ -46,6 +50,14 @@ export default function LangLayout({ children, params }) {
         <meta property="og:type" content="website" />
       </head>
       <body className={inter.className}>
+        {/* Hidden LCP image with high priority for early discovery */}
+        <img
+          src="/Background1.svg"
+          alt=""
+          fetchPriority="high"
+          style={{ position: "absolute", width: 0, height: 0, opacity: 0 }}
+          aria-hidden="true"
+        />
         <LanguageProvider>
           {children}
           <Analytics />
