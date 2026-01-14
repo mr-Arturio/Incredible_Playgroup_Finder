@@ -63,7 +63,7 @@ const RootLayout = ({ children }) => {
         <LanguageProvider>
           {children}
           <Analytics />
-          <HotjarTracking />
+          {/*<HotjarTracking />*/}
         </LanguageProvider>
       </body>
     </html>

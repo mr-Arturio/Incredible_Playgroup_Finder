@@ -61,7 +61,7 @@ export default function LangLayout({ children, params }) {
         <LanguageProvider>
           {children}
           <Analytics />
-          <HotjarTracking />
+         {/*<HotjarTracking />*/}
         </LanguageProvider>
       </body>
     </html>
