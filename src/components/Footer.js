@@ -61,6 +61,9 @@ export const Footer = () => {
                   width={39}
                   height={39}
                   className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 24px, 40px"
                 />
               </a>
               <a
@@ -74,6 +77,9 @@ export const Footer = () => {
                   width={39}
                   height={39}
                   className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 24px, 40px"
                 />
               </a>
               <a
@@ -87,6 +93,9 @@ export const Footer = () => {
                   width={39}
                   height={39}
                   className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 24px, 40px"
                 />
               </a>
               <a
@@ -100,6 +109,9 @@ export const Footer = () => {
                   width={39}
                   height={39}
                   className="md:h-10 md:w-10 h-6 w-6 shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 24px, 40px"
                 />
               </a>
             </div>
@@ -111,8 +123,10 @@ export const Footer = () => {
                 alt="OCF Logo"
                 width={150}
                 height={60}
-                unoptimized
                 className="w-28 md:w-40"
+                loading="lazy"
+                sizes="(max-width: 768px) 112px, 160px"
+                quality={90}
               />
               <p className="mt-2 text-xxs md:text-xs">
                 Generously supported in part by

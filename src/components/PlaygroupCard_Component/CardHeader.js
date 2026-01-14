@@ -119,6 +119,9 @@ function CardHeader({
             width={20}
             height={20}
             className="h-4 w-4 md:h-5 md:w-5 text-gray-500"
+            loading="lazy"
+            quality={75}
+            sizes="(max-width: 768px) 16px, 20px"
           />
           <span className="ml-2 md:text-base text-sm ">{Time}</span>
         </div>

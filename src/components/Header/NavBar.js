@@ -31,7 +31,8 @@ const NavBar = () => {
                 alt="Logo"
                 fill
                 style={{ objectFit: "contain" }}
-                unoptimized
+                priority
+                sizes="(max-width: 768px) 96px, (max-width: 1024px) 112px, (max-width: 1280px) 128px, 144px"
               />
             </div>
           </a>
@@ -98,9 +99,12 @@ const NavBar = () => {
             <Image
               src="https://static.wixstatic.com/media/11062b_0bec1cadb27b4d4a9898a740648fc5a9~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_0bec1cadb27b4d4a9898a740648fc5a9~mv2.png"
               alt="Facebook"
+              className="navBarIcons"
               width={39}
               height={39}
-              className="navBarIcons"
+              loading="lazy"
+              quality={75}
+              sizes="39px"
             />
           </a>
           <a
@@ -111,9 +115,12 @@ const NavBar = () => {
             <Image
               src="https://static.wixstatic.com/media/11062b_482d38aa2aaa49a5b45774ebe9a5b544~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_482d38aa2aaa49a5b45774ebe9a5b544~mv2.png"
               alt="Instagram"
+              className="navBarIcons"
               width={39}
               height={39}
-              className="navBarIcons"
+              loading="lazy"
+              quality={75}
+              sizes="39px"
             />
           </a>
           <a
@@ -124,9 +131,12 @@ const NavBar = () => {
             <Image
               src="https://static.wixstatic.com/media/11062b_23e5890c2dfc4a04af80178b43ef66fd~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_23e5890c2dfc4a04af80178b43ef66fd~mv2.png"
               alt="LinkedIn"
+              className="navBarIcons"
               width={39}
               height={39}
-              className="navBarIcons"
+              loading="lazy"
+              quality={75}
+              sizes="39px"
             />
           </a>
         </div>

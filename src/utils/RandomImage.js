@@ -19,7 +19,15 @@ const RandomImage = () => {
   }, []);
 
   return (
-    <Image src={imageData.src} alt="Family Image" width={imageData.width} height={100} />
+    <Image 
+      src={imageData.src} 
+      alt="Family Image" 
+      width={imageData.width} 
+      height={100}
+      loading="lazy"
+      sizes="(max-width: 768px) 200px, (max-width: 1024px) 300px, 400px"
+      quality={90}
+    />
   );
 };
 
