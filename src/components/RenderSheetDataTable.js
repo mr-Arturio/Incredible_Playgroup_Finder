@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useMemo, useRef } from "react";
+import dynamic from "next/dynamic";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import applyFilters from "../utils/applyFilters";
-import MapComponent from "./MapComponent";
 import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
@@ -13,6 +13,12 @@ import NoDataText from "./NoDataText";
 import ShowTodayButton from "./ShowTodayButton";
 import WeatherWidget from "./WeatherWidget";
 import PromoLink from "./PromoLink";
+// Dynamically import MapComponent to reduce initial bundle size
+// ssr: false because Google Maps is client-side only
+const MapComponent = dynamic(() => import("./MapComponent"), {
+  loading: () => <Loading />,
+  ssr: false,
+});
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -68,7 +74,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   // State declarations
   const [startDate, setStartDate] = useState(new Date()); // Handles the selected date for filtering
   const [filterCriteria, setFilterCriteria] = useState({
-    // Stores the current filter settings
     date: "",
     area: "",
     language: "",
@@ -79,14 +84,38 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
     address: "",
     showActiveOnly: false,
   });
+  const isFilterActive = useMemo(() => {
+    const {
+      date,
+      area,
+      language,
+      day,
+      organizer,
+      age,
+      time,
+      address,
+      showActiveOnly,
+    } = filterCriteria;
+
+    return Boolean(
+      date ||
+        area ||
+        language ||
+        day ||
+        organizer ||
+        age ||
+        time ||
+        address ||
+        showActiveOnly
+    );
+  }, [filterCriteria]);
+
   // State to control filter container visibility
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   // Controls visibility of the map
   const [isMapVisible, setIsMapVisible] = useState(false);
   // State to control the number of visible cards
   const [visibleCards, setVisibleCards] = useState(12);
-  // State to track if any filters are active
-  const [isFilterActive, setIsFilterActive] = useState(false);
 
   const handleShowMore = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
@@ -113,7 +142,6 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
       address: "",
       showActiveOnly: false,
     });
-    setIsFilterActive(false); // Reset filter state
   };
 
   const showTodayPlaygroups = () => {
@@ -149,7 +177,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const filteredData = useMemo(() => {
     const data = getFilteredData();
     return data;
-  }, [sheetData, filterCriteria, isLoading]);
+  }, [sheetData, filterCriteria, translation, isLoading]);
 
   const noDataAvailable = filteredData.length === 0;
 
