@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 import PromoLink from "./PromoLink";
+import IntroductionTextSkeleton from "./IntroductionTextSkeleton";
 
 const IntroductionText = () => {
   const [isFullTextVisible, setIsFullTextVisible] = useState(false);
@@ -183,13 +184,9 @@ const IntroductionText = () => {
     showLess: translation === "fr" ? "Lire moins" : "Read Less",
   };
 
-  // Render a loading state until client-side hydration is complete
+  // Render skeleton until client-side hydration is complete
   if (!isClient) {
-    return (
-      <div className="flex-col items-center justify-between">
-        <div className="mt-8 md:mt-4 md:mb-8 text-left">Loading...</div>
-      </div>
-    );
+    return <IntroductionTextSkeleton />;
   }
 
   return (
