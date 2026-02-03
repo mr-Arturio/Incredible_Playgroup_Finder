@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import PlaygroupCardSkeleton from "./PlaygroupCard_Component/PlaygroupCardSkeleton";
+import MapSkeleton from "./MapSkeleton";
 import applyFilters from "../utils/applyFilters";
 import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
@@ -21,7 +22,6 @@ const MapComponent = dynamic(() => import("./MapComponent"), {
   ssr: false,
 });
 
-/** Desktop-only skeleton layout: header + map placeholder + playgroup card skeletons */
 function RenderSheetDataTableSkeleton() {
   const skeletonCardCount = 6;
   return (
@@ -34,8 +34,10 @@ function RenderSheetDataTableSkeleton() {
         </div>
       </div>
       <div className="flex flex-1 flex-col xl:flex-row-reverse">
-        {/* Map placeholder (skeleton for map comes later) */}
-        <div className="w-full xl:w-1/2 md:h-[85vh] h-[55vh] bg-gray-200 rounded-lg animate-pulse shrink-0" />
+        {/* Map skeleton */}
+        <div className="w-full xl:w-1/2 md:h-[85vh] h-[55vh] shrink-0">
+          <MapSkeleton />
+        </div>
         {/* Playgroup Cards Section - skeleton cards */}
         <div
           id="todayPlaygroupsSection"
@@ -269,18 +271,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
-  // Desktop (xl): show full layout with skeleton cards when loading; mobile: show Loading
+  // Show skeleton layout (playgroup cards + map placeholder) on all screens when loading
   if (isLoading) {
-    return (
-      <>
-        <div className="xl:hidden flex flex-col items-center justify-center min-h-[60vh]">
-          <Loading />
-        </div>
-        <div className="hidden xl:block">
-          <RenderSheetDataTableSkeleton />
-        </div>
-      </>
-    );
+    return <RenderSheetDataTableSkeleton />;
   }
 
   return (
