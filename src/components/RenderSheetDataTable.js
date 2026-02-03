@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
 import PlaygroupCardSkeleton from "./PlaygroupCard_Component/PlaygroupCardSkeleton";
-import MapSkeleton from "./MapSkeleton";
+import MapSkeleton from "./Map_Component/MapSkeleton";
 import applyFilters from "../utils/applyFilters";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
@@ -16,7 +16,7 @@ import WeatherWidget from "./WeatherWidget";
 import PromoLink from "./PromoLink";
 // Dynamically import MapComponent to reduce initial bundle size
 // ssr: false because Google Maps is client-side only
-const MapComponent = dynamic(() => import("./MapComponent"), {
+const MapComponent = dynamic(() => import("./Map_Component/MapComponent"), {
   loading: () => <MapSkeleton />,
   ssr: false,
 });
