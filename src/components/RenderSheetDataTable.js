@@ -4,6 +4,7 @@ import React, { useState, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
+import PlaygroupCardSkeleton from "./PlaygroupCard_Component/PlaygroupCardSkeleton";
 import applyFilters from "../utils/applyFilters";
 import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
@@ -19,6 +20,35 @@ const MapComponent = dynamic(() => import("./MapComponent"), {
   loading: () => <Loading />,
   ssr: false,
 });
+
+/** Desktop-only skeleton layout: header + map placeholder + playgroup card skeletons */
+function RenderSheetDataTableSkeleton() {
+  const skeletonCardCount = 6;
+  return (
+    <>
+      <div className="flex justify-between items-end px-2.5 md:mb-4 mb-2">
+        <div className="h-9 bg-gray-200 rounded animate-pulse w-32" />
+        <div className="flex gap-2">
+          <div className="h-5 bg-gray-200 rounded animate-pulse w-20" />
+          <div className="h-5 bg-gray-200 rounded animate-pulse w-12" />
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col xl:flex-row-reverse">
+        {/* Map placeholder (skeleton for map comes later) */}
+        <div className="w-full xl:w-1/2 md:h-[85vh] h-[55vh] bg-gray-200 rounded-lg animate-pulse shrink-0" />
+        {/* Playgroup Cards Section - skeleton cards */}
+        <div
+          id="todayPlaygroupsSection"
+          className="w-full xl:w-1/2 pt-2 overflow-x-auto bg-white rounded-lg md:rounded-b-lg md:rounded-t-none shadow-md overflow-y-auto relative h-[80vh]"
+        >
+          {Array.from({ length: skeletonCardCount }).map((_, i) => (
+            <PlaygroupCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -239,7 +269,19 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
-  if (isLoading) return <Loading />;
+  // Desktop (xl): show full layout with skeleton cards when loading; mobile: show Loading
+  if (isLoading) {
+    return (
+      <>
+        <div className="xl:hidden flex flex-col items-center justify-center min-h-[60vh]">
+          <Loading />
+        </div>
+        <div className="hidden xl:block">
+          <RenderSheetDataTableSkeleton />
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
