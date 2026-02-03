@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import Loading from "./Loading";
+import Loading from "../Loading";
 import {
   GoogleMap,
   useJsApiLoader,

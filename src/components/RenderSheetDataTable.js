@@ -4,8 +4,9 @@ import React, { useState, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import "react-datepicker/dist/react-datepicker.css";
 import PlaygroupCard from "./PlaygroupCard_Component/PlaygroupCard";
+import PlaygroupCardSkeleton from "./PlaygroupCard_Component/PlaygroupCardSkeleton";
+import MapSkeleton from "./Map_Component/MapSkeleton";
 import applyFilters from "../utils/applyFilters";
-import Loading from "./Loading";
 import { handleDateChange } from "../utils/handleDateChange";
 import FilterContainer from "./Filter_Component/FilterContainer";
 import ToggleButton from "./ToggleButton";
@@ -15,10 +16,41 @@ import WeatherWidget from "./WeatherWidget";
 import PromoLink from "./PromoLink";
 // Dynamically import MapComponent to reduce initial bundle size
 // ssr: false because Google Maps is client-side only
-const MapComponent = dynamic(() => import("./MapComponent"), {
-  loading: () => <Loading />,
+const MapComponent = dynamic(() => import("./Map_Component/MapComponent"), {
+  loading: () => <MapSkeleton />,
   ssr: false,
 });
+
+/** Skeleton layout for all screens (mobile, tablet, desktop). */
+function RenderSheetDataTableSkeleton() {
+  const skeletonCardCount = 6;
+  return (
+    <>
+      <div className="flex justify-between items-end gap-2 px-2.5 sm:px-3 md:mb-4 mb-2 min-w-0">
+        <div className="h-8 w-24 sm:h-9 sm:w-32 bg-gray-200 rounded animate-pulse shrink-0 min-w-0" />
+        <div className="flex gap-1.5 sm:gap-2 shrink-0">
+          <div className="h-4 w-14 sm:h-5 sm:w-20 bg-gray-200 rounded animate-pulse" />
+          <div className="h-4 w-8 sm:h-5 sm:w-12 bg-gray-200 rounded animate-pulse" />
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col xl:flex-row-reverse min-w-0">
+        {/* Map skeleton */}
+        <div className="w-full xl:w-1/2 h-[50vh] sm:h-[55vh] md:h-[85vh] shrink-0 min-h-0">
+          <MapSkeleton />
+        </div>
+        {/* Playgroup Cards Section - skeleton cards */}
+        <div
+          id="todayPlaygroupsSection"
+          className="w-full xl:w-1/2 pt-1 sm:pt-2 overflow-x-auto bg-white rounded-lg md:rounded-b-lg md:rounded-t-none shadow-md overflow-y-auto relative min-h-[70vh] sm:min-h-[75vh] h-[80vh] min-w-0"
+        >
+          {Array.from({ length: skeletonCardCount }).map((_, i) => (
+            <PlaygroupCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
 
 const RenderSheetDataTable = ({ sheetData, translation }) => {
   const isLoading = !sheetData || sheetData.length === 0;
@@ -239,7 +271,10 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   const dayOptions = Object.keys(translations.daysOfWeek); // Short day names for filtering
 
-  if (isLoading) return <Loading />;
+  // Show skeleton layout (playgroup cards + map placeholder) on all screens when loading
+  if (isLoading) {
+    return <RenderSheetDataTableSkeleton />;
+  }
 
   return (
     <>

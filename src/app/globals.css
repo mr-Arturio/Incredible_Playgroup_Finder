@@ -16,6 +16,32 @@
   }
 }
 
+/* Loading dots animation (opacity cycle for each dot) */
+@keyframes loading-dot {
+  0%,
+  20% {
+    opacity: 0.2;
+  }
+  40%,
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-loading-dot {
+  animation: loading-dot 1.4s ease-in-out infinite;
+}
+
+.animate-loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.animate-loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.animate-loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
 /* Custom CSS to hide the close button in Google Maps InfoWindow */
 .gm-style-iw-chr .gm-ui-hover-effect {
   display: none !important;
