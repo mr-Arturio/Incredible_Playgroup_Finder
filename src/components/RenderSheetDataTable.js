@@ -131,14 +131,14 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
     return Boolean(
       date ||
-        area ||
-        language ||
-        day ||
-        organizer ||
-        age ||
-        time ||
-        address ||
-        showActiveOnly
+      area ||
+      language ||
+      day ||
+      organizer ||
+      age ||
+      time ||
+      address ||
+      showActiveOnly,
     );
   }, [filterCriteria]);
 
@@ -236,7 +236,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   const areaOptions = useMemo(() => {
     if (!sheetData) return [];
     return [...new Set(sheetData.map((item) => item.Area).filter(Boolean))].map(
-      (area) => translations.areaOptions[area] || area
+      (area) => translations.areaOptions[area] || area,
     );
   }, [sheetData, translations.areaOptions]);
 
@@ -255,7 +255,7 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
   }, [sheetData]);
 
   const timeOptions = Object.keys(translations.timesOfDay).map(
-    (key) => translations.timesOfDay[key]
+    (key) => translations.timesOfDay[key],
   );
 
   const ageOptions = useMemo(() => {
@@ -278,7 +278,13 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
 
   return (
     <>
-      <div className="flex justify-between items-end px-2.5 md:mb-4 mb-2">
+      {/* Mobile only: weather text above the button row */}
+      <div className="block md:hidden px-2.5 mb-2 text-center">
+        <span className="text-base font-bold text-introText">
+          Due to weather conditions, please confirm schedules with the provider.
+        </span>
+      </div>
+      <div className="relative flex justify-between items-end px-2.5 md:mb-4 mb-2">
         <ShowTodayButton
           onShowToday={showTodayPlaygroups}
           translation={translation}
@@ -288,6 +294,9 @@ const RenderSheetDataTable = ({ sheetData, translation }) => {
           mobileTextClassName="hidden"
           className="translate-y-2 md:translate-y-3"
         /> */}
+        <span className="hidden md:inline absolute left-1/2 -translate-x-1/2 text-center text-sm md:text-xl font-bold text-introText px-2 lg:static lg:left-auto lg:translate-x-0 lg:text-left">
+          Due to weather conditions, please confirm schedules with the provider.
+        </span>
         <div>
           {/* Our story link*/}
           <a
