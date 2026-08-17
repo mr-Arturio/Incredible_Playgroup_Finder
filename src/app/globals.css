@@ -47,19 +47,120 @@
   display: none !important;
 }
 
-/* Native dialog reset so the anniversary promo stays centered on all viewports */
-.anniversary-promo-dialog {
-  margin: auto;
-  max-width: calc(100% - 1.25rem);
-  outline: none;
+/* Anniversary promo: explicit layout so Safari does not collapse height */
+.anniversary-promo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
-.anniversary-promo-dialog:not([open]) {
-  display: none;
-}
-
-.anniversary-promo-dialog::backdrop {
+.anniversary-promo-backdrop {
+  position: fixed;
+  inset: 0;
   background: rgb(15 23 42 / 0.45);
+}
+
+.anniversary-promo-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100%;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: max(0.75rem, env(safe-area-inset-top))
+    max(0.75rem, env(safe-area-inset-right))
+    max(0.75rem, env(safe-area-inset-bottom))
+    max(0.75rem, env(safe-area-inset-left));
+}
+
+.anniversary-promo-card {
+  flex-shrink: 0;
+  width: min(100%, 36rem);
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  overflow: hidden;
+}
+
+.anniversary-promo-header {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr 2.75rem;
+  align-items: center;
+  padding: 0.65rem 0.5rem 0.25rem;
+}
+
+.anniversary-promo-title {
+  margin: 0;
+  text-align: center;
+  font-family: Lazydog, cursive;
+  font-size: clamp(1.4rem, 5.5vw, 2.25rem);
+  line-height: 1.15;
+  color: #e22a69;
+}
+
+.anniversary-promo-close {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.anniversary-promo-close:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.anniversary-promo-close:focus-visible {
+  outline: 2px solid #e22a69;
+  outline-offset: 2px;
+}
+
+.anniversary-promo-link {
+  display: block;
+  margin: 0 0.65rem 0.75rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+}
+
+.anniversary-promo-link:focus-visible {
+  outline: 2px solid #e22a69;
+  outline-offset: 2px;
+}
+
+.anniversary-promo-image {
+  position: relative;
+  display: block;
+  width: min(100%, 32rem, 70vh);
+  width: min(100%, 32rem, 70dvh);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #d8eefc;
+}
+
+.anniversary-promo-cta {
+  display: block;
+  margin: 0.6rem 0 0.15rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4e8dca;
+}
+
+.anniversary-promo-link:hover .anniversary-promo-cta {
+  color: #316191;
 }
 
 @keyframes anniversary-promo-in {

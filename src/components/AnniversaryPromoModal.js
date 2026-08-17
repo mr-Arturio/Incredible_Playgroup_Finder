@@ -1,14 +1,18 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { FiX } from "react-icons/fi";
 import { useLanguage } from "../context/LanguageContext";
 
-const STORAGE_KEY = "ipf.promo.dismissed.50-years-together-2026";
+const STORAGE_KEY = "ipf.promo.hideUntil.50-years-together-2026";
+const LEGACY_STORAGE_KEY = "ipf.promo.dismissed.50-years-together-2026";
 const FACEBOOK_EVENT_URL = "https://www.facebook.com/share/1W42JGEHXP/";
 const SHOW_DELAY_MS = 1400;
+const SNOOZE_AFTER_VIEW_MS = 30 * 60 * 1000;
+const SNOOZE_AFTER_CLICK_MS = 24 * 60 * 60 * 1000;
 // Hide the promo after the celebration weekend (America/Toronto, Aug 22 2026).
 const CAMPAIGN_END_MS = Date.parse("2026-08-23T04:00:00.000Z");
 
@@ -27,17 +31,29 @@ const copy = {
   },
 };
 
-const hasDismissedPromo = () => {
+const readHideUntil = () => {
   try {
-    return window.localStorage.getItem(STORAGE_KEY) === "1";
+    const until = Number(window.localStorage.getItem(STORAGE_KEY));
+    if (Number.isFinite(until) && until > 0) {
+      return until;
+    }
+
+    if (window.localStorage.getItem(LEGACY_STORAGE_KEY) === "1") {
+      const migrated = Date.now() + SNOOZE_AFTER_VIEW_MS;
+      window.localStorage.setItem(STORAGE_KEY, String(migrated));
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+      return migrated;
+    }
   } catch {
-    return false;
+    // Ignore private-mode / blocked storage.
   }
+
+  return 0;
 };
 
-const persistDismissal = () => {
+const persistHideUntil = (durationMs) => {
   try {
-    window.localStorage.setItem(STORAGE_KEY, "1");
+    window.localStorage.setItem(STORAGE_KEY, String(Date.now() + durationMs));
   } catch {
     // Ignore private-mode / blocked storage; the promo simply stays session-only.
   }
@@ -47,25 +63,28 @@ const AnniversaryPromoModal = () => {
   const { translation } = useLanguage();
   const t = copy[translation] || copy.en;
   const titleId = useId();
-  const dialogRef = useRef(null);
+  const overlayRef = useRef(null);
   const closeBtnRef = useRef(null);
-  const [shouldRender, setShouldRender] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const dismiss = useCallback((reason = "close") => {
-    persistDismissal();
+    persistHideUntil(SNOOZE_AFTER_VIEW_MS);
     setIsOpen(false);
     track("50 years anniversary promo", { action: reason });
   }, []);
 
   useEffect(() => {
-    if (Date.now() >= CAMPAIGN_END_MS || hasDismissedPromo()) {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (Date.now() >= CAMPAIGN_END_MS || Date.now() < readHideUntil()) {
       return undefined;
     }
 
-    setShouldRender(true);
-
     const timer = window.setTimeout(() => {
+      persistHideUntil(SNOOZE_AFTER_VIEW_MS);
       setIsOpen(true);
       track("50 years anniversary promo", { action: "shown" });
     }, SHOW_DELAY_MS);
@@ -74,107 +93,128 @@ const AnniversaryPromoModal = () => {
   }, []);
 
   useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return undefined;
-
-    if (isOpen && !dialog.open) {
-      dialog.showModal();
-      closeBtnRef.current?.focus();
-    }
-
-    if (!isOpen && dialog.open) {
-      dialog.close();
-    }
-
     if (!isOpen) return undefined;
+
+    const previouslyFocused = document.activeElement;
+    closeBtnRef.current?.focus();
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    return () => {
-      document.body.style.overflow = previousOverflow;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        dismiss("escape");
+        return;
+      }
+
+      if (event.key !== "Tab" || !overlayRef.current) return;
+
+      const focusable = overlayRef.current.querySelectorAll(
+        'button, [href]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-  }, [isOpen]);
 
-  const handleBackdropClick = (event) => {
-    if (event.target === event.currentTarget) {
-      dismiss("backdrop");
-    }
-  };
+    document.addEventListener("keydown", onKeyDown);
 
-  const handleCancel = (event) => {
-    event.preventDefault();
-    dismiss("escape");
-  };
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocused instanceof HTMLElement) {
+        previouslyFocused.focus();
+      }
+    };
+  }, [isOpen, dismiss]);
 
   const handleCtaClick = () => {
-    persistDismissal();
+    persistHideUntil(SNOOZE_AFTER_CLICK_MS);
     setIsOpen(false);
     track("50 years anniversary promo", { action: "click" });
   };
 
-  if (!shouldRender) {
+  if (!isMounted || !isOpen) {
     return null;
   }
 
-  return (
-    <dialog
-      ref={dialogRef}
-      aria-labelledby={titleId}
-      aria-modal="true"
-      className="anniversary-promo-dialog z-[100] w-[min(calc(100%-1.25rem),34rem)] max-h-[min(92dvh,100%)] border-0 bg-transparent p-0 backdrop:bg-slate-900/45 sm:w-[min(calc(100%-2rem),36rem)] md:w-[min(calc(100%-3rem),38rem)]"
-      onCancel={handleCancel}
-      onClick={handleBackdropClick}
+  return createPortal(
+    <div
+      ref={overlayRef}
+      className="anniversary-promo-overlay"
+      role="presentation"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          dismiss("backdrop");
+        }
+      }}
     >
       <div
-        className="animate-anniversary-promo flex max-h-[min(92dvh,100%)] flex-col overflow-y-auto overscroll-contain rounded-2xl bg-white pb-[max(0.25rem,env(safe-area-inset-bottom))] shadow-2xl ring-1 ring-black/10"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="grid shrink-0 grid-cols-[2.75rem_1fr_2.75rem] items-center px-2 pb-1 pt-2 sm:px-3 sm:pt-3">
-          <span aria-hidden="true" />
-          <h2
-            id={titleId}
-            className="px-1 text-center font-lazydog text-[clamp(1.4rem,5.5vw,2.25rem)] leading-tight text-introText"
-          >
-            {t.title}
-          </h2>
-          <button
-            ref={closeBtnRef}
-            type="button"
-            onClick={() => dismiss("close")}
-            className="ml-auto inline-flex h-11 w-11 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-introText"
-            aria-label={t.close}
-          >
-            <FiX className="h-6 w-6" aria-hidden="true" />
-          </button>
-        </div>
-
-        <a
-          href={FACEBOOK_EVENT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleCtaClick}
-          className="group mx-2 mb-2 flex min-h-0 flex-1 flex-col rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-introText sm:mx-3 sm:mb-3"
+        className="anniversary-promo-backdrop"
+        aria-hidden="true"
+        onClick={() => dismiss("backdrop")}
+      />
+      <div className="anniversary-promo-center">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          className="anniversary-promo-card animate-anniversary-promo"
+          onClick={(event) => event.stopPropagation()}
         >
-          <span className="relative block min-h-0 w-full overflow-hidden rounded-xl bg-[#d8eefc] shadow-sm ring-1 ring-black/5 transition duration-200 group-hover:shadow-md">
-            <Image
-              src="/banner/50_Years_Together.png"
-              alt={t.alt}
-              width={1568}
-              height={1568}
-              quality={85}
-              priority
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 70vw, 560px"
-              className="h-auto max-h-[calc(92dvh-7.5rem)] w-full object-contain"
-            />
-          </span>
-          <span className="mb-1 mt-2 block text-center text-sm font-semibold text-mainBlue transition-colors group-hover:text-hoverBlue sm:text-base">
-            {t.cta}
-            <span aria-hidden="true"> →</span>
-          </span>
-        </a>
+          <div className="anniversary-promo-header">
+            <span aria-hidden="true" />
+            <h2 id={titleId} className="anniversary-promo-title">
+              {t.title}
+            </h2>
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={() => dismiss("close")}
+              className="anniversary-promo-close"
+              aria-label={t.close}
+            >
+              <FiX className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+
+          <a
+            href={FACEBOOK_EVENT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleCtaClick}
+            className="anniversary-promo-link"
+          >
+            <span className="anniversary-promo-image">
+              <Image
+                src="/banner/50_Years_Together.png"
+                alt={t.alt}
+                fill
+                quality={85}
+                priority
+                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 70vw, 512px"
+                className="object-contain"
+              />
+            </span>
+            <span className="anniversary-promo-cta">
+              {t.cta}
+              <span aria-hidden="true"> →</span>
+            </span>
+          </a>
+        </div>
       </div>
-    </dialog>
+    </div>,
+    document.body
   );
 };
 
