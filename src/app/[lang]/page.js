@@ -10,6 +10,7 @@ import Header from "../../components/Header/Header";
 import { Footer } from "../../components/Footer";
 import Background  from "../../components/Background";
 import { useParams } from "next/navigation";
+import AnniversaryPromoModal from "../../components/AnniversaryPromoModal";
 
 function Home() {
   const [sheetData, setSheetData] = useState(null);
@@ -40,6 +41,7 @@ function Home() {
 
   return (
     <>
+      <AnniversaryPromoModal />
       <Header />
       <Background>
         <div className="container">

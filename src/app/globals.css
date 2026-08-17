@@ -46,3 +46,39 @@
 .gm-style-iw-chr .gm-ui-hover-effect {
   display: none !important;
 }
+
+/* Native dialog reset so the anniversary promo stays centered on all viewports */
+.anniversary-promo-dialog {
+  margin: auto;
+  max-width: calc(100% - 1.25rem);
+  outline: none;
+}
+
+.anniversary-promo-dialog:not([open]) {
+  display: none;
+}
+
+.anniversary-promo-dialog::backdrop {
+  background: rgb(15 23 42 / 0.45);
+}
+
+@keyframes anniversary-promo-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-anniversary-promo {
+  animation: anniversary-promo-in 280ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-anniversary-promo {
+    animation: none;
+  }
+}
